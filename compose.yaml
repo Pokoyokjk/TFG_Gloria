@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+
+  flask:
+    build: ./flask
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask/app:/app
+    networks:
+      - internal_network  
+    depends_on:
+      - mongodb
+    environment:
+      - FLASK_ENV = development
+      - FLASK_DEBUG = 1
+
+  mongodb:
+    build: ./mongodb
+    networks:
+      - internal_network 
+    ports:
+      - "27017:27017"  # TODO: change to "expose" for not externally exposing the port 
+
+
+networks:
+  internal_network:
+    driver: bridge 
