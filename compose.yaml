@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
   flask:
     build: ./flask
     ports:
@@ -13,17 +12,24 @@ services:
     depends_on:
       - mongodb
     environment:
-      - FLASK_ENV = development
-      - FLASK_DEBUG = 1
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
 
   mongodb:
-    build: ./mongodb
+    image: mongodb/mongodb-community-server:8.0.0-ubi8
+    volumes:
+      - db:/data/db
+      - db:/data/configdb
     networks:
-      - internal_network 
+      - internal_network
+    command: ["mongod"]
     ports:
-      - "27017:27017"  # TODO: change to "expose" for not externally exposing the port 
-
+      - "27017:27017"
+    
 
 networks:
   internal_network:
     driver: bridge 
+
+volumes:
+  db:

@@ -1,0 +1,200 @@
+@prefix : <http://www.gsi.upm.es/ontologies/amor/ns#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix mft: <http://gsi.upm.es/ontologies/participation/morality/ns/> .
+@prefix mls: <http://www.w3.org/ns/mls#> .
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix amor: <http://www.gsi.upm.es/ontologies/amor/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix schema: <https://schema.org/> .
+@base <http://www.gsi.upm.es/ontologies/amor/ns> .
+
+<http://www.gsi.upm.es/ontologies/amor/ns> rdf:type owl:Ontology ;
+                                            owl:imports nif: ,
+                                                        <http://www.w3.org/2016/03/mls#> ,
+                                                        <http://www.w3.org/ns/prov-o-inverses-20130430> ;
+                                            dc:description "AMOR is an ontology designed for representing moral values and value annotations in text."@en ;
+                                            vann:preferredNamespacePrefix "amor" ;
+                                            vann:preferredNamespaceUri "http://www.gsi.upm.es/ontologies/amor/ns#" ;
+                                            rdfs:comment "AMOR is an ontology designed for representing moral values and value annotations in text."@en ;
+                                            rdfs:label "AMOR Value Ontology"@en ;
+                                            owl:versionInfo "1.0" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#analyses
+amor:analyses rdf:type owl:ObjectProperty ;
+              rdfs:domain amor:ValueAnalysis ;
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( nif:String
+                                         schema:NewsArticle
+                                       )
+                         ] ;
+              rdfs:comment "This property relates a ValueAnalysis with the resource that is analysed (it can be a nif:String or a schema:NewsArticle)."@en ;
+              rdfs:label "analyses"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#annotates
+amor:annotates rdf:type owl:ObjectProperty ;
+               rdfs:domain amor:ValueAnnotation ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( nif:String
+                                          schema:NewsArticle
+                                        )
+                          ] ;
+               rdfs:comment "This property relates the ValueAnnotation activity with the resource that is annotated (it can be a nif:String or a schema:NewsArticle)."@en ;
+               rdfs:label "annotates"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#hasValueCategory
+amor:hasValueCategory rdf:type owl:ObjectProperty ;
+                      rdfs:domain [ rdf:type owl:Class ;
+                                    owl:unionOf ( amor:ValueAnnotation
+                                                  amor:ValueModel
+                                                )
+                                  ] ;
+                      rdfs:range amor:ValueCategory ;
+                      rdfs:comment "Specifies the category of the moral value."@en ;
+                      rdfs:label "hasValueCategory"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#usesValueModel
+amor:usesValueModel rdf:type owl:ObjectProperty ;
+                    rdfs:domain amor:ValueAnalysis ;
+                    rdfs:range amor:ValueModel ;
+                    rdfs:comment "Specifies the value model used in the analysis."@en ;
+                    rdfs:label "usesValueModel"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#confidence
+amor:confidence rdf:type owl:DatatypeProperty ;
+                rdfs:domain amor:ValueAnnotation ;
+                rdfs:range xsd:float ;
+                rdfs:comment "The confidence score of the value annotation, ranging from 0 to 1."@en ;
+                rdfs:label "confidence"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#hasPolarity
+amor:hasPolarity rdf:type owl:DatatypeProperty ;
+                 rdfs:domain amor:ValueAnnotation ;
+                 rdfs:range xsd:float ;
+                 rdfs:comment "The polarity of the value, ranging from -1 to 1."@en ;
+                 rdfs:label "hasPolarity"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#MLEntity
+amor:MLEntity rdf:type owl:Class ;
+              rdfs:subClassOf mls:InformationEntity ,
+                              prov:Entity ;
+              rdfs:comment "Represents any entity related with a Machine Learning process. It is a subclass of mls:Entity and prov:Entity."@en ;
+              rdfs:label "MLEntity"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#MLProcess
+amor:MLProcess rdf:type owl:Class ;
+               rdfs:subClassOf mls:Run ,
+                               prov:Activity ;
+               rdfs:comment "Represents a process related with Machine Learning that generates some output, such as a mls:Model or any other mls:InformationEntity."@en ;
+               rdfs:label "MLProcess"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#Robot
+amor:Robot rdf:type owl:Class ;
+           rdfs:subClassOf prov:SoftwareAgent .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#ValueAnalysis
+amor:ValueAnalysis rdf:type owl:Class ;
+                   rdfs:subClassOf prov:Activity ;
+                   rdfs:comment "Represents the activity of analyzing text for moral values."@en ;
+                   rdfs:label "ValueAnalysis"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#ValueAnnotation
+amor:ValueAnnotation rdf:type owl:Class ;
+                     rdfs:subClassOf prov:Entity ;
+                     rdfs:comment "Represents a value annotation extracted from text."@en ;
+                     rdfs:label "ValueAnnotation"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#ValueCategory
+amor:ValueCategory rdf:type owl:Class ;
+                   rdfs:comment "Represents a category of moral values."@en ;
+                   rdfs:label "ValueCategory"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#ValueModel
+amor:ValueModel rdf:type owl:Class ;
+                rdfs:comment "Represents a model for categorizing moral values."@en ;
+                rdfs:label "ValueModel"@en .
+
+
+###  http://www.w3.org/ns/mls#InformationEntity
+mls:InformationEntity rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/mls#Run
+mls:Run rdf:type owl:Class .
+
+
+###  https://schema.org/NewsArticle
+schema:NewsArticle rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#agent1
+amor:agent1 rdf:type owl:NamedIndividual ,
+                     amor:Robot .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#human1
+amor:human1 rdf:type owl:NamedIndividual ,
+                     prov:Person .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#newsArticle1
+amor:newsArticle1 rdf:type owl:NamedIndividual ,
+                           schema:NewsArticle .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#valueAnalysis1
+amor:valueAnalysis1 rdf:type owl:NamedIndividual ,
+                             amor:ValueAnalysis ;
+                    amor:analyses amor:newsArticle1 ;
+                    prov:generated amor:valueAnnotation1 ;
+                    prov:wasAssociatedWith amor:human1 .
+
+
+###  http://www.gsi.upm.es/ontologies/amor/ns#valueAnnotation1
+amor:valueAnnotation1 rdf:type owl:NamedIndividual ,
+                               amor:ValueAnnotation ;
+                      amor:annotates amor:newsArticle1 .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

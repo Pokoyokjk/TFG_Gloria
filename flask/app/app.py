@@ -1,8 +1,6 @@
 from flask import Flask, request, Response
-
-
 import aux
-from model import connect_to_db, save_json_ld
+from model import connect_to_db, save_json_ld, get_json_ld
 
 app = Flask(__name__)
 
@@ -29,15 +27,15 @@ def save_log():
     return Response(status=200)
 
   
-    
-
 @app.route('/query', methods=['GET'])
 def get_query():
     # TODO: function that executes graph queries over mongodb/kgtk
-    return "<h1>Hello</h1>"
     pass
+    
     
 @app.route('/get_graph', methods=['GET'])
 def get_html_graph():
-    # TODO: function that return a graph in HTML format
-    pass
+    json_ld_data = get_json_ld().graph_data
+    json_ld_graph_data = aux.process_json_ld_data(json_ld_data)
+    turtle_data = aux.convert_json_ld_to_turtle(json_ld_graph_data)
+    return turtle_data

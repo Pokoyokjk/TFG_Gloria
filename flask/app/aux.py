@@ -10,6 +10,11 @@ def process_turtle_data(data):
     graph.parse(data=data, format="turtle")
     return graph
 
+def process_json_ld_data(data):
+    graph = Graph()
+    graph.parse(data=data, format="json-ld")
+    return graph
+
 def convert_turtle_to_json_ld(ttl_graph_data):
     
     graph_namespace = ttl_graph_data.namespaces()
@@ -25,6 +30,12 @@ def convert_turtle_to_json_ld(ttl_graph_data):
         json_ld_data = {"@context": context, "@graph": data}
     
     return json_ld_data
+
+def convert_json_ld_to_turtle(json_ld_graph_data):
+    graph_namespace = json_ld_graph_data.namespaces()
+    prefixes = {prefix: str(uri) for prefix, uri in graph_namespace}
+    serialized_turtle_data = json_ld_graph_data.serialize(format="turtle", context=prefixes)
+    return serialized_turtle_data
 
 
 # -------- AUX FUNCTIONS FOR MODEL.PY ----------- # 
