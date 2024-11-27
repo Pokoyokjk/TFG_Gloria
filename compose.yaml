@@ -1,14 +1,11 @@
-version: '3.8'
-
 services:
-  flask:
-    build: ./flask
+  sebb:
+    container_name: amor-sebb
+    image: ghcr.io/gsi-upm/amor-sebb:latest
     ports:
       - "5000:5000"
-    volumes:
-      - ./flask/app:/app
     networks:
-      - internal_network  
+      - internal_network
     depends_on:
       - mongodb
     environment:
@@ -16,20 +13,20 @@ services:
       - FLASK_DEBUG=1
 
   mongodb:
+    container_name: amor-sebb-mongodb
     image: mongodb/mongodb-community-server:8.0.0-ubi8
     volumes:
       - db:/data/db
       - db:/data/configdb
     networks:
       - internal_network
-    command: ["mongod"]
     ports:
       - "27017:27017"
     
 
 networks:
   internal_network:
-    driver: bridge 
+    driver: bridge
 
 volumes:
   db:

@@ -16,7 +16,6 @@ def process_json_ld_data(data):
     return graph
 
 def convert_turtle_to_json_ld(ttl_graph_data):
-    
     graph_namespace = ttl_graph_data.namespaces()
     prefixes = {prefix: str(uri) for prefix, uri in graph_namespace}
     serialized_json_ld = ttl_graph_data.serialize(format="json-ld", context=prefixes)

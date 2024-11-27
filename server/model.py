@@ -1,6 +1,6 @@
 from mongoengine import Document, DynamicField, DateTimeField, StringField, ValidationError, connect
 from datetime import datetime
-import aux
+import semantic_utils
 
 class Graph(Document):
     _id = StringField(primary_key=True)
@@ -19,8 +19,8 @@ def connect_to_db():
 def save_json_ld(json_ld_data:dict):
     graph = Graph.objects(_id='0').first()
     if graph:
-        json_ld_data = aux.update_prefixes(graph.graph_data, json_ld_data)
-        json_ld_data = aux.update_graph(graph.graph_data, json_ld_data)
+        json_ld_data = semantic_utils.update_prefixes(graph.graph_data, json_ld_data)
+        json_ld_data = semantic_utils.update_graph(graph.graph_data, json_ld_data)
         graph.update(
             set__graph_data=json_ld_data,
             set__updated_at=datetime.now()
