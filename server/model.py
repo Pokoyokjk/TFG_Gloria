@@ -5,7 +5,7 @@ import semantic_utils
 class Graph(Document):
     _id = StringField(primary_key=True)
     updated_at = DateTimeField()
-    graph_data = DynamicField (required=True) 
+    graph_data = DynamicField (required=True)
 
     def clean(self):
         if not isinstance(self.graph_data, dict):
