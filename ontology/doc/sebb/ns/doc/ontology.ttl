@@ -55,7 +55,7 @@
                 rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasEndedBy> ;
                 rdfs:domain :LoggedActivity ;
                 rdfs:range :Result ;
-                rdfs:comment "Represents the relation between an result and an activity which produced it."@en ;
+                rdfs:comment "Represents the relation between a result and an activity which produced it."@en ;
                 rdfs:label "produced result"@en .
 
 
@@ -63,7 +63,7 @@
 :triggeredBy rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasStartedBy> ;
              rdfs:domain :LoggedActivity ;
-             rdfs:range :TriggerEvent ;
+             rdfs:range :Trigger ;
              rdfs:comment "Represents the relation between an activity and the event which triggered it."@en ;
              rdfs:label "triggered by"@en .
 
@@ -71,7 +71,7 @@
 ###  http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel
 :usedMLModel rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf <http://www.w3.org/ns/prov#used> ;
-             rdfs:domain :LoggedActivity ;
+             rdfs:domain <http://www.w3.org/ns/prov#Activity> ;
              rdfs:range <http://www.w3.org/ns/mls#Model> ;
              rdfs:comment "Represents the fact that an activity has used a Machine Learning Model to produce the result."@en ;
              rdfs:label "used machine learning model"@en .
@@ -101,16 +101,8 @@
 <http://kb.openrobots.org#RobotResponses> rdf:type owl:Class .
 
 
-###  http://purl.org/NET/c4dm/event.owl#Event
-<http://purl.org/NET/c4dm/event.owl#Event> rdf:type owl:Class .
-
-
 ###  http://sw.opencyc.org/concept/Action
 <http://sw.opencyc.org/concept/Action> rdf:type owl:Class .
-
-
-###  http://sw.opencyc.org/concept/Event
-<http://sw.opencyc.org/concept/Event> rdf:type owl:Class .
 
 
 ###  http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity
@@ -130,27 +122,24 @@
 ###  http://www.gsi.upm.es/ontologies/sebb/ns#Result
 :Result rdf:type owl:Class ;
         owl:equivalentClass [ rdf:type owl:Class ;
-                              owl:unionOf ( <http://kb.openrobots.org#Intent>
-                                            <http://kb.openrobots.org#RobotResponses>
-                                            <http://purl.org/NET/c4dm/event.owl#Event>
-                                            :LoggedActivity
+                              owl:unionOf ( <http://www.w3.org/ns/prov#Activity>
+                                            <http://www.w3.org/ns/prov#Entity>
                                           )
                             ] ;
-        rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ;
+        rdfs:subClassOf <http://www.w3.org/ns/prov#Activity> ;
         rdfs:comment "Represents the result of an activity."@en ;
         rdfs:label "Result"@en .
 
 
-###  http://www.gsi.upm.es/ontologies/sebb/ns#TriggerEvent
-:TriggerEvent rdf:type owl:Class ;
-              owl:equivalentClass [ rdf:type owl:Class ;
-                                    owl:unionOf ( <http://purl.org/NET/c4dm/event.owl#Event>
-                                                  <http://sw.opencyc.org/concept/Event>
-                                                )
-                                  ] ;
-              rdfs:subClassOf <http://www.w3.org/ns/prov#Entity> ;
-              rdfs:comment "Represents an event that caused/triggered an activity."@en ;
-              rdfs:label "Input"@en .
+###  http://www.gsi.upm.es/ontologies/sebb/ns#Trigger
+:Trigger rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Class ;
+                               owl:unionOf ( <http://www.w3.org/ns/prov#Activity>
+                                             <http://www.w3.org/ns/prov#Entity>
+                                           )
+                             ] ;
+         rdfs:comment "Represents an event that caused/triggered an activity."@en ;
+         rdfs:label "Trigger"@en .
 
 
 ###  http://www.w3.org/ns/mls#Model

@@ -2,7 +2,7 @@
   "_comment" : "Created with OWL2VOWL (version 0.3.5), http://vowl.visualdataweb.org",
   "header" : {
     "languages" : [ "en", "undefined" ],
-    "baseIris" : [ "http://sw.opencyc.org/concept", "http://www.w3.org/1999/02/22-rdf-syntax-ns", "http://purl.org/NET/c4dm/event.owl", "http://kb.openrobots.org", "http://www.w3.org/ns/mls", "http://www.w3.org/2000/01/rdf-schema", "http://www.w3.org/ns/prov", "http://www.w3.org/2001/XMLSchema", "http://www.gsi.upm.es/ontologies/sebb/ns" ],
+    "baseIris" : [ "http://sw.opencyc.org/concept", "http://www.w3.org/1999/02/22-rdf-syntax-ns", "http://kb.openrobots.org", "http://www.w3.org/ns/mls", "http://www.w3.org/2000/01/rdf-schema", "http://www.w3.org/ns/prov", "http://www.w3.org/2001/XMLSchema", "http://www.gsi.upm.es/ontologies/sebb/ns" ],
     "title" : {
       "en" : "Semantic Ethical Black Box (SEBB) Ontology"
     },
@@ -60,54 +60,62 @@
   "namespace" : [ ],
   "class" : [ {
     "id" : "0",
-    "type" : "owl:Class"
-  }, {
-    "id" : "5",
-    "type" : "owl:Class"
-  }, {
-    "id" : "11",
     "type" : "owl:unionOf"
   }, {
     "id" : "1",
-    "type" : "owl:unionOf"
-  }, {
-    "id" : "7",
-    "type" : "owl:unionOf"
-  }, {
-    "id" : "16",
-    "type" : "owl:Class"
-  }, {
-    "id" : "14",
     "type" : "owl:Class"
   }, {
     "id" : "8",
     "type" : "owl:Class"
   }, {
-    "id" : "9",
-    "type" : "owl:Thing"
+    "id" : "3",
+    "type" : "owl:unionOf"
   }, {
-    "id" : "18",
+    "id" : "4",
+    "type" : "owl:unionOf"
+  }, {
+    "id" : "13",
     "type" : "owl:Class"
+  }, {
+    "id" : "2",
+    "type" : "owl:Class"
+  }, {
+    "id" : "14",
+    "type" : "owl:Class"
+  }, {
+    "id" : "6",
+    "type" : "owl:Class"
+  }, {
+    "id" : "10",
+    "type" : "owl:Thing"
   }, {
     "id" : "15",
     "type" : "owl:Class"
-  }, {
-    "id" : "3",
-    "type" : "owl:Class"
-  }, {
-    "id" : "17",
-    "type" : "owl:Class"
   } ],
   "classAttribute" : [ {
+    "iri" : "http://www.gsi.upm.es/ontologies/sebb/ns#Trigger",
+    "baseIri" : "http://www.gsi.upm.es/ontologies/sebb/ns",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Trigger",
+      "en" : "Trigger"
+    },
+    "union" : [ "1", "2" ],
+    "comment" : {
+      "en" : "Represents an event that caused/triggered an activity."
+    },
+    "attributes" : [ "union" ],
+    "id" : "0"
+  }, {
     "iri" : "http://www.w3.org/ns/prov#Activity",
     "baseIri" : "http://www.w3.org/ns/prov",
     "instances" : 0,
     "label" : {
       "IRI-based" : "Activity"
     },
-    "subClasses" : [ "1" ],
+    "subClasses" : [ "3", "4" ],
     "attributes" : [ "external" ],
-    "id" : "0"
+    "id" : "1"
   }, {
     "iri" : "http://kb.openrobots.org#RobotResponses",
     "baseIri" : "http://kb.openrobots.org",
@@ -116,7 +124,7 @@
       "IRI-based" : "RobotResponses"
     },
     "attributes" : [ "external" ],
-    "id" : "5"
+    "id" : "8"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/sebb/ns#Result",
     "baseIri" : "http://www.gsi.upm.es/ontologies/sebb/ns",
@@ -125,13 +133,13 @@
       "IRI-based" : "Result",
       "en" : "Result"
     },
-    "union" : [ "14", "15", "5", "1" ],
+    "union" : [ "1", "2" ],
     "comment" : {
       "en" : "Represents the result of an activity."
     },
     "attributes" : [ "union" ],
-    "id" : "11",
-    "superClasses" : [ "8" ]
+    "id" : "3",
+    "superClasses" : [ "1" ]
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity",
     "baseIri" : "http://www.gsi.upm.es/ontologies/sebb/ns",
@@ -140,28 +148,13 @@
       "IRI-based" : "LoggedActivity",
       "en" : "Logged Activity"
     },
-    "union" : [ "16", "15", "5", "17" ],
+    "union" : [ "13", "14", "8", "15" ],
     "comment" : {
       "en" : "Represents an activity that is recorded/logged in the SEBB."
     },
     "attributes" : [ "union" ],
-    "id" : "1",
-    "superClasses" : [ "0" ]
-  }, {
-    "iri" : "http://www.gsi.upm.es/ontologies/sebb/ns#TriggerEvent",
-    "baseIri" : "http://www.gsi.upm.es/ontologies/sebb/ns",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "TriggerEvent",
-      "en" : "Input"
-    },
-    "union" : [ "14", "18" ],
-    "comment" : {
-      "en" : "Represents an event that caused/triggered an activity."
-    },
-    "attributes" : [ "union" ],
-    "id" : "7",
-    "superClasses" : [ "8" ]
+    "id" : "4",
+    "superClasses" : [ "1" ]
   }, {
     "iri" : "http://sw.opencyc.org/concept/Action",
     "baseIri" : "http://sw.opencyc.org/concept",
@@ -170,16 +163,7 @@
       "IRI-based" : "Action"
     },
     "attributes" : [ "external" ],
-    "id" : "16"
-  }, {
-    "iri" : "http://purl.org/NET/c4dm/event.owl#Event",
-    "baseIri" : "http://purl.org/NET/c4dm/event.owl",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "Event"
-    },
-    "attributes" : [ "external" ],
-    "id" : "14"
+    "id" : "13"
   }, {
     "iri" : "http://www.w3.org/ns/prov#Entity",
     "baseIri" : "http://www.w3.org/ns/prov",
@@ -187,25 +171,8 @@
     "label" : {
       "IRI-based" : "Entity"
     },
-    "subClasses" : [ "7", "11" ],
     "attributes" : [ "external" ],
-    "id" : "8"
-  }, {
-    "iri" : "http://www.w3.org/2002/07/owl#Thing",
-    "baseIri" : "http://owl2vowl.de",
-    "id" : "9",
-    "label" : {
-      "undefined" : "Thing"
-    }
-  }, {
-    "iri" : "http://sw.opencyc.org/concept/Event",
-    "baseIri" : "http://sw.opencyc.org/concept",
-    "instances" : 0,
-    "label" : {
-      "IRI-based" : "Event"
-    },
-    "attributes" : [ "external" ],
-    "id" : "18"
+    "id" : "2"
   }, {
     "iri" : "http://kb.openrobots.org#Intent",
     "baseIri" : "http://kb.openrobots.org",
@@ -214,7 +181,7 @@
       "IRI-based" : "Intent"
     },
     "attributes" : [ "external" ],
-    "id" : "15"
+    "id" : "14"
   }, {
     "iri" : "http://www.w3.org/ns/mls#Model",
     "baseIri" : "http://www.w3.org/ns/mls",
@@ -223,7 +190,14 @@
       "IRI-based" : "Model"
     },
     "attributes" : [ "external" ],
-    "id" : "3"
+    "id" : "6"
+  }, {
+    "iri" : "http://www.w3.org/2002/07/owl#Thing",
+    "baseIri" : "http://owl2vowl.de",
+    "id" : "10",
+    "label" : {
+      "undefined" : "Thing"
+    }
   }, {
     "iri" : "http://www.w3.org/ns/mls#Run",
     "baseIri" : "http://www.w3.org/ns/mls",
@@ -232,128 +206,120 @@
       "IRI-based" : "Run"
     },
     "attributes" : [ "external" ],
-    "id" : "17"
+    "id" : "15"
   } ],
   "property" : [ {
-    "id" : "2",
+    "id" : "5",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "6",
+    "id" : "9",
     "type" : "rdfs:SubClassOf"
   }, {
-    "id" : "4",
+    "id" : "7",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "10",
-    "type" : "rdfs:SubClassOf"
+    "id" : "11",
+    "type" : "owl:objectProperty"
   }, {
     "id" : "12",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "19",
+    "id" : "16",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "18",
     "type" : "rdfs:SubClassOf"
   }, {
-    "id" : "13",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "20",
-    "type" : "owl:objectProperty"
-  }, {
-    "id" : "21",
+    "id" : "17",
     "type" : "owl:objectProperty"
   } ],
   "propertyAttribute" : [ {
     "iri" : "http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel",
     "baseIri" : "http://www.gsi.upm.es/ontologies/sebb/ns",
-    "range" : "3",
+    "range" : "6",
     "label" : {
       "IRI-based" : "usedMLModel",
       "en" : "used machine learning model"
     },
-    "superproperty" : [ "4" ],
+    "superproperty" : [ "7" ],
     "domain" : "1",
     "comment" : {
       "en" : "Represents the fact that an activity has used a Machine Learning Model to produce the result."
     },
     "attributes" : [ "object" ],
-    "id" : "2"
+    "id" : "5"
   }, {
-    "range" : "8",
-    "domain" : "7",
-    "attributes" : [ "object", "anonymous" ],
-    "id" : "6"
+    "range" : "1",
+    "domain" : "4",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "9"
   }, {
     "iri" : "http://www.w3.org/ns/prov#used",
     "baseIri" : "http://www.w3.org/ns/prov",
-    "range" : "9",
+    "range" : "10",
     "label" : {
       "IRI-based" : "used"
     },
-    "domain" : "9",
-    "subproperty" : [ "2" ],
+    "domain" : "10",
+    "subproperty" : [ "5" ],
     "attributes" : [ "object", "external" ],
-    "id" : "4"
-  }, {
-    "range" : "8",
-    "domain" : "11",
-    "attributes" : [ "object", "anonymous" ],
-    "id" : "10"
+    "id" : "7"
   }, {
     "iri" : "http://www.w3.org/ns/prov#wasStartedBy",
     "baseIri" : "http://www.w3.org/ns/prov",
-    "range" : "9",
+    "range" : "10",
     "label" : {
       "IRI-based" : "wasStartedBy"
     },
-    "domain" : "9",
-    "subproperty" : [ "13" ],
+    "domain" : "10",
+    "subproperty" : [ "12" ],
     "attributes" : [ "object", "external" ],
-    "id" : "12"
-  }, {
-    "range" : "0",
-    "domain" : "1",
-    "attributes" : [ "object", "anonymous" ],
-    "id" : "19"
+    "id" : "11"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy",
     "baseIri" : "http://www.gsi.upm.es/ontologies/sebb/ns",
-    "range" : "7",
+    "range" : "0",
     "label" : {
       "IRI-based" : "triggeredBy",
       "en" : "triggered by"
     },
-    "superproperty" : [ "12" ],
-    "domain" : "1",
+    "superproperty" : [ "11" ],
+    "domain" : "4",
     "comment" : {
       "en" : "Represents the relation between an activity and the event which triggered it."
     },
     "attributes" : [ "object" ],
-    "id" : "13"
+    "id" : "12"
   }, {
     "iri" : "http://www.w3.org/ns/prov#wasEndedBy",
     "baseIri" : "http://www.w3.org/ns/prov",
-    "range" : "9",
+    "range" : "10",
     "label" : {
       "IRI-based" : "wasEndedBy"
     },
-    "domain" : "9",
-    "subproperty" : [ "21" ],
+    "domain" : "10",
+    "subproperty" : [ "17" ],
     "attributes" : [ "object", "external" ],
-    "id" : "20"
+    "id" : "16"
+  }, {
+    "range" : "1",
+    "domain" : "3",
+    "attributes" : [ "anonymous", "object" ],
+    "id" : "18"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/sebb/ns#producedResult",
     "baseIri" : "http://www.gsi.upm.es/ontologies/sebb/ns",
-    "range" : "11",
+    "range" : "3",
     "label" : {
       "IRI-based" : "producedResult",
       "en" : "produced result"
     },
-    "superproperty" : [ "20" ],
-    "domain" : "1",
+    "superproperty" : [ "16" ],
+    "domain" : "4",
     "comment" : {
-      "en" : "Represents the relation between an result and an activity which produced it."
+      "en" : "Represents the relation between a result and an activity which produced it."
     },
     "attributes" : [ "object" ],
-    "id" : "21"
+    "id" : "17"
   } ]
 }

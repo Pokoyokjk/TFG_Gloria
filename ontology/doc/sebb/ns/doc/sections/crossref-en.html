@@ -3,37 +3,10 @@ This section provides details for each class and property defined by AMOR Moral 
 <div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="classes">
  <h3 id="classes-headline" class="list">Classes</h3>
  <ul class="hlist">
-  <li><a href="#TriggerEvent" title="http://www.gsi.upm.es/ontologies/sebb/ns#TriggerEvent">Input</a></li>
   <li><a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a></li>
   <li><a href="#Result" title="http://www.gsi.upm.es/ontologies/sebb/ns#Result">Result</a></li>
+  <li><a href="#Trigger" title="http://www.gsi.upm.es/ontologies/sebb/ns#Trigger">Trigger</a></li>
  </ul>
- <div class="entity" id="TriggerEvent">
-  <h3>Input<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
-  <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#TriggerEvent</p>
-  <div class="comment">
-   <span class="markdown">Represents an event that caused/triggered an activity.</span>
-  </div>
-  <dl class="description">
-   <dt>
-    is equivalent to
-   </dt>
-   <dd>
-    <a href="http://purl.org/NET/c4dm/event.owl#Event" target="_blank" title="http://purl.org/NET/c4dm/event.owl#Event">Event</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="http://sw.opencyc.org/concept/Event" target="_blank" title="http://sw.opencyc.org/concept/Event">Event</a> <sup class="type-c" title="class">c</sup>
-   </dd>
-   <dt>
-    has super-classes
-   </dt>
-   <dd>
-    <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
-   </dd>
-   <dt>
-    is in range of
-   </dt>
-   <dd>
-    <a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a> <sup class="type-op" title="object property">op</sup>
-   </dd>
-  </dl>
- </div>
  <div class="entity" id="LoggedActivity">
   <h3>Logged Activity<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
   <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity</p>
@@ -57,7 +30,7 @@ This section provides details for each class and property defined by AMOR Moral 
     is in domain of
    </dt>
    <dd>
-    <a href="#producedResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult">produced result</a> <sup class="type-op" title="object property">op</sup>, <a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a> <sup class="type-op" title="object property">op</sup>, <a href="#usedMLModel" title="http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel">used machine learning model</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#producedResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult">produced result</a> <sup class="type-op" title="object property">op</sup>, <a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -72,19 +45,40 @@ This section provides details for each class and property defined by AMOR Moral 
     is equivalent to
    </dt>
    <dd>
-    <a href="http://kb.openrobots.org#Intent" target="_blank" title="http://kb.openrobots.org#Intent">Intent</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="http://kb.openrobots.org#RobotResponses" target="_blank" title="http://kb.openrobots.org#RobotResponses">Robot Responses</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="http://purl.org/NET/c4dm/event.owl#Event" target="_blank" title="http://purl.org/NET/c4dm/event.owl#Event">Event</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a> <sup class="type-c" title="class">c</sup>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
    </dd>
    <dt>
     has super-classes
    </dt>
    <dd>
-    <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
    </dd>
    <dt>
     is in range of
    </dt>
    <dd>
     <a href="#producedResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult">produced result</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="Trigger">
+  <h3>Trigger<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#Trigger</p>
+  <div class="comment">
+   <span class="markdown">Represents an event that caused/triggered an activity.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    is equivalent to
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup> <span class="logic">or</span> <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -99,7 +93,7 @@ This section provides details for each class and property defined by AMOR Moral 
   <h3>produced result<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#producedResult</p>
   <div class="comment">
-   <span class="markdown">Represents the relation between an result and an activity which produced it.</span>
+   <span class="markdown">Represents the relation between a result and an activity which produced it.</span>
   </div>
   <div class="description">
    <dl>
@@ -148,7 +142,7 @@ This section provides details for each class and property defined by AMOR Moral 
      has range
     </dt>
     <dd>
-     <a href="#TriggerEvent" title="http://www.gsi.upm.es/ontologies/sebb/ns#TriggerEvent">Input</a> <sup class="type-c" title="class">c</sup>
+     <a href="#Trigger" title="http://www.gsi.upm.es/ontologies/sebb/ns#Trigger">Trigger</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>
@@ -171,7 +165,7 @@ This section provides details for each class and property defined by AMOR Moral 
      has domain
     </dt>
     <dd>
-     <a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a> <sup class="type-c" title="class">c</sup>
+     <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
     </dd>
     <dt>
      has range

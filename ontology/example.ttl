@@ -1,0 +1,56 @@
+@prefix : <file:///home/alvaro/git/amor-robots/amor-sebb/ontology/case_study.ttl#> .
+@prefix amor: <http://www.gsi.upm.es/ontologies/amor/ns#> .
+@prefix concept: <http://sw.opencyc.org/concept/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix ex: <http://example.org#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix http: <http://www.w3.org/2011/http#> .
+@prefix mls: <http://www.w3.org/ns/mls#> .
+@prefix oro: <http://kb.openrobots.org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sebb: <http://www.gsi.upm.es/ontologies/sebb/ns#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:maria a prov:Person, foaf:Person, schema:Person, oro:Human ;
+    foaf:firstName "María"@es ;
+    foaf:homepage <http://example.org/maria> ;
+    schema:affiliation ex:upm .
+
+ex:upm a schema:Organization, foaf:Organization, prov:Organization ;
+    schema:url <https://www.upm.es> ;
+    schema:name "Universidad Politécnica de Madrid"@es ;
+    schema:name "Technical University of Madrid"@en .
+
+ex:ari a prov:SoftwareAgent, oro:Robot ;
+    oro:hasName "ARI" ;
+    oro:belongsTo ex:maria ;
+    foaf:knows ex:maria .
+
+ex:inmerEnv a prov:SoftwareAgent .
+
+ex:newsCloudService a prov:SoftwareAgent .
+
+ex:interaction1 a sebb:LoggedActivity ;
+    sebb:triggeredBy ex:event1 ;
+    sebb:producedResult ex:speech1 ;
+    sebb:producedResult ex:shownContent1 ;
+    sebb:usedMLModel ex:model1 .
+# TODO add timestamps
+
+ex:event1 a oro:ListeningEvent ;
+    oro:hasSpeaker ex:maria ;
+    oro:hasListener ex:ari ;
+    oro:hasContent "Good morning. Show me some news about climate change."@en ;
+    sebb:usedMLModel ex:model2 .
+
+ex:result1 a oro:SpeechAction ;
+    oro:hasSpeaker ex:ari ;
+    sebb:usedMLModel ex:model3 ;
+    oro:hasContent "Good morning maria. Here I show you the last news about climate change"@en .
+
+

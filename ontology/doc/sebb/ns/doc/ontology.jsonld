@@ -13,27 +13,23 @@
     } ]
   } ]
 }, {
-  "@id" : "_:genid11",
-  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
-  "http://www.w3.org/2002/07/owl#unionOf" : [ {
-    "@list" : [ {
-      "@id" : "http://purl.org/NET/c4dm/event.owl#Event"
-    }, {
-      "@id" : "http://sw.opencyc.org/concept/Event"
-    } ]
-  } ]
-}, {
   "@id" : "_:genid6",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2002/07/owl#unionOf" : [ {
     "@list" : [ {
-      "@id" : "http://kb.openrobots.org#Intent"
+      "@id" : "http://www.w3.org/ns/prov#Activity"
     }, {
-      "@id" : "http://kb.openrobots.org#RobotResponses"
+      "@id" : "http://www.w3.org/ns/prov#Entity"
+    } ]
+  } ]
+}, {
+  "@id" : "_:genid9",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2002/07/owl#unionOf" : [ {
+    "@list" : [ {
+      "@id" : "http://www.w3.org/ns/prov#Activity"
     }, {
-      "@id" : "http://purl.org/NET/c4dm/event.owl#Event"
-    }, {
-      "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity"
+      "@id" : "http://www.w3.org/ns/prov#Entity"
     } ]
   } ]
 }, {
@@ -41,9 +37,6 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
 }, {
   "@id" : "http://kb.openrobots.org#RobotResponses",
-  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
-}, {
-  "@id" : "http://purl.org/NET/c4dm/event.owl#Event",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
 }, {
   "@id" : "http://purl.org/dc/terms/creator",
@@ -65,9 +58,6 @@
   "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
 }, {
   "@id" : "http://sw.opencyc.org/concept/Action",
-  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
-}, {
-  "@id" : "http://sw.opencyc.org/concept/Event",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
 }, {
   "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns",
@@ -136,13 +126,13 @@
     "@value" : "Result"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
-    "@id" : "http://www.w3.org/ns/prov#Entity"
+    "@id" : "http://www.w3.org/ns/prov#Activity"
   } ],
   "http://www.w3.org/2002/07/owl#equivalentClass" : [ {
     "@id" : "_:genid6"
   } ]
 }, {
-  "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#TriggerEvent",
+  "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#Trigger",
   "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
@@ -150,20 +140,17 @@
   } ],
   "http://www.w3.org/2000/01/rdf-schema#label" : [ {
     "@language" : "en",
-    "@value" : "Input"
-  } ],
-  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
-    "@id" : "http://www.w3.org/ns/prov#Entity"
+    "@value" : "Trigger"
   } ],
   "http://www.w3.org/2002/07/owl#equivalentClass" : [ {
-    "@id" : "_:genid11"
+    "@id" : "_:genid9"
   } ]
 }, {
   "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#producedResult",
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
     "@language" : "en",
-    "@value" : "Represents the relation between an result and an activity which produced it."
+    "@value" : "Represents the relation between a result and an activity which produced it."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
     "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity"
@@ -193,7 +180,7 @@
     "@value" : "triggered by"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
-    "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#TriggerEvent"
+    "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#Trigger"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
     "@id" : "http://www.w3.org/ns/prov#wasStartedBy"
@@ -206,7 +193,7 @@
     "@value" : "Represents the fact that an activity has used a Machine Learning Model to produce the result."
   } ],
   "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity"
+    "@id" : "http://www.w3.org/ns/prov#Activity"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#label" : [ {
     "@language" : "en",

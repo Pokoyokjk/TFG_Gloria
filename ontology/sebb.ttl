@@ -2,7 +2,6 @@
 @prefix amor: <http://www.gsi.upm.es/ontologies/amor/ns#> .
 @prefix concept: <http://sw.opencyc.org/concept/> .
 @prefix dc: <http://purl.org/dc/terms/> .
-@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
 @prefix mls: <http://www.w3.org/ns/mls#> .
 @prefix oro: <http://kb.openrobots.org#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -36,24 +35,21 @@
     rdfs:label "Logged Activity"@en ;
     rdfs:comment "Represents an activity that is recorded/logged in the SEBB."@en .
 
-:TriggerEvent
+:Trigger
     a owl:Class ;
-    rdfs:subClassOf prov:Entity ;
     owl:unionOf (
-        concept:Event 
-        event:Event
+        prov:Entity 
+        prov:Activity
     ) ;
-    rdfs:label "Input"@en ;
+    rdfs:label "Trigger"@en ;
     rdfs:comment "Represents an event that caused/triggered an activity."@en .
 
 :Result
     a owl:Class ;
-    rdfs:subClassOf prov:Entity ;
+    rdfs:subClassOf prov:Activity ;
     owl:unionOf (
-        oro:RobotResponses 
-        oro:Intent 
-        event:Event
-        :LoggedActivity
+        prov:Entity 
+        prov:Activity
     ) ;
     rdfs:label "Result"@en ;
     rdfs:comment "Represents the result of an activity."@en .
@@ -62,7 +58,7 @@
     a owl:ObjectProperty ;
     rdfs:subPropertyOf prov:wasStartedBy ;
     rdfs:domain :LoggedActivity ;
-    rdfs:range :TriggerEvent ;
+    rdfs:range :Trigger ;
     rdfs:label "triggered by"@en ;
     rdfs:comment "Represents the relation between an activity and the event which triggered it."@en .
 
@@ -72,13 +68,13 @@
     rdfs:domain :LoggedActivity ;
     rdfs:range :Result ;
     rdfs:label "produced result"@en ;
-    rdfs:comment "Represents the relation between an result and an activity which produced it."@en .
+    rdfs:comment "Represents the relation between a result and an activity which produced it."@en .
 
 :usedMLModel
     a owl:ObjectProperty ;
     rdfs:subPropertyOf prov:used ;
     owl:equivalentProperty amor:usedMLModel ;
-    rdfs:domain :LoggedActivity ;
+    rdfs:domain prov:Activity ;
     rdfs:range mls:Model ;
     rdfs:label "used machine learning model"@en ;
     rdfs:comment "Represents the fact that an activity has used a Machine Learning Model to produce the result."@en .
