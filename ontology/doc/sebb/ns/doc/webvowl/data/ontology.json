@@ -74,7 +74,7 @@
     "id" : "14",
     "type" : "owl:intersectionOf"
   }, {
-    "id" : "11",
+    "id" : "10",
     "type" : "owl:Thing"
   }, {
     "id" : "3",
@@ -150,7 +150,7 @@
   }, {
     "iri" : "http://www.w3.org/2002/07/owl#Thing",
     "baseIri" : "http://owl2vowl.de",
-    "id" : "11",
+    "id" : "10",
     "label" : {
       "undefined" : "Thing"
     }
@@ -244,10 +244,10 @@
     "id" : "5",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "10",
+    "id" : "7",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "7",
+    "id" : "11",
     "type" : "owl:objectProperty"
   }, {
     "id" : "15",
@@ -269,6 +269,9 @@
     "type" : "owl:objectProperty"
   }, {
     "id" : "26",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "27",
     "type" : "owl:objectProperty"
   }, {
     "id" : "13",
@@ -293,27 +296,27 @@
     "attributes" : [ "object" ],
     "id" : "5"
   }, {
-    "iri" : "http://www.w3.org/ns/prov#wasInfluencedBy",
-    "baseIri" : "http://www.w3.org/ns/prov",
-    "range" : "11",
-    "label" : {
-      "IRI-based" : "wasInfluencedBy"
-    },
-    "domain" : "11",
-    "subproperty" : [ "12", "13" ],
-    "attributes" : [ "external", "object" ],
-    "id" : "10"
-  }, {
     "iri" : "http://www.w3.org/ns/prov#used",
     "baseIri" : "http://www.w3.org/ns/prov",
-    "range" : "11",
+    "range" : "10",
     "label" : {
       "IRI-based" : "used"
     },
-    "domain" : "11",
+    "domain" : "10",
     "subproperty" : [ "5" ],
     "attributes" : [ "external", "object" ],
     "id" : "7"
+  }, {
+    "iri" : "http://www.w3.org/ns/prov#wasInfluencedBy",
+    "baseIri" : "http://www.w3.org/ns/prov",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "wasInfluencedBy"
+    },
+    "domain" : "10",
+    "subproperty" : [ "12", "13" ],
+    "attributes" : [ "external", "object" ],
+    "id" : "11"
   }, {
     "range" : "1",
     "domain" : "3",
@@ -384,7 +387,7 @@
       "IRI-based" : "triggeredBy",
       "en" : "triggered by"
     },
-    "superproperty" : [ "10" ],
+    "superproperty" : [ "11" ],
     "domain" : "4",
     "subproperty" : [ "24", "25" ],
     "comment" : {
@@ -400,13 +403,24 @@
       "IRI-based" : "producedEntityResult",
       "en" : "produced entity result"
     },
-    "superproperty" : [ "13" ],
+    "superproperty" : [ "27", "13" ],
     "domain" : "4",
     "comment" : {
       "en" : "Represents the relation between a result and an activity which produced it, where the result is an entity."
     },
     "attributes" : [ "object" ],
     "id" : "26"
+  }, {
+    "iri" : "http://www.w3.org/ns/prov#generated",
+    "baseIri" : "http://www.w3.org/ns/prov",
+    "range" : "10",
+    "label" : {
+      "IRI-based" : "generated"
+    },
+    "domain" : "10",
+    "subproperty" : [ "26" ],
+    "attributes" : [ "external", "object" ],
+    "id" : "27"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/sebb/ns#producedResult",
     "baseIri" : "http://www.gsi.upm.es/ontologies/sebb/ns",
@@ -415,7 +429,7 @@
       "IRI-based" : "producedResult",
       "en" : "produced result"
     },
-    "superproperty" : [ "10" ],
+    "superproperty" : [ "11" ],
     "domain" : "4",
     "subproperty" : [ "26", "21" ],
     "comment" : {

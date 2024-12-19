@@ -7,6 +7,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
+@prefix seb: <> .
 @prefix sebb: <http://www.gsi.upm.es/ontologies/sebb/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -86,6 +87,8 @@
 
 
 :asrModel1 a mls:Model .
+
+:decisionMakingModel1 a mls:Model .
 :llmModel1 a mls:Model .
 :ttsModel1 a mls:Model .
 
@@ -108,18 +111,13 @@
     prov:wasAssociatedWith :ari1 .
 
 :msg1 a oro:Message, prov:Entity ;
-    oro:hasValue "Good morning. Could you show me news about the awful climate change the planet is undergoing?."@en ;
+    oro:hasValue "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
     prov:wasGeneratedBy :listeningEvent1 .
 
 :decisionMaking1 a oro:DecisionMaking, sebb:LoggedActivity ;
     sebb:triggeredByActivity :listeningEvent1 ;
-    sebb:intermediateActivity :emotionDetection1 ;
-    sebb:intermediateActivity :informationRetrieval1 ;
-    sebb:producedActivityResult :speech1 ;
-    sebb:producedActivityResult :shownContent1 ;
-    sebb:usedMLModel :llmModel1 ;
+    sebb:usedMLModel :decisionMakingModel1 ;
     prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
-    prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
     prov:wasAssociatedWith :ari1 .
 
 :emotionDetection1 a onyx:EmotionAnalysis, sebb:LoggedActivity ;
@@ -150,6 +148,7 @@
 :informationRetrieval1 a oro:InformationRetrieval, sebb:LoggedActivity ;
     prov:used :emotionset1 ;
     oro:queriedTopic "climate change" ;
+    prov:generated :news1, :news2, :news3 ;
     sebb:triggeredByActivity :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
@@ -185,6 +184,17 @@
 :exampleNews a schema:Organization ;
     schema:logo <http://www.example.org/logo.png> ;
     schema:name "Example News"^^xsd:string .
+
+:decisionMaking1
+    sebb:intermediateActivity :emotionDetection1 ;
+    sebb:intermediateActivity :informationRetrieval1 ;
+    sebb:usedMLModel :llmModel1 ;
+    sebb:producedEntityResult :msg2 .
+
+:msg2 a oro:ResponseMessage, prov:Entity ;
+    oro:previousMessage :msg1 ;
+    oro:hasValue "Here's some news for you, you whiny, fearful child."@en ;
+    prov:wasGeneratedBy :decisionMaking1 .
 :shownContent1 a oro:ShownContent, sebb:LoggedActivity ;
     oro:hasContent :news1 ;
     oro:hasContent :news2 ;
@@ -194,10 +204,7 @@
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
     prov:wasAssociatedWith :ari1 .
 
-:msg2 a oro:ResponseMessage, prov:Entity ;
-    oro:previousMessage :msg1 ;
-    oro:hasValue "Here's some news for you, you whiny, fearful child."@en ;
-    prov:wasGeneratedBy :decisionMaking1 .
+
 
 :speech1 a oro:SpeechAction, sebb:LoggedActivity ;
     oro:hasSpeaker :ari ;
@@ -207,3 +214,9 @@
     prov:startedAtTime "2024-11-16T12:27:17"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:22"^^xsd:dateTime ;
     prov:wasAssociatedWith :ari1 .
+
+
+:decisionMaking1
+    sebb:producedActivityResult :speech1 ;
+    sebb:producedActivityResult :shownContent1 ;
+    prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime .

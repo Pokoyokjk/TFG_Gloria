@@ -78,7 +78,8 @@
 
 ###  http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult
 :producedEntityResult rdf:type owl:ObjectProperty ;
-                      rdfs:subPropertyOf :producedResult ;
+                      rdfs:subPropertyOf :producedResult ,
+                                         <http://www.w3.org/ns/prov#generated> ;
                       rdfs:domain :LoggedActivity ;
                       rdfs:range [ owl:intersectionOf ( :Result
                                                         <http://www.w3.org/ns/prov#Entity>
@@ -140,6 +141,10 @@
              rdfs:range <http://www.w3.org/ns/mls#Model> ;
              rdfs:comment "Represents the fact that an activity has used a Machine Learning Model to produce the result."@en ;
              rdfs:label "used machine learning model"@en .
+
+
+###  http://www.w3.org/ns/prov#generated
+<http://www.w3.org/ns/prov#generated> rdf:type owl:ObjectProperty .
 
 
 ###  http://www.w3.org/ns/prov#used

@@ -122,6 +122,7 @@
 :producedEntityResult
     a owl:ObjectProperty ;
     rdfs:subPropertyOf :producedResult ;
+    rdfs:subPropertyOf prov:generated ;
     rdfs:domain :LoggedActivity ;
     rdfs:range [
         a owl:Class ;

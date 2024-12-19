@@ -135,6 +135,7 @@
 
     <owl:ObjectProperty rdf:about="http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult">
         <rdfs:subPropertyOf rdf:resource="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/ns/prov#generated"/>
         <rdfs:domain rdf:resource="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity"/>
         <rdfs:range>
             <owl:Class>
@@ -226,6 +227,13 @@
         <rdfs:comment xml:lang="en">Represents the fact that an activity has used a Machine Learning Model to produce the result.</rdfs:comment>
         <rdfs:label xml:lang="en">used machine learning model</rdfs:label>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#generated -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#generated"/>
     
 
 

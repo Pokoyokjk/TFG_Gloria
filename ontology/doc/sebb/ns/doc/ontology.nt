@@ -76,6 +76,8 @@ _:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/19
 # http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult
 <http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/ns/prov#generated> .
+<http://www.w3.org/ns/prov#generated> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult> <http://www.w3.org/2000/01/rdf-schema#range> _:genid4 .
 _:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
@@ -148,6 +150,8 @@ _:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1
 <http://www.w3.org/ns/mls#Model> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the fact that an activity has used a Machine Learning Model to produce the result."@en .
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/2000/01/rdf-schema#label> "used machine learning model"@en .
+# 
+# http://www.w3.org/ns/prov#generated
 # 
 # http://www.w3.org/ns/prov#used
 # 
