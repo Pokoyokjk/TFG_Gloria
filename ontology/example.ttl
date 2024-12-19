@@ -93,8 +93,8 @@
 
 :maria a prov:Person, foaf:Person, schema:Person, oro:Human ;
     foaf:firstName "María"@es .
-:ari a prov:SoftwareAgent, oro:Robot ;
-    oro:hasName "ARI" ;
+:ari1 a prov:SoftwareAgent, oro:Robot ;
+    oro:hasName "ARI"@es ;
     oro:belongsTo :maria ;
     foaf:knows :maria .
 
@@ -102,7 +102,7 @@
 
 :listeningEvent1 a oro:ListeningEvent, sebb:LoggedActivity ;
     oro:hasSpeaker :maria ;
-    oro:hasListener :ari ;
+    oro:hasListener :ari1 ;
     oro:hasMessage :msg1 ;
     sebb:usedMLModel :asrModel1 ;
     prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime ;
@@ -203,10 +203,8 @@
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
     prov:wasAssociatedWith :ari1 .
 
-
-
 :speech1 a oro:SpeechAction, sebb:LoggedActivity ;
-    oro:hasSpeaker :ari ;
+    oro:hasSpeaker :ari1 ;
     sebb:usedMLModel :ttsModel1 ;
     oro:hasMessage :msg2 ;
     sebb:triggeredByActivity :decisionMaking1 ;

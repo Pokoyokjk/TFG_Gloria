@@ -1,0 +1,24 @@
+PREFIX oro: <http://kb.openrobots.org#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX sebb: <http://www.gsi.upm.es/ontologies/sebb/ns#>
+
+SELECT ?initialActivity ?listenMsgContent 
+        ?resultingActivity ?responseMsgContent
+        ?robot ?human
+WHERE {
+?activity a sebb:LoggedActivity ;
+    sebb:triggeredByActivity ?initialActivity ;
+    sebb:producedActivityResult ?resultingActivity ;
+    prov:wasAssociatedWith ?robot .
+?resultingActivity a oro:SpeechAction ;
+    prov:wasAssociatedWith ?robot .
+?initialActivity a oro:ListeningEvent ;
+    oro:hasSpeaker ?human ;
+    prov:wasAssociatedWith ?robot .
+?listenMsg a oro:Message ;
+    prov:wasGeneratedBy ?initialActivity ;
+    oro:hasValue ?listenMsgContent .
+?responseMsg a oro:Message ;
+    prov:wasGeneratedBy ?resultActivity ;
+    oro:hasValue ?responseMsgContent .
+}

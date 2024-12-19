@@ -1,0 +1,27 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX sebb: <http://www.gsi.upm.es/ontologies/sebb/ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mls: <http://www.w3.org/ns/mls#>
+PREFIX oro: <http://kb.openrobots.org#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+SELECT ?activity ?startTime ?endTime ?model ?human ?humanName
+WHERE {
+?activity a sebb:LoggedActivity ;
+        sebb:usedMLModel ?model ;
+        prov:startedAtTime ?startTime ;
+        prov:endedAtTime ?endTime ;
+        prov:wasAssociatedWith ?agent .
+?agent a oro:Robot ;
+    oro:hasName ?robotName .	
+?run mls:hasOutput ?model ;
+        prov:wasAssociatedWith ?human .
+?human a prov:Person, foaf:Person ;
+        foaf:firstName ?humanName .
+  FILTER (
+    ?startTime >= "2024-11-16T00:00:00"^^xsd:dateTime &&
+    ?endTime <= "2024-11-16T23:59:59"^^xsd:dateTime &&
+    ?robotName = "ARI"@es
+  )
+}
