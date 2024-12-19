@@ -119,7 +119,7 @@
     rdfs:label "produced activity result"@en ;
     rdfs:comment "Represents the relation between a result and an activity which produced it, where the result is an activity."@en .
 
-:producedActivityEntity
+:producedEntityResult
     a owl:ObjectProperty ;
     rdfs:subPropertyOf :producedResult ;
     rdfs:domain :LoggedActivity ;
@@ -130,7 +130,7 @@
             :Result
         )
     ] ;
-    rdfs:label "produced activity entity"@en ;
+    rdfs:label "produced entity result"@en ;
     rdfs:comment "Represents the relation between a result and an activity which produced it, where the result is an entity."@en .
 
 :usedMLModel

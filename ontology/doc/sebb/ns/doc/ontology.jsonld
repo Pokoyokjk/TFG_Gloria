@@ -5,7 +5,7 @@
     "@list" : [ {
       "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#Result"
     }, {
-      "@id" : "http://www.w3.org/ns/prov#Entity"
+      "@id" : "http://www.w3.org/ns/prov#Activity"
     } ]
   } ]
 }, {
@@ -59,7 +59,7 @@
     "@list" : [ {
       "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#Result"
     }, {
-      "@id" : "http://www.w3.org/ns/prov#Activity"
+      "@id" : "http://www.w3.org/ns/prov#Entity"
     } ]
   } ]
 }, {
@@ -206,26 +206,6 @@
     "@id" : "http://www.w3.org/ns/prov#wasInfluencedBy"
   } ]
 }, {
-  "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity",
-  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
-  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
-    "@language" : "en",
-    "@value" : "Represents the relation between a result and an activity which produced it, where the result is an entity."
-  } ],
-  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
-    "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity"
-  } ],
-  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
-    "@language" : "en",
-    "@value" : "produced activity entity"
-  } ],
-  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
-    "@id" : "_:genid1"
-  } ],
-  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
-    "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#producedResult"
-  } ]
-}, {
   "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult",
   "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
   "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
@@ -238,6 +218,26 @@
   "http://www.w3.org/2000/01/rdf-schema#label" : [ {
     "@language" : "en",
     "@value" : "produced activity result"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#range" : [ {
+    "@id" : "_:genid1"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subPropertyOf" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#producedResult"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#producedEntityResult",
+  "@type" : [ "http://www.w3.org/2002/07/owl#ObjectProperty" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Represents the relation between a result and an activity which produced it, where the result is an entity."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#domain" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "produced entity result"
   } ],
   "http://www.w3.org/2000/01/rdf-schema#range" : [ {
     "@id" : "_:genid4"
