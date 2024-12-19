@@ -146,7 +146,7 @@
 
 :informationRetrieval1 a oro:InformationRetrieval, sebb:LoggedActivity ;
     prov:used :emotionset1 ;
-    oro:queriedTopic "climate change" ;
+    oro:queriedTopic "climate change"@en ;
     prov:generated :news1, :news2, :news3 ;
     sebb:triggeredByActivity :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;

@@ -14,7 +14,7 @@ WHERE {
         prov:endedAtTime ?endTime ;
         prov:wasAssociatedWith ?agent .
 ?agent a oro:Robot ;
-    oro:hasName ?robotName .	
+        oro:hasName ?robotName .	
 ?run mls:hasOutput ?model ;
         prov:wasAssociatedWith ?human .
 ?human a prov:Person, foaf:Person ;
