@@ -36,6 +36,9 @@
 # http://purl.org/vocab/vann/preferredNamespaceUri
 <http://purl.org/vocab/vann/preferredNamespaceUri> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
 # 
+# http://www.w3.org/ns/prov#subPropertyOf
+<http://www.w3.org/ns/prov#subPropertyOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
 # 
 # 
 # #################################################################
@@ -45,10 +48,52 @@
 # #################################################################
 # 
 # 
+# http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity
+<http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the relation between a logged activity and another activity that is an intermediate step towards the final result."@en .
+<http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity> <http://www.w3.org/2000/01/rdf-schema#label> "intermediate activity"@en .
+<http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity> <http://www.w3.org/ns/prov#subPropertyOf> <http://www.w3.org/ns/prov#wasInfluencedBy> .
+# 
+# http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity> <http://www.w3.org/2000/01/rdf-schema#range> _:genid1 .
+_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid1 <http://www.w3.org/2002/07/owl#intersectionOf> _:genid3 .
+_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid2 .
+_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Entity> .
+<http://www.w3.org/ns/prov#Entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.gsi.upm.es/ontologies/sebb/ns#Result> .
+_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the relation between a result and an activity which produced it, where the result is an entity."@en .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity> <http://www.w3.org/2000/01/rdf-schema#label> "produced activity entity"@en .
+# 
+# http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult> <http://www.w3.org/2000/01/rdf-schema#range> _:genid4 .
+_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid4 <http://www.w3.org/2002/07/owl#intersectionOf> _:genid6 .
+_:genid6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid5 .
+_:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Activity> .
+<http://www.w3.org/ns/prov#Activity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.gsi.upm.es/ontologies/sebb/ns#Result> .
+_:genid6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the relation between a result and an activity which produced it, where the result is an activity."@en .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult> <http://www.w3.org/2000/01/rdf-schema#label> "produced activity result"@en .
+# 
 # http://www.gsi.upm.es/ontologies/sebb/ns#producedResult
 <http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/ns/prov#wasEndedBy> .
-<http://www.w3.org/ns/prov#wasEndedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/ns/prov#wasInfluencedBy> .
+<http://www.w3.org/ns/prov#wasInfluencedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.gsi.upm.es/ontologies/sebb/ns#Result> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#producedResult> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the relation between a result and an activity which produced it."@en .
@@ -56,19 +101,49 @@
 # 
 # http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy
 <http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/ns/prov#wasStartedBy> .
-<http://www.w3.org/ns/prov#wasStartedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/ns/prov#wasInfluencedBy> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.gsi.upm.es/ontologies/sebb/ns#Trigger> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the relation between an activity and the event which triggered it."@en .
 <http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> <http://www.w3.org/2000/01/rdf-schema#label> "triggered by"@en .
+# 
+# http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity> <http://www.w3.org/2000/01/rdf-schema#range> _:genid7 .
+_:genid7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid7 <http://www.w3.org/2002/07/owl#intersectionOf> _:genid9 .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid8 .
+_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Activity> .
+_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.gsi.upm.es/ontologies/sebb/ns#Trigger> .
+_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the relation between an activity and the event which triggered it, where the event is an activity."@en .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity> <http://www.w3.org/2000/01/rdf-schema#label> "triggered by activity"@en .
+# 
+# http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity> <http://www.w3.org/2000/01/rdf-schema#range> _:genid10 .
+_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid10 <http://www.w3.org/2002/07/owl#intersectionOf> _:genid12 .
+_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid11 .
+_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Entity> .
+_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.gsi.upm.es/ontologies/sebb/ns#Trigger> .
+_:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the relation between an activity and the event which triggered it, where the event is an entity."@en .
+<http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity> <http://www.w3.org/2000/01/rdf-schema#label> "triggered by entity"@en .
 # 
 # http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/ns/prov#used> .
 <http://www.w3.org/ns/prov#used> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.w3.org/ns/prov#Activity> .
-<http://www.w3.org/ns/prov#Activity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/ns/mls#Model> .
 <http://www.w3.org/ns/mls#Model> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the fact that an activity has used a Machine Learning Model to produce the result."@en .
@@ -76,9 +151,7 @@
 # 
 # http://www.w3.org/ns/prov#used
 # 
-# http://www.w3.org/ns/prov#wasEndedBy
-# 
-# http://www.w3.org/ns/prov#wasStartedBy
+# http://www.w3.org/ns/prov#wasInfluencedBy
 # 
 # 
 # 
@@ -100,53 +173,52 @@
 # 
 # http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity
 <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-<http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> <http://www.w3.org/2002/07/owl#equivalentClass> _:genid1 .
-_:genid1 <http://www.w3.org/2002/07/owl#unionOf> _:genid5 .
-_:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid4 .
-_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid3 .
-_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid2 .
-_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/mls#Run> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> <http://www.w3.org/2002/07/owl#equivalentClass> _:genid13 .
+_:genid13 <http://www.w3.org/2002/07/owl#unionOf> _:genid17 .
+_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid16 .
+_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid15 .
+_:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid14 .
+_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/mls#Run> .
 <http://www.w3.org/ns/mls#Run> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-_:genid2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://sw.opencyc.org/concept/Action> .
-_:genid3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://kb.openrobots.org#RobotResponses> .
-_:genid4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://kb.openrobots.org#Intent> .
-_:genid5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:genid14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://sw.opencyc.org/concept/Action> .
+_:genid15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://kb.openrobots.org#RobotResponses> .
+_:genid16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://kb.openrobots.org#Intent> .
+_:genid17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/prov#Activity> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents an activity that is recorded/logged in the SEBB."@en .
 <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> <http://www.w3.org/2000/01/rdf-schema#label> "Logged Activity"@en .
 # 
 # http://www.gsi.upm.es/ontologies/sebb/ns#Result
 <http://www.gsi.upm.es/ontologies/sebb/ns#Result> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-<http://www.gsi.upm.es/ontologies/sebb/ns#Result> <http://www.w3.org/2002/07/owl#equivalentClass> _:genid6 .
-_:genid6 <http://www.w3.org/2002/07/owl#unionOf> _:genid8 .
-_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid7 .
-_:genid7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-_:genid7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Entity> .
-<http://www.w3.org/ns/prov#Entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-_:genid7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Activity> .
-_:genid8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#Result> <http://www.w3.org/2002/07/owl#equivalentClass> _:genid18 .
+_:genid18 <http://www.w3.org/2002/07/owl#unionOf> _:genid20 .
+_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid19 .
+_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Entity> .
+_:genid19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Activity> .
+_:genid20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#Result> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/ns/prov#Activity> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#Result> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the result of an activity."@en .
 <http://www.gsi.upm.es/ontologies/sebb/ns#Result> <http://www.w3.org/2000/01/rdf-schema#label> "Result"@en .
 # 
 # http://www.gsi.upm.es/ontologies/sebb/ns#Trigger
 <http://www.gsi.upm.es/ontologies/sebb/ns#Trigger> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-<http://www.gsi.upm.es/ontologies/sebb/ns#Trigger> <http://www.w3.org/2002/07/owl#equivalentClass> _:genid9 .
-_:genid9 <http://www.w3.org/2002/07/owl#unionOf> _:genid11 .
-_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid10 .
-_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Entity> .
-_:genid10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Activity> .
-_:genid11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
-_:genid9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#Trigger> <http://www.w3.org/2002/07/owl#equivalentClass> _:genid21 .
+_:genid21 <http://www.w3.org/2002/07/owl#unionOf> _:genid23 .
+_:genid23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:genid22 .
+_:genid22 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:genid22 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Entity> .
+_:genid22 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/ns/prov#Activity> .
+_:genid23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#List> .
+_:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://www.gsi.upm.es/ontologies/sebb/ns#Trigger> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents an event that caused/triggered an activity."@en .
 <http://www.gsi.upm.es/ontologies/sebb/ns#Trigger> <http://www.w3.org/2000/01/rdf-schema#label> "Trigger"@en .
 # 

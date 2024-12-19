@@ -46,13 +46,52 @@
 <http://purl.org/vocab/vann/preferredNamespaceUri> rdf:type owl:AnnotationProperty .
 
 
+###  http://www.w3.org/ns/prov#subPropertyOf
+<http://www.w3.org/ns/prov#subPropertyOf> rdf:type owl:AnnotationProperty .
+
+
 #################################################################
 #    Object Properties
 #################################################################
 
+###  http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity
+:intermediateActivity rdf:type owl:ObjectProperty ;
+                      rdfs:domain :LoggedActivity ;
+                      rdfs:range :LoggedActivity ;
+                      rdfs:comment "Represents the relation between a logged activity and another activity that is an intermediate step towards the final result."@en ;
+                      rdfs:label "intermediate activity"@en ;
+                      <http://www.w3.org/ns/prov#subPropertyOf> <http://www.w3.org/ns/prov#wasInfluencedBy> .
+
+
+###  http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity
+:producedActivityEntity rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :producedResult ;
+                        rdfs:domain :LoggedActivity ;
+                        rdfs:range [ owl:intersectionOf ( :Result
+                                                          <http://www.w3.org/ns/prov#Entity>
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+                        rdfs:comment "Represents the relation between a result and an activity which produced it, where the result is an entity."@en ;
+                        rdfs:label "produced activity entity"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult
+:producedActivityResult rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :producedResult ;
+                        rdfs:domain :LoggedActivity ;
+                        rdfs:range [ owl:intersectionOf ( :Result
+                                                          <http://www.w3.org/ns/prov#Activity>
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+                        rdfs:comment "Represents the relation between a result and an activity which produced it, where the result is an activity."@en ;
+                        rdfs:label "produced activity result"@en .
+
+
 ###  http://www.gsi.upm.es/ontologies/sebb/ns#producedResult
 :producedResult rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasEndedBy> ;
+                rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
                 rdfs:domain :LoggedActivity ;
                 rdfs:range :Result ;
                 rdfs:comment "Represents the relation between a result and an activity which produced it."@en ;
@@ -61,11 +100,37 @@
 
 ###  http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy
 :triggeredBy rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasStartedBy> ;
+             rdfs:subPropertyOf <http://www.w3.org/ns/prov#wasInfluencedBy> ;
              rdfs:domain :LoggedActivity ;
              rdfs:range :Trigger ;
              rdfs:comment "Represents the relation between an activity and the event which triggered it."@en ;
              rdfs:label "triggered by"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity
+:triggeredByActivity rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :triggeredBy ;
+                     rdfs:domain :LoggedActivity ;
+                     rdfs:range [ owl:intersectionOf ( :Trigger
+                                                       <http://www.w3.org/ns/prov#Activity>
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ;
+                     rdfs:comment "Represents the relation between an activity and the event which triggered it, where the event is an activity."@en ;
+                     rdfs:label "triggered by activity"@en .
+
+
+###  http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity
+:triggeredByEntity rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :triggeredBy ;
+                   rdfs:domain :LoggedActivity ;
+                   rdfs:range [ owl:intersectionOf ( :Trigger
+                                                     <http://www.w3.org/ns/prov#Entity>
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+                   rdfs:comment "Represents the relation between an activity and the event which triggered it, where the event is an entity."@en ;
+                   rdfs:label "triggered by entity"@en .
 
 
 ###  http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel
@@ -81,12 +146,8 @@
 <http://www.w3.org/ns/prov#used> rdf:type owl:ObjectProperty .
 
 
-###  http://www.w3.org/ns/prov#wasEndedBy
-<http://www.w3.org/ns/prov#wasEndedBy> rdf:type owl:ObjectProperty .
-
-
-###  http://www.w3.org/ns/prov#wasStartedBy
-<http://www.w3.org/ns/prov#wasStartedBy> rdf:type owl:ObjectProperty .
+###  http://www.w3.org/ns/prov#wasInfluencedBy
+<http://www.w3.org/ns/prov#wasInfluencedBy> rdf:type owl:ObjectProperty .
 
 
 #################################################################

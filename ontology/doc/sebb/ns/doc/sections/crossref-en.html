@@ -30,7 +30,13 @@ This section provides details for each class and property defined by AMOR Moral 
     is in domain of
    </dt>
    <dd>
-    <a href="#producedResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult">produced result</a> <sup class="type-op" title="object property">op</sup>, <a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a> <sup class="type-op" title="object property">op</sup>
+    <a href="#intermediateActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity">intermediate activity</a> <sup class="type-op" title="object property">op</sup>, <a href="#producedActivityEntity" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity">produced activity entity</a> <sup class="type-op" title="object property">op</sup>, <a href="#producedActivityResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult">produced activity result</a> <sup class="type-op" title="object property">op</sup>, <a href="#producedResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult">produced result</a> <sup class="type-op" title="object property">op</sup>, <a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a> <sup class="type-op" title="object property">op</sup>, <a href="#triggeredByActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity">triggered by activity</a> <sup class="type-op" title="object property">op</sup>, <a href="#triggeredByEntity" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity">triggered by entity</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#intermediateActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity">intermediate activity</a> <sup class="type-op" title="object property">op</sup>
    </dd>
   </dl>
  </div>
@@ -85,10 +91,96 @@ This section provides details for each class and property defined by AMOR Moral 
 </div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="objectproperties">
  <h3 id="properties" class="list">Object Properties</h3>
  <ul class="hlist">
+  <li><a href="#intermediateActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity">intermediate activity</a></li>
+  <li><a href="#producedActivityEntity" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity">produced activity entity</a></li>
+  <li><a href="#producedActivityResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult">produced activity result</a></li>
   <li><a href="#producedResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult">produced result</a></li>
   <li><a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a></li>
+  <li><a href="#triggeredByActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity">triggered by activity</a></li>
+  <li><a href="#triggeredByEntity" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity">triggered by entity</a></li>
   <li><a href="#usedMLModel" title="http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel">used machine learning model</a></li>
  </ul>
+ <div class="entity" id="intermediateActivity">
+  <h3>intermediate activity<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#intermediateActivity</p>
+  <div class="comment">
+   <span class="markdown">Represents the relation between a logged activity and another activity that is an intermediate step towards the final result.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="producedActivityEntity">
+  <h3>produced activity entity<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity</p>
+  <div class="comment">
+   <span class="markdown">Represents the relation between a result and an activity which produced it, where the result is an entity.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#producedResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult">produced result</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Result" title="http://www.gsi.upm.es/ontologies/sebb/ns#Result">Result</a> <sup class="type-c" title="class">c</sup> <span class="logic">and</span> <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="producedActivityResult">
+  <h3>produced activity result<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult</p>
+  <div class="comment">
+   <span class="markdown">Represents the relation between a result and an activity which produced it, where the result is an activity.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#producedResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedResult">produced result</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Result" title="http://www.gsi.upm.es/ontologies/sebb/ns#Result">Result</a> <sup class="type-c" title="class">c</sup> <span class="logic">and</span> <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
  <div class="entity" id="producedResult">
   <h3>produced result<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
   <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#producedResult</p>
@@ -101,7 +193,13 @@ This section provides details for each class and property defined by AMOR Moral 
      has super-properties
     </dt>
     <dd>
-     <a href="http://www.w3.org/ns/prov#wasEndedBy" target="_blank" title="http://www.w3.org/ns/prov#wasEndedBy">was Ended By</a> <sup class="type-op" title="object property">op</sup>
+     <a href="http://www.w3.org/ns/prov#wasInfluencedBy" target="_blank" title="http://www.w3.org/ns/prov#wasInfluencedBy">was Influenced By</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#producedActivityEntity" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityEntity">produced activity entity</a> <sup class="type-op" title="object property">op</sup>, <a href="#producedActivityResult" title="http://www.gsi.upm.es/ontologies/sebb/ns#producedActivityResult">produced activity result</a> <sup class="type-op" title="object property">op</sup>
     </dd>
     <dt>
      has domain
@@ -130,7 +228,13 @@ This section provides details for each class and property defined by AMOR Moral 
      has super-properties
     </dt>
     <dd>
-     <a href="http://www.w3.org/ns/prov#wasStartedBy" target="_blank" title="http://www.w3.org/ns/prov#wasStartedBy">was Started By</a> <sup class="type-op" title="object property">op</sup>
+     <a href="http://www.w3.org/ns/prov#wasInfluencedBy" target="_blank" title="http://www.w3.org/ns/prov#wasInfluencedBy">was Influenced By</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#triggeredByActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity">triggered by activity</a> <sup class="type-op" title="object property">op</sup>, <a href="#triggeredByEntity" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity">triggered by entity</a> <sup class="type-op" title="object property">op</sup>
     </dd>
     <dt>
      has domain
@@ -143,6 +247,64 @@ This section provides details for each class and property defined by AMOR Moral 
     </dt>
     <dd>
      <a href="#Trigger" title="http://www.gsi.upm.es/ontologies/sebb/ns#Trigger">Trigger</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="triggeredByActivity">
+  <h3>triggered by activity<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByActivity</p>
+  <div class="comment">
+   <span class="markdown">Represents the relation between an activity and the event which triggered it, where the event is an activity.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Trigger" title="http://www.gsi.upm.es/ontologies/sebb/ns#Trigger">Trigger</a> <sup class="type-c" title="class">c</sup> <span class="logic">and</span> <a href="http://www.w3.org/ns/prov#Activity" target="_blank" title="http://www.w3.org/ns/prov#Activity">Activity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="triggeredByEntity">
+  <h3>triggered by entity<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://www.gsi.upm.es/ontologies/sebb/ns#triggeredByEntity</p>
+  <div class="comment">
+   <span class="markdown">Represents the relation between an activity and the event which triggered it, where the event is an entity.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#triggeredBy" title="http://www.gsi.upm.es/ontologies/sebb/ns#triggeredBy">triggered by</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#LoggedActivity" title="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity">Logged Activity</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Trigger" title="http://www.gsi.upm.es/ontologies/sebb/ns#Trigger">Trigger</a> <sup class="type-c" title="class">c</sup> <span class="logic">and</span> <a href="http://www.w3.org/ns/prov#Entity" target="_blank" title="http://www.w3.org/ns/prov#Entity">Entity</a> <sup class="type-c" title="class">c</sup>
     </dd>
    </dl>
   </div>

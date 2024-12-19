@@ -1,56 +1,209 @@
-@prefix : <file:///home/alvaro/git/amor-robots/amor-sebb/ontology/case_study.ttl#> .
-@prefix amor: <http://www.gsi.upm.es/ontologies/amor/ns#> .
-@prefix concept: <http://sw.opencyc.org/concept/> .
-@prefix dc: <http://purl.org/dc/terms/> .
-@prefix event: <http://purl.org/NET/c4dm/event.owl#> .
-@prefix ex: <http://example.org#> .
+@prefix : <http://example.org#> .
+@prefix emoml: <http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix http: <http://www.w3.org/2011/http#> .
 @prefix mls: <http://www.w3.org/ns/mls#> .
+@prefix onyx: <http://www.gsi.dit.upm.es/ontologies/onyx/ns#> .
 @prefix oro: <http://kb.openrobots.org#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 @prefix sebb: <http://www.gsi.upm.es/ontologies/sebb/ns#> .
-@prefix vann: <http://purl.org/vocab/vann/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:maria a prov:Person, foaf:Person, schema:Person, oro:Human ;
-    foaf:firstName "María"@es ;
-    foaf:homepage <http://example.org/maria> ;
-    schema:affiliation ex:upm .
+# Agents
+:dataScientist1 a prov:Person, foaf:Person, schema:Person ;
+    foaf:firstName "Pedro"@es ;
+    foaf:homepage <http://example.org/pedro> ;
+    schema:affiliation :upm .
 
-ex:upm a schema:Organization, foaf:Organization, prov:Organization ;
+:upm a schema:Organization, foaf:Organization, prov:Organization ;
     schema:url <https://www.upm.es> ;
     schema:name "Universidad Politécnica de Madrid"@es ;
     schema:name "Technical University of Madrid"@en .
 
-ex:ari a prov:SoftwareAgent, oro:Robot ;
+
+# Machine Learning Models developed by human data scientist.
+
+:emotionDetectionModel1 a mls:Model, prov:Entity, sebb:Result ;
+    mls:hasQuality :compatibleEmotionModel ;
+    prov:wasGeneratedBy :run1 .
+
+:compatibleEmotionModel a mls:ModelCharacteristic ;
+    mls:hasValue "Big 6 Emotion Model"@en .
+
+:run1 a mls:Run, sebb:LoggedActivity ;
+    mls:realizes :cnn ;
+    mls:hasInput :dataset1 ;
+    mls:executes :cnn_tensorflow293 ;
+    mls:hasInput :num_epochs ;
+    mls:hasOutput :emotionDetectionModel1 ;
+    mls:hasOutput :emotionDetectionModel1Accuracy ;
+    prov:startedAtTime "2023-09-15T10:17:25"^^xsd:dateTime ;
+    prov:endedAtTime "2023-09-15T11:27:24"^^xsd:dateTime ;
+    prov:wasAssociatedWith :dataScientist1 ;
+    sebb:producedResult :emotionDetectionModel1 .
+
+:cnn a mls:Algorithm ;
+    rdfs:label "Convolutional Neural Network"@en.
+
+:cnn_tensorflow293 a mls:Implementation ;
+    mls:hasHyperParameter :epochs ;
+    mls:implements :cnn .
+
+:tensorflow293 a mls:Software ;
+    rdfs:label "TensorFlow 2.9.3"@en ;
+    mls:hasPart :cnn_tensorflow293 .
+
+:epochs a mls:HyperParameter ;
+    rdfs:label "epochs"@en ;
+    rdfs:description "Number of epochs."@en .
+
+:num_epochs a mls:HyperParameterSetting ;
+    mls:specifiedBy :epochs ;
+    mls:hasValue "50"^^xsd:long .
+
+:emotionDetectionModel1Accuracy a mls:ModelEvaluation ;
+    mls:specifiedBy :accuracy ;
+    mls:hasValue "0.86"^^xsd:float .
+
+:accuracy a mls:EvaluationMeasure ;
+    rdfs:label "Accuracy"@en.
+
+:dataset1 a mls:Dataset ;
+    rdfs:label "Dataset for emotion recognition."@en ;
+    mls:hasQuality :numberOfFeatures ;
+    mls:hasQuality :numberOfInstantes .
+
+:numberOfFeatures_dataset1 a mls:DatasetCharacteristic ;
+    rdfs:label "Number of features for Dataset 1"@en ;
+    mls:hasValue "15"^^xsd:long .
+
+:numberOfInstantes a mls:DatasetCharacteristic ;
+    rdfs:label "Number of instances for Dataset 1"@en ;
+    mls:hasValue "1600"^^xsd:long .
+
+# Logged Activities by a robot
+
+
+:asrModel1 a mls:Model .
+:llmModel1 a mls:Model .
+:ttsModel1 a mls:Model .
+
+:maria a prov:Person, foaf:Person, schema:Person, oro:Human ;
+    foaf:firstName "María"@es .
+:ari a prov:SoftwareAgent, oro:Robot ;
     oro:hasName "ARI" ;
-    oro:belongsTo ex:maria ;
-    foaf:knows ex:maria .
+    oro:belongsTo :maria ;
+    foaf:knows :maria .
 
-ex:inmerEnv a prov:SoftwareAgent .
+:newsCloudService a prov:SoftwareAgent .
 
-ex:newsCloudService a prov:SoftwareAgent .
+:listeningEvent1 a oro:ListeningEvent, sebb:LoggedActivity ;
+    oro:hasSpeaker :maria ;
+    oro:hasListener :ari ;
+    oro:hasMessage :msg1 ;
+    sebb:usedMLModel :asrModel1 ;
+    prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+    prov:wasAssociatedWith :ari1 .
 
-ex:interaction1 a sebb:LoggedActivity ;
-    sebb:triggeredBy ex:event1 ;
-    sebb:producedResult ex:speech1 ;
-    sebb:producedResult ex:shownContent1 ;
-    sebb:usedMLModel ex:model1 .
-# TODO add timestamps
+:msg1 a oro:Message, prov:Entity ;
+    oro:hasValue "Good morning. Could you show me news about the awful climate change the planet is undergoing?."@en ;
+    prov:wasGeneratedBy :listeningEvent1 .
 
-ex:event1 a oro:ListeningEvent ;
-    oro:hasSpeaker ex:maria ;
-    oro:hasListener ex:ari ;
-    oro:hasContent "Good morning. Show me some news about climate change."@en ;
-    sebb:usedMLModel ex:model2 .
+:decisionMaking1 a oro:DecisionMaking, sebb:LoggedActivity ;
+    sebb:triggeredByActivity :listeningEvent1 ;
+    sebb:intermediateActivity :emotionDetection1 ;
+    sebb:intermediateActivity :informationRetrieval1 ;
+    sebb:producedActivityResult :speech1 ;
+    sebb:producedActivityResult :shownContent1 ;
+    sebb:usedMLModel :llmModel1 ;
+    prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
+    prov:wasAssociatedWith :ari1 .
 
-ex:result1 a oro:SpeechAction ;
-    oro:hasSpeaker ex:ari ;
-    sebb:usedMLModel ex:model3 ;
-    oro:hasContent "Good morning maria. Here I show you the last news about climate change"@en .
+:emotionDetection1 a onyx:EmotionAnalysis, sebb:LoggedActivity ;
+    prov:used :msg1 ;
+    prov:generated :emotionset1 ;
+    sebb:usedMLModel :emotionDetectionModel1 ;
+    onyx:usesEmotionModel emoml:big6 ;
+    sebb:triggeredByActivity :decisionMaking1 ;
+    prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:18"^^xsd:dateTime ;
+    prov:wasAssociatedWith :ari1 .
+
+:emotionset1 a onyx:EmotionSet ;
+    onyx:hasEmotion :emotion1 ;
+    onyx:hasEmotion :emotion2 .
+
+:emotion1 a onyx:Emotion ;
+    onyx:hasEmotionCategory emoml:big6_fear ;
+    onyx:hasEmotionIntensity "0.3"^^xsd:float ;
+    onyx:algorithmConfidente "0.86"^^xsd:float .
+
+:emotion2 a onyx:Emotion ;
+    onyx:hasEmotionCategory emoml:big6_sadness ;
+    onyx:hasEmotionIntensity "0.4"^^xsd:float ;
+    onyx:algorithmConfidente "0.93"^^xsd:float .
 
 
+:informationRetrieval1 a oro:InformationRetrieval, sebb:LoggedActivity ;
+    prov:used :emotionset1 ;
+    oro:queriedTopic "climate change" ;
+    sebb:triggeredByActivity :decisionMaking1 ;
+    prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
+    prov:wasAssociatedWith :newsCloudService .
+
+:news1 a schema:NewsArticle, prov:Entity ;
+  schema:articleBody "Scientists warn that the effects of climate change are accelerating, with more frequent and severe weather events."^^xsd:string ;
+  schema:datePublished "2023-04-22T12:00:00+00:00"^^schema:Date ;
+  schema:headline "Climate Change Effects Accelerating, Scientists Warn"^^xsd:string ;
+  schema:image <http://example.org/images/climate_change.jpg> ;
+  schema:mainEntityOfPage <http://www.example.org/news/climate-change-effects> ;
+  schema:publisher :exampleNews ;
+  schema:url <http://www.example.org/news/climate-change-effects> .
+
+:news2 a schema:NewsArticle, prov:Entity ;
+  schema:articleBody "A new international agreement aims to reduce carbon emissions by 50% by 2030."^^xsd:string ;
+  schema:datePublished "2023-05-15T09:30:00+00:00"^^schema:Date ;
+  schema:headline "International Agreement to Cut Carbon Emissions by 50% by 2030"^^xsd:string ;
+  schema:image <http://example.org/images/carbon_emissions.jpg> ;
+  schema:mainEntityOfPage <http://www.example.org/news/carbon-emissions-agreement> ;
+  schema:publisher :exampleNews ;
+  schema:url <http://www.example.org/news/carbon-emissions-agreement> .
+
+:news3 a schema:NewsArticle, prov:Entity ;
+  schema:articleBody "Renewable energy sources are becoming more cost-effective and widely adopted, helping to combat climate change."^^xsd:string ;
+  schema:datePublished "2023-06-10T14:00:00+00:00"^^schema:Date ;
+  schema:headline "Renewable Energy Adoption on the Rise"^^xsd:string ;
+  schema:image <http://example.org/images/renewable_energy.jpg> ;
+  schema:mainEntityOfPage <http://www.example.org/news/renewable-energy-adoption> ;
+  schema:publisher :exampleNews ;
+  schema:url <http://www.example.org/news/renewable-energy-adoption> .
+
+:exampleNews a schema:Organization ;
+    schema:logo <http://www.example.org/logo.png> ;
+    schema:name "Example News"^^xsd:string .
+:shownContent1 a oro:ShownContent, sebb:LoggedActivity ;
+    oro:hasContent :news1 ;
+    oro:hasContent :news2 ;
+    oro:hasContent :news3 ;
+    sebb:triggeredBy :decisionMaking1 ;
+    prov:startedAtTime "2024-11-16T12:27:23"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
+    prov:wasAssociatedWith :ari1 .
+
+:msg2 a oro:ResponseMessage, prov:Entity ;
+    oro:previousMessage :msg1 ;
+    oro:hasValue "Here's some news for you, you whiny, fearful child."@en ;
+    prov:wasGeneratedBy :decisionMaking1 .
+
+:speech1 a oro:SpeechAction, sebb:LoggedActivity ;
+    oro:hasSpeaker :ari ;
+    sebb:usedMLModel :ttsModel1 ;
+    oro:hasMessage :msg2 ;
+    sebb:triggeredByActivity :decisionMaking1 ;
+    prov:startedAtTime "2024-11-16T12:27:17"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:22"^^xsd:dateTime ;
+    prov:wasAssociatedWith :ari1 .
