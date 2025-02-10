@@ -1,47 +1,79 @@
+"""
+Module for interacting with the Semantic Ethical Black Box (SEBB).
+
+This module provides functions to:
+    - Log Turtle (TTL) data to the SEBB via a POST request.
+    - Download the complete graph stored in the SEBB via a GET request.
+
+The SEBB exposes two endpoints:
+    - /log: To store data in Turtle format (which is internally converted to JSON-LD).
+    - /get_graph: To retrieve the complete graph in Turtle format.
+"""
+
 import requests
 
 def log_ttl(server: str, input_file_path: str):
-    '''
-    Example function to log a TTL file to the SEBB.
-    '''
+    
+    """Log a TTL file to the SEBB.
 
-    with open(input_file_path, mode="r", encoding='utf-8') as file:
+    Reads a Turtle (TTL) file from the specified path and sends its content
+    to the SEBB's `/log` endpoint via a POST request.
+
+    Args:
+        server (str): The base URL of the SEBB server (e.g., "http://127.0.0.1:5000").
+        input_file_path (str): The path to the TTL file to be logged.
+    
+    Example:
+        >>> log_ttl("http://127.0.0.1:5000", "/path/to/file/data.ttl")
+    """
+    
+    with open(input_file_path, mode="r", encoding="utf-8") as file:
         data = file.read()
-        print("Fichero leído con éxito de:", input_file_path)
+        print("File successfully read from:", input_file_path)
     
     headers = {
-        "Content-Type": "text/turtle" 
+        "Content-Type": "text/turtle"
     }
     
-    response = requests.post(server+"/log", headers=headers, data=data)
+    response = requests.post(f"{server}/log", headers=headers, data=data)
     
     if response.status_code == 200:
-        print("POST realizado con éxito")
+        print("POST request completed successfully")
     else:
-        print(f"Error en POST: {response.status_code} - {response.text}")
+        print(f"Error in POST: {response.status_code} - {response.text}")
 
 
 def get_graph(server: str, output_file_path: str):
-    '''
-    Example function to download the complete graph stored in the SEBB
-    '''
+    """Download the complete graph stored in the SEBB.
+
+    Sends a GET request to the SEBB's `/get_graph` endpoint to retrieve the
+    complete graph in Turtle format and saves it to the specified output file.
+
+    Args:
+        server (str): The base URL of the SEBB server (e.g., "http://127.0.0.1:5000").
+        output_file_path (str): The path where the downloaded graph will be saved.
+    
+    Example:
+        >>> get_graph("http://127.0.0.1:5000", "/path/to/output/graph.ttl")
+    """
     print("Requesting graph...")
     
-    response = requests.get(server+"/get_graph")
+    response = requests.get(f"{server}/get_graph")
     
     if response.status_code == 200:
-        # print(response.text)
-        with open(output_file_path, mode="w", encoding='utf-8') as file:
+        with open(output_file_path, mode="w", encoding="utf-8") as file:
             file.write(response.text)
-        print("Fichero descargado con éxito en:", output_file_path)
+        print("File successfully downloaded to:", output_file_path)
     else:
-        print(f"Error en GET: {response.status_code} - {response.text}")
+        print(f"Error in GET: {response.status_code} - {response.text}")
 
 
-if __name__ == '__main__':
-    # SEBB URI
+if __name__ == "__main__":
+    
+    # SEBB server URL
     server = "http://127.0.0.1:5000"
-    # Log full ontologies to SEBB
+    
+    # Log complete ontologies to the SEBB
     models = [
         "example-data/amor.ttl",
         "example-data/mft.ttl",
@@ -52,19 +84,15 @@ if __name__ == '__main__':
     for model in models:
         log_ttl(server, model)
     
-    # Log a new ontology plenty of individuals
+    # Log a new ontology with plenty of individuals
     input_ttl_file = "example-data/amor-examples.ttl"
     log_ttl(server, input_ttl_file)
     
+    # TODO: Fix the duplication of blank nodes (try using rdflib.ConjunctiveGraph)
+    # Note: In version 0.1, if there are duplicated triples related to blank nodes,
+    # they will appear duplicated in the downloaded graph.
     
-    # TODO fix the duplication of blank nodes (try with rdflib.ConjuctiveGraph)
-    '''
-    v0.1 works if the duplicated triples are related with BlankNodes.
-    If there are some blank nodes duplicated, there will appear duplicated 
-    in the downloaded graph.
-    
-    '''
-    # Log a few triples (no ontology), some of them are duplicated.
+    # Log a few triples (not a full ontology) simulating some TTL-parsed logs, some of which are duplicated.
     input_ttl_file = "example-data/new-triples.ttl"
     log_ttl(server, input_ttl_file)
     
