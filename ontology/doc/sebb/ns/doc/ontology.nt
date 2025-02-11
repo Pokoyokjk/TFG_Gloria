@@ -151,9 +151,21 @@ _:genid12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the fact that an activity has used a Machine Learning Model to produce the result."@en .
 <http://www.gsi.upm.es/ontologies/sebb/ns#usedMLModel> <http://www.w3.org/2000/01/rdf-schema#label> "used machine learning model"@en .
 # 
+# http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy
+<http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/ns/prov#wasAssociatedWith> .
+<http://www.w3.org/ns/prov#wasAssociatedWith> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy> <http://www.w3.org/2000/01/rdf-schema#domain> <http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/ns/prov#Agent> .
+<http://www.w3.org/ns/prov#Agent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy> <http://www.w3.org/2000/01/rdf-schema#comment> "Represents the relation between a logged activity and the agent that performed it."@en .
+<http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy> <http://www.w3.org/2000/01/rdf-schema#label> "was performed by"@en .
+# 
 # http://www.w3.org/ns/prov#generated
 # 
 # http://www.w3.org/ns/prov#used
+# 
+# http://www.w3.org/ns/prov#wasAssociatedWith
 # 
 # http://www.w3.org/ns/prov#wasInfluencedBy
 # 
@@ -231,6 +243,8 @@ _:genid21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2
 # http://www.w3.org/ns/mls#Run
 # 
 # http://www.w3.org/ns/prov#Activity
+# 
+# http://www.w3.org/ns/prov#Agent
 # 
 # http://www.w3.org/ns/prov#Entity
 # 

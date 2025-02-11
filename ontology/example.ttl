@@ -40,7 +40,7 @@
     mls:hasOutput :emotionDetectionModel1Accuracy ;
     prov:startedAtTime "2023-09-15T10:17:25"^^xsd:dateTime ;
     prov:endedAtTime "2023-09-15T11:27:24"^^xsd:dateTime ;
-    prov:wasAssociatedWith :dataScientist1 ;
+    sebb:wasPerformedBy :dataScientist1 ;
     sebb:producedResult :emotionDetectionModel1 .
 
 :cnn a mls:Algorithm ;
@@ -107,7 +107,7 @@
     sebb:usedMLModel :asrModel1 ;
     prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
-    prov:wasAssociatedWith :ari1 .
+    sebb:wasPerformedBy :ari1 .
 
 :msg1 a oro:Message, prov:Entity ;
     oro:hasValue "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
@@ -117,7 +117,7 @@
     sebb:triggeredByActivity :listeningEvent1 ;
     sebb:usedMLModel :decisionMakingModel1 ;
     prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
-    prov:wasAssociatedWith :ari1 .
+    sebb:wasPerformedBy :ari1 .
 
 :emotionDetection1 a onyx:EmotionAnalysis, sebb:LoggedActivity ;
     prov:used :msg1 ;
@@ -127,7 +127,7 @@
     sebb:triggeredByActivity :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:18"^^xsd:dateTime ;
-    prov:wasAssociatedWith :ari1 .
+    sebb:wasPerformedBy :ari1 .
 
 :emotionset1 a onyx:EmotionSet ;
     onyx:hasEmotion :emotion1 ;
@@ -151,7 +151,7 @@
     sebb:triggeredByActivity :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
-    prov:wasAssociatedWith :newsCloudService .
+    sebb:wasPerformedBy :newsCloudService .
 
 :news1 a schema:NewsArticle, prov:Entity ;
   schema:articleBody "Scientists warn that the effects of climate change are accelerating, with more frequent and severe weather events."^^xsd:string ;
@@ -201,7 +201,7 @@
     sebb:triggeredBy :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:23"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
-    prov:wasAssociatedWith :ari1 .
+    sebb:wasPerformedBy :ari1 .
 
 :speech1 a oro:SpeechAction, sebb:LoggedActivity ;
     oro:hasSpeaker :ari1 ;
@@ -210,7 +210,7 @@
     sebb:triggeredByActivity :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:17"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:22"^^xsd:dateTime ;
-    prov:wasAssociatedWith :ari1 .
+    sebb:wasPerformedBy :ari1 .
 
 
 :decisionMaking1

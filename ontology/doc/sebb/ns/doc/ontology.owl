@@ -230,6 +230,19 @@
     
 
 
+    <!-- http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.gsi.upm.es/ontologies/sebb/ns#wasPerformedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/ns/prov#wasAssociatedWith"/>
+        <rdfs:domain rdf:resource="http://www.gsi.upm.es/ontologies/sebb/ns#LoggedActivity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Agent"/>
+        <rdfs:comment xml:lang="en">Represents the relation between a logged activity and the agent that performed it.</rdfs:comment>
+        <rdfs:label xml:lang="en">was performed by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.w3.org/ns/prov#generated -->
 
 
@@ -241,6 +254,13 @@
 
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#used"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasAssociatedWith -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasAssociatedWith"/>
     
 
 
@@ -360,6 +380,13 @@
 
 
     <owl:Class rdf:about="http://www.w3.org/ns/prov#Activity"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Agent -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/ns/prov#Agent"/>
     
 
 
