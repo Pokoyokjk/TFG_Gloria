@@ -1,5 +1,5 @@
 PREFIX prov: <http://www.w3.org/ns/prov#>
-PREFIX sebb: <http://www.gsi.upm.es/ontologies/sebb/ns#>
+PREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX mls: <http://www.w3.org/ns/mls#>
 PREFIX oro: <http://kb.openrobots.org#>
@@ -8,8 +8,8 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT ?activity ?startTime ?endTime ?model ?human ?humanName
 WHERE {
-?activity a sebb:LoggedActivity ;
-        sebb:usedMLModel ?model ;
+?activity a segb:LoggedActivity ;
+        segb:usedMLModel ?model ;
         prov:startedAtTime ?startTime ;
         prov:endedAtTime ?endTime ;
         prov:wasAssociatedWith ?agent .

@@ -1,11 +1,11 @@
 """
-Module for interacting with the Semantic Ethical Black Box (SEBB).
+Module for interacting with the Semantic Ethical Black Box (SEGB).
 
 This module provides functions to:
-    - Log Turtle (TTL) data to the SEBB via a POST request.
-    - Download the complete graph stored in the SEBB via a GET request.
+    - Log Turtle (TTL) data to the SEGB via a POST request.
+    - Download the complete graph stored in the SEGB via a GET request.
 
-The SEBB exposes two endpoints:
+The SEGB exposes two endpoints:
     - /log: To store data in Turtle format (which is internally converted to JSON-LD).
     - /get_graph: To retrieve the complete graph in Turtle format.
 """
@@ -14,13 +14,13 @@ import requests
 
 def log_ttl(server: str, input_file_path: str):
     
-    """Log a TTL file to the SEBB.
+    """Log a TTL file to the SEGB.
 
     Reads a Turtle (TTL) file from the specified path and sends its content
-    to the SEBB's `/log` endpoint via a POST request.
+    to the SEGB's `/log` endpoint via a POST request.
 
     Args:
-        server (str): The base URL of the SEBB server (e.g., "http://127.0.0.1:5000").
+        server (str): The base URL of the SEGB server (e.g., "http://127.0.0.1:5000").
         input_file_path (str): The path to the TTL file to be logged.
     
     Example:
@@ -44,13 +44,13 @@ def log_ttl(server: str, input_file_path: str):
 
 
 def get_graph(server: str, output_file_path: str):
-    """Download the complete graph stored in the SEBB.
+    """Download the complete graph stored in the SEGB.
 
-    Sends a GET request to the SEBB's `/get_graph` endpoint to retrieve the
+    Sends a GET request to the SEGB's `/get_graph` endpoint to retrieve the
     complete graph in Turtle format and saves it to the specified output file.
 
     Args:
-        server (str): The base URL of the SEBB server (e.g., "http://127.0.0.1:5000").
+        server (str): The base URL of the SEGB server (e.g., "http://127.0.0.1:5000").
         output_file_path (str): The path where the downloaded graph will be saved.
     
     Example:
@@ -70,10 +70,10 @@ def get_graph(server: str, output_file_path: str):
 
 if __name__ == "__main__":
     
-    # SEBB server URL
+    # SEGB server URL
     server = "http://127.0.0.1:5000"
     
-    # Log complete ontologies to the SEBB
+    # Log complete ontologies to the SEGB
     models = [
         "example-data/amor.ttl",
         "example-data/mft.ttl",
@@ -96,6 +96,6 @@ if __name__ == "__main__":
     input_ttl_file = "example-data/new-triples.ttl"
     log_ttl(server, input_ttl_file)
     
-    # Download the complete graph stored in the SEBB
+    # Download the complete graph stored in the SEGB
     output_ttl_file = "graph.ttl"
     get_graph(server, output_ttl_file)

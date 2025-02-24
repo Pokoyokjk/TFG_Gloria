@@ -1,14 +1,14 @@
 PREFIX oro: <http://kb.openrobots.org#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
-PREFIX sebb: <http://www.gsi.upm.es/ontologies/sebb/ns#>
+PREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>
 
 SELECT ?initialActivity ?listenMsgContent 
         ?resultingActivity ?responseMsgContent
         ?robot ?human
 WHERE {
-?activity a sebb:LoggedActivity ;
-    sebb:triggeredByActivity ?initialActivity ;
-    sebb:producedActivityResult ?resultingActivity ;
+?activity a segb:LoggedActivity ;
+    segb:triggeredByActivity ?initialActivity ;
+    segb:producedActivityResult ?resultingActivity ;
     prov:wasAssociatedWith ?robot .
 ?resultingActivity a oro:SpeechAction ;
     prov:wasAssociatedWith ?robot .

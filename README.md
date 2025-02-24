@@ -6,7 +6,7 @@ AMOR - Semantic Ethical Glass Box
 To start the Semantic Ethical Glass Box (SEGB), you should use the **compose.yaml** file provided in this repo.
 
 ## Tutorial
-Then, you can execute the tutorial code provided in **sebb_tutorial.py** that log a set of triples (full ontologies and individuals stored in **example-data/**) into the SEGB and download all the triples stored in the SEGB to a local file.
+Then, you can execute the tutorial code provided in **segb_tutorial.py** that log a set of triples (full ontologies and individuals stored in **example-data/**) into the SEGB and download all the triples stored in the SEGB to a local file.
 
 ## 1. Overview 
 
@@ -140,7 +140,7 @@ with open("output.ttl", "wb") as file:
 
 ## 5. Using the SEGB in the AMOR context
 
-We have defined a *Python* script, [sebb_tutorial.py](./sebb_tutorial.py) which defines an SEGB's use case within the AMOR context. 
+We have defined a *Python* script, [segb_tutorial.py](./segb_tutorial.py) which defines an SEGB's use case within the AMOR context. 
 
 It first defines two functions, both of them including console *logs* and some errors verification logic, and being appropiately described by using *Docstring*:
 

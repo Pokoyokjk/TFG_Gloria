@@ -7,7 +7,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
-@prefix sebb: <http://www.gsi.upm.es/ontologies/sebb/ns#> .
+@prefix segb: <http://www.gsi.upm.es/ontologies/segb/ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Agents
@@ -24,14 +24,14 @@
 
 # Machine Learning Models developed by human data scientist.
 
-:emotionDetectionModel1 a mls:Model, prov:Entity, sebb:Result ;
+:emotionDetectionModel1 a mls:Model, prov:Entity, segb:Result ;
     mls:hasQuality :compatibleEmotionModel ;
     prov:wasGeneratedBy :run1 .
 
 :compatibleEmotionModel a mls:ModelCharacteristic ;
     mls:hasValue "Big 6 Emotion Model"@en .
 
-:run1 a mls:Run, sebb:LoggedActivity ;
+:run1 a mls:Run, segb:LoggedActivity ;
     mls:realizes :cnn ;
     mls:hasInput :dataset1 ;
     mls:executes :cnn_tensorflow293 ;
@@ -40,8 +40,8 @@
     mls:hasOutput :emotionDetectionModel1Accuracy ;
     prov:startedAtTime "2023-09-15T10:17:25"^^xsd:dateTime ;
     prov:endedAtTime "2023-09-15T11:27:24"^^xsd:dateTime ;
-    sebb:wasPerformedBy :dataScientist1 ;
-    sebb:producedResult :emotionDetectionModel1 .
+    segb:wasPerformedBy :dataScientist1 ;
+    segb:producedResult :emotionDetectionModel1 .
 
 :cnn a mls:Algorithm ;
     rdfs:label "Convolutional Neural Network"@en.
@@ -100,34 +100,34 @@
 
 :newsCloudService a prov:SoftwareAgent .
 
-:listeningEvent1 a oro:ListeningEvent, sebb:LoggedActivity ;
+:listeningEvent1 a oro:ListeningEvent, segb:LoggedActivity ;
     oro:hasSpeaker :maria ;
     oro:hasListener :ari1 ;
     oro:hasMessage :msg1 ;
-    sebb:usedMLModel :asrModel1 ;
+    segb:usedMLModel :asrModel1 ;
     prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
-    sebb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy :ari1 .
 
 :msg1 a oro:Message, prov:Entity ;
     oro:hasValue "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
     prov:wasGeneratedBy :listeningEvent1 .
 
-:decisionMaking1 a oro:DecisionMaking, sebb:LoggedActivity ;
-    sebb:triggeredByActivity :listeningEvent1 ;
-    sebb:usedMLModel :decisionMakingModel1 ;
+:decisionMaking1 a oro:DecisionMaking, segb:LoggedActivity ;
+    segb:triggeredByActivity :listeningEvent1 ;
+    segb:usedMLModel :decisionMakingModel1 ;
     prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
-    sebb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy :ari1 .
 
-:emotionDetection1 a onyx:EmotionAnalysis, sebb:LoggedActivity ;
+:emotionDetection1 a onyx:EmotionAnalysis, segb:LoggedActivity ;
     prov:used :msg1 ;
     prov:generated :emotionset1 ;
-    sebb:usedMLModel :emotionDetectionModel1 ;
+    segb:usedMLModel :emotionDetectionModel1 ;
     onyx:usesEmotionModel emoml:big6 ;
-    sebb:triggeredByActivity :decisionMaking1 ;
+    segb:triggeredByActivity :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:18"^^xsd:dateTime ;
-    sebb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy :ari1 .
 
 :emotionset1 a onyx:EmotionSet ;
     onyx:hasEmotion :emotion1 ;
@@ -144,14 +144,14 @@
     onyx:algorithmConfidente "0.93"^^xsd:float .
 
 
-:informationRetrieval1 a oro:InformationRetrieval, sebb:LoggedActivity ;
+:informationRetrieval1 a oro:InformationRetrieval, segb:LoggedActivity ;
     prov:used :emotionset1 ;
     oro:queriedTopic "climate change"@en ;
     prov:generated :news1, :news2, :news3 ;
-    sebb:triggeredByActivity :decisionMaking1 ;
+    segb:triggeredByActivity :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
-    sebb:wasPerformedBy :newsCloudService .
+    segb:wasPerformedBy :newsCloudService .
 
 :news1 a schema:NewsArticle, prov:Entity ;
   schema:articleBody "Scientists warn that the effects of climate change are accelerating, with more frequent and severe weather events."^^xsd:string ;
@@ -185,35 +185,35 @@
     schema:name "Example News"^^xsd:string .
 
 :decisionMaking1
-    sebb:intermediateActivity :emotionDetection1 ;
-    sebb:intermediateActivity :informationRetrieval1 ;
-    sebb:usedMLModel :llmModel1 ;
-    sebb:producedEntityResult :msg2 .
+    segb:intermediateActivity :emotionDetection1 ;
+    segb:intermediateActivity :informationRetrieval1 ;
+    segb:usedMLModel :llmModel1 ;
+    segb:producedEntityResult :msg2 .
 
 :msg2 a oro:ResponseMessage, prov:Entity ;
     oro:previousMessage :msg1 ;
     oro:hasValue "Here's some news for you, you whiny, fearful child."@en ;
     prov:wasGeneratedBy :decisionMaking1 .
-:shownContent1 a oro:ShownContent, sebb:LoggedActivity ;
+:shownContent1 a oro:ShownContent, segb:LoggedActivity ;
     oro:hasContent :news1 ;
     oro:hasContent :news2 ;
     oro:hasContent :news3 ;
-    sebb:triggeredBy :decisionMaking1 ;
+    segb:triggeredBy :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:23"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
-    sebb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy :ari1 .
 
-:speech1 a oro:SpeechAction, sebb:LoggedActivity ;
+:speech1 a oro:SpeechAction, segb:LoggedActivity ;
     oro:hasSpeaker :ari1 ;
-    sebb:usedMLModel :ttsModel1 ;
+    segb:usedMLModel :ttsModel1 ;
     oro:hasMessage :msg2 ;
-    sebb:triggeredByActivity :decisionMaking1 ;
+    segb:triggeredByActivity :decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:17"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:22"^^xsd:dateTime ;
-    sebb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy :ari1 .
 
 
 :decisionMaking1
-    sebb:producedActivityResult :speech1 ;
-    sebb:producedActivityResult :shownContent1 ;
+    segb:producedActivityResult :speech1 ;
+    segb:producedActivityResult :shownContent1 ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime .
