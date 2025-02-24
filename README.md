@@ -1,23 +1,23 @@
-# amor-sebb
+# amor-segb
 
-AMOR - Semantic Ethical Black Box
+AMOR - Semantic Ethical Glass Box
 
-## Launch the SEBB
-To start the Semantic Ethical Black Box (SEBB), you should use the **compose.yaml** file provided in this repo.
+## Launch the SEGB
+To start the Semantic Ethical Glass Box (SEGB), you should use the **compose.yaml** file provided in this repo.
 
 ## Tutorial
-Then, you can execute the tutorial code provided in **sebb_tutorial.py** that log a set of triples (full ontologies and individuals stored in **example-data/**) into the SEBB and download all the triples stored in the SEBB to a local file.
+Then, you can execute the tutorial code provided in **sebb_tutorial.py** that log a set of triples (full ontologies and individuals stored in **example-data/**) into the SEGB and download all the triples stored in the SEGB to a local file.
 
 ## 1. Overview 
 
-The Semantic Ethical Black Box (SEBB) is global *log* storage, which keeps a semantic registry (graph) of logs generated within different systems. It is comprised of two parts: 
+The Semantic Ethical Glass Box (SEGB) is global *log* storage, which keeps a semantic registry (graph) of logs generated within different systems. It is comprised of two parts: 
 
 1. A REST API Flask-based server, whose functions are 1) to add new triples to the global graph and 2) retrieve the global graph; 
 
 2. A MongoDB-based database, where the global graph is storaged in JSON-LD format
 
 >[!IMPORTANT]
-> Since the SEBB is in a testing stage, the MongoDB database is stored in a local Docker-managed volume on the local computer where the SEBB is deployed. In the future, during the deployment stage, the database will be migrated to a centralized server to store all the records in a safe, consistent manner.
+> Since the SEGB is in a testing stage, the MongoDB database is stored in a local Docker-managed volume on the local computer where the SEGB is deployed. In the future, during the deployment stage, the database will be migrated to a centralized server to store all the records in a safe, consistent manner.
 
 ## API Description
 
@@ -55,7 +55,7 @@ Retrieves the stored **JSON-LD** data, processes it, and returns it in **Turtle 
 | `200 OK` | Returns the data in **Turtle (TTL)** format. |
 | `404 Not Found` | No data available in the database. |
 
-## 3. Launching the Semantic Ethical Black Box (SEBB)
+## 3. Launching the Semantic Ethical Glass Box (SEGB)
 
 Use the docker-compose file available in this repository. This action requires access to the image used in the docker compose file. This consists on several steps:
 
@@ -82,14 +82,14 @@ echo $CR_PAT | docker login ghcr.io -u <YOUR_USER_NAME> --password-stdin
 docker compose up -d
 ```
 
-6. The URL of the SEBB is `http://127.0.0.1:5000`
+6. The URL of the SEGB is `http://127.0.0.1:5000`
 
-## 4. Sending data to and retrieving data from the SEBB.
+## 4. Sending data to and retrieving data from the SEGB.
 
 To update a new TTL file containing one or several triples, we makes a POST request to the */log* route. Given that we have a Turtle file "*data.ttl*".
 
 >[!IMPORTANT]
->We strongly recommend to do **NOT use blank nodes** in any triples you want to log in the SEBB. They will not break the SEBB, but it can generate duplicated blank nodes (in the global graph) if they are sent several times to the SEBB due to external limitatios.
+>We strongly recommend to do **NOT use blank nodes** in any triples you want to log in the SEGB. They will not break the SEGB, but it can generate duplicated blank nodes (in the global graph) if they are sent several times to the SEGB due to external limitatios.
 
 We can make it through the *curl* tool if using *bash*:
 
@@ -138,15 +138,15 @@ with open("output.ttl", "wb") as file:
 
 ```
 
-## 5. Using the SEBB in the AMOR context
+## 5. Using the SEGB in the AMOR context
 
-We have defined a *Python* script, [sebb_tutorial.py](./sebb_tutorial.py) which defines an SEBB's use case within the AMOR context. 
+We have defined a *Python* script, [sebb_tutorial.py](./sebb_tutorial.py) which defines an SEGB's use case within the AMOR context. 
 
 It first defines two functions, both of them including console *logs* and some errors verification logic, and being appropiately described by using *Docstring*:
 
-- ***log_ttl***: function who receives as *input* the server's URL and the TTL file path and makes a POST to the SEBB.
+- ***log_ttl***: function who receives as *input* the server's URL and the TTL file path and makes a POST to the SEGB.
 
-- ***get_graph***: function who receives as *input* the server's URL and the output TTL file path and makes a GET to the SEBB.
+- ***get_graph***: function who receives as *input* the server's URL and the output TTL file path and makes a GET to the SEGB.
 
 
 The workflow defined within the *script* defines the use case as follows:
@@ -165,7 +165,7 @@ The workflow defined within the *script* defines the use case as follows:
     ]
 ```
 
-2. The ontologies TTL files are mapped to the SEBB's global graph via the *log_ttl* function:
+2. The ontologies TTL files are mapped to the SEGB's global graph via the *log_ttl* function:
 
 ``` python
     for model in models:
