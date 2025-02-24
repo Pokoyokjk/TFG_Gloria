@@ -2,8 +2,8 @@
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix : <> .
-<http://www.gsi.upm.es/ontologies/sebb/ns/1.0.0> a prov:Entity;
-	 dc:title "Semantic Ethical Black Box (SEBB) Ontology";
+<http://www.gsi.upm.es/ontologies/segb/ns/1.0.0> a prov:Entity;
+	 dc:title "Semantic Ethical Glass Box (SEGB) Ontology";
 	 prov:wasAttributedTo <https://gsi.upm.es/a.carrera>;
 	 dc:creator <https://gsi.upm.es/a.carrera>;
 	 prov:wasAttributedTo <https://github.com/dgarijo/Widoco/>,<http://www.essepuntato.it/lode/>;
