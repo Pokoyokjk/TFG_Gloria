@@ -10,6 +10,11 @@ class Graph(Document):
     def clean(self):
         if not isinstance(self.graph_data, dict):
             raise ValidationError("'graph' field must be a document in JSON format")
+        
+class TTL(Document):
+    uploaded_at = DateTimeField()
+    origin_ip = StringField(required=True, regex="^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$")
+    ttl_content = StringField(required=True)
 
     
 def connect_to_db():
@@ -37,3 +42,18 @@ def save_json_ld(json_ld_data:dict):
 def get_json_ld():
     graph = Graph.objects(_id='0').first()
     return graph   
+
+
+def save_ttl_content(ttl:str, ip_addr:str):
+    ttl = TTL (
+        uploaded_at = datetime.now(),
+        origin_ip = ip_addr,
+        ttl_content = ttl
+    )
+    ttl.save()
+    
+    
+def get_ttl_content():
+    ttl_list = TTL.objects()
+    dict_ttl_list = semantic_utils.convert_ttl_info_to_dict(ttl_list)
+    return dict_ttl_list

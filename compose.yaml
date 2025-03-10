@@ -1,7 +1,10 @@
 services:
-  segb:
-    container_name: amor-segb
-    image: ghcr.io/gsi-upm/amor-segb:latest
+  sebb:
+    container_name: amor-sebb-flask
+    # image: ghcr.io/gsi-upm/amor-sebb:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     networks:
@@ -13,7 +16,7 @@ services:
       - FLASK_DEBUG=1
 
   mongodb:
-    container_name: amor-segb-mongodb
+    container_name: amor-sebb-mongodb
     image: mongodb/mongodb-community-server:8.0.0-ubi8
     volumes:
       - db:/data/db
