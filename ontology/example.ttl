@@ -1,8 +1,9 @@
-@prefix : <http://example.org#> .
+@prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
 @prefix emoml: <http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#> .
+@prefix ex: <http://example.org#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix mls: <http://www.w3.org/ns/mls#> .
-@prefix onyx: <http://www.gsi.dit.upm.es/ontologies/onyx/ns#> .
+@prefix onyx: <http://www.gsi.upm.es/ontologies/onyx/ns#> .
 @prefix oro: <http://kb.openrobots.org#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -11,12 +12,12 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Agents
-:dataScientist1 a prov:Person, foaf:Person, schema:Person ;
+ex:dataScientist1 a prov:Person, foaf:Person, schema:Person ;
     foaf:firstName "Pedro"@es ;
     foaf:homepage <http://example.org/pedro> ;
-    schema:affiliation :upm .
+    schema:affiliation ex:upm .
 
-:upm a schema:Organization, foaf:Organization, prov:Organization ;
+ex:upm a schema:Organization, foaf:Organization, prov:Organization ;
     schema:url <https://www.upm.es> ;
     schema:name "Universidad Politécnica de Madrid"@es ;
     schema:name "Technical University of Madrid"@en .
@@ -24,196 +25,281 @@
 
 # Machine Learning Models developed by human data scientist.
 
-:emotionDetectionModel1 a mls:Model, prov:Entity, segb:Result ;
-    mls:hasQuality :compatibleEmotionModel ;
-    prov:wasGeneratedBy :run1 .
+ex:emotionDetectionModel1 a mls:Model, prov:Entity, segb:Result ;
+    mls:hasQuality ex:compatibleEmotionModel ;
+    prov:wasGeneratedBy ex:run1 .
 
-:compatibleEmotionModel a mls:ModelCharacteristic ;
+ex:compatibleEmotionModel a mls:ModelCharacteristic ;
     mls:hasValue "Big 6 Emotion Model"@en .
 
-:run1 a mls:Run, segb:LoggedActivity ;
-    mls:realizes :cnn ;
-    mls:hasInput :dataset1 ;
-    mls:executes :cnn_tensorflow293 ;
-    mls:hasInput :num_epochs ;
-    mls:hasOutput :emotionDetectionModel1 ;
-    mls:hasOutput :emotionDetectionModel1Accuracy ;
+ex:run1 a mls:Run, segb:LoggedActivity ;
+    mls:realizes ex:cnn ;
+    mls:hasInput ex:dataset1 ;
+    mls:executes ex:cnn_tensorflow293 ;
+    mls:hasInput ex:num_epochs ;
+    mls:hasOutput ex:emotionDetectionModel1 ;
+    mls:hasOutput ex:emotionDetectionModel1Accuracy ;
     prov:startedAtTime "2023-09-15T10:17:25"^^xsd:dateTime ;
     prov:endedAtTime "2023-09-15T11:27:24"^^xsd:dateTime ;
-    segb:wasPerformedBy :dataScientist1 ;
-    segb:producedResult :emotionDetectionModel1 .
+    segb:wasPerformedBy ex:dataScientist1 ;
+    segb:producedResult ex:emotionDetectionModel1 .
 
-:cnn a mls:Algorithm ;
+ex:cnn a mls:Algorithm ;
     rdfs:label "Convolutional Neural Network"@en.
 
-:cnn_tensorflow293 a mls:Implementation ;
-    mls:hasHyperParameter :epochs ;
-    mls:implements :cnn .
+ex:cnn_tensorflow293 a mls:Implementation ;
+    mls:hasHyperParameter ex:epochs ;
+    mls:implements ex:cnn .
 
-:tensorflow293 a mls:Software ;
+ex:tensorflow293 a mls:Software ;
     rdfs:label "TensorFlow 2.9.3"@en ;
-    mls:hasPart :cnn_tensorflow293 .
+    mls:hasPart ex:cnn_tensorflow293 .
 
-:epochs a mls:HyperParameter ;
+ex:epochs a mls:HyperParameter ;
     rdfs:label "epochs"@en ;
     rdfs:description "Number of epochs."@en .
 
-:num_epochs a mls:HyperParameterSetting ;
-    mls:specifiedBy :epochs ;
+ex:num_epochs a mls:HyperParameterSetting ;
+    mls:specifiedBy ex:epochs ;
     mls:hasValue "50"^^xsd:long .
 
-:emotionDetectionModel1Accuracy a mls:ModelEvaluation ;
-    mls:specifiedBy :accuracy ;
+ex:emotionDetectionModel1Accuracy a mls:ModelEvaluation ;
+    mls:specifiedBy ex:accuracy ;
     mls:hasValue "0.86"^^xsd:float .
 
-:accuracy a mls:EvaluationMeasure ;
+ex:accuracy a mls:EvaluationMeasure ;
     rdfs:label "Accuracy"@en.
 
-:dataset1 a mls:Dataset ;
+ex:dataset1 a mls:Dataset ;
     rdfs:label "Dataset for emotion recognition."@en ;
-    mls:hasQuality :numberOfFeatures ;
-    mls:hasQuality :numberOfInstantes .
+    mls:hasQuality ex:numberOfFeatures ;
+    mls:hasQuality ex:numberOfInstantes .
 
-:numberOfFeatures_dataset1 a mls:DatasetCharacteristic ;
+ex:numberOfFeatures_dataset1 a mls:DatasetCharacteristic ;
     rdfs:label "Number of features for Dataset 1"@en ;
     mls:hasValue "15"^^xsd:long .
 
-:numberOfInstantes a mls:DatasetCharacteristic ;
+ex:numberOfInstantes a mls:DatasetCharacteristic ;
     rdfs:label "Number of instances for Dataset 1"@en ;
     mls:hasValue "1600"^^xsd:long .
 
 # Logged Activities by a robot
 
+ex:asrModel1 a mls:Model .
+ex:decisionMakingModel1 a mls:Model .
+ex:llmModel1 a mls:Model .
+ex:ttsModel1 a mls:Model .
 
-:asrModel1 a mls:Model .
-
-:decisionMakingModel1 a mls:Model .
-:llmModel1 a mls:Model .
-:ttsModel1 a mls:Model .
-
-:maria a prov:Person, foaf:Person, schema:Person, oro:Human ;
+ex:maria a prov:Person, foaf:Person, schema:Person, oro:Human ;
     foaf:firstName "María"@es .
-:ari1 a prov:SoftwareAgent, oro:Robot ;
+ex:ari1 a prov:SoftwareAgent, oro:Robot ;
     oro:hasName "ARI"@es ;
-    oro:belongsTo :maria ;
-    foaf:knows :maria .
+    oro:belongsTo ex:maria ;
+    foaf:knows ex:maria .
 
-:newsCloudService a prov:SoftwareAgent .
 
-:listeningEvent1 a oro:ListeningEvent, segb:LoggedActivity ;
-    oro:hasSpeaker :maria ;
-    oro:hasListener :ari1 ;
-    oro:hasMessage :msg1 ;
-    segb:usedMLModel :asrModel1 ;
+### Step 0: Starting an experiment with a robot
+ex:experiment1 a amor-exp:Experiment ;
+    rdfs:label "Experiment 1"@en ;
+    amor-exp:hasExperimentExecutor ex:ari1 ;
+    amor-exp:hasExperimentSubject ex:maria ;
+    prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime .
+
+
+
+# Step 1: Listening event by the robot
+ex:listeningEvent1 a oro:ListeningEvent, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    oro:hasSpeaker ex:maria ;
+    oro:hasListener ex:ari1 ;
+    oro:hasMessage ex:msg1 ;
+    segb:usedMLModel ex:asrModel1 ;
     prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
-    segb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy ex:ari1 .
 
-:msg1 a oro:Message, prov:Entity ;
-    oro:hasValue "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
-    prov:wasGeneratedBy :listeningEvent1 .
+ex:msg1 a oro:InitialMessage, oro:Message, prov:Entity ;
+    oro:hasText "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
+    prov:wasGeneratedBy ex:listeningEvent1 .
 
-:decisionMaking1 a oro:DecisionMaking, segb:LoggedActivity ;
-    segb:triggeredByActivity :listeningEvent1 ;
-    segb:usedMLModel :decisionMakingModel1 ;
+
+# Step 2: Decision making by the robot based on the listening event
+ex:decisionMaking1 a oro:DecisionMakingAction, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    segb:triggeredByActivity ex:listeningEvent1 ;
+    segb:usedMLModel ex:decisionMakingModel1 ;
     prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
-    segb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy ex:ari1 .
 
-:emotionDetection1 a onyx:EmotionAnalysis, segb:LoggedActivity ;
-    prov:used :msg1 ;
-    prov:generated :emotionset1 ;
-    segb:usedMLModel :emotionDetectionModel1 ;
+# Step 3: Emotion detection by the robot triggered by the decision making
+ex:emotionDetection1 a oro:EmotionRecognitionEvent, onyx:EmotionAnalysis, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    prov:used ex:msg1 ;
+    segb:usedMLModel ex:emotionDetectionModel1 ;
     onyx:usesEmotionModel emoml:big6 ;
-    segb:triggeredByActivity :decisionMaking1 ;
+    segb:triggeredByActivity ex:decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:18"^^xsd:dateTime ;
-    segb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy ex:ari1 ;
+    prov:generated ex:emotionset1 .
 
-:emotionset1 a onyx:EmotionSet ;
-    onyx:hasEmotion :emotion1 ;
-    onyx:hasEmotion :emotion2 .
+ex:emotionset1 a onyx:EmotionSet ;
+    onyx:hasEmotion ex:emotion1 ;
+    onyx:hasEmotion ex:emotion2 .
 
-:emotion1 a onyx:Emotion ;
+ex:emotion1 a onyx:Emotion ;
     onyx:hasEmotionCategory emoml:big6_fear ;
     onyx:hasEmotionIntensity "0.3"^^xsd:float ;
     onyx:algorithmConfidente "0.86"^^xsd:float .
 
-:emotion2 a onyx:Emotion ;
+ex:emotion2 a onyx:Emotion ;
     onyx:hasEmotionCategory emoml:big6_sadness ;
     onyx:hasEmotionIntensity "0.4"^^xsd:float ;
     onyx:algorithmConfidente "0.93"^^xsd:float .
 
+# Step 4: Emotion expression by the robot triggered by the emotion detection
+ex:emotionExpression1 a oro:EmotionExpressionAction, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    segb:triggeredByActivity ex:decisionMaking1 ;
+    segb:triggeredByActivity ex:emotionDetection1 ;
+    segb:triggeredByActivity ex:listeningEvent1 ;
+    prov:used ex:emotionset1 ;
+    prov:used ex:msg1 ;
+    oro:expressedEmotion emoml:big6_sadness ;
+    prov:startedAtTime "2024-11-16T12:27:18"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:19"^^xsd:dateTime ;
+    segb:wasPerformedBy ex:ari1 .
 
-:informationRetrieval1 a oro:InformationRetrieval, segb:LoggedActivity ;
-    prov:used :emotionset1 ;
-    oro:queriedTopic "climate change"@en ;
-    prov:generated :news1, :news2, :news3 ;
-    segb:triggeredByActivity :decisionMaking1 ;
+# Update the decision making with a resulting action
+ex:decisionMaking1 segb:producedActivityResult ex:emotionExpression1 .
+
+
+# Step 5: Information retrieval by the robot triggered by the decision making and the emotion detection
+ex:informationRetrieval1 a oro:InformationRetrievalAction, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    oro:query "climate change"@en ;
+    oro:endPoint "http://example.org/news_search/api" ;
+    segb:producedEntityResult ex:news1, ex:news2, ex:news3 ;
+    segb:triggeredByActivity ex:decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
-    segb:wasPerformedBy :newsCloudService .
+    segb:wasPerformedBy ex:ari1 .
 
-:news1 a schema:NewsArticle, prov:Entity ;
+ex:news1 a schema:NewsArticle, prov:Entity ;
   schema:articleBody "Scientists warn that the effects of climate change are accelerating, with more frequent and severe weather events."^^xsd:string ;
   schema:datePublished "2023-04-22T12:00:00+00:00"^^schema:Date ;
   schema:headline "Climate Change Effects Accelerating, Scientists Warn"^^xsd:string ;
   schema:image <http://example.org/images/climate_change.jpg> ;
   schema:mainEntityOfPage <http://www.example.org/news/climate-change-effects> ;
-  schema:publisher :exampleNews ;
+  schema:publisher ex:publisher1 ;
   schema:url <http://www.example.org/news/climate-change-effects> .
 
-:news2 a schema:NewsArticle, prov:Entity ;
+ex:news2 a schema:NewsArticle, prov:Entity ;
   schema:articleBody "A new international agreement aims to reduce carbon emissions by 50% by 2030."^^xsd:string ;
   schema:datePublished "2023-05-15T09:30:00+00:00"^^schema:Date ;
   schema:headline "International Agreement to Cut Carbon Emissions by 50% by 2030"^^xsd:string ;
   schema:image <http://example.org/images/carbon_emissions.jpg> ;
   schema:mainEntityOfPage <http://www.example.org/news/carbon-emissions-agreement> ;
-  schema:publisher :exampleNews ;
+  schema:publisher ex:publisher1 ;
   schema:url <http://www.example.org/news/carbon-emissions-agreement> .
 
-:news3 a schema:NewsArticle, prov:Entity ;
+ex:news3 a schema:NewsArticle, prov:Entity ;
   schema:articleBody "Renewable energy sources are becoming more cost-effective and widely adopted, helping to combat climate change."^^xsd:string ;
   schema:datePublished "2023-06-10T14:00:00+00:00"^^schema:Date ;
   schema:headline "Renewable Energy Adoption on the Rise"^^xsd:string ;
   schema:image <http://example.org/images/renewable_energy.jpg> ;
   schema:mainEntityOfPage <http://www.example.org/news/renewable-energy-adoption> ;
-  schema:publisher :exampleNews ;
+  schema:publisher ex:publisher1 ;
   schema:url <http://www.example.org/news/renewable-energy-adoption> .
 
-:exampleNews a schema:Organization ;
+ex:publisher1 a schema:Organization ;
     schema:logo <http://www.example.org/logo.png> ;
     schema:name "Example News"^^xsd:string .
 
-:decisionMaking1
-    segb:intermediateActivity :emotionDetection1 ;
-    segb:intermediateActivity :informationRetrieval1 ;
-    segb:usedMLModel :llmModel1 ;
-    segb:producedEntityResult :msg2 .
+# Update the decision making with a resulting action and generated a response message
+ex:decisionMaking1
+    segb:intermediateActivity ex:emotionDetection1 ;
+    segb:intermediateActivity ex:informationRetrieval1 ;
+    segb:usedMLModel ex:llmModel1 ;
+    segb:producedEntityResult ex:msg2 .
 
-:msg2 a oro:ResponseMessage, prov:Entity ;
-    oro:previousMessage :msg1 ;
-    oro:hasValue "Here's some news for you, you whiny, fearful child."@en ;
-    prov:wasGeneratedBy :decisionMaking1 .
-:shownContent1 a oro:ShownContent, segb:LoggedActivity ;
-    oro:hasContent :news1 ;
-    oro:hasContent :news2 ;
-    oro:hasContent :news3 ;
-    segb:triggeredBy :decisionMaking1 ;
+ex:msg2 a oro:ResponseMessage, oro:Message, prov:Entity ;
+    oro:previousMessage ex:msg1 ;
+    oro:hasText "Here's some news for you, you whiny, fearful child."@en ;
+    prov:wasGeneratedBy ex:decisionMaking1 .
+
+ex:msg1 oro:nextMessage ex:msg2 .
+
+# Step 6: Showing content by the robot triggered by the decision making
+ex:shownContent1 a oro:ShownContentAction, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    oro:hasContent ex:news1 ;
+    oro:hasContent ex:news2 ;
+    oro:hasContent ex:news3 ;
+    segb:triggeredBy ex:decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:23"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
-    segb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy ex:ari1 .
 
-:speech1 a oro:SpeechAction, segb:LoggedActivity ;
-    oro:hasSpeaker :ari1 ;
-    segb:usedMLModel :ttsModel1 ;
-    oro:hasMessage :msg2 ;
-    segb:triggeredByActivity :decisionMaking1 ;
+# Step 7: Speech the response message by the robot triggered by the decision making
+ex:speech1 a oro:SpeechAction, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    oro:hasSpeaker ex:ari1 ;
+    oro:hasListener ex:maria ;
+    segb:usedMLModel ex:ttsModel1 ;
+    oro:hasMessage ex:msg2 ;
+    segb:triggeredByActivity ex:decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:17"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:22"^^xsd:dateTime ;
-    segb:wasPerformedBy :ari1 .
+    segb:wasPerformedBy ex:ari1 .
 
-
-:decisionMaking1
-    segb:producedActivityResult :speech1 ;
-    segb:producedActivityResult :shownContent1 ;
+ex:decisionMaking1
+    segb:producedActivityResult ex:speech1 ;
+    segb:producedActivityResult ex:shownContent1 ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime .
+
+# Step 8: Selection of a news by the user
+ex:selection1 a oro:SelectedOptionEvent, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    oro:selectedOption ex:news2 ;
+    oro:hasUser ex:maria ;
+    segb:triggeredByActivity ex:shownContent1 ;
+    prov:startedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:25"^^xsd:dateTime ;
+    segb:wasPerformedBy ex:ari1 .
+
+
+# Step 9: Decision making by the robot based on the selection of the news
+ex:decisionMaking2 a oro:DecisionMakingAction, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    segb:triggeredByActivity ex:selection1 ;
+    segb:usedMLModel ex:decisionMakingModel1 ;
+    prov:startedAtTime "2024-11-16T12:27:25"^^xsd:dateTime ;
+    segb:wasPerformedBy ex:ari1 .
+
+
+# Step 10: Movement and gesture by the robot triggered by the decision making
+ex:movement1 a oro:MovementAction, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    oro:initialLocation ex:location1 ;
+    oro:goalLocation ex:location2 ;
+    prov:startedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:25"^^xsd:dateTime ;
+    segb:wasPerformedBy ex:ari1 .
+
+ex:gesture1 a oro:GestureAction, segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ex:experiment1 ;
+    oro:usesBodyPart oro:Hand ;
+    oro:pointsAt ex:location2 ;
+    prov:startedAtTime "2024-11-16T12:27:25"^^xsd:dateTime ;
+    prov:endedAtTime "2024-11-16T12:27:26"^^xsd:dateTime ;
+    segb:wasPerformedBy ex:ari1 .
+
+# Update the decision making with a resulting action
+ex:decisionMaking2
+    segb:producedActivityResult ex:movement1 ;
+    segb:producedActivityResult ex:gesture1 ;
+    prov:endedAtTime "2024-11-16T12:27:26"^^xsd:dateTime .
+
+# Step 11: Finish the experiment
+ex:experiment1 prov:endedAtTime "2024-11-16T12:27:30"^^xsd:dateTime .
