@@ -93,8 +93,7 @@ if __name__ == "__main__":
     # they will appear duplicated in the downloaded graph.
     
     # Log a few triples (not a full ontology) simulating some TTL-parsed logs, some of which are duplicated.
-    input_ttl_file = "example-data/new-triples.ttl"
-    log_ttl(server, input_ttl_file)
+ 
     
     # Download the complete graph stored in the SEGB
     output_ttl_file = "graph.ttl"
