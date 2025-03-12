@@ -9,8 +9,10 @@ Semantic Ethical Glass Box (SEGB) documentation
    :maxdepth: 2
    :caption: Contents:
     
-   amor_project
-   introduction_segb
+   1_amor_project
+   2_introduction_segb
+   3_api_documentation
+   4_basic_tutorial
 
 
 
