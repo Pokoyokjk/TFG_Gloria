@@ -5,6 +5,7 @@
 @prefix mls: <http://www.w3.org/ns/mls#> .
 @prefix onyx: <http://www.gsi.upm.es/ontologies/onyx/ns#> .
 @prefix oro: <http://kb.openrobots.org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
@@ -45,7 +46,8 @@ ex:run1 a mls:Run, segb:LoggedActivity ;
     segb:producedResult ex:emotionDetectionModel1 .
 
 ex:cnn a mls:Algorithm ;
-    rdfs:label "Convolutional Neural Network"@en.
+    rdfs:label "Convolutional Neural Network"@en ;
+    owl:sameAs <http://dbpedia.org/resource/Convolutional_neural_network> .
 
 ex:cnn_tensorflow293 a mls:Implementation ;
     mls:hasHyperParameter ex:epochs ;
@@ -83,12 +85,15 @@ ex:numberOfInstantes a mls:DatasetCharacteristic ;
     rdfs:label "Number of instances for Dataset 1"@en ;
     mls:hasValue "1600"^^xsd:long .
 
-# Logged Activities by a robot
-
-ex:asrModel1 a mls:Model .
+### Models previously described
+ex:asrModel1 a mls:Model ;
+    rdfs:label "Automatic Speech Recognition - vosk_es" ;
+    rdfs:comment "ASR Model from vosk repository using Spanish as input" .
 ex:decisionMakingModel1 a mls:Model .
 ex:llmModel1 a mls:Model .
 ex:ttsModel1 a mls:Model .
+
+# Agents (previous - real time generation)
 
 ex:maria a prov:Person, foaf:Person, schema:Person, oro:Human ;
     foaf:firstName "María"@es .
@@ -98,7 +103,12 @@ ex:ari1 a prov:SoftwareAgent, oro:Robot ;
     foaf:knows ex:maria .
 
 
+# Logged Activities by a robot
+
 ### Step 0: Starting an experiment with a robot
+
+### (generated when SEGB receive a JSON for an experiment begging)
+
 ex:experiment1 a amor-exp:Experiment ;
     rdfs:label "Experiment 1"@en ;
     amor-exp:hasExecutor ex:ari1 ;
@@ -128,6 +138,12 @@ ex:decisionMaking1 a oro:DecisionMakingAction, segb:LoggedActivity ;
     segb:usedMLModel ex:decisionMakingModel1 ;
     prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
     segb:wasPerformedBy ex:ari1 .
+
+# Update the decision making with a resulting action and generated a response message
+ex:decisionMaking1
+    segb:intermediateActivity ex:emotionDetection1 ;
+    segb:intermediateActivity ex:informationRetrieval1 ;
+    segb:intermediateActivity ex:generateResponse1 .
 
 # Step 3: Emotion detection by the robot triggered by the decision making
 ex:emotionDetection1 a oro:EmotionRecognitionEvent, onyx:EmotionAnalysis, segb:LoggedActivity ;
@@ -169,8 +185,10 @@ ex:emotionExpression1 a oro:EmotionExpressionAction, segb:LoggedActivity ;
     segb:wasPerformedBy ex:ari1 .
 
 # Update the decision making with a resulting action
-ex:decisionMaking1 segb:producedActivityResult ex:emotionExpression1 .
-
+ex:decisionMaking1 
+    segb:producedActivityResult ex:emotionExpression1 ;
+    segb:producedActivityResult ex:speech1 ;
+    segb:producedActivityResult ex:shownContent1 .
 
 # Step 5: Information retrieval by the robot triggered by the decision making and the emotion detection
 ex:informationRetrieval1 a oro:InformationRetrievalAction, segb:LoggedActivity ;
@@ -214,13 +232,11 @@ ex:publisher1 a schema:Organization ;
     schema:logo <http://www.example.org/logo.png> ;
     schema:name "Example News"^^xsd:string .
 
-# Update the decision making with a resulting action and generated a response message
-ex:decisionMaking1
-    segb:intermediateActivity ex:emotionDetection1 ;
-    segb:intermediateActivity ex:informationRetrieval1 ;
+
+ex:generateResponse1 a oro:GenerateResponseAction , segb:LoggedActivity;
     segb:usedMLModel ex:llmModel1 ;
     segb:producedEntityResult ex:msg2 .
-
+# TODO: review this
 ex:msg2 a oro:ResponseMessage, oro:Message, prov:Entity ;
     oro:previousMessage ex:msg1 ;
     oro:hasText "Here's some news for you, you whiny, fearful child."@en ;
@@ -234,7 +250,7 @@ ex:shownContent1 a oro:ShownContentAction, segb:LoggedActivity ;
     oro:hasContent ex:news1 ;
     oro:hasContent ex:news2 ;
     oro:hasContent ex:news3 ;
-    segb:triggeredBy ex:decisionMaking1 ;
+    segb:triggeredByActivity ex:decisionMaking1 ;
     prov:startedAtTime "2024-11-16T12:27:23"^^xsd:dateTime ;
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
     segb:wasPerformedBy ex:ari1 .
@@ -251,9 +267,8 @@ ex:speech1 a oro:SpeechAction, segb:LoggedActivity ;
     prov:endedAtTime "2024-11-16T12:27:22"^^xsd:dateTime ;
     segb:wasPerformedBy ex:ari1 .
 
-ex:decisionMaking1
-    segb:producedActivityResult ex:speech1 ;
-    segb:producedActivityResult ex:shownContent1 ;
+
+ex:decisionMaking1 
     prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime .
 
 # Step 8: Selection of a news by the user
@@ -274,7 +289,6 @@ ex:decisionMaking2 a oro:DecisionMakingAction, segb:LoggedActivity ;
     segb:usedMLModel ex:decisionMakingModel1 ;
     prov:startedAtTime "2024-11-16T12:27:25"^^xsd:dateTime ;
     segb:wasPerformedBy ex:ari1 .
-
 
 # Step 10: Movement and gesture by the robot triggered by the decision making
 ex:movement1 a oro:MovementAction, segb:LoggedActivity ;

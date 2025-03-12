@@ -20,7 +20,7 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX oro: <http://kb.openrobots.org#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?activity ?robot ?trigger ?result ?human ?msg1 ?msg2 ?text1 ?text2\nWHERE {\n?activity a segb:LoggedActivity ;\n    segb:triggeredByActivity ?trigger ;\n    segb:producedActivityResult ?result ;\n    segb:wasPerformedBy ?robot .\n?trigger a oro:ListeningEvent ;\n    oro:hasListener ?robot ;\n    oro:hasSpeaker ?human ;\n    oro:hasMessage ?msg1 .\n?msg1 a oro:Message ;\n    oro:hasText ?text1 .\n?result a oro:SpeechAction ;\n    oro:hasSpeaker ?robot ;\n    oro:hasListener ?listener ;\n    oro:hasMessage ?msg2 .\n?msg2 a oro:Message ;\n    oro:hasText ?text2 .\n}",
+    "value": "# from file CQ3.rq\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?activity ?robot ?trigger ?result ?human ?msg1 ?msg2 ?text1 ?text2\nWHERE {\n?activity a segb:LoggedActivity ;\n    segb:triggeredByActivity ?trigger ;\n    segb:producedActivityResult ?result ;\n    segb:wasPerformedBy ?robot .\n?trigger a oro:ListeningEvent ;\n    oro:hasListener ?robot ;\n    oro:hasSpeaker ?human ;\n    oro:hasMessage ?msg1 .\n?msg1 a oro:Message ;\n    oro:hasText ?text1 .\n?result a oro:SpeechAction ;\n    oro:hasSpeaker ?robot ;\n    oro:hasListener ?listener ;\n    oro:hasMessage ?msg2 .\n?msg2 a oro:Message ;\n    oro:hasText ?text2 .\n}",
     "metadata": {
       "file": "CQ3.rq"
     }
