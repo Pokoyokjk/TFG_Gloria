@@ -101,11 +101,9 @@ ex:ari1 a prov:SoftwareAgent, oro:Robot ;
 ### Step 0: Starting an experiment with a robot
 ex:experiment1 a amor-exp:Experiment ;
     rdfs:label "Experiment 1"@en ;
-    amor-exp:hasExperimentExecutor ex:ari1 ;
-    amor-exp:hasExperimentSubject ex:maria ;
+    amor-exp:hasExecutor ex:ari1 ;
+    amor-exp:hasExperimentationSubject ex:maria ;
     prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime .
-
-
 
 # Step 1: Listening event by the robot
 ex:listeningEvent1 a oro:ListeningEvent, segb:LoggedActivity ;

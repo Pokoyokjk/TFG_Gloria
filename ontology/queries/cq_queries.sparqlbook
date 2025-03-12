@@ -1,0 +1,40 @@
+[
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>\nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\nPREFIX mls: <http://www.w3.org/ns/mls#>\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX prov: <http://www.w3.org/ns/prov#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\nSELECT ?experiment ?expSubject ?expExecutor WHERE {\n    ?experiment a amor-exp:Experiment ;\n        amor-exp:hasExperimentationSubject ?expSubject ;\n        amor-exp:hasExecutor ?expExecutor .\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX prov: <http://www.w3.org/ns/prov#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\nPREFIX mls: <http://www.w3.org/ns/mls#>\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n\nSELECT ?activity ?secondType ?model ?robot ?speaker ?listener ?text\nWHERE {\n?activity a segb:LoggedActivity , ?secondType ;\n        segb:usedMLModel ?model ;\n        segb:wasPerformedBy ?robot ;\n        oro:hasMessage ?msg ;\n        oro:hasSpeaker ?speaker ;\n        oro:hasListener ?listener .\n?msg a oro:Message ;\n        oro:hasText ?text .\nFILTER(?secondType != segb:LoggedActivity)\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX oro: <http://kb.openrobots.org#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?activity ?robot ?trigger ?result ?human ?msg1 ?msg2 ?text1 ?text2\nWHERE {\n?activity a segb:LoggedActivity ;\n    segb:triggeredByActivity ?trigger ;\n    segb:producedActivityResult ?result ;\n    segb:wasPerformedBy ?robot .\n?trigger a oro:ListeningEvent ;\n    oro:hasListener ?robot ;\n    oro:hasSpeaker ?human ;\n    oro:hasMessage ?msg1 .\n?msg1 a oro:Message ;\n    oro:hasText ?text1 .\n?result a oro:SpeechAction ;\n    oro:hasSpeaker ?robot ;\n    oro:hasListener ?listener ;\n    oro:hasMessage ?msg2 .\n?msg2 a oro:Message ;\n    oro:hasText ?text2 .\n}",
+    "metadata": {
+      "file": "CQ3.rq"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX oro: <http://kb.openrobots.org#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?activity ?speaker ?listener ?text ?next\nWHERE {\n?activity a segb:LoggedActivity ;\n    oro:hasListener ?listener ;\n    oro:hasSpeaker ?speaker ;\n    oro:hasMessage ?msg .\n?msg a oro:Message ;\n    oro:hasText ?text ;\n    oro:nextMessage ?next .\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX amor: <http://www.gsi.upm.es/ontologies/amor/ns#>\nPREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>\nPREFIX ex: <http://example.org#>\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?activity ?experiment\nWHERE {\n?activity a segb:LoggedActivity ;\n    amor-exp:isRelatedWithExperiment ?experiment .\n?experiment a amor-exp:Experiment .\nFILTER(?experiment = ex:experiment1)\n}",
+    "metadata": {}
+  }
+]
