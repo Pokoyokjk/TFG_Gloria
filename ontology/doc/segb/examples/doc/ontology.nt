@@ -1,0 +1,787 @@
+_:genid1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://kb.openrobots.org#belongsTo
+<http://kb.openrobots.org#belongsTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#detectedHuman
+<http://kb.openrobots.org#detectedHuman> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#doGesture
+<http://kb.openrobots.org#doGesture> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#endPoint
+<http://kb.openrobots.org#endPoint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#expressedEmotion
+<http://kb.openrobots.org#expressedEmotion> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#goalLocation
+<http://kb.openrobots.org#goalLocation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#hasContent
+<http://kb.openrobots.org#hasContent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#hasListener
+<http://kb.openrobots.org#hasListener> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#hasMessage
+<http://kb.openrobots.org#hasMessage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#hasName
+<http://kb.openrobots.org#hasName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#hasSpeaker
+<http://kb.openrobots.org#hasSpeaker> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#hasText
+<http://kb.openrobots.org#hasText> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#hasUser
+<http://kb.openrobots.org#hasUser> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#initialLocation
+<http://kb.openrobots.org#initialLocation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#nextMessage
+<http://kb.openrobots.org#nextMessage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#pointsAt
+<http://kb.openrobots.org#pointsAt> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#previousMessage
+<http://kb.openrobots.org#previousMessage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#query
+<http://kb.openrobots.org#query> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#selectedOption
+<http://kb.openrobots.org#selectedOption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://kb.openrobots.org#usesBodyPart
+<http://kb.openrobots.org#usesBodyPart> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/affiliation
+<http://schema.org/affiliation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/articleBody
+<http://schema.org/articleBody> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/datePublished
+<http://schema.org/datePublished> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/headline
+<http://schema.org/headline> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/image
+<http://schema.org/image> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/logo
+<http://schema.org/logo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/mainEntityOfPage
+<http://schema.org/mainEntityOfPage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/name
+<http://schema.org/name> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/publisher
+<http://schema.org/publisher> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://schema.org/url
+<http://schema.org/url> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExecutor
+<http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExecutor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExperimentationSubject
+<http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExperimentationSubject> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment
+<http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente
+<http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotion
+<http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotion> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory
+<http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity
+<http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/onyx/ns#usesEmotionModel
+<http://www.gsi.upm.es/ontologies/onyx/ns#usesEmotionModel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity
+<http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult
+<http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult
+<http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#producedResult
+<http://www.gsi.upm.es/ontologies/segb/ns#producedResult> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity
+<http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel
+<http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy
+<http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/2000/01/rdf-schema#description
+<http://www.w3.org/2000/01/rdf-schema#description> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#executes
+<http://www.w3.org/ns/mls#executes> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#hasHyperParameter
+<http://www.w3.org/ns/mls#hasHyperParameter> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#hasInput
+<http://www.w3.org/ns/mls#hasInput> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#hasOutput
+<http://www.w3.org/ns/mls#hasOutput> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#hasPart
+<http://www.w3.org/ns/mls#hasPart> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#hasQuality
+<http://www.w3.org/ns/mls#hasQuality> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#hasValue
+<http://www.w3.org/ns/mls#hasValue> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#implements
+<http://www.w3.org/ns/mls#implements> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#realizes
+<http://www.w3.org/ns/mls#realizes> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/mls#specifiedBy
+<http://www.w3.org/ns/mls#specifiedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/oa#hasTarget
+<http://www.w3.org/ns/oa#hasTarget> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/prov#endedAtTime
+<http://www.w3.org/ns/prov#endedAtTime> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/prov#generated
+<http://www.w3.org/ns/prov#generated> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/prov#startedAtTime
+<http://www.w3.org/ns/prov#startedAtTime> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/prov#used
+<http://www.w3.org/ns/prov#used> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://www.w3.org/ns/prov#wasGeneratedBy
+<http://www.w3.org/ns/prov#wasGeneratedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://xmlns.com/foaf/0.1/firstName
+<http://xmlns.com/foaf/0.1/firstName> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://xmlns.com/foaf/0.1/homepage
+<http://xmlns.com/foaf/0.1/homepage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# http://xmlns.com/foaf/0.1/knows
+<http://xmlns.com/foaf/0.1/knows> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Datatypes
+# #
+# #################################################################
+# 
+# 
+# http://schema.org/Date
+<http://schema.org/Date> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Datatype> .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://kb.openrobots.org#DecisionMakingAction
+<http://kb.openrobots.org#DecisionMakingAction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#DetectedHumanEvent
+<http://kb.openrobots.org#DetectedHumanEvent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#EmotionExpressionAction
+<http://kb.openrobots.org#EmotionExpressionAction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#EmotionRecognitionEvent
+<http://kb.openrobots.org#EmotionRecognitionEvent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#GestureAction
+<http://kb.openrobots.org#GestureAction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#Human
+<http://kb.openrobots.org#Human> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#InformationRetrievalAction
+<http://kb.openrobots.org#InformationRetrievalAction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#InitialMessage
+<http://kb.openrobots.org#InitialMessage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#ListeningEvent
+<http://kb.openrobots.org#ListeningEvent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#Message
+<http://kb.openrobots.org#Message> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#MovementAction
+<http://kb.openrobots.org#MovementAction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#ResponseGenerationAction
+<http://kb.openrobots.org#ResponseGenerationAction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#ResponseMessage
+<http://kb.openrobots.org#ResponseMessage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#Robot
+<http://kb.openrobots.org#Robot> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#SelectedOptionEvent
+<http://kb.openrobots.org#SelectedOptionEvent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#ShownContentAction
+<http://kb.openrobots.org#ShownContentAction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://kb.openrobots.org#SpeechAction
+<http://kb.openrobots.org#SpeechAction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://schema.org/NewsArticle
+<http://schema.org/NewsArticle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://schema.org/Organization
+<http://schema.org/Organization> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://schema.org/Person
+<http://schema.org/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.gsi.upm.es/ontologies/amor/experiments/ns#Experiment
+<http://www.gsi.upm.es/ontologies/amor/experiments/ns#Experiment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.gsi.upm.es/ontologies/amor/experiments/ns#ExperimentExecutor
+<http://www.gsi.upm.es/ontologies/amor/experiments/ns#ExperimentExecutor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.gsi.upm.es/ontologies/amor/ns#EmotionAnnotation
+<http://www.gsi.upm.es/ontologies/amor/ns#EmotionAnnotation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.gsi.upm.es/ontologies/onyx/ns#Emotion
+<http://www.gsi.upm.es/ontologies/onyx/ns#Emotion> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.gsi.upm.es/ontologies/onyx/ns#EmotionAnalysis
+<http://www.gsi.upm.es/ontologies/onyx/ns#EmotionAnalysis> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity
+<http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/ns#Result
+<http://www.gsi.upm.es/ontologies/segb/ns#Result> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#Algorithm
+<http://www.w3.org/ns/mls#Algorithm> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#Dataset
+<http://www.w3.org/ns/mls#Dataset> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#DatasetCharacteristic
+<http://www.w3.org/ns/mls#DatasetCharacteristic> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#EvaluationMeasure
+<http://www.w3.org/ns/mls#EvaluationMeasure> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#HyperParameter
+<http://www.w3.org/ns/mls#HyperParameter> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#HyperParameterSetting
+<http://www.w3.org/ns/mls#HyperParameterSetting> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#Implementation
+<http://www.w3.org/ns/mls#Implementation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#Model
+<http://www.w3.org/ns/mls#Model> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#ModelCharacteristic
+<http://www.w3.org/ns/mls#ModelCharacteristic> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#ModelEvaluation
+<http://www.w3.org/ns/mls#ModelEvaluation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#Run
+<http://www.w3.org/ns/mls#Run> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/mls#Software
+<http://www.w3.org/ns/mls#Software> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/prov#Entity
+<http://www.w3.org/ns/prov#Entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/prov#Organization
+<http://www.w3.org/ns/prov#Organization> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/prov#Person
+<http://www.w3.org/ns/prov#Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://www.w3.org/ns/prov#SoftwareAgent
+<http://www.w3.org/ns/prov#SoftwareAgent> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://xmlns.com/foaf/0.1/Organization
+<http://xmlns.com/foaf/0.1/Organization> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# http://xmlns.com/foaf/0.1/Person
+<http://xmlns.com/foaf/0.1/Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://dbpedia.org/resource/Convolutional_neural_network
+<http://dbpedia.org/resource/Convolutional_neural_network> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://dbpedia.org/resource/Convolutional_neural_network> <http://www.w3.org/2002/07/owl#sameAs> <http://www.gsi.upm.es/ontologies/segb/examples#cnn> .
+<http://www.gsi.upm.es/ontologies/segb/examples#cnn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#cnn
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#accuracy
+<http://www.gsi.upm.es/ontologies/segb/examples#accuracy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#accuracy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#EvaluationMeasure> .
+<http://www.gsi.upm.es/ontologies/segb/examples#accuracy> <http://www.w3.org/2000/01/rdf-schema#label> "Accuracy"@en .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#ari1
+<http://www.gsi.upm.es/ontologies/segb/examples#ari1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#ari1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#Robot> .
+<http://www.gsi.upm.es/ontologies/segb/examples#ari1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#ExperimentExecutor> .
+<http://www.gsi.upm.es/ontologies/segb/examples#ari1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#SoftwareAgent> .
+<http://www.gsi.upm.es/ontologies/segb/examples#ari1> <http://kb.openrobots.org#belongsTo> <http://www.gsi.upm.es/ontologies/segb/examples#maria> .
+<http://www.gsi.upm.es/ontologies/segb/examples#ari1> <http://kb.openrobots.org#hasName> "ARI"@es .
+<http://www.gsi.upm.es/ontologies/segb/examples#ari1> <http://xmlns.com/foaf/0.1/knows> <http://www.gsi.upm.es/ontologies/segb/examples#maria> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#asrModel1
+<http://www.gsi.upm.es/ontologies/segb/examples#asrModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#asrModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Model> .
+<http://www.gsi.upm.es/ontologies/segb/examples#asrModel1> <http://www.w3.org/2000/01/rdf-schema#comment> "ASR Model from vosk repository using Spanish as input" .
+<http://www.gsi.upm.es/ontologies/segb/examples#asrModel1> <http://www.w3.org/2000/01/rdf-schema#label> "Automatic Speech Recognition - vosk_es" .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#cnn
+<http://www.gsi.upm.es/ontologies/segb/examples#cnn> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Algorithm> .
+<http://www.gsi.upm.es/ontologies/segb/examples#cnn> <http://www.w3.org/2000/01/rdf-schema#label> "Convolutional Neural Network"@en .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293
+<http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Implementation> .
+<http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293> <http://www.w3.org/ns/mls#hasHyperParameter> <http://www.gsi.upm.es/ontologies/segb/examples#epochs> .
+<http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293> <http://www.w3.org/ns/mls#implements> <http://www.gsi.upm.es/ontologies/segb/examples#cnn> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel
+<http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#ModelCharacteristic> .
+<http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel> <http://www.w3.org/ns/mls#hasValue> "Big 6 Emotion Model"@en .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1
+<http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Person> .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1> <http://schema.org/affiliation> <http://www.gsi.upm.es/ontologies/segb/examples#upm> .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1> <http://xmlns.com/foaf/0.1/firstName> "Pedro"@es .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1> <http://xmlns.com/foaf/0.1/homepage> <http://example.org/pedro> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#dataset1
+<http://www.gsi.upm.es/ontologies/segb/examples#dataset1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataset1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Dataset> .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataset1> <http://www.w3.org/2000/01/rdf-schema#label> "Dataset for emotion recognition."@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataset1> <http://www.w3.org/ns/mls#hasQuality> <http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures> .
+<http://www.gsi.upm.es/ontologies/segb/examples#dataset1> <http://www.w3.org/ns/mls#hasQuality> <http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#DecisionMakingAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult> <http://www.gsi.upm.es/ontologies/segb/examples#gesture1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult> <http://www.gsi.upm.es/ontologies/segb/examples#movement1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#selection1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel> <http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:26"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:28"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#DecisionMakingAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity> <http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity> <http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity> <http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult> <http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult> <http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult> <http://www.gsi.upm.es/ontologies/segb/examples#speech1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel> <http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:24"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:15"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Model> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1
+<http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#DetectedHumanEvent> .
+<http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> <http://kb.openrobots.org#detectedHuman> <http://www.gsi.upm.es/ontologies/segb/examples#maria> .
+<http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:40"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:12"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#emotion1
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/onyx/ns#Emotion> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion1> <http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente> "0.86"^^<http://www.w3.org/2001/XMLSchema#float> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion1> <http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory> <http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_fear> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion1> <http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity> "0.3"^^<http://www.w3.org/2001/XMLSchema#float> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#emotion2
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/onyx/ns#Emotion> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion2> <http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente> "0.93"^^<http://www.w3.org/2001/XMLSchema#float> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion2> <http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory> <http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_sadness> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotion2> <http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity> "0.4"^^<http://www.w3.org/2001/XMLSchema#float> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#EmotionRecognitionEvent> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/onyx/ns#EmotionAnalysis> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.gsi.upm.es/ontologies/onyx/ns#usesEmotionModel> <http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel> <http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:18"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.w3.org/ns/prov#generated> <http://www.gsi.upm.es/ontologies/segb/examples#emotionset1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:16"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#msg1> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#Result> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Model> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> <http://www.w3.org/ns/mls#hasQuality> <http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://www.gsi.upm.es/ontologies/segb/examples#run1> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#ModelEvaluation> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy> <http://www.w3.org/ns/mls#hasValue> "0.86"^^<http://www.w3.org/2001/XMLSchema#float> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy> <http://www.w3.org/ns/mls#specifiedBy> <http://www.gsi.upm.es/ontologies/segb/examples#accuracy> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#EmotionExpressionAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://kb.openrobots.org#expressedEmotion> <http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_sadness> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:21"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:18"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#emotionset1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#msg1> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#emotionset1
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionset1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionset1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/amor/ns#EmotionAnnotation> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionset1> <http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotion> <http://www.gsi.upm.es/ontologies/segb/examples#emotion1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionset1> <http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotion> <http://www.gsi.upm.es/ontologies/segb/examples#emotion2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionset1> <http://www.w3.org/ns/oa#hasTarget> <http://www.gsi.upm.es/ontologies/segb/examples#maria> .
+<http://www.gsi.upm.es/ontologies/segb/examples#emotionset1> <http://www.w3.org/ns/oa#hasTarget> <http://www.gsi.upm.es/ontologies/segb/examples#msg1> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#epochs
+<http://www.gsi.upm.es/ontologies/segb/examples#epochs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#epochs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#HyperParameter> .
+<http://www.gsi.upm.es/ontologies/segb/examples#epochs> <http://www.w3.org/2000/01/rdf-schema#description> "Number of epochs."@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#epochs> <http://www.w3.org/2000/01/rdf-schema#label> "epochs"@en .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#experiment1
+<http://www.gsi.upm.es/ontologies/segb/examples#experiment1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#experiment1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#Experiment> .
+<http://www.gsi.upm.es/ontologies/segb/examples#experiment1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExecutor> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#experiment1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExperimentationSubject> <http://www.gsi.upm.es/ontologies/segb/examples#maria> .
+<http://www.gsi.upm.es/ontologies/segb/examples#experiment1> <http://www.w3.org/2000/01/rdf-schema#label> "Experiment 1"@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#experiment1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:30"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#experiment1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:10"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#gesture1
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#GestureAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://kb.openrobots.org#doGesture> "showLeft" .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://kb.openrobots.org#pointsAt> <http://www.gsi.upm.es/ontologies/segb/examples#location2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://kb.openrobots.org#usesBodyPart> <http://kb.openrobots.org#LeftHand> .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:34"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#gesture1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:33"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#InformationRetrievalAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://kb.openrobots.org#endPoint> "http://example.org/news_search/api" .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://kb.openrobots.org#query> "climate change"@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult> <http://www.gsi.upm.es/ontologies/segb/examples#news1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult> <http://www.gsi.upm.es/ontologies/segb/examples#news2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult> <http://www.gsi.upm.es/ontologies/segb/examples#news3> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:24"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:16"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#ListeningEvent> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://kb.openrobots.org#hasListener> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://kb.openrobots.org#hasMessage> <http://www.gsi.upm.es/ontologies/segb/examples#msg1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://kb.openrobots.org#hasSpeaker> <http://www.gsi.upm.es/ontologies/segb/examples#maria> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel> <http://www.gsi.upm.es/ontologies/segb/examples#asrModel1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:15"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:12"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#llmModel1
+<http://www.gsi.upm.es/ontologies/segb/examples#llmModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#llmModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Model> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#maria
+<http://www.gsi.upm.es/ontologies/segb/examples#maria> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#maria> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#Human> .
+<http://www.gsi.upm.es/ontologies/segb/examples#maria> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Person> .
+<http://www.gsi.upm.es/ontologies/segb/examples#maria> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Person> .
+<http://www.gsi.upm.es/ontologies/segb/examples#maria> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://www.gsi.upm.es/ontologies/segb/examples#maria> <http://xmlns.com/foaf/0.1/firstName> "María"@es .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#movement1
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#MovementAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://kb.openrobots.org#goalLocation> <http://www.gsi.upm.es/ontologies/segb/examples#location2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://kb.openrobots.org#initialLocation> <http://www.gsi.upm.es/ontologies/segb/examples#location1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:32"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#movement1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:29"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#msg1
+<http://www.gsi.upm.es/ontologies/segb/examples#msg1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#InitialMessage> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#Message> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg1> <http://kb.openrobots.org#hasText> "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg1> <http://kb.openrobots.org#nextMessage> <http://www.gsi.upm.es/ontologies/segb/examples#msg2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg1> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#msg2
+<http://www.gsi.upm.es/ontologies/segb/examples#msg2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#Message> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#ResponseMessage> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg2> <http://kb.openrobots.org#hasText> "Here's some news for you, you whiny, fearful child."@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg2> <http://kb.openrobots.org#previousMessage> <http://www.gsi.upm.es/ontologies/segb/examples#msg1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#msg2> <http://www.w3.org/ns/prov#wasGeneratedBy> <http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#news1
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/NewsArticle> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://schema.org/articleBody> "Scientists warn that the effects of climate change are accelerating, with more frequent and severe weather events." .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://schema.org/datePublished> "2023-04-22T12:00:00+00:00"^^<http://schema.org/Date> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://schema.org/headline> "Climate Change Effects Accelerating, Scientists Warn" .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://schema.org/image> <http://example.org/images/climate_change.jpg> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://schema.org/mainEntityOfPage> <http://www.example.org/news/climate-change-effects> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://schema.org/publisher> <http://www.gsi.upm.es/ontologies/segb/examples#publisher1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news1> <http://schema.org/url> <http://www.example.org/news/climate-change-effects> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#news2
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/NewsArticle> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://schema.org/articleBody> "A new international agreement aims to reduce carbon emissions by 50% by 2030." .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://schema.org/datePublished> "2023-05-15T09:30:00+00:00"^^<http://schema.org/Date> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://schema.org/headline> "International Agreement to Cut Carbon Emissions by 50% by 2030" .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://schema.org/image> <http://example.org/images/carbon_emissions.jpg> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://schema.org/mainEntityOfPage> <http://www.example.org/news/carbon-emissions-agreement> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://schema.org/publisher> <http://www.gsi.upm.es/ontologies/segb/examples#publisher1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news2> <http://schema.org/url> <http://www.example.org/news/carbon-emissions-agreement> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#news3
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/NewsArticle> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Entity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://schema.org/articleBody> "Renewable energy sources are becoming more cost-effective and widely adopted, helping to combat climate change." .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://schema.org/datePublished> "2023-06-10T14:00:00+00:00"^^<http://schema.org/Date> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://schema.org/headline> "Renewable Energy Adoption on the Rise" .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://schema.org/image> <http://example.org/images/renewable_energy.jpg> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://schema.org/mainEntityOfPage> <http://www.example.org/news/renewable-energy-adoption> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://schema.org/publisher> <http://www.gsi.upm.es/ontologies/segb/examples#publisher1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#news3> <http://schema.org/url> <http://www.example.org/news/renewable-energy-adoption> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#num_epochs
+<http://www.gsi.upm.es/ontologies/segb/examples#num_epochs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#num_epochs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#HyperParameterSetting> .
+<http://www.gsi.upm.es/ontologies/segb/examples#num_epochs> <http://www.w3.org/ns/mls#hasValue> "50"^^<http://www.w3.org/2001/XMLSchema#long> .
+<http://www.gsi.upm.es/ontologies/segb/examples#num_epochs> <http://www.w3.org/ns/mls#specifiedBy> <http://www.gsi.upm.es/ontologies/segb/examples#epochs> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures_dataset1
+<http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures_dataset1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures_dataset1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#DatasetCharacteristic> .
+<http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures_dataset1> <http://www.w3.org/2000/01/rdf-schema#label> "Number of features for Dataset 1"@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures_dataset1> <http://www.w3.org/ns/mls#hasValue> "15"^^<http://www.w3.org/2001/XMLSchema#long> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes
+<http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#DatasetCharacteristic> .
+<http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes> <http://www.w3.org/2000/01/rdf-schema#label> "Number of instances for Dataset 1"@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes> <http://www.w3.org/ns/mls#hasValue> "1600"^^<http://www.w3.org/2001/XMLSchema#long> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#publisher1
+<http://www.gsi.upm.es/ontologies/segb/examples#publisher1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#publisher1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://www.gsi.upm.es/ontologies/segb/examples#publisher1> <http://schema.org/logo> <http://www.example.org/logo.png> .
+<http://www.gsi.upm.es/ontologies/segb/examples#publisher1> <http://schema.org/name> "Example News" .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#ResponseGenerationAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult> <http://www.gsi.upm.es/ontologies/segb/examples#msg2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel> <http://www.gsi.upm.es/ontologies/segb/examples#llmModel1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:24"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:24"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#msg1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#news1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#news2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#news3> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#run1
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Run> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.gsi.upm.es/ontologies/segb/ns#producedResult> <http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/ns/mls#executes> <http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/ns/mls#hasInput> <http://www.gsi.upm.es/ontologies/segb/examples#dataset1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/ns/mls#hasInput> <http://www.gsi.upm.es/ontologies/segb/examples#num_epochs> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/ns/mls#hasOutput> <http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/ns/mls#hasOutput> <http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/ns/mls#realizes> <http://www.gsi.upm.es/ontologies/segb/examples#cnn> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/ns/prov#endedAtTime> "2023-09-15T11:27:24"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#run1> <http://www.w3.org/ns/prov#startedAtTime> "2023-09-15T10:17:25"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#selection1
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#SelectedOptionEvent> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://kb.openrobots.org#hasUser> <http://www.gsi.upm.es/ontologies/segb/examples#maria> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://kb.openrobots.org#selectedOption> <http://www.gsi.upm.es/ontologies/segb/examples#news2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:28"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#selection1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:27"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#shownContent1
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#ShownContentAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://kb.openrobots.org#hasContent> <http://www.gsi.upm.es/ontologies/segb/examples#news1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://kb.openrobots.org#hasContent> <http://www.gsi.upm.es/ontologies/segb/examples#news2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://kb.openrobots.org#hasContent> <http://www.gsi.upm.es/ontologies/segb/examples#news3> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:24"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:23"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#news1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#news2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#shownContent1> <http://www.w3.org/ns/prov#used> <http://www.gsi.upm.es/ontologies/segb/examples#news3> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#speech1
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://kb.openrobots.org#SpeechAction> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://kb.openrobots.org#hasListener> <http://www.gsi.upm.es/ontologies/segb/examples#maria> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://kb.openrobots.org#hasMessage> <http://www.gsi.upm.es/ontologies/segb/examples#msg2> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://kb.openrobots.org#hasSpeaker> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment> <http://www.gsi.upm.es/ontologies/segb/examples#experiment1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity> <http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel> <http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy> <http://www.gsi.upm.es/ontologies/segb/examples#ari1> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.w3.org/ns/prov#endedAtTime> "2024-11-16T12:27:26"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+<http://www.gsi.upm.es/ontologies/segb/examples#speech1> <http://www.w3.org/ns/prov#startedAtTime> "2024-11-16T12:27:24"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#tensorflow293
+<http://www.gsi.upm.es/ontologies/segb/examples#tensorflow293> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#tensorflow293> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Software> .
+<http://www.gsi.upm.es/ontologies/segb/examples#tensorflow293> <http://www.w3.org/2000/01/rdf-schema#label> "TensorFlow 2.9.3"@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#tensorflow293> <http://www.w3.org/ns/mls#hasPart> <http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1
+<http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/mls#Model> .
+# 
+# http://www.gsi.upm.es/ontologies/segb/examples#upm
+<http://www.gsi.upm.es/ontologies/segb/examples#upm> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#NamedIndividual> .
+<http://www.gsi.upm.es/ontologies/segb/examples#upm> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Organization> .
+<http://www.gsi.upm.es/ontologies/segb/examples#upm> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/prov#Organization> .
+<http://www.gsi.upm.es/ontologies/segb/examples#upm> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Organization> .
+<http://www.gsi.upm.es/ontologies/segb/examples#upm> <http://schema.org/name> "Technical University of Madrid"@en .
+<http://www.gsi.upm.es/ontologies/segb/examples#upm> <http://schema.org/name> "Universidad Politécnica de Madrid"@es .
+<http://www.gsi.upm.es/ontologies/segb/examples#upm> <http://schema.org/url> <https://www.upm.es> .
+# 
+# Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/

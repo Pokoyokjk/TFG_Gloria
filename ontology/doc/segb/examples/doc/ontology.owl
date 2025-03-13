@@ -1,0 +1,1496 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:kb="http://kb.openrobots.org#"
+     xmlns:ns="http://www.gsi.upm.es/ontologies/onyx/ns#"
+     xmlns:oa="http://www.w3.org/ns/oa#"
+     xmlns:mls="http://www.w3.org/ns/mls#"
+     xmlns:ns1="http://www.gsi.upm.es/ontologies/segb/ns#"
+     xmlns:ns2="http://www.gsi.upm.es/ontologies/amor/experiments/ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:schema="http://schema.org/">
+    <Ontology/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://kb.openrobots.org#belongsTo -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#belongsTo"/>
+    
+
+
+    <!-- http://kb.openrobots.org#detectedHuman -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#detectedHuman"/>
+    
+
+
+    <!-- http://kb.openrobots.org#doGesture -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#doGesture"/>
+    
+
+
+    <!-- http://kb.openrobots.org#endPoint -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#endPoint"/>
+    
+
+
+    <!-- http://kb.openrobots.org#expressedEmotion -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#expressedEmotion"/>
+    
+
+
+    <!-- http://kb.openrobots.org#goalLocation -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#goalLocation"/>
+    
+
+
+    <!-- http://kb.openrobots.org#hasContent -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#hasContent"/>
+    
+
+
+    <!-- http://kb.openrobots.org#hasListener -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#hasListener"/>
+    
+
+
+    <!-- http://kb.openrobots.org#hasMessage -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#hasMessage"/>
+    
+
+
+    <!-- http://kb.openrobots.org#hasName -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#hasName"/>
+    
+
+
+    <!-- http://kb.openrobots.org#hasSpeaker -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#hasSpeaker"/>
+    
+
+
+    <!-- http://kb.openrobots.org#hasText -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#hasText"/>
+    
+
+
+    <!-- http://kb.openrobots.org#hasUser -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#hasUser"/>
+    
+
+
+    <!-- http://kb.openrobots.org#initialLocation -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#initialLocation"/>
+    
+
+
+    <!-- http://kb.openrobots.org#nextMessage -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#nextMessage"/>
+    
+
+
+    <!-- http://kb.openrobots.org#pointsAt -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#pointsAt"/>
+    
+
+
+    <!-- http://kb.openrobots.org#previousMessage -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#previousMessage"/>
+    
+
+
+    <!-- http://kb.openrobots.org#query -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#query"/>
+    
+
+
+    <!-- http://kb.openrobots.org#selectedOption -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#selectedOption"/>
+    
+
+
+    <!-- http://kb.openrobots.org#usesBodyPart -->
+
+
+    <AnnotationProperty rdf:about="http://kb.openrobots.org#usesBodyPart"/>
+    
+
+
+    <!-- http://schema.org/affiliation -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/affiliation"/>
+    
+
+
+    <!-- http://schema.org/articleBody -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/articleBody"/>
+    
+
+
+    <!-- http://schema.org/datePublished -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/datePublished"/>
+    
+
+
+    <!-- http://schema.org/headline -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/headline"/>
+    
+
+
+    <!-- http://schema.org/image -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/image"/>
+    
+
+
+    <!-- http://schema.org/logo -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/logo"/>
+    
+
+
+    <!-- http://schema.org/mainEntityOfPage -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/mainEntityOfPage"/>
+    
+
+
+    <!-- http://schema.org/name -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/name"/>
+    
+
+
+    <!-- http://schema.org/publisher -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/publisher"/>
+    
+
+
+    <!-- http://schema.org/url -->
+
+
+    <AnnotationProperty rdf:about="http://schema.org/url"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExecutor -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExecutor"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExperimentationSubject -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExperimentationSubject"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotion -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotion"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/onyx/ns#usesEmotionModel -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/onyx/ns#usesEmotionModel"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#producedResult -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#producedResult"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy -->
+
+
+    <AnnotationProperty rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy"/>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#description -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#description"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#executes -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#executes"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#hasHyperParameter -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#hasHyperParameter"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#hasInput -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#hasInput"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#hasOutput -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#hasOutput"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#hasPart -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#hasPart"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#hasQuality -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#hasQuality"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#hasValue -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#hasValue"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#implements -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#implements"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#realizes -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#realizes"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#specifiedBy -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/mls#specifiedBy"/>
+    
+
+
+    <!-- http://www.w3.org/ns/oa#hasTarget -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/oa#hasTarget"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#endedAtTime -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/prov#endedAtTime"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#generated -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/prov#generated"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#startedAtTime -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/prov#startedAtTime"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#used -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/prov#used"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasGeneratedBy -->
+
+
+    <AnnotationProperty rdf:about="http://www.w3.org/ns/prov#wasGeneratedBy"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/firstName -->
+
+
+    <AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/firstName"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/homepage -->
+
+
+    <AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/homepage"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/knows -->
+
+
+    <AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/knows"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://schema.org/Date -->
+
+
+    <rdfs:Datatype rdf:about="http://schema.org/Date"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://kb.openrobots.org#DecisionMakingAction -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#DecisionMakingAction"/>
+    
+
+
+    <!-- http://kb.openrobots.org#DetectedHumanEvent -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#DetectedHumanEvent"/>
+    
+
+
+    <!-- http://kb.openrobots.org#EmotionExpressionAction -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#EmotionExpressionAction"/>
+    
+
+
+    <!-- http://kb.openrobots.org#EmotionRecognitionEvent -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#EmotionRecognitionEvent"/>
+    
+
+
+    <!-- http://kb.openrobots.org#GestureAction -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#GestureAction"/>
+    
+
+
+    <!-- http://kb.openrobots.org#Human -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#Human"/>
+    
+
+
+    <!-- http://kb.openrobots.org#InformationRetrievalAction -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#InformationRetrievalAction"/>
+    
+
+
+    <!-- http://kb.openrobots.org#InitialMessage -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#InitialMessage"/>
+    
+
+
+    <!-- http://kb.openrobots.org#ListeningEvent -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#ListeningEvent"/>
+    
+
+
+    <!-- http://kb.openrobots.org#Message -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#Message"/>
+    
+
+
+    <!-- http://kb.openrobots.org#MovementAction -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#MovementAction"/>
+    
+
+
+    <!-- http://kb.openrobots.org#ResponseGenerationAction -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#ResponseGenerationAction"/>
+    
+
+
+    <!-- http://kb.openrobots.org#ResponseMessage -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#ResponseMessage"/>
+    
+
+
+    <!-- http://kb.openrobots.org#Robot -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#Robot"/>
+    
+
+
+    <!-- http://kb.openrobots.org#SelectedOptionEvent -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#SelectedOptionEvent"/>
+    
+
+
+    <!-- http://kb.openrobots.org#ShownContentAction -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#ShownContentAction"/>
+    
+
+
+    <!-- http://kb.openrobots.org#SpeechAction -->
+
+
+    <Class rdf:about="http://kb.openrobots.org#SpeechAction"/>
+    
+
+
+    <!-- http://schema.org/NewsArticle -->
+
+
+    <Class rdf:about="http://schema.org/NewsArticle"/>
+    
+
+
+    <!-- http://schema.org/Organization -->
+
+
+    <Class rdf:about="http://schema.org/Organization"/>
+    
+
+
+    <!-- http://schema.org/Person -->
+
+
+    <Class rdf:about="http://schema.org/Person"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/amor/experiments/ns#Experiment -->
+
+
+    <Class rdf:about="http://www.gsi.upm.es/ontologies/amor/experiments/ns#Experiment"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/amor/experiments/ns#ExperimentExecutor -->
+
+
+    <Class rdf:about="http://www.gsi.upm.es/ontologies/amor/experiments/ns#ExperimentExecutor"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/amor/ns#EmotionAnnotation -->
+
+
+    <Class rdf:about="http://www.gsi.upm.es/ontologies/amor/ns#EmotionAnnotation"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/onyx/ns#Emotion -->
+
+
+    <Class rdf:about="http://www.gsi.upm.es/ontologies/onyx/ns#Emotion"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/onyx/ns#EmotionAnalysis -->
+
+
+    <Class rdf:about="http://www.gsi.upm.es/ontologies/onyx/ns#EmotionAnalysis"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity -->
+
+
+    <Class rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/ns#Result -->
+
+
+    <Class rdf:about="http://www.gsi.upm.es/ontologies/segb/ns#Result"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Algorithm -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Algorithm"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Dataset -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Dataset"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#DatasetCharacteristic -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#DatasetCharacteristic"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#EvaluationMeasure -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#EvaluationMeasure"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#HyperParameter -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#HyperParameter"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#HyperParameterSetting -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#HyperParameterSetting"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Implementation -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Implementation"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Model -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Model"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#ModelCharacteristic -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#ModelCharacteristic"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#ModelEvaluation -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#ModelEvaluation"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Run -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Run"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Software -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Software"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Entity -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/prov#Entity"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Organization -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/prov#Organization"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#Person -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/prov#Person"/>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#SoftwareAgent -->
+
+
+    <Class rdf:about="http://www.w3.org/ns/prov#SoftwareAgent"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Organization -->
+
+
+    <Class rdf:about="http://xmlns.com/foaf/0.1/Organization"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+
+    <Class rdf:about="http://xmlns.com/foaf/0.1/Person"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://dbpedia.org/resource/Convolutional_neural_network -->
+
+
+    <NamedIndividual rdf:about="http://dbpedia.org/resource/Convolutional_neural_network">
+        <sameAs rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#cnn"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#cnn -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#cnn"/>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#accuracy -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#accuracy">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#EvaluationMeasure"/>
+        <rdfs:label xml:lang="en">Accuracy</rdfs:label>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#ari1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#ari1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#Robot"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/amor/experiments/ns#ExperimentExecutor"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#SoftwareAgent"/>
+        <kb:belongsTo rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#maria"/>
+        <kb:hasName xml:lang="es">ARI</kb:hasName>
+        <foaf:knows rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#maria"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#asrModel1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#asrModel1">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Model"/>
+        <rdfs:comment>ASR Model from vosk repository using Spanish as input</rdfs:comment>
+        <rdfs:label>Automatic Speech Recognition - vosk_es</rdfs:label>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#cnn -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#cnn">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Algorithm"/>
+        <rdfs:label xml:lang="en">Convolutional Neural Network</rdfs:label>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Implementation"/>
+        <mls:hasHyperParameter rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#epochs"/>
+        <mls:implements rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#cnn"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#ModelCharacteristic"/>
+        <mls:hasValue xml:lang="en">Big 6 Emotion Model</mls:hasValue>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1">
+        <rdf:type rdf:resource="http://schema.org/Person"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <schema:affiliation rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#upm"/>
+        <foaf:firstName xml:lang="es">Pedro</foaf:firstName>
+        <foaf:homepage rdf:resource="http://example.org/pedro"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#dataset1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#dataset1">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Dataset"/>
+        <rdfs:label xml:lang="en">Dataset for emotion recognition.</rdfs:label>
+        <mls:hasQuality rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures"/>
+        <mls:hasQuality rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2">
+        <rdf:type rdf:resource="http://kb.openrobots.org#DecisionMakingAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:producedActivityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#gesture1"/>
+        <ns1:producedActivityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#movement1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#selection1"/>
+        <ns1:usedMLModel rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:26</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:28</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#DecisionMakingAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:intermediateActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1"/>
+        <ns1:intermediateActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1"/>
+        <ns1:intermediateActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1"/>
+        <ns1:producedActivityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1"/>
+        <ns1:producedActivityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#shownContent1"/>
+        <ns1:producedActivityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#speech1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1"/>
+        <ns1:usedMLModel rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:24</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:15</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Model"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#DetectedHumanEvent"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:detectedHuman rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#maria"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:40</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:12</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#emotion1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#emotion1">
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/onyx/ns#Emotion"/>
+        <ns:algorithmConfidente rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.86</ns:algorithmConfidente>
+        <ns:hasEmotionCategory rdf:resource="http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_fear"/>
+        <ns:hasEmotionIntensity rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.3</ns:hasEmotionIntensity>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#emotion2 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#emotion2">
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/onyx/ns#Emotion"/>
+        <ns:algorithmConfidente rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.93</ns:algorithmConfidente>
+        <ns:hasEmotionCategory rdf:resource="http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_sadness"/>
+        <ns:hasEmotionIntensity rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.4</ns:hasEmotionIntensity>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#EmotionRecognitionEvent"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/onyx/ns#EmotionAnalysis"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns:usesEmotionModel rdf:resource="http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"/>
+        <ns1:usedMLModel rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:18</prov:endedAtTime>
+        <prov:generated rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionset1"/>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:16</prov:startedAtTime>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg1"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1">
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#Result"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Model"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <mls:hasQuality rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel"/>
+        <prov:wasGeneratedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#run1"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#ModelEvaluation"/>
+        <mls:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.86</mls:hasValue>
+        <mls:specifiedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#accuracy"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#EmotionExpressionAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:expressedEmotion rdf:resource="http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_sadness"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:21</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:18</prov:startedAtTime>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionset1"/>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg1"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#emotionset1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#emotionset1">
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/amor/ns#EmotionAnnotation"/>
+        <ns:hasEmotion rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotion1"/>
+        <ns:hasEmotion rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotion2"/>
+        <oa:hasTarget rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#maria"/>
+        <oa:hasTarget rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg1"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#epochs -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#epochs">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#HyperParameter"/>
+        <rdfs:description xml:lang="en">Number of epochs.</rdfs:description>
+        <rdfs:label xml:lang="en">epochs</rdfs:label>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#experiment1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#experiment1">
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/amor/experiments/ns#Experiment"/>
+        <ns2:hasExecutor rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <ns2:hasExperimentationSubject rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#maria"/>
+        <rdfs:label xml:lang="en">Experiment 1</rdfs:label>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:30</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:10</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#gesture1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#gesture1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#GestureAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:doGesture>showLeft</kb:doGesture>
+        <kb:pointsAt rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#location2"/>
+        <kb:usesBodyPart rdf:resource="http://kb.openrobots.org#LeftHand"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:34</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:33</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#InformationRetrievalAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:endPoint>http://example.org/news_search/api</kb:endPoint>
+        <kb:query xml:lang="en">climate change</kb:query>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:producedEntityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news1"/>
+        <ns1:producedEntityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news2"/>
+        <ns1:producedEntityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news3"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:24</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:16</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#ListeningEvent"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:hasListener rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <kb:hasMessage rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg1"/>
+        <kb:hasSpeaker rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#maria"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:usedMLModel rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#asrModel1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:15</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:12</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#llmModel1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#llmModel1">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Model"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#maria -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#maria">
+        <rdf:type rdf:resource="http://kb.openrobots.org#Human"/>
+        <rdf:type rdf:resource="http://schema.org/Person"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Person"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <foaf:firstName xml:lang="es">María</foaf:firstName>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#movement1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#movement1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#MovementAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:goalLocation rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#location2"/>
+        <kb:initialLocation rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#location1"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:32</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:29</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#msg1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#msg1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#InitialMessage"/>
+        <rdf:type rdf:resource="http://kb.openrobots.org#Message"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <kb:hasText xml:lang="en">Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?.</kb:hasText>
+        <kb:nextMessage rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg2"/>
+        <prov:wasGeneratedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#msg2 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#msg2">
+        <rdf:type rdf:resource="http://kb.openrobots.org#Message"/>
+        <rdf:type rdf:resource="http://kb.openrobots.org#ResponseMessage"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <kb:hasText xml:lang="en">Here&apos;s some news for you, you whiny, fearful child.</kb:hasText>
+        <kb:previousMessage rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg1"/>
+        <prov:wasGeneratedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#news1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#news1">
+        <rdf:type rdf:resource="http://schema.org/NewsArticle"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <schema:articleBody>Scientists warn that the effects of climate change are accelerating, with more frequent and severe weather events.</schema:articleBody>
+        <schema:datePublished rdf:datatype="http://schema.org/Date">2023-04-22T12:00:00+00:00</schema:datePublished>
+        <schema:headline>Climate Change Effects Accelerating, Scientists Warn</schema:headline>
+        <schema:image rdf:resource="http://example.org/images/climate_change.jpg"/>
+        <schema:mainEntityOfPage rdf:resource="http://www.example.org/news/climate-change-effects"/>
+        <schema:publisher rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#publisher1"/>
+        <schema:url rdf:resource="http://www.example.org/news/climate-change-effects"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#news2 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#news2">
+        <rdf:type rdf:resource="http://schema.org/NewsArticle"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <schema:articleBody>A new international agreement aims to reduce carbon emissions by 50% by 2030.</schema:articleBody>
+        <schema:datePublished rdf:datatype="http://schema.org/Date">2023-05-15T09:30:00+00:00</schema:datePublished>
+        <schema:headline>International Agreement to Cut Carbon Emissions by 50% by 2030</schema:headline>
+        <schema:image rdf:resource="http://example.org/images/carbon_emissions.jpg"/>
+        <schema:mainEntityOfPage rdf:resource="http://www.example.org/news/carbon-emissions-agreement"/>
+        <schema:publisher rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#publisher1"/>
+        <schema:url rdf:resource="http://www.example.org/news/carbon-emissions-agreement"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#news3 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#news3">
+        <rdf:type rdf:resource="http://schema.org/NewsArticle"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity"/>
+        <schema:articleBody>Renewable energy sources are becoming more cost-effective and widely adopted, helping to combat climate change.</schema:articleBody>
+        <schema:datePublished rdf:datatype="http://schema.org/Date">2023-06-10T14:00:00+00:00</schema:datePublished>
+        <schema:headline>Renewable Energy Adoption on the Rise</schema:headline>
+        <schema:image rdf:resource="http://example.org/images/renewable_energy.jpg"/>
+        <schema:mainEntityOfPage rdf:resource="http://www.example.org/news/renewable-energy-adoption"/>
+        <schema:publisher rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#publisher1"/>
+        <schema:url rdf:resource="http://www.example.org/news/renewable-energy-adoption"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#num_epochs -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#num_epochs">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#HyperParameterSetting"/>
+        <mls:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">50</mls:hasValue>
+        <mls:specifiedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#epochs"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures_dataset1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures_dataset1">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#DatasetCharacteristic"/>
+        <rdfs:label xml:lang="en">Number of features for Dataset 1</rdfs:label>
+        <mls:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">15</mls:hasValue>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#DatasetCharacteristic"/>
+        <rdfs:label xml:lang="en">Number of instances for Dataset 1</rdfs:label>
+        <mls:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#long">1600</mls:hasValue>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#publisher1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#publisher1">
+        <rdf:type rdf:resource="http://schema.org/Organization"/>
+        <schema:logo rdf:resource="http://www.example.org/logo.png"/>
+        <schema:name>Example News</schema:name>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#ResponseGenerationAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <ns1:producedEntityResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg2"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"/>
+        <ns1:usedMLModel rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#llmModel1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:24</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:24</prov:startedAtTime>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg1"/>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news1"/>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news2"/>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news3"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#run1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#run1">
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Run"/>
+        <ns1:producedResult rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1"/>
+        <mls:executes rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293"/>
+        <mls:hasInput rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#dataset1"/>
+        <mls:hasInput rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#num_epochs"/>
+        <mls:hasOutput rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1"/>
+        <mls:hasOutput rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy"/>
+        <mls:realizes rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#cnn"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-09-15T11:27:24</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-09-15T10:17:25</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#selection1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#selection1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#SelectedOptionEvent"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:hasUser rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#maria"/>
+        <kb:selectedOption rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news2"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#shownContent1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:28</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:27</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#shownContent1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#shownContent1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#ShownContentAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:hasContent rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news1"/>
+        <kb:hasContent rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news2"/>
+        <kb:hasContent rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news3"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:24</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:23</prov:startedAtTime>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news1"/>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news2"/>
+        <prov:used rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#news3"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#speech1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#speech1">
+        <rdf:type rdf:resource="http://kb.openrobots.org#SpeechAction"/>
+        <rdf:type rdf:resource="http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"/>
+        <kb:hasListener rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#maria"/>
+        <kb:hasMessage rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#msg2"/>
+        <kb:hasSpeaker rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <ns2:isRelatedWithExperiment rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#experiment1"/>
+        <ns1:triggeredByActivity rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"/>
+        <ns1:usedMLModel rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1"/>
+        <ns1:wasPerformedBy rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#ari1"/>
+        <prov:endedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:26</prov:endedAtTime>
+        <prov:startedAtTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-11-16T12:27:24</prov:startedAtTime>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#tensorflow293 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#tensorflow293">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Software"/>
+        <rdfs:label xml:lang="en">TensorFlow 2.9.3</rdfs:label>
+        <mls:hasPart rdf:resource="http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1 -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1">
+        <rdf:type rdf:resource="http://www.w3.org/ns/mls#Model"/>
+    </NamedIndividual>
+    
+
+
+    <!-- http://www.gsi.upm.es/ontologies/segb/examples#upm -->
+
+
+    <NamedIndividual rdf:about="http://www.gsi.upm.es/ontologies/segb/examples#upm">
+        <rdf:type rdf:resource="http://schema.org/Organization"/>
+        <rdf:type rdf:resource="http://www.w3.org/ns/prov#Organization"/>
+        <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
+        <schema:name xml:lang="en">Technical University of Madrid</schema:name>
+        <schema:name xml:lang="es">Universidad Politécnica de Madrid</schema:name>
+        <schema:url rdf:resource="https://www.upm.es"/>
+    </NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/ -->
+
+

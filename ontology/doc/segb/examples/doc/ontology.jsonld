@@ -1,0 +1,1311 @@
+[ {
+  "@id" : "_:genid1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Ontology" ]
+}, {
+  "@id" : "http://dbpedia.org/resource/Convolutional_neural_network",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/2002/07/owl#sameAs" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#cnn"
+  } ]
+}, {
+  "@id" : "http://kb.openrobots.org#DecisionMakingAction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#DetectedHumanEvent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#EmotionExpressionAction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#EmotionRecognitionEvent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#GestureAction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#Human",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#InformationRetrievalAction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#InitialMessage",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#ListeningEvent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#Message",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#MovementAction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#ResponseGenerationAction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#ResponseMessage",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#Robot",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#SelectedOptionEvent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#ShownContentAction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#SpeechAction",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://kb.openrobots.org#belongsTo",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#detectedHuman",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#doGesture",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#endPoint",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#expressedEmotion",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#goalLocation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#hasContent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#hasListener",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#hasMessage",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#hasName",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#hasSpeaker",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#hasText",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#hasUser",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#initialLocation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#nextMessage",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#pointsAt",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#previousMessage",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#query",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#selectedOption",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://kb.openrobots.org#usesBodyPart",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/Date",
+  "@type" : [ "http://www.w3.org/2000/01/rdf-schema#Datatype" ]
+}, {
+  "@id" : "http://schema.org/NewsArticle",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://schema.org/Organization",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://schema.org/Person",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://schema.org/affiliation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/articleBody",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/datePublished",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/headline",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/image",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/logo",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/mainEntityOfPage",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/name",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/publisher",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://schema.org/url",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/amor/experiments/ns#Experiment",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/amor/experiments/ns#ExperimentExecutor",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExecutor",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExperimentationSubject",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/amor/ns#EmotionAnnotation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#Emotion",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#EmotionAnalysis",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotion",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#usesEmotionModel",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#accuracy",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#EvaluationMeasure"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Accuracy"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#belongsTo" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria"
+  } ],
+  "http://kb.openrobots.org#hasName" : [ {
+    "@language" : "es",
+    "@value" : "ARI"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#Robot"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/amor/experiments/ns#ExperimentExecutor"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#SoftwareAgent"
+  } ],
+  "http://xmlns.com/foaf/0.1/knows" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#asrModel1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#Model"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@value" : "ASR Model from vosk repository using Spanish as input"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@value" : "Automatic Speech Recognition - vosk_es"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#cnn",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#Algorithm"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Convolutional Neural Network"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#Implementation"
+  } ],
+  "http://www.w3.org/ns/mls#hasHyperParameter" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#epochs"
+  } ],
+  "http://www.w3.org/ns/mls#implements" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#cnn"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#ModelCharacteristic"
+  } ],
+  "http://www.w3.org/ns/mls#hasValue" : [ {
+    "@language" : "en",
+    "@value" : "Big 6 Emotion Model"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://schema.org/affiliation" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#upm"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://schema.org/Person"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Person"
+  }, {
+    "@id" : "http://xmlns.com/foaf/0.1/Person"
+  } ],
+  "http://xmlns.com/foaf/0.1/firstName" : [ {
+    "@language" : "es",
+    "@value" : "Pedro"
+  } ],
+  "http://xmlns.com/foaf/0.1/homepage" : [ {
+    "@id" : "http://example.org/pedro"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#dataset1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#Dataset"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Dataset for emotion recognition."
+  } ],
+  "http://www.w3.org/ns/mls#hasQuality" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMaking2",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#gesture1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#movement1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#selection1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#DecisionMakingAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:26"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:28"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#shownContent1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#speech1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#DecisionMakingAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:24"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:15"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingModel1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#Model"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#detectedHumanEvent1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#detectedHuman" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#DetectedHumanEvent"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:40"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:12"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotion1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#float",
+    "@value" : "0.86"
+  } ],
+  "http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_fear"
+  } ],
+  "http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#float",
+    "@value" : "0.3"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#Emotion"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotion2",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/onyx/ns#algorithmConfidente" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#float",
+    "@value" : "0.93"
+  } ],
+  "http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionCategory" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_sadness"
+  } ],
+  "http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotionIntensity" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#float",
+    "@value" : "0.4"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#Emotion"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/onyx/ns#usesEmotionModel" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#EmotionRecognitionEvent"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/onyx/ns#EmotionAnalysis"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:18"
+  } ],
+  "http://www.w3.org/ns/prov#generated" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionset1"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:16"
+  } ],
+  "http://www.w3.org/ns/prov#used" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg1"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#Result"
+  }, {
+    "@id" : "http://www.w3.org/ns/mls#Model"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Entity"
+  } ],
+  "http://www.w3.org/ns/mls#hasQuality" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#compatibleEmotionModel"
+  } ],
+  "http://www.w3.org/ns/prov#wasGeneratedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#run1"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#ModelEvaluation"
+  } ],
+  "http://www.w3.org/ns/mls#hasValue" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#float",
+    "@value" : "0.86"
+  } ],
+  "http://www.w3.org/ns/mls#specifiedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#accuracy"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionExpression1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#expressedEmotion" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_sadness"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionAction1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#EmotionExpressionAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:21"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:18"
+  } ],
+  "http://www.w3.org/ns/prov#used" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionset1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg1"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionset1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/onyx/ns#hasEmotion" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotion1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotion2"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/amor/ns#EmotionAnnotation"
+  } ],
+  "http://www.w3.org/ns/oa#hasTarget" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg1"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#epochs",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#HyperParameter"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#description" : [ {
+    "@language" : "en",
+    "@value" : "Number of epochs."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "epochs"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExecutor" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#hasExperimentationSubject" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/amor/experiments/ns#Experiment"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Experiment 1"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:30"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:10"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#gesture1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#doGesture" : [ {
+    "@value" : "showLeft"
+  } ],
+  "http://kb.openrobots.org#pointsAt" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#location2"
+  } ],
+  "http://kb.openrobots.org#usesBodyPart" : [ {
+    "@id" : "http://kb.openrobots.org#LeftHand"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#GestureAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:34"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:33"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#informationRetrievalAction1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#endPoint" : [ {
+    "@value" : "http://example.org/news_search/api"
+  } ],
+  "http://kb.openrobots.org#query" : [ {
+    "@language" : "en",
+    "@value" : "climate change"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news2"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news3"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#InformationRetrievalAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:24"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:16"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#hasListener" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://kb.openrobots.org#hasMessage" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg1"
+  } ],
+  "http://kb.openrobots.org#hasSpeaker" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#asrModel1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#ListeningEvent"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:15"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:12"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#llmModel1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#Model"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#Human"
+  }, {
+    "@id" : "http://schema.org/Person"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Person"
+  }, {
+    "@id" : "http://xmlns.com/foaf/0.1/Person"
+  } ],
+  "http://xmlns.com/foaf/0.1/firstName" : [ {
+    "@language" : "es",
+    "@value" : "María"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#movement1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#goalLocation" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#location2"
+  } ],
+  "http://kb.openrobots.org#initialLocation" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#location1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#MovementAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:32"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:29"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#hasText" : [ {
+    "@language" : "en",
+    "@value" : "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."
+  } ],
+  "http://kb.openrobots.org#nextMessage" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg2"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#InitialMessage"
+  }, {
+    "@id" : "http://kb.openrobots.org#Message"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Entity"
+  } ],
+  "http://www.w3.org/ns/prov#wasGeneratedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#listeningEvent1"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg2",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#hasText" : [ {
+    "@language" : "en",
+    "@value" : "Here's some news for you, you whiny, fearful child."
+  } ],
+  "http://kb.openrobots.org#previousMessage" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#Message"
+  }, {
+    "@id" : "http://kb.openrobots.org#ResponseMessage"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Entity"
+  } ],
+  "http://www.w3.org/ns/prov#wasGeneratedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://schema.org/articleBody" : [ {
+    "@value" : "Scientists warn that the effects of climate change are accelerating, with more frequent and severe weather events."
+  } ],
+  "http://schema.org/datePublished" : [ {
+    "@type" : "http://schema.org/Date",
+    "@value" : "2023-04-22T12:00:00+00:00"
+  } ],
+  "http://schema.org/headline" : [ {
+    "@value" : "Climate Change Effects Accelerating, Scientists Warn"
+  } ],
+  "http://schema.org/image" : [ {
+    "@id" : "http://example.org/images/climate_change.jpg"
+  } ],
+  "http://schema.org/mainEntityOfPage" : [ {
+    "@id" : "http://www.example.org/news/climate-change-effects"
+  } ],
+  "http://schema.org/publisher" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#publisher1"
+  } ],
+  "http://schema.org/url" : [ {
+    "@id" : "http://www.example.org/news/climate-change-effects"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://schema.org/NewsArticle"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Entity"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news2",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://schema.org/articleBody" : [ {
+    "@value" : "A new international agreement aims to reduce carbon emissions by 50% by 2030."
+  } ],
+  "http://schema.org/datePublished" : [ {
+    "@type" : "http://schema.org/Date",
+    "@value" : "2023-05-15T09:30:00+00:00"
+  } ],
+  "http://schema.org/headline" : [ {
+    "@value" : "International Agreement to Cut Carbon Emissions by 50% by 2030"
+  } ],
+  "http://schema.org/image" : [ {
+    "@id" : "http://example.org/images/carbon_emissions.jpg"
+  } ],
+  "http://schema.org/mainEntityOfPage" : [ {
+    "@id" : "http://www.example.org/news/carbon-emissions-agreement"
+  } ],
+  "http://schema.org/publisher" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#publisher1"
+  } ],
+  "http://schema.org/url" : [ {
+    "@id" : "http://www.example.org/news/carbon-emissions-agreement"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://schema.org/NewsArticle"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Entity"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news3",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://schema.org/articleBody" : [ {
+    "@value" : "Renewable energy sources are becoming more cost-effective and widely adopted, helping to combat climate change."
+  } ],
+  "http://schema.org/datePublished" : [ {
+    "@type" : "http://schema.org/Date",
+    "@value" : "2023-06-10T14:00:00+00:00"
+  } ],
+  "http://schema.org/headline" : [ {
+    "@value" : "Renewable Energy Adoption on the Rise"
+  } ],
+  "http://schema.org/image" : [ {
+    "@id" : "http://example.org/images/renewable_energy.jpg"
+  } ],
+  "http://schema.org/mainEntityOfPage" : [ {
+    "@id" : "http://www.example.org/news/renewable-energy-adoption"
+  } ],
+  "http://schema.org/publisher" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#publisher1"
+  } ],
+  "http://schema.org/url" : [ {
+    "@id" : "http://www.example.org/news/renewable-energy-adoption"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://schema.org/NewsArticle"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Entity"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#num_epochs",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#HyperParameterSetting"
+  } ],
+  "http://www.w3.org/ns/mls#hasValue" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#long",
+    "@value" : "50"
+  } ],
+  "http://www.w3.org/ns/mls#specifiedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#epochs"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#numberOfFeatures_dataset1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#DatasetCharacteristic"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Number of features for Dataset 1"
+  } ],
+  "http://www.w3.org/ns/mls#hasValue" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#long",
+    "@value" : "15"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#numberOfInstantes",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#DatasetCharacteristic"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Number of instances for Dataset 1"
+  } ],
+  "http://www.w3.org/ns/mls#hasValue" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#long",
+    "@value" : "1600"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#publisher1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://schema.org/logo" : [ {
+    "@id" : "http://www.example.org/logo.png"
+  } ],
+  "http://schema.org/name" : [ {
+    "@value" : "Example News"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://schema.org/Organization"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#responseGenerationAction1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg2"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#llmModel1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#ResponseGenerationAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:24"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:24"
+  } ],
+  "http://www.w3.org/ns/prov#used" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news2"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news3"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#run1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#producedResult" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#dataScientist1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  }, {
+    "@id" : "http://www.w3.org/ns/mls#Run"
+  } ],
+  "http://www.w3.org/ns/mls#executes" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293"
+  } ],
+  "http://www.w3.org/ns/mls#hasInput" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#dataset1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#num_epochs"
+  } ],
+  "http://www.w3.org/ns/mls#hasOutput" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#emotionDetectionModel1Accuracy"
+  } ],
+  "http://www.w3.org/ns/mls#realizes" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#cnn"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2023-09-15T11:27:24"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2023-09-15T10:17:25"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#selection1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#hasUser" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria"
+  } ],
+  "http://kb.openrobots.org#selectedOption" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news2"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#shownContent1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#SelectedOptionEvent"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:28"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:27"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#shownContent1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#hasContent" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news2"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news3"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#ShownContentAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:24"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:23"
+  } ],
+  "http://www.w3.org/ns/prov#used" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news1"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news2"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#news3"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#speech1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://kb.openrobots.org#hasListener" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#maria"
+  } ],
+  "http://kb.openrobots.org#hasMessage" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#msg2"
+  } ],
+  "http://kb.openrobots.org#hasSpeaker" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/amor/experiments/ns#isRelatedWithExperiment" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#experiment1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#decisionMakingAction1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1"
+  } ],
+  "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ari1"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://kb.openrobots.org#SpeechAction"
+  }, {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity"
+  } ],
+  "http://www.w3.org/ns/prov#endedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:26"
+  } ],
+  "http://www.w3.org/ns/prov#startedAtTime" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime",
+    "@value" : "2024-11-16T12:27:24"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#tensorflow293",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#Software"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "TensorFlow 2.9.3"
+  } ],
+  "http://www.w3.org/ns/mls#hasPart" : [ {
+    "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#cnn_tensorflow293"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#ttsModel1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://www.w3.org/ns/mls#Model"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/examples#upm",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://schema.org/name" : [ {
+    "@language" : "en",
+    "@value" : "Technical University of Madrid"
+  }, {
+    "@language" : "es",
+    "@value" : "Universidad Politécnica de Madrid"
+  } ],
+  "http://schema.org/url" : [ {
+    "@id" : "https://www.upm.es"
+  } ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://schema.org/Organization"
+  }, {
+    "@id" : "http://www.w3.org/ns/prov#Organization"
+  }, {
+    "@id" : "http://xmlns.com/foaf/0.1/Organization"
+  } ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#Result",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#producedResult",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/2000/01/rdf-schema#description",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#Algorithm",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#Dataset",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#DatasetCharacteristic",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#EvaluationMeasure",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#HyperParameter",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#HyperParameterSetting",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#Implementation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#Model",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#ModelCharacteristic",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#ModelEvaluation",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#Run",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#Software",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#executes",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#hasHyperParameter",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#hasInput",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#hasOutput",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#hasPart",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#hasQuality",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#hasValue",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#implements",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#realizes",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/mls#specifiedBy",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/oa#hasTarget",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#Entity",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#Organization",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#Person",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#SoftwareAgent",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#endedAtTime",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#generated",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#startedAtTime",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#used",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://www.w3.org/ns/prov#wasGeneratedBy",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://xmlns.com/foaf/0.1/Organization",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://xmlns.com/foaf/0.1/Person",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "http://xmlns.com/foaf/0.1/firstName",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://xmlns.com/foaf/0.1/homepage",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+}, {
+  "@id" : "http://xmlns.com/foaf/0.1/knows",
+  "@type" : [ "http://www.w3.org/2002/07/owl#AnnotationProperty" ]
+} ]
