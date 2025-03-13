@@ -65,7 +65,7 @@
     "id" : "12",
     "type" : "owl:Class"
   }, {
-    "id" : "6",
+    "id" : "2",
     "type" : "owl:intersectionOf"
   }, {
     "id" : "18",
@@ -86,7 +86,7 @@
     "id" : "9",
     "type" : "owl:intersectionOf"
   }, {
-    "id" : "2",
+    "id" : "5",
     "type" : "owl:intersectionOf"
   }, {
     "id" : "1",
@@ -130,7 +130,7 @@
     "instances" : 0,
     "intersection" : [ "13", "10" ],
     "attributes" : [ "intersection", "anonymous" ],
-    "id" : "6"
+    "id" : "2"
   }, {
     "instances" : 0,
     "intersection" : [ "13", "19" ],
@@ -185,7 +185,7 @@
     "instances" : 0,
     "intersection" : [ "11", "19" ],
     "attributes" : [ "intersection", "anonymous" ],
-    "id" : "2"
+    "id" : "5"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#LoggedActivity",
     "baseIri" : "http://www.gsi.upm.es/ontologies/segb/ns",
@@ -256,7 +256,7 @@
     "id" : "0",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "5",
+    "id" : "4",
     "type" : "owl:objectProperty"
   }, {
     "id" : "8",
@@ -265,7 +265,7 @@
     "id" : "14",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "17",
+    "id" : "16",
     "type" : "owl:objectProperty"
   }, {
     "id" : "20",
@@ -277,57 +277,57 @@
     "id" : "23",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "4",
+    "id" : "7",
     "type" : "owl:objectProperty"
   }, {
     "id" : "24",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "7",
+    "id" : "3",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "16",
+    "id" : "17",
     "type" : "owl:objectProperty"
   }, {
     "id" : "25",
     "type" : "owl:objectProperty"
   }, {
-    "id" : "3",
+    "id" : "6",
     "type" : "owl:objectProperty"
   }, {
     "id" : "30",
     "type" : "owl:objectProperty"
   } ],
   "propertyAttribute" : [ {
-    "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult",
-    "baseIri" : "http://www.gsi.upm.es/ontologies/segb/ns",
-    "range" : "2",
-    "label" : {
-      "IRI-based" : "producedEntityResult",
-      "en" : "produced entity result"
-    },
-    "superproperty" : [ "3", "4" ],
-    "domain" : "1",
-    "comment" : {
-      "en" : "Represents the relation between a result and an activity which produced it, where the result is an entity."
-    },
-    "attributes" : [ "object" ],
-    "id" : "0"
-  }, {
     "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#triggeredByActivity",
     "baseIri" : "http://www.gsi.upm.es/ontologies/segb/ns",
-    "range" : "6",
+    "range" : "2",
     "label" : {
       "IRI-based" : "triggeredByActivity",
       "en" : "triggered by activity"
     },
-    "superproperty" : [ "7" ],
+    "superproperty" : [ "3" ],
     "domain" : "1",
     "comment" : {
       "en" : "Represents the relation between an activity and the event which triggered it, where the event is an activity."
     },
     "attributes" : [ "object" ],
-    "id" : "5"
+    "id" : "0"
+  }, {
+    "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#producedEntityResult",
+    "baseIri" : "http://www.gsi.upm.es/ontologies/segb/ns",
+    "range" : "5",
+    "label" : {
+      "IRI-based" : "producedEntityResult",
+      "en" : "produced entity result"
+    },
+    "superproperty" : [ "6", "7" ],
+    "domain" : "1",
+    "comment" : {
+      "en" : "Represents the relation between a result and an activity which produced it, where the result is an entity."
+    },
+    "attributes" : [ "object" ],
+    "id" : "4"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#producedActivityResult",
     "baseIri" : "http://www.gsi.upm.es/ontologies/segb/ns",
@@ -336,24 +336,13 @@
       "IRI-based" : "producedActivityResult",
       "en" : "produced activity result"
     },
-    "superproperty" : [ "4" ],
+    "superproperty" : [ "7" ],
     "domain" : "1",
     "comment" : {
       "en" : "Represents the relation between a result and an activity which produced it, where the result is an activity."
     },
     "attributes" : [ "object" ],
     "id" : "8"
-  }, {
-    "iri" : "http://www.w3.org/ns/prov#used",
-    "baseIri" : "http://www.w3.org/ns/prov",
-    "range" : "15",
-    "label" : {
-      "IRI-based" : "used"
-    },
-    "domain" : "15",
-    "subproperty" : [ "16" ],
-    "attributes" : [ "external", "object" ],
-    "id" : "14"
   }, {
     "iri" : "http://www.w3.org/ns/prov#wasInfluencedBy",
     "baseIri" : "http://www.w3.org/ns/prov",
@@ -362,9 +351,20 @@
       "IRI-based" : "wasInfluencedBy"
     },
     "domain" : "15",
-    "subproperty" : [ "4", "7" ],
-    "attributes" : [ "external", "object" ],
-    "id" : "17"
+    "subproperty" : [ "7", "3" ],
+    "attributes" : [ "object", "external" ],
+    "id" : "14"
+  }, {
+    "iri" : "http://www.w3.org/ns/prov#used",
+    "baseIri" : "http://www.w3.org/ns/prov",
+    "range" : "15",
+    "label" : {
+      "IRI-based" : "used"
+    },
+    "domain" : "15",
+    "subproperty" : [ "17" ],
+    "attributes" : [ "object", "external" ],
+    "id" : "16"
   }, {
     "range" : "10",
     "domain" : "11",
@@ -383,7 +383,7 @@
       "IRI-based" : "triggeredByEntity",
       "en" : "triggered by entity"
     },
-    "superproperty" : [ "7" ],
+    "superproperty" : [ "3" ],
     "domain" : "1",
     "comment" : {
       "en" : "Represents the relation between an activity and the event which triggered it, where the event is an entity."
@@ -398,14 +398,14 @@
       "IRI-based" : "producedResult",
       "en" : "produced result"
     },
-    "superproperty" : [ "17" ],
+    "superproperty" : [ "14" ],
     "domain" : "1",
-    "subproperty" : [ "0", "8" ],
+    "subproperty" : [ "4", "8" ],
     "comment" : {
       "en" : "Represents the relation between a result and an activity which produced it."
     },
     "attributes" : [ "object" ],
-    "id" : "4"
+    "id" : "7"
   }, {
     "iri" : "http://www.w3.org/ns/prov#wasAssociatedWith",
     "baseIri" : "http://www.w3.org/ns/prov",
@@ -415,7 +415,7 @@
     },
     "domain" : "15",
     "subproperty" : [ "25" ],
-    "attributes" : [ "external", "object" ],
+    "attributes" : [ "object", "external" ],
     "id" : "24"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#triggeredBy",
@@ -425,14 +425,14 @@
       "IRI-based" : "triggeredBy",
       "en" : "triggered by"
     },
-    "superproperty" : [ "17" ],
+    "superproperty" : [ "14" ],
     "domain" : "1",
-    "subproperty" : [ "5", "23" ],
+    "subproperty" : [ "0", "23" ],
     "comment" : {
       "en" : "Represents the relation between an activity and the event which triggered it."
     },
     "attributes" : [ "object" ],
-    "id" : "7"
+    "id" : "3"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#usedMLModel",
     "baseIri" : "http://www.gsi.upm.es/ontologies/segb/ns",
@@ -441,13 +441,13 @@
       "IRI-based" : "usedMLModel",
       "en" : "used machine learning model"
     },
-    "superproperty" : [ "14" ],
+    "superproperty" : [ "16" ],
     "domain" : "10",
     "comment" : {
       "en" : "Represents the fact that an activity has used a Machine Learning Model to produce the result."
     },
     "attributes" : [ "object" ],
-    "id" : "16"
+    "id" : "17"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#wasPerformedBy",
     "baseIri" : "http://www.gsi.upm.es/ontologies/segb/ns",
@@ -471,9 +471,9 @@
       "IRI-based" : "generated"
     },
     "domain" : "15",
-    "subproperty" : [ "0" ],
-    "attributes" : [ "external", "object" ],
-    "id" : "3"
+    "subproperty" : [ "4" ],
+    "attributes" : [ "object", "external" ],
+    "id" : "6"
   }, {
     "iri" : "http://www.gsi.upm.es/ontologies/segb/ns#intermediateActivity",
     "baseIri" : "http://www.gsi.upm.es/ontologies/segb/ns",
