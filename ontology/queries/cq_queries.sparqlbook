@@ -42,5 +42,17 @@
     "language": "sparql",
     "value": "PREFIX amor: <http://www.gsi.upm.es/ontologies/amor/ns#>\nPREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>\nPREFIX ex: <http://example.org#>\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?activity ?experiment\nWHERE {\n?activity a segb:LoggedActivity ;\n    amor-exp:isRelatedWithExperiment ?experiment .\n?experiment a amor-exp:Experiment .\nFILTER(?experiment = ex:experiment1)\n}",
     "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\nPREFIX mls: <http://www.w3.org/ns/mls#>\nPREFIX onyx: <http://www.gsi.upm.es/ontologies/onyx/ns#>\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX prov: <http://www.w3.org/ns/prov#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?dataset ?software ?algorithm ?emotionAnalysis ?model ?msgText ?robotName ?humanName\nWHERE {\n?listeningEvent a oro:ListeningEvent, \n        segb:LoggedActivity ;\n    oro:hasSpeaker ?human ;\n    oro:hasListener ?robot .\n?robot a oro:Robot ;\n    oro:hasName ?robotName .\n?human a prov:Person, foaf:Person ;\n    foaf:firstName ?humanName .\n?msg a oro:Message, prov:Entity ;\n    oro:hasText ?msgText ;\n    prov:wasGeneratedBy ?listeningEvent .\n?emotionAnalysis a onyx:EmotionAnalysis, segb:LoggedActivity ;\n    prov:used ?msg ;\n    segb:usedMLModel ?model .\n?model a mls:Model .\n?dataset a mls:Dataset .\n?run a mls:Run;\n    mls:hasOutput ?model ;\n    mls:hasInput ?dataset ;\n    mls:executes ?implementation ;\n    mls:realizes ?algorithm .\n?software a mls:Software ;\n    mls:hasPart ?implementation .\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\nPREFIX mls: <http://www.w3.org/ns/mls#>\nPREFIX onyx: <http://www.gsi.upm.es/ontologies/onyx/ns#>\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX prov: <http://www.w3.org/ns/prov#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?model ?dataset ?software ?algorithm \n    ?robotName ?humanName\nWHERE {\n?listeningEvent a oro:ListeningEvent, \n        segb:LoggedActivity ;\n    oro:hasSpeaker ?human ;\n    oro:hasListener ?robot .\n?robot a oro:Robot ;\n    oro:hasName ?robotName .\n?human a prov:Person, foaf:Person ;\n    foaf:firstName ?humanName .\n?msg a oro:Message, prov:Entity ;\n    prov:wasGeneratedBy ?listeningEvent .\n?emotionAnalysis a onyx:EmotionAnalysis , \n        segb:LoggedActivity ;\n    prov:used ?msg ;\n    segb:usedMLModel ?model .\n?model a mls:Model .\n?dataset a mls:Dataset .\n?run a mls:Run;\n    mls:hasOutput ?model ;\n    mls:hasInput ?dataset ;\n    mls:executes ?implementation ;\n    mls:realizes ?algorithm .\n?software a mls:Software ;\n    mls:hasPart ?implementation .\n}",
+    "metadata": {}
   }
 ]
