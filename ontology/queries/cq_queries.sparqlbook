@@ -54,5 +54,17 @@
     "language": "sparql",
     "value": "PREFIX foaf: <http://xmlns.com/foaf/0.1/>\nPREFIX mls: <http://www.w3.org/ns/mls#>\nPREFIX onyx: <http://www.gsi.upm.es/ontologies/onyx/ns#>\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX prov: <http://www.w3.org/ns/prov#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?model ?dataset ?software ?algorithm \n    ?robotName ?humanName\nWHERE {\n?listeningEvent a oro:ListeningEvent, \n        segb:LoggedActivity ;\n    oro:hasSpeaker ?human ;\n    oro:hasListener ?robot .\n?robot a oro:Robot ;\n    oro:hasName ?robotName .\n?human a prov:Person, foaf:Person ;\n    foaf:firstName ?humanName .\n?msg a oro:Message, prov:Entity ;\n    prov:wasGeneratedBy ?listeningEvent .\n?emotionAnalysis a onyx:EmotionAnalysis , \n        segb:LoggedActivity ;\n    prov:used ?msg ;\n    segb:usedMLModel ?model .\n?model a mls:Model .\n?dataset a mls:Dataset .\n?run a mls:Run;\n    mls:hasOutput ?model ;\n    mls:hasInput ?dataset ;\n    mls:executes ?implementation ;\n    mls:realizes ?algorithm .\n?software a mls:Software ;\n    mls:hasPart ?implementation .\n}",
     "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>\nPREFIX ex: <http://example.org#>\nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\nPREFIX mls: <http://www.w3.org/ns/mls#>\nPREFIX oro: <http://kb.openrobots.org#>\nPREFIX prov: <http://www.w3.org/ns/prov#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\nSELECT ?activity ?startTime ?endTime ?model ?dataScientist ?dataScientistName\nWHERE {\n?activity a segb:LoggedActivity ;\n        amor-exp:isRelatedWithExperiment ?experiment ;\n        segb:usedMLModel ?model ;\n        prov:startedAtTime ?startTime ;\n        prov:endedAtTime ?endTime ;\n        segb:wasPerformedBy ?agent .\n?agent a oro:Robot ;\n        oro:hasName ?robotName .\t\n?run mls:hasOutput ?model ;\n        segb:wasPerformedBy ?dataScientist .\n?dataScientist a prov:Person, foaf:Person ;\n        foaf:firstName ?dataScientistName .\n  FILTER (\n    ?startTime >= \"2024-10-16T00:00:00\"^^xsd:dateTime &&\n    ?endTime <= \"2024-11-16T23:59:59\"^^xsd:dateTime &&\n    ?robotName = \"ARI\"@es &&\n    ?experiment = ex:experiment1\n  )\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX oro: <http://kb.openrobots.org#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?activity ?robot ?trigger ?result ?human ?msg1 ?msg2 ?text1 ?text2\nWHERE {\n?activity a segb:LoggedActivity ;\n    segb:triggeredByActivity ?trigger ;\n    segb:producedActivityResult ?result ;\n    segb:wasPerformedBy ?robot .\n?trigger a oro:ListeningEvent ;\n    oro:hasListener ?robot ;\n    oro:hasSpeaker ?human ;\n    oro:hasMessage ?msg1 .\n?msg1 a oro:Message ;\n    oro:hasText ?text1 .\n?result a oro:SpeechAction ;\n    oro:hasSpeaker ?robot ;\n    oro:hasListener ?listener ;\n    oro:hasMessage ?msg2 .\n?msg2 a oro:Message ;\n    oro:previousMessage ?msg1 ;\n    oro:hasText ?text2 .\n}",
+    "metadata": {}
   }
 ]
