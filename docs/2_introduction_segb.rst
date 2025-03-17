@@ -1,4 +1,4 @@
-2. Introduction to the Semantic Ethical Glass Box
+2. Introduction to SEGB
 ===============================================
 
 The Semantic Ethical Glass Box (SEGB) is a system designed to persisently store a global semantic registry of all in-
