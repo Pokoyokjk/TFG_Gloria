@@ -14,11 +14,6 @@ The general objectives of the project are defined around its strategic lines, as
 
 This project is funded by the Ministry of Economic Affairs and Digital Transformation and the European Union – NextGeneration EU, within the UNICO I+D Cloud Program.
 
-.. image:: images/amor_logo.png
-   :alt: AMOR Project Logo
-   :width: 100px
-   :align: center
-
 ## 2. Introduction to the Semantic Ethical Glass Box
 
 The Semantic Ethical Glass Box (SEGB) is a system designed to persisently store a global semantic registry of all in-
@@ -55,7 +50,7 @@ The SEGB ontology can be found in:
 
 ### 3.2. Knowledge Graph Construction Pipeline 
 
-![SEGB pipeline](/home/canarionjl/Escritorio/doctors_degree/AMOR/sebb/docs/images/segb_pipeline.jpg)
+![SEGB pipeline](docs/images/segb_pipeline.jpg)
 
 
 ## 5. SEGB Tutorial 
