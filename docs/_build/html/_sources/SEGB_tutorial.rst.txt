@@ -1,7 +1,7 @@
-5. Tutorial
-================
+Semantic Ethical Glass Box (SEGB)
+=================================
 
-5.1. Overview
+1. Overview
 -----------
 
 The Semantic Ethical Glass Box (SEGB) is global *log* storage, which
@@ -14,7 +14,7 @@ systems. It is comprised of two parts:
 2. A MongoDB-based database, where the global graph is storaged in
    JSON-LD format
 
-5.2. Motivational Scenario
+2. Motivational Scenario
 ------------------------
 
 Let’s suppose we set up a controlled scenario which includes a robot and
@@ -33,13 +33,8 @@ point-of-view.
 
 The expected operation order is humans first adding the models’
 information to the SEGB, and thenm, the AI-based agents registering
-themself and posting all the activities’ information to the SEGB as they
-take place. So let’s start.
-
-5.3. Use Case: Interaction Human-Robot
-----------------------------------------
-
-Let's see how data is published/retrieved of the SEGB in a real use case based on the motivational scenario explained before.
+themself and posting all the activities’ information to the
+:raw-latex:`\ac{SEBB}` as they take place. So let’s start.
 
 Auxiliary functions
 ~~~~~~~~~~~~~~~~~~~
@@ -123,70 +118,6 @@ for detailed info):
         else:
             print(f"Error in GET: {response.status_code} - {response.text}")
 
-.. code:: ipython3
-
-    import rdflib
-    from pyvis.network import Network
-    from IPython.display import IFrame
-    
-    def display_graph(filepath):
-    
-        get_graph(server, filepath)
-    
-        g = rdflib.Graph()
-        g.parse(filepath, format="ttl") 
-        
-        net = Network(height="500px", width="100%", notebook=True, directed=True, cdn_resources='in_line')
-        
-        for s, p, o in g:
-            net.add_node(s, label=str(s), title=str(s)) 
-            net.add_node(o, label=str(o), title=str(o))  
-            net.add_edge(s, o, title=str(p))
-    
-        net.force_atlas_2based()  
-        
-        net.show("interactive_segb_graph.html")
-    
-        return IFrame("interactive_segb_graph.html", width=900, height=600)
-
-.. code:: ipython3
-
-    import rdflib
-    from pyvis.network import Network
-    from IPython.display import IFrame
-    import os
-    
-    graph_id_counter = 0
-    
-    def display_graph(filepath):
-        global graph_id_counter
-    
-        get_graph(server, filepath)
-    
-        output_dir = "html"
-        os.makedirs(output_dir, exist_ok=True)
-    
-        g = rdflib.Graph()
-        g.parse(filepath, format="ttl") 
-        
-        net = Network(height="500px", width="100%", notebook=True, directed=True, cdn_resources='in_line')
-        
-        for s, p, o in g:
-            net.add_node(s, label=str(s), title=str(s)) 
-            net.add_node(o, label=str(o), title=str(o))  
-            net.add_edge(s, o, title=str(p))
-    
-        net.force_atlas_2based()
-    
-        filename = f"segb_graph_{graph_id_counter}.html"
-        filepath_out = os.path.join(output_dir, filename)
-        graph_id_counter += 1
-    
-        net.show(filepath_out)
-    
-        return IFrame(filepath_out, width=900, height=500)
-
-
 Loading info to the SEGB
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -235,35 +166,6 @@ Data Scientist
 
     File successfully read from: ./ttl/data_scientist.ttl
     POST request completed successfully
-
-
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_0.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_0.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
 
 
 Models
@@ -363,35 +265,6 @@ Models
     POST request completed successfully
 
 
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_1.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_1.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
-
-
 Agents and Scenario Activities & Interactions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -437,35 +310,6 @@ Agents and Scenario Activities & Interactions
 
     File successfully read from: ./ttl/person_detection.ttl
     POST request completed successfully
-
-
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_2.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_2.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
 
 
 4. Next, Maria speaks to the robot, which causes the robot to raise a
@@ -516,35 +360,6 @@ Agents and Scenario Activities & Interactions
     POST request completed successfully
 
 
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_3.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_3.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
-
-
 5. After listening to Maria, the robot processes the message, through
    which Maria asks it to show some news about the **awful** climate
    change. This raises a “decision making” process (which uses the ML
@@ -586,35 +401,6 @@ Agents and Scenario Activities & Interactions
 
     File successfully read from: ./ttl/decision_making.ttl
     POST request completed successfully
-
-
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_4.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_4.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
 
 
 6. The “decision making” process raises the emotion detection by the
@@ -678,35 +464,6 @@ Agents and Scenario Activities & Interactions
     POST request completed successfully
 
 
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_5.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_5.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
-
-
 5. Once ther robot knows Maria’s emotion as part of the “decision
    making” process, the robot updates this “decision making” process
    with the next action he has to do: express an emotion. The robot has
@@ -756,35 +513,6 @@ Agents and Scenario Activities & Interactions
 
     File successfully read from: ./ttl/emotion_expression.ttl
     POST request completed successfully
-
-
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_6.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_6.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
 
 
 6. Now the robot retrieves some news from an information source.
@@ -859,35 +587,6 @@ Agents and Scenario Activities & Interactions
     POST request completed successfully
 
 
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_7.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_7.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
-
-
 7. Next, the robot shows the news to Maria through its screen.
 
 .. code:: ipython3
@@ -932,35 +631,6 @@ Agents and Scenario Activities & Interactions
 
     File successfully read from: ./ttl/shown_content.ttl
     POST request completed successfully
-
-
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_8.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_8.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
 
 
 8. Lastly, the robot generates a response to speak to Maria and telling
@@ -1020,35 +690,6 @@ Agents and Scenario Activities & Interactions
     POST request completed successfully
 
 
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_9.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_9.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
-
-
 Retreving the global graph
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1060,7 +701,8 @@ published *logs*:
 
 .. code:: ipython3
 
-    get_graph(server, "graph.ttl")
+    output_ttl_file = "graph.ttl"
+    get_graph(server, output_ttl_file)
 
 
 .. parsed-literal::
@@ -1071,7 +713,7 @@ published *logs*:
 
 .. code:: ipython3
 
-    with open("graph.ttl", mode="r") as file:
+    with open(output_ttl_file, mode="r") as file:
          ttl = file.read()
          print(ttl)
 
@@ -1330,34 +972,4 @@ published *logs*:
         foaf:knows ex:maria .
     
     
-
-
-.. code:: ipython3
-
-    display_graph("graph.ttl")
-
-
-.. parsed-literal::
-
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
-    html/segb_graph_10.html
-
-
-
-
-.. raw:: html
-
-    
-    <iframe
-        width="900"
-        height="500"
-        src="_static/segb_graph_10.html"
-        frameborder="0"
-        allowfullscreen
-    
-    ></iframe>
-
-
-
 

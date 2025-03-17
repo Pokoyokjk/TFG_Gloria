@@ -13,6 +13,7 @@ Semantic Ethical Glass Box (SEGB) documentation
    2_introduction_segb
    3_api_documentation
    4_basic_tutorial
+   5_complete_demo_tutorial
 
 
 

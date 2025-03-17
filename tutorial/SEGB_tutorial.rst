@@ -1,7 +1,7 @@
-5. Tutorial
-================
+Semantic Ethical Glass Box (SEGB)
+=================================
 
-5.1. Overview
+1. Overview
 -----------
 
 The Semantic Ethical Glass Box (SEGB) is global *log* storage, which
@@ -14,7 +14,7 @@ systems. It is comprised of two parts:
 2. A MongoDB-based database, where the global graph is storaged in
    JSON-LD format
 
-5.2. Motivational Scenario
+2. Motivational Scenario
 ------------------------
 
 Let’s suppose we set up a controlled scenario which includes a robot and
@@ -35,11 +35,6 @@ The expected operation order is humans first adding the models’
 information to the SEGB, and thenm, the AI-based agents registering
 themself and posting all the activities’ information to the SEGB as they
 take place. So let’s start.
-
-5.3. Use Case: Interaction Human-Robot
-----------------------------------------
-
-Let's see how data is published/retrieved of the SEGB in a real use case based on the motivational scenario explained before.
 
 Auxiliary functions
 ~~~~~~~~~~~~~~~~~~~
@@ -257,7 +252,7 @@ Data Scientist
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_0.html"
+        src="html/segb_graph_0.html"
         frameborder="0"
         allowfullscreen
     
@@ -383,7 +378,7 @@ Models
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_1.html"
+        src="html/segb_graph_1.html"
         frameborder="0"
         allowfullscreen
     
@@ -459,7 +454,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_2.html"
+        src="html/segb_graph_2.html"
         frameborder="0"
         allowfullscreen
     
@@ -536,7 +531,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_3.html"
+        src="html/segb_graph_3.html"
         frameborder="0"
         allowfullscreen
     
@@ -608,7 +603,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_4.html"
+        src="html/segb_graph_4.html"
         frameborder="0"
         allowfullscreen
     
@@ -698,7 +693,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_5.html"
+        src="html/segb_graph_5.html"
         frameborder="0"
         allowfullscreen
     
@@ -778,7 +773,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_6.html"
+        src="html/segb_graph_6.html"
         frameborder="0"
         allowfullscreen
     
@@ -879,7 +874,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_7.html"
+        src="html/segb_graph_7.html"
         frameborder="0"
         allowfullscreen
     
@@ -954,7 +949,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_8.html"
+        src="html/segb_graph_8.html"
         frameborder="0"
         allowfullscreen
     
@@ -1040,7 +1035,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_9.html"
+        src="html/segb_graph_9.html"
         frameborder="0"
         allowfullscreen
     
@@ -1352,7 +1347,7 @@ published *logs*:
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_10.html"
+        src="html/segb_graph_10.html"
         frameborder="0"
         allowfullscreen
     

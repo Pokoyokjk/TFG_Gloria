@@ -1,12 +1,9 @@
 3. API Description
 ==================
 
-Endpoints Overview
-------------------
-
 This section describes the available API endpoints provided by the Semantic Ethical Glass Box (SEGB), including their usage, expected inputs, and response formats.
 
-POST `/log`
+3.1. POST /log
 -----------
 
 **Description:**  
@@ -34,7 +31,7 @@ This endpoint receives data in **Turtle (TTL)** format, converts it into **JSON-
    * - ``400 Bad Request``
      - The request contained invalid or malformed data.
 
-GET `/get_graph`
+3.2. GET /get_graph
 ----------------
 
 **Description:**  
