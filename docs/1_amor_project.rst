@@ -19,8 +19,3 @@ and the needs of the elderly and dependent individuals.
 
 This project is funded by the Ministry of Economic Affairs and Digital Transformation 
 and the European Union – NextGeneration EU, within the UNICO I+D Cloud Program.
-
-.. image:: images/amor_logo.png
-   :alt: AMOR Project Logo
-   :width: 100px
-   :align: center

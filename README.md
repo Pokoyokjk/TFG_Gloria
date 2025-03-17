@@ -53,8 +53,8 @@ The SEGB ontology can be found in:
 ![SEGB pipeline](docs/images/segb_pipeline.jpg)
 
 
-## 5. SEGB Tutorial 
+## 4. SEGB Tutorial 
 
 In the folder [tutorial](./tutorial), an extensive use case is presented in a notebook to help understand the usability and capabilities of the SEGB. 
 
-The complete documentation & tutorial is available in ![SEGB documentation](https://amor-segb.readthedocs.io/en/latest/index.html)
+The complete documentation & tutorial is available in [SEGB documentation](https://amor-segb.readthedocs.io/en/latest/index.html)
