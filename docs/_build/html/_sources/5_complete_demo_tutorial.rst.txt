@@ -1,5 +1,5 @@
-5. Tutorial
-================
+Semantic Ethical Glass Box (SEGB)
+=================================
 
 1. Overview
 -----------
@@ -35,10 +35,6 @@ The expected operation order is humans first adding the models’
 information to the SEGB, and thenm, the AI-based agents registering
 themself and posting all the activities’ information to the SEGB as they
 take place. So let’s start.
-
-3. Use Case: Interaction Human-Robot
-
-Let's see how data is published/retrieved of the SEGB in a real use case based on the motivational scenario explained before.
 
 Auxiliary functions
 ~~~~~~~~~~~~~~~~~~~

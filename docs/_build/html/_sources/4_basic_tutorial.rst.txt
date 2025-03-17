@@ -1,6 +1,9 @@
 4. Deploying the SEGB
 ==================================================
 
+Starting the SEGB
+-------------------
+
 Use the docker-compose file available in this repository. This action requires access to the image used in the docker compose file. The process consists of several steps:
 
 1. Get a personal access token to enable console login in `ghcr.io <https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens>`__.
@@ -29,8 +32,8 @@ Use the docker-compose file available in this repository. This action requires a
 5. The URL of the SEGB is ``http://127.0.0.1:5000``
 
 
-Sending and Retrieving Data from the SEGB
-------------------------------------------
+Sending and Retrieving Data
+-----------------------------
 
 To update a new TTL file containing one or several triples, make a POST request to the */log* route. For instance, if you have a Turtle file named "*data.ttl*":
 

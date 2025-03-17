@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>3. API Description &#8212; Semantic Ethical Glass Box (SEGB) v0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=61cd365c" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
     <script src="_static/documentation_options.js?v=34cd777e"></script>
@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="4. Deploying the SEGB" href="4_basic_tutorial.html" />
-    <link rel="prev" title="Introduction to the Semantic Ethical Glass Box" href="2_introduction_segb.html" />
+    <link rel="prev" title="2. Introduction to SEGB" href="2_introduction_segb.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -35,29 +35,24 @@
             
   <section id="api-description">
 <h1>3. API Description<a class="headerlink" href="#api-description" title="Link to this heading">¶</a></h1>
+<section id="endpoints-overview">
+<h2>Endpoints Overview<a class="headerlink" href="#endpoints-overview" title="Link to this heading">¶</a></h2>
+<p>This section describes the available API endpoints provided by the Semantic Ethical Glass Box (SEGB), including their usage, expected inputs, and response formats.</p>
+</section>
 <section id="post-log">
-<h2>🔹 <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/log</span></code><a class="headerlink" href="#post-log" title="Link to this heading">¶</a></h2>
+<h2>POST <cite>/log</cite><a class="headerlink" href="#post-log" title="Link to this heading">¶</a></h2>
 <p><strong>Description:</strong>
-Stores the received <strong>Turtle (TTL)</strong> data, converts it to <strong>JSON-LD</strong>, and saves it in the database. The TTL data could contain one or several triples.</p>
-<section id="request">
-<h3>✅ Request<a class="headerlink" href="#request" title="Link to this heading">¶</a></h3>
+This endpoint receives data in <strong>Turtle (TTL)</strong> format, converts it into <strong>JSON-LD</strong>, and stores it in the database. The TTL payload may include one or multiple RDF triples.</p>
+<p><strong>Request Details:</strong></p>
 <ul class="simple">
 <li><p><strong>URL:</strong> <cite>/log</cite></p></li>
 <li><p><strong>Method:</strong> <cite>POST</cite></p></li>
-<li><dl class="simple">
-<dt><strong>Required Headers:</strong></dt><dd><p>Content-Type: text/turtle</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><strong>Request Body:</strong></dt><dd><p>A document in <strong>Turtle (TTL)</strong> format (<cite>text/turtle</cite>).</p>
-</dd>
-</dl>
-</li>
+<li><p><strong>Required Headers:</strong>
+<code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">text/turtle</span></code></p></li>
+<li><p><strong>Request Body:</strong>
+A valid RDF document in <strong>Turtle (TTL)</strong> format.</p></li>
 </ul>
-</section>
-<section id="responses">
-<h3>📤 Responses<a class="headerlink" href="#responses" title="Link to this heading">¶</a></h3>
+<p><strong>Response Codes:</strong></p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 20.0%" />
@@ -69,30 +64,25 @@ Stores the received <strong>Turtle (TTL)</strong> data, converts it to <strong>J
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><cite>200 OK</cite></p></td>
-<td><p>Data successfully stored.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p></td>
+<td><p>The data was successfully received and stored.</p></td>
 </tr>
-<tr class="row-odd"><td><p><cite>400 Bad Request</cite></p></td>
-<td><p>Error processing data or missing data.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code></p></td>
+<td><p>The request contained invalid or malformed data.</p></td>
 </tr>
 </tbody>
 </table>
-<p>—</p>
-</section>
 </section>
 <section id="get-get-graph">
-<h2>🔹 <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/get_graph</span></code><a class="headerlink" href="#get-get-graph" title="Link to this heading">¶</a></h2>
+<h2>GET <cite>/get_graph</cite><a class="headerlink" href="#get-get-graph" title="Link to this heading">¶</a></h2>
 <p><strong>Description:</strong>
-Retrieves the stored <strong>JSON-LD</strong> data, processes it, and returns it in <strong>Turtle (TTL)</strong> format.</p>
-<section id="id1">
-<h3>✅ Request<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+This endpoint retrieves the stored data (originally submitted in TTL, stored in JSON-LD), processes it, and returns the result in <strong>Turtle (TTL)</strong> format.</p>
+<p><strong>Request Details:</strong></p>
 <ul class="simple">
 <li><p><strong>URL:</strong> <cite>/get_graph</cite></p></li>
 <li><p><strong>Method:</strong> <cite>GET</cite></p></li>
 </ul>
-</section>
-<section id="id2">
-<h3>📤 Responses<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p><strong>Response Codes:</strong></p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 20.0%" />
@@ -104,15 +94,14 @@ Retrieves the stored <strong>JSON-LD</strong> data, processes it, and returns it
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><cite>200 OK</cite></p></td>
-<td><p>Returns the data in <strong>Turtle (TTL)</strong> format.</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p></td>
+<td><p>Successfully returns the stored data in <strong>Turtle (TTL)</strong> format.</p></td>
 </tr>
-<tr class="row-odd"><td><p><cite>404 Not Found</cite></p></td>
-<td><p>No data available in the database.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code></p></td>
+<td><p>No data is currently available in the database.</p></td>
 </tr>
 </tbody>
 </table>
-</section>
 </section>
 </section>
 
@@ -144,21 +133,23 @@ Retrieves the stored <strong>JSON-LD</strong> data, processes it, and returns it
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="1_amor_project.html">AMOR Project</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_introduction_segb.html">Introduction to the Semantic Ethical Glass Box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_amor_project.html">1. AMOR Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_introduction_segb.html">2. Introduction to SEGB</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. API Description</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#post-log">🔹 <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/log</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-get-graph">🔹 <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/get_graph</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#endpoints-overview">Endpoints Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#post-log">POST <cite>/log</cite></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-get-graph">GET <cite>/get_graph</cite></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="4_basic_tutorial.html">4. Deploying the SEGB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_complete_demo_tutorial.html">Semantic Ethical Glass Box (SEGB)</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="2_introduction_segb.html" title="previous chapter">Introduction to the Semantic Ethical Glass Box</a></li>
+      <li>Previous: <a href="2_introduction_segb.html" title="previous chapter">2. Introduction to SEGB</a></li>
       <li>Next: <a href="4_basic_tutorial.html" title="next chapter">4. Deploying the SEGB</a></li>
   </ul></li>
 </ul>
