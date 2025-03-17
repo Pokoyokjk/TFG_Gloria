@@ -1,4 +1,4 @@
-AMOR Project
+1. AMOR Project
 ================
 
 The AMOR (*Análisis de sentimiento MORal en datos textuales* -Spanish- or Moral Sentiment Analysis in Textual Data) 

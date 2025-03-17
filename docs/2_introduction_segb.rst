@@ -1,4 +1,4 @@
-Introduction to the Semantic Ethical Glass Box
+2. Introduction to the Semantic Ethical Glass Box
 ===============================================
 
 The Semantic Ethical Glass Box (SEGB) is a system designed to persisently store a global semantic registry of all in-
@@ -15,7 +15,7 @@ agents’ behavior. Let's break the name in order to better understand the conce
 - *Box*: It represents a storage container where all the events produced by AI-based agents are joined and persistently saved, conforming the global registry. 
 
 
-The SEGB arises as part of the AMOR project, as it uses AI-based robots and imersive environments to interact with different groups of people, requiring these agents' ethical behaviour in order to meet the objectives. This implies being able to explain and interpret why a decision/action was produced and ensuring the ethics and transparency of these gents' behaviour.
+The SEGB arises as part of the AMOR project, as it uses AI-based robots and imersive environments to interact with different groups of people, requiring these agents' ethical behaviour in order to meet the objectives. This implies being able to explain and interpret why a decision/action was produced and ensuring the ethics and transparency of these agents' behaviour.
 
 Nevertheless, the SEGB is appliable to any scenario. as long as the AI-based agents has an Internet connection and the capability of 
 generating TTL-formated logs.

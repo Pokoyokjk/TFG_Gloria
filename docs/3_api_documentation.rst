@@ -1,54 +1,60 @@
 3. API Description
-===================
+==================
 
-🔹 ``POST /log``
-----------------
+Endpoints Overview
+------------------
+
+This section describes the available API endpoints provided by the Semantic Ethical Glass Box (SEGB), including their usage, expected inputs, and response formats.
+
+POST `/log`
+-----------
+
 **Description:**  
-Stores the received **Turtle (TTL)** data, converts it to **JSON-LD**, and saves it in the database. The TTL data could contain one or several triples.
+This endpoint receives data in **Turtle (TTL)** format, converts it into **JSON-LD**, and stores it in the database. The TTL payload may include one or multiple RDF triples.
 
-✅ Request
-~~~~~~~~~~
+**Request Details:**
+
 - **URL:** `/log`
 - **Method:** `POST`
-- **Required Headers:** 
-    Content-Type: text/turtle
+- **Required Headers:**  
+  ``Content-Type: text/turtle``
 - **Request Body:**  
-    A document in **Turtle (TTL)** format (`text/turtle`).
+  A valid RDF document in **Turtle (TTL)** format.
 
-📤 Responses
-~~~~~~~~~~~~
+**Response Codes:**
+
 .. list-table::
-   :widths: 15 60
+   :widths: 20 80
    :header-rows: 1
 
    * - Status Code
      - Description
-   * - `200 OK`
-     - Data successfully stored.
-   * - `400 Bad Request`
-     - Error processing data or missing data.
+   * - ``200 OK``
+     - The data was successfully received and stored.
+   * - ``400 Bad Request``
+     - The request contained invalid or malformed data.
 
----
+GET `/get_graph`
+----------------
 
-🔹 ``GET /get_graph``
----------------------
 **Description:**  
-Retrieves the stored **JSON-LD** data, processes it, and returns it in **Turtle (TTL)** format.
+This endpoint retrieves the stored data (originally submitted in TTL, stored in JSON-LD), processes it, and returns the result in **Turtle (TTL)** format.
 
-✅ Request
-~~~~~~~~~~
+**Request Details:**
+
 - **URL:** `/get_graph`
 - **Method:** `GET`
 
-📤 Responses
-~~~~~~~~~~~~
+**Response Codes:**
+
 .. list-table::
-   :widths: 15 60
+   :widths: 20 80
    :header-rows: 1
 
    * - Status Code
      - Description
-   * - `200 OK`
-     - Returns the data in **Turtle (TTL)** format.
-   * - `404 Not Found`
-     - No data available in the database.
+   * - ``200 OK``
+     - Successfully returns the stored data in **Turtle (TTL)** format.
+   * - ``404 Not Found``
+     - No data is currently available in the database.
+
