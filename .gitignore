@@ -1,9 +1,5 @@
 __pycache__/
 .ipynb_checkpoints/
 tutorial/graph.ttl
-<<<<<<< HEAD
 tutorial/interactive_segb_graph.html
 .venv
-=======
-tutorial/interactive_segb_graph.html
->>>>>>> 999b6610fae6ffa4a27b29cc95cf1a2aef58173b
