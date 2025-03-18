@@ -1,7 +1,7 @@
 4. Deploying the SEGB
 ==================================================
 
-Starting the SEGB
+4.1. Starting the SEGB
 -------------------
 
 Use the docker-compose file available in this repository. This action requires access to the image used in the docker compose file. The process consists of several steps:
@@ -32,7 +32,7 @@ Use the docker-compose file available in this repository. This action requires a
 5. The URL of the SEGB is ``http://127.0.0.1:5000``
 
 
-Sending and Retrieving Data
+4.2. Sending and Retrieving Data
 -----------------------------
 
 To update a new TTL file containing one or several triples, make a POST request to the */log* route. For instance, if you have a Turtle file named "*data.ttl*":

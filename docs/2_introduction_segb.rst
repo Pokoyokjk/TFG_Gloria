@@ -19,3 +19,17 @@ The SEGB arises as part of the AMOR project, as it uses AI-based robots and imer
 
 Nevertheless, the SEGB is appliable to any scenario. as long as the AI-based agents has an Internet connection and the capability of 
 generating TTL-formated logs.
+
+2.1. Semantic model
+----------------------
+The SEGB ontology can be found in:
+
+- **File**: https://github.com/gsi-upm/amor-segb/blob/main/ontology/example.ttl
+- **URL**: http://www.gsi.upm.es/ontologies/segb/examples#
+
+2.2. SEGB Pipeline
+-----------------------
+.. image:: _static/segb_pipeline.jpg
+   :alt: Pipeline which describes the use of the SEGB.
+   :width: 600px
+   :align: center
