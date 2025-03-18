@@ -50,7 +50,7 @@ The SEGB ontology can be found in:
 
 ### 3.2. Knowledge Graph Construction Pipeline 
 
-![SEGB pipeline](docs/images/segb_pipeline.jpg)
+![SEGB pipeline](docs/_static/segb_pipeline.jpg)
 
 
 ## 4. SEGB Tutorial 
