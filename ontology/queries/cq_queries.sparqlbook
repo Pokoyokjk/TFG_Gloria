@@ -64,5 +64,13 @@
     "language": "sparql",
     "value": "PREFIX oro: <http://kb.openrobots.org#>\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\n\nSELECT ?activity ?robot ?trigger ?result ?human ?msg1 ?msg2 ?text1 ?text2\nWHERE {\n?activity a segb:LoggedActivity ;\n    segb:triggeredByActivity ?trigger ;\n    segb:producedActivityResult ?result ;\n    segb:wasPerformedBy ?robot .\n?trigger a oro:ListeningEvent ;\n    oro:hasListener ?robot ;\n    oro:hasSpeaker ?human ;\n    oro:hasMessage ?msg1 .\n?msg1 a oro:Message ;\n    oro:hasText ?text1 .\n?result a oro:SpeechAction ;\n    oro:hasSpeaker ?robot ;\n    oro:hasListener ?listener ;\n    oro:hasMessage ?msg2 .\n?msg2 a oro:Message ;\n    oro:previousMessage ?msg1 ;\n    oro:hasText ?text2 .\n}",
     "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "# from file check_experiment_query.sparql\nPREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>\nPREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\n# SELECT or DESCRIBE can be used\nDESCRIBE ?experiment ?activity\nWHERE {\n?activity a segb:LoggedActivity ;\n    amor-exp:isRelatedWithExperiment ?experiment .\n?experiment a amor-exp:Experiment ;\n    rdfs:label ?exp_id .\nFILTER (regex(?exp_id, \"Experiment 1\"))\n}",
+    "metadata": {
+      "file": "check_experiment_query.sparql"
+    }
   }
 ]

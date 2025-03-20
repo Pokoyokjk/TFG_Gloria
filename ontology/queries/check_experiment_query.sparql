@@ -1,0 +1,13 @@
+PREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>
+PREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# SELECT or DESCRIBE can be used
+DESCRIBE ?experiment ?activity
+WHERE {
+?activity a segb:LoggedActivity ;
+    amor-exp:isRelatedWithExperiment ?experiment .
+?experiment a amor-exp:Experiment ;
+    rdfs:label ?exp_id .
+FILTER (regex(?exp_id, "Experiment 1"))
+}
