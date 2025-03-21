@@ -17,11 +17,11 @@ class TTL(Document):
     ttl_content = StringField(required=True)
 
     
-def connect_to_db():
+def connect_to_db() -> None:
     connect('graph', host='mongodb', port=27017)
     
     
-def save_json_ld(json_ld_data:dict):
+def save_json_ld(json_ld_data:dict) -> None:
     graph = Graph.objects(_id='0').first()
     if graph:
         json_ld_data = semantic_utils.update_prefixes(graph.graph_data, json_ld_data)
@@ -39,12 +39,12 @@ def save_json_ld(json_ld_data:dict):
     graph.save()
     
         
-def get_json_ld():
+def get_raw_graph_from_db() -> DynamicField:
     graph = Graph.objects(_id='0').first()
-    return graph   
+    return graph.graph_data
 
 
-def save_ttl_content(ttl:str, ip_addr:str):
+def save_ttl_content(ttl:str, ip_addr:str) -> None:
     ttl = TTL (
         uploaded_at = datetime.now(),
         origin_ip = ip_addr,
@@ -53,7 +53,7 @@ def save_ttl_content(ttl:str, ip_addr:str):
     ttl.save()
     
     
-def get_ttl_content():
+def get_ttl_content() -> list:
     ttl_list = TTL.objects()
     dict_ttl_list = semantic_utils.convert_ttl_info_to_dict(ttl_list)
     return dict_ttl_list

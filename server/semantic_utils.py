@@ -1,24 +1,22 @@
 from rdflib import Graph
 import json
 
-
 # -------- AUX FUNCTIONS FOR APP.PY ----------- # 
 
-def process_turtle_data(data):
-
+def get_graph_from_ttl(data) -> Graph:
     graph = Graph()
     graph.parse(data=data, format="turtle")
     return graph
 
-def process_json_ld_data(data):
+def get_graph_from_json(data) -> Graph:
     graph = Graph()
     graph.parse(data=data, format="json-ld")
     return graph
 
-def convert_turtle_to_json_ld(ttl_graph_data):
-    graph_namespace = ttl_graph_data.namespaces()
+def convert_graph_to_json_ld(graph: Graph) -> dict:
+    graph_namespace = graph.namespaces()
     prefixes = {prefix: str(uri) for prefix, uri in graph_namespace}
-    serialized_json_ld = ttl_graph_data.serialize(format="json-ld", context=prefixes)
+    serialized_json_ld = graph.serialize(format="json-ld", context=prefixes)
     json_ld_data = json.loads(serialized_json_ld)
     
     context = json_ld_data.get("@context", {})
@@ -30,23 +28,22 @@ def convert_turtle_to_json_ld(ttl_graph_data):
     
     return json_ld_data
 
-def convert_json_ld_to_turtle(json_ld_graph_data):
-    graph_namespace = json_ld_graph_data.namespaces()
+def convert_graph_to_turtle(graph: Graph) -> str:
+    graph_namespace = graph.namespaces()
     prefixes = {prefix: str(uri) for prefix, uri in graph_namespace}
-    serialized_turtle_data = json_ld_graph_data.serialize(format="turtle", context=prefixes)
+    serialized_turtle_data = graph.serialize(format="turtle", context=prefixes)
     return serialized_turtle_data
 
-def get_origin_ip(request):
+def get_origin_ip(request) -> str:
     if request.headers.getlist("X-Forwarded-For"):
         ip = request.headers.getlist("X-Forwarded-For")[0].split(',')[0]
     else:
         ip = request.remote_addr
     return ip
 
-
 # -------- AUX FUNCTIONS FOR MODEL.PY ----------- # 
 
-def update_prefixes (graph_data:dict, json_ld_data:dict):
+def update_prefixes (graph_data:dict, json_ld_data:dict) -> dict:
     new_prefixes = json_ld_data.get("@context", None)
     current_prefixes = graph_data.get("@context", {})
     if new_prefixes:
@@ -57,15 +54,12 @@ def update_prefixes (graph_data:dict, json_ld_data:dict):
     return json_ld_data
 
 
-def update_graph (graph_data: dict, json_ld_data:dict):
+def update_graph (graph_data: dict, json_ld_data:dict) -> dict:
     old_graph = graph_data.get("@graph", [])
     new_graph = old_graph + [json_triple for json_triple in json_ld_data["@graph"]]
     json_ld_data["@graph"] = new_graph
     return json_ld_data
 
-def convert_ttl_info_to_dict(ttl_list):
+def convert_ttl_info_to_dict(ttl_list) -> dict:
     dict_ttl_list = [json.loads(ttl.to_json()) for ttl in ttl_list]
     return dict_ttl_list
-
-
-        
