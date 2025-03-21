@@ -3,3 +3,5 @@ __pycache__/
 tutorial/graph.ttl
 tutorial/interactive_segb_graph.html
 .venv
+.vscode
+playground/
