@@ -55,3 +55,42 @@ This endpoint retrieves the stored data (originally submitted in TTL, stored in 
    * - ``404 Not Found``
      - No data is currently available in the database.
 
+3.3. GET /get_experiment
+-------------------------
+
+**Description:**
+
+  This endpoint retrieves information about an experiment along with its associated activities from the stored data (the SEGB global graph).
+
+**Request Details:**
+
+- **URL:** ``/get_experiment``
+- **Method:** ``GET``
+- **Parameters:**
+  
+  - **Option 1 (complete):**
+    
+    - ``uri``: Complete URI of the experiment in the format ``namespace#experiment_id``.
+  
+  - **Option 2 (separate):**
+    
+    - ``namespace``: The namespace part of the URI.
+    - ``experiment_id``: The identifier of the experiment.
+
+**Response Codes:**
+
+
+.. list-table::
+  :widths: 20 80
+  :header-rows: 1
+
+  * - Status Code
+    - Description
+  * - ``200 OK``
+    - Returns the representation of the experiment and its activities in **Turtle (TTL)** format.
+  * - ``400 Bad Request``
+    - Missing required parameters. Neither a complete ``uri`` nor both ``namespace`` and ``experiment_id`` were provided.
+  * - ``404 Not Found``
+    - The specified experiment (``namespace`` and ``experiment_id`` combination) was not found.
+  * - ``500 Internal Server Error``
+    - An internal error occurred while retrieving or processing the data.
