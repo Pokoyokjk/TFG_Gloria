@@ -67,3 +67,16 @@ def get_experiment_with_activities(source: Graph, namespace: str, experiment_id:
         result_graph.add((subject, predicate, obj))
         
     return result_graph
+
+
+def get_experiment_list(graph: Graph):
+    query = """
+        PREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>
+        
+        SELECT ?experiment_uri 
+        WHERE {
+            ?experiment_uri a amor-exp:Experiment .
+        }
+    """
+    result = graph.query(query)
+    return result 

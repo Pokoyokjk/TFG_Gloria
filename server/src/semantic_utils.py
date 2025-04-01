@@ -1,6 +1,8 @@
 from rdflib import Graph
 import json
 
+import logging
+
 # -------- AUX FUNCTIONS FOR APP.PY ----------- # 
 
 def get_graph_from_ttl(data) -> Graph:
@@ -10,7 +12,8 @@ def get_graph_from_ttl(data) -> Graph:
 
 def get_graph_from_json(data) -> Graph:
     graph = Graph()
-    graph.parse(data=data, format="json-ld")
+    if data:
+        graph.parse(data=data, format="json-ld")
     return graph
 
 def convert_graph_to_json_ld(graph: Graph) -> dict:

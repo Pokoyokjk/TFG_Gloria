@@ -1,6 +1,7 @@
 from mongoengine import Document, DynamicField, DateTimeField, StringField, ValidationError, connect
+from pymongo.errors import ServerSelectionTimeoutError
 from datetime import datetime
-import semantic_utils
+import semantic_utils as semantic_utils
 
 class Graph(Document):
     _id = StringField(primary_key=True)
@@ -18,7 +19,7 @@ class TTL(Document):
 
     
 def connect_to_db() -> None:
-    connect('graph', host='mongodb', port=27017)
+    connect('graph', host='amor-segb-mongodb', port=27017)
     
     
 def save_json_ld(json_ld_data:dict) -> None:
@@ -40,8 +41,12 @@ def save_json_ld(json_ld_data:dict) -> None:
     
         
 def get_raw_graph_from_db() -> DynamicField:
-    graph = Graph.objects(_id='0').first()
-    return graph.graph_data
+    graph = None
+    try:
+        graph = Graph.objects(_id='0').first()
+    except ServerSelectionTimeoutError:
+        pass
+    return graph.graph_data if isinstance(graph, Graph) else graph
 
 
 def save_ttl_content(ttl:str, ip_addr:str) -> None:
