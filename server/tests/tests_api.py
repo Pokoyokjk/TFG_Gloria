@@ -6,17 +6,17 @@ import subprocess
 
 
 BASE_URL = "http://127.0.0.1:5000"  
-
+TEST_DB_VOLUME = "amor-segb-db-test"
 
 def docker_compose_up():
     try:
-        subprocess.run(['docker', 'compose', 'up', '-d'], check=True)
+        subprocess.run(['docker', 'compose', '-f', 'compose_tests.yaml', 'up', '-d'], check=True)
     except subprocess.CalledProcessError as e:
         pytest.fail(f'SEGB cannot be initiated: {e}')
         
 def docker_compose_down():
     try:
-        subprocess.run(['docker','compose', 'down'], check=True)
+        subprocess.run(['docker','compose', '-f', 'compose_tests.yaml', 'down'], check=True)
     except subprocess.CalledProcessError as e:
         pytest.fail(f'SEGB cannot be stopped: {e}')
         
@@ -44,10 +44,12 @@ def wait_for_docker_service(url=BASE_URL, timeout=60, interval=2):
         
 def remove_database_docker_volume():
     client = docker.from_env()
-    volume_name = 'sebb_amor-segb-db'
+    volumes = client.volumes.list()
     try:
-        volume = client.volumes.get(volume_name)
-        volume.remove()
+        for vol in volumes:
+            if TEST_DB_VOLUME in vol.name:
+                vol.remove()
+                break
     except docker.errors.NotFound:
         pass # if volume does not exist, the test just goes on
     except docker.errors.APIError as e:
