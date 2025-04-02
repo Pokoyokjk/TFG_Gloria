@@ -182,12 +182,12 @@ ex:emotionset1 a amor:EmotionAnnotation ;
 ex:emotion1 a onyx:Emotion ;
     onyx:hasEmotionCategory emoml:big6_fear ;
     onyx:hasEmotionIntensity "0.3"^^xsd:float ;
-    onyx:algorithmConfidente "0.86"^^xsd:float .
+    onyx:algorithmConfidence "0.86"^^xsd:float .
 
 ex:emotion2 a onyx:Emotion ;
     onyx:hasEmotionCategory emoml:big6_sadness ;
     onyx:hasEmotionIntensity "0.4"^^xsd:float ;
-    onyx:algorithmConfidente "0.93"^^xsd:float .
+    onyx:algorithmConfidence "0.93"^^xsd:float .
 
 # Step 4.2: The robot retrieves information from a news search API
 ex:informationRetrievalAction1 a oro:InformationRetrievalAction, segb:LoggedActivity ;

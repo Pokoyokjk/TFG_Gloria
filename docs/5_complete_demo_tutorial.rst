@@ -658,12 +658,12 @@ Agents and Scenario Activities & Interactions
     ex:emotion1 a onyx:Emotion ;
         onyx:hasEmotionCategory emoml:big6_fear ;
         onyx:hasEmotionIntensity "0.3"^^xsd:float ;
-        onyx:algorithmConfidente "0.86"^^xsd:float .
+        onyx:algorithmConfidence "0.86"^^xsd:float .
     
     ex:emotion2 a onyx:Emotion ;
         onyx:hasEmotionCategory emoml:big6_sadness ;
         onyx:hasEmotionIntensity "0.4"^^xsd:float ;
-        onyx:algorithmConfidente "0.93"^^xsd:float .
+        onyx:algorithmConfidence "0.93"^^xsd:float .
     
 
 
@@ -1118,12 +1118,12 @@ published *logs*:
             ex:numberOfInstantes .
     
     ex:emotion1 a onyx:Emotion ;
-        onyx:algorithmConfidente "0.86"^^xsd:float ;
+        onyx:algorithmConfidence "0.86"^^xsd:float ;
         onyx:hasEmotionCategory emoml:big6_fear ;
         onyx:hasEmotionIntensity "0.3"^^xsd:float .
     
     ex:emotion2 a onyx:Emotion ;
-        onyx:algorithmConfidente "0.93"^^xsd:float ;
+        onyx:algorithmConfidence "0.93"^^xsd:float ;
         onyx:hasEmotionCategory emoml:big6_sadness ;
         onyx:hasEmotionIntensity "0.4"^^xsd:float .
     
