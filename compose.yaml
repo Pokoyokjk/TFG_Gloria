@@ -1,19 +1,17 @@
 services:
   amor-segb:
     container_name: amor-segb-flask
-    image: ghcr.io/gsi-upm/amor-segb:0.2.0
-    # build: 
-    #   context: ./server
-    #   dockerfile: Dockerfile
+    image: ghcr.io/gsi-upm/amor-segb:0.3.0
     ports:
       - "5000:5000"
     networks:
       - internal_network
     depends_on:
       - amor-segb-mongodb
-    environment:
-      - FLASK_ENV=development
-      - FLASK_DEBUG=1
+    env_file:
+      - ./.env
+    volumes:
+      - ./logs:/logs
     links:
       - "amor-segb-mongodb:database"
 
@@ -25,9 +23,6 @@ services:
       - amor-segb-db:/data/configdb
     networks:
       - internal_network
-    #ports:
-     # - 27017:27017
-    
 
 networks:
   internal_network:
