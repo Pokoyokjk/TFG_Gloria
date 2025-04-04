@@ -1,0 +1,13 @@
+[project]
+name = "amor-segb"
+version = "0.2.0"
+description = "Semantic Ethical Glass Box (SEGB) for AMOR project"
+readme = "README.md"
+requires-python = "==3.12.7"
+dependencies = [
+    "fastapi[standard]==0.115.12",
+    "mongoengine==0.29.1",
+    "pyjwt==2.10.1",
+    "pytest==8.3.5",
+    "rdflib==7.1.3",
+]

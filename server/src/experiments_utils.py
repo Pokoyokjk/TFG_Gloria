@@ -1,5 +1,27 @@
 from rdflib import Namespace, Graph, URIRef
 from rdflib.query import Result
+import os
+import logging
+
+logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
+log_file = os.getenv("SERVER_LOG_FILE", "segb_server.log")
+# Ensure the logs directory exists
+os.makedirs('./logs', exist_ok=True)
+file_handler = logging.FileHandler(
+    filename=f'./logs/{log_file}',
+    mode='a',
+    encoding='utf-8'
+)
+file_handler.setFormatter(logging.Formatter(
+    fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+))
+logger = logging.getLogger("segb_server.experiments_utils")
+logger.setLevel(getattr(logging, logging_level, logging.INFO))
+logger.addHandler(file_handler)
+
+
+logger.info("Loading module experiments_utils...")
 
 # -------- AUX FUNCTIONS FOR AMOR EXPERIMENTS QUERIES ----------- # 
 
@@ -8,6 +30,7 @@ def get_experiment(graph: Graph, namespace: str, experiment_id: str):
     ns = Namespace(namespace)
     experiment_uri = ns[experiment_id]
     # Define the SPARQL query
+    logger.info(f"Getting experiment details for {experiment_uri}")
     query = f"""
     PREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>
 
@@ -20,6 +43,7 @@ def get_experiment(graph: Graph, namespace: str, experiment_id: str):
     # Execute the query
     results = graph.query(query)
     # Return the results
+    logger.info(f"Experiment details for {experiment_uri} retrieved successfully.")
     return experiment_uri, results
 
 def get_logged_activities(graph: Graph, namespace: str, experiment_id: str) -> Result:
@@ -27,6 +51,7 @@ def get_logged_activities(graph: Graph, namespace: str, experiment_id: str) -> R
     ns = Namespace(namespace)
     experiment_uri: URIRef = ns[experiment_id]
     # Define the SPARQL query
+    logger.info(f"Getting logged activities for {experiment_uri}")
     query = f"""
     PREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>
     PREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>
@@ -39,12 +64,14 @@ def get_logged_activities(graph: Graph, namespace: str, experiment_id: str) -> R
     """
     # Execute the query
     results = graph.query(query)
+    logger.info(f"Logged activities for {experiment_uri} retrieved successfully.")
     # Return the results
     return results
 
 def get_experiment_with_activities(source: Graph, namespace: str, experiment_id: str) -> Graph:
     # Get the experiment details
     try:
+        logger.info(f"Getting experiment details...")
         experiment_uri, experiment_details = get_experiment(source, namespace, experiment_id)
     except Exception as e:
         raise Exception(f"Error getting experiment details: {str(e)}")
@@ -65,11 +92,13 @@ def get_experiment_with_activities(source: Graph, namespace: str, experiment_id:
     for triple in logged_activities:
         subject, predicate, obj = triple
         result_graph.add((subject, predicate, obj))
-        
+    
+    logger.info(f"Experiment details for {experiment_uri} retrieved successfully.")
+    logger.debug(f"Resulting graph has {len(result_graph)} triples.")
     return result_graph
 
 
-def get_experiment_list(graph: Graph):
+def get_experiment_list(graph: Graph) -> Result:
     query = """
         PREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>
         
@@ -79,4 +108,4 @@ def get_experiment_list(graph: Graph):
         }
     """
     result = graph.query(query)
-    return result 
+    return result.serialize(format="csv", encoding="utf-8")

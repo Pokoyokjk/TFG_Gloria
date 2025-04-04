@@ -1,24 +1,25 @@
 services:
-  amor-segb:
-    container_name: amor-segb-flask
-    # image: ghcr.io/gsi-upm/amor-segb:0.2.0
-    build: 
-      context: ./server
-      dockerfile: Dockerfile
+  amor-segb-test:
+    container_name: amor-segb-flask-test
+    image: ghcr.io/gsi-upm/amor-segb:testing
+    # build: 
+    #   context: ./server
+    #   dockerfile: Dockerfile
     ports:
       - "5000:5000"
     networks:
       - internal_network
     depends_on:
-      - amor-segb-mongodb
-    environment:
-      - FLASK_ENV=development
-      - FLASK_DEBUG=1
+      - amor-segb-mongodb-test
+    env_file:
+      - ./test.env
+    volumes:
+      - ./logs:/logs
     links:
-      - "amor-segb-mongodb:database"
+      - "amor-segb-mongodb-test:database"
 
-  amor-segb-mongodb:
-    container_name: amor-segb-mongodb
+  amor-segb-mongodb-test:
+    container_name: amor-segb-mongodb-test
     image: mongodb/mongodb-community-server:8.0.0-ubi8
     volumes:
       - amor-segb-db-test:/data/db
