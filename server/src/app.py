@@ -1,8 +1,8 @@
 from flask import Flask, request, Response
 import semantic_utils as semantic_utils
 import experiments_utils as experiments_utils
-from model import connect_to_db, save_json_ld, get_raw_graph_from_db, save_ttl_content
-
+from model import connect_to_db, save_json_ld, get_raw_graph_from_db, log_ttl_content, clear_graph, get_logs_list, get_log_info
+from flask import Response, jsonify
 
 import logging
 
@@ -34,7 +34,7 @@ def save_log():
     
     if status == 200:
         save_json_ld(json_ld_data=json_ld_data)
-        save_ttl_content(recieved_data,origin_ip)
+        log_ttl_content(recieved_data,origin_ip)
         
     return Response(status=status)
 
@@ -102,21 +102,71 @@ def get_experiment():
     except Exception as e:
         return Response(f"Error retrieving experiment: {str(e)}", status=500)
     
+    
 @app.route('/get_experiment_list', methods=['GET'])
 def get_experiment_list():
     experiment_list = None
     try:
         json_ld_data = get_raw_graph_from_db()
         graph = semantic_utils.get_graph_from_json(json_ld_data)
-        experiment_list = experiments_utils.get_experiment_list()
+        experiment_list = experiments_utils.get_experiment_list(graph)
     except Exception as e:
         return Response(f"Error retrieving experiment: {str(e)}", status=500)
     result = experiment_list.serialize(format="turtle")
     return result    
+ 
+
+@app.route('/clear_graph', methods=['DELETE'])
+def delete_graph():
+    status = 200
+    origin_ip = semantic_utils.get_origin_ip(request)
+    deleted = clear_graph(origin_ip)
+    if not deleted:
+        status = 500
+    return Response(status=status)
+
+
+
+
+@app.route('/history', methods=['GET'])
+def get_history():
+    status = 200
+    try:
+        history = get_logs_list()
+        if not history:
+            history = []
+            status = 204
+        return jsonify(history), status
+    except Exception as e:
+        return jsonify({"Internal Server Error"}), status
+
+
+
+@app.route('/get_log', methods=['GET'])
+def get_log():
+    
+    log_id = request.args.get('log_id')
+    logging.info(f"Received log_id: {log_id}")
+    if not log_id:
+        message = jsonify("Missing log_id parameter")
+        status=400
+    else:
+        status = 200
+        message = None
         
-
-# @app.route('/clear_graph', methods=['GET'])
-
-# @app.route('/history', methods=['GET'])
-
-# @app.route('/get_log', methods=['GET'])
+        try:
+            log_data = get_log_info(log_id)
+            if not log_data:
+                message = jsonify("Log Info not found")
+                status=404
+            else:
+                message = jsonify(log_data)
+                status=200
+        except Exception as e:
+            logging.error(f"Error retrieving log: {e}")
+            message = jsonify("Error retrieving log")
+            status = 500
+            log_data = None
+        
+    
+    return message, status

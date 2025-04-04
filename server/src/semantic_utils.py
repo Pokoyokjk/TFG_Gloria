@@ -66,3 +66,12 @@ def update_graph (graph_data: dict, json_ld_data:dict) -> dict:
 def convert_ttl_info_to_dict(ttl_list) -> dict:
     dict_ttl_list = [json.loads(ttl.to_json()) for ttl in ttl_list]
     return dict_ttl_list
+
+def serialize_log(log) -> dict:
+    return {
+        "_id": str(log._id),
+        "uploaded_at": log.uploaded_at.isoformat() if log.uploaded_at else None,
+        "origin_ip": log.origin_ip,
+        "action_type": log.action_type,
+        "action": str(log.action) if log.action else None,
+    }
