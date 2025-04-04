@@ -2,6 +2,27 @@ from rdflib import Graph
 import json
 
 import logging
+import os
+
+logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
+log_file = os.getenv("SERVER_LOG_FILE", "segb_server.log")
+# Ensure the logs directory exists
+os.makedirs('./logs', exist_ok=True)
+file_handler = logging.FileHandler(
+    filename=f'./logs/{log_file}',
+    mode='a',
+    encoding='utf-8'
+)
+file_handler.setFormatter(logging.Formatter(
+    fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+))
+logger = logging.getLogger("segb_server.semantic_utils")
+logger.setLevel(getattr(logging, logging_level, logging.INFO))
+logger.addHandler(file_handler)
+
+
+logger.info("Loading module semantic_utils...")
 
 # -------- AUX FUNCTIONS FOR APP.PY ----------- # 
 
@@ -36,13 +57,6 @@ def convert_graph_to_turtle(graph: Graph) -> str:
     prefixes = {prefix: str(uri) for prefix, uri in graph_namespace}
     serialized_turtle_data = graph.serialize(format="turtle", context=prefixes)
     return serialized_turtle_data
-
-def get_origin_ip(request) -> str:
-    if request.headers.getlist("X-Forwarded-For"):
-        ip = request.headers.getlist("X-Forwarded-For")[0].split(',')[0]
-    else:
-        ip = request.remote_addr
-    return ip
 
 # -------- AUX FUNCTIONS FOR MODEL.PY ----------- # 
 

@@ -4,8 +4,28 @@ import semantic_utils as semantic_utils
 import hashlib
 from bson import ObjectId
 
-
 import logging
+import os
+
+logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
+log_file = os.getenv("SERVER_LOG_FILE", "segb_server.log")
+# Ensure the logs directory exists
+os.makedirs('./logs', exist_ok=True)
+file_handler = logging.FileHandler(
+    filename=f'./logs/{log_file}',
+    mode='a',
+    encoding='utf-8'
+)
+file_handler.setFormatter(logging.Formatter(
+    fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+))
+logger = logging.getLogger("segb_server.model")
+logger.setLevel(getattr(logging, logging_level, logging.INFO))
+logger.addHandler(file_handler)
+
+
+logger.info("Loading module model...")
 
 # ------------ DOCUMENTS DEFINITION ------------ #
 
@@ -70,13 +90,17 @@ def log_ttl_content(ttl:str, ip_addr:str) -> None:
     """
         Atomic Transaction 
     """
-    
+    logger.debug(f"Logging TTL content")
+    logger.debug(f"Origin IP: {ip_addr}")
     log_id = ObjectId()
+    logger.debug(f"Log ID: {log_id}")
     insertion_id = ObjectId()
+    logger.debug(f"Insertion ID: {insertion_id}")
     
     db = get_db()
     session = db.client.start_session()
     session.start_transaction()
+    logger.debug(f"Session started")
     try:
         
         log = Log (
@@ -87,22 +111,25 @@ def log_ttl_content(ttl:str, ip_addr:str) -> None:
             action = insertion_id
         )
         log.save()        
-        
+        logger.debug(f"Log saved")
         insertion = Insertion (
         _id = insertion_id,
         log = log,
         ttl_content = ttl
      )
         insertion.save()
+        logger.debug(f"Insertion saved")
     
         session.commit_transaction()
         return True
     
     except Exception as ex:
+        logger.error(f"Error logging TTL content: {ex}")
         session.abort_transaction()
         return False
     finally:
         session.end_session()
+        logger.debug(f"Session ended")
         
     
     
@@ -200,6 +227,12 @@ def clear_graph(ip_addr:str) -> bool:
         graph.delete()
             
         session.commit_transaction()
+        logger.debug(f"Graph deleted")
+        logger.debug(f"Deletion ID: {deletion_id}")
+        logger.debug(f"Log ID: {log_id}")
+        logger.debug(f"Deleted graph hash: {current_graph_hash}")
+        logger.debug(f"Deletion saved")
+        logger.info("Graph cleared successfully")
         return True
     
     except Exception as e:

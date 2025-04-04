@@ -8,3 +8,6 @@ tutorial/interactive_segb_graph.html
 .env
 k8s/
 playground/
+logs/
+*.log
+*.bak
