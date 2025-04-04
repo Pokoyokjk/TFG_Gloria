@@ -143,10 +143,13 @@ def get_graph():
 def delete_graph():
     status = 200
     origin_ip = semantic_utils.get_origin_ip(request)
+    json_ld_data = get_raw_graph_from_db()
+    if not json_ld_data:
+        return Response("Empty graph, nothing to delete", status=204)
     deleted = clear_graph(origin_ip)
     if not deleted:
         status = 500
-    return Response(status=status)
+    return Response("Internal Server Error", status=status)
 
 @app.route('/experiment', methods=['GET'])
 def get_experiment():

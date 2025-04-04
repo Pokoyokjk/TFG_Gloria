@@ -230,6 +230,18 @@ def test_DELETE_graph():
     assert response.status_code == 204, f"Expected HTTP 204 Empty Content code, but got {response.status_code}"
     assert response.text == "", f"Expected empty response, but got {response.text}"
 
+def test_DELETE_empty_graph():
+    # Test the DELETE /graph endpoint when the graph is already empty
+    
+    # Ensure the graph is empty by attempting to delete it first
+    url = f"{BASE_URL}/graph"
+    response = requests.delete(url)
+    assert response.status_code in [200, 204], f"Expected HTTP 200 or 204 when ensuring graph is empty, but got {response.status_code}"
+    
+    # Attempt to delete the graph again
+    response = requests.delete(url)
+    assert response.status_code == 204, f"Expected HTTP 204 No Content when deleting an already empty graph, but got {response.status_code}"
+    assert response.text.strip() == "", f"Expected empty response body for 204, but got: {response.text}"
 
     
 def test_GET_history():
