@@ -163,7 +163,7 @@ Delete the entire graph stored in the SEGB.
    * - ``403 Forbidden``
      - Insufficient permissions (e.g., using a Reader Token).
 
-3.6. GET /experiment
+3.6. GET /experiments
 ---------------------
 
 **Description:**  
@@ -181,6 +181,8 @@ Retrieve information about a specific experiment and its associated activities.
   - OR
   - ``namespace``: The namespace of the experiment.
   - ``experiment_id``: The ID of the experiment.
+  - OR
+  - no parameters: Returns all experiments in JSON format.
 
 **Response Codes:**
 
@@ -192,40 +194,14 @@ Retrieve information about a specific experiment and its associated activities.
      - Description
    * - ``200 OK``
      - Returns the experiment details in **Turtle (TTL)** format.
+   * - ``204 No Content``
+     - No experiments found.
    * - ``403 Forbidden``
      - Insufficient permissions (e.g., using a Logger Token).
    * - ``404 Not Found``
      - The specified experiment was not found.
    * - ``422 Unprocessable Entity``
      - Missing required parameters (e.g., `namespace` or `experiment_id`).
-
-3.7. GET /experiments
-----------------------
-
-**Description:**  
-Retrieve a list of all experiments stored in the SEGB.
-
-**Request Details:**
-
-- **URL:** `/experiments`
-- **Method:** `GET`
-- **Required Headers:**  
-  - ``Authorization: Bearer "<READER_TOKEN>"``
-
-**Response Codes:**
-
-.. list-table::
-   :widths: 20 80
-   :header-rows: 1
-
-   * - Status Code
-     - Description
-   * - ``200 OK``
-     - Returns a CSV file with the list of experiment URIs.
-   * - ``204 No Content``
-     - No experiments found.
-   * - ``403 Forbidden``
-     - Insufficient permissions (e.g., using a Logger Token).
 
 3.8. GET /history
 ------------------

@@ -98,7 +98,7 @@ def get_experiment_with_activities(source: Graph, namespace: str, experiment_id:
     return result_graph
 
 
-def get_experiment_list(graph: Graph) -> Result:
+def get_experiment_list(graph: Graph) -> dict:
     query = """
         PREFIX amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#>
         
@@ -108,4 +108,4 @@ def get_experiment_list(graph: Graph) -> Result:
         }
     """
     result = graph.query(query)
-    return result.serialize(format="csv", encoding="utf-8")
+    return result.serialize(format="json", encoding="utf-8")

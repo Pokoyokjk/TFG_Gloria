@@ -1,3 +1,4 @@
+import json
 from fastapi import Depends, FastAPI, HTTPException, status, Response, Request
 from fastapi.responses import JSONResponse, PlainTextResponse, StreamingResponse
 from fastapi.encoders import jsonable_encoder
@@ -138,6 +139,31 @@ async def get_log(user: Annotated[User, Depends(validate_token_for_admin_endpoin
     
     return JSONResponse(content=log_data, status_code=status.HTTP_200_OK)
 
+@app.get('/history')
+@app.get('/logs')
+async def get_history(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request):
+    logger.info(f"Received request for history from IP: {request.client.host} from user {user.name} (username: {user.username})")
+    try:
+        history = get_logs_list()
+        logger.debug(f"History retrieved successfully")
+        if not history:
+            logger.info("No history found")
+            response = JSONResponse(content=[], status_code=status.HTTP_204_NO_CONTENT)
+        else:
+            logger.info("History found")
+            response = JSONResponse(content=history, status_code=status.HTTP_200_OK)
+        logger.debug(f"Response status code: {response.status_code}")
+        return response
+    except HTTPException as e:
+        logger.error(f"HTTPException: {e.detail}")
+        raise e
+    except Exception as e:
+        logger.error(f"Error retrieving history: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error retrieving history: {str(e)}"
+        )
+
 @app.get('/query')
 async def get_query(user: Annotated[User, Depends(validate_token_for_admin_endpoint)]):
     raise HTTPException(
@@ -221,7 +247,7 @@ async def delete_graph(user: Annotated[User, Depends(validate_token_for_admin_en
         logger.info("Graph deleted successfully")
         return PlainTextResponse(content="Graph deleted successfully")
 
-@app.get('/experiment')
+@app.get('/experiments')
 async def get_experiment(user: Annotated[User, Depends(validate_token_for_readers_endpoint)], request: Request, uri: str = None, namespace: str = None, experiment_id: str = None, experiment: Experiment = None):
     logger.info(f"Received request to get a specific experiment from IP: {request.client.host} from user {user.name} (username: {user.username})")
     uri =  experiment.uri if experiment and experiment.uri else uri
@@ -238,6 +264,10 @@ async def get_experiment(user: Annotated[User, Depends(validate_token_for_reader
         experiment_id = experiment.experiment_id if experiment and experiment.experiment_id else experiment_id
         if namespace and not namespace.endswith("#"):
             namespace += "#"
+        if not namespace and not experiment_id:
+            logger.info("No URI, namespace or experiment_id provided")
+            logger.info("Returning the list of experiments")
+            return generate_response_with_all_experiments_in_json()
         logger.info(f"Requested the following experiment -> {namespace}{experiment_id}")
         if not namespace or not experiment_id:
             logger.info("Missing parameters: namespace or experiment_id")
@@ -275,35 +305,31 @@ async def get_experiment(user: Annotated[User, Depends(validate_token_for_reader
             detail=f"Error retrieving experiment: {str(e)}"
         )
 
-# TODO: add experiments/namespace/{namespace}/id/{experiment_id} as new endpoint
-# TODO: add experiments/namespace/{namespace}/id/{experiment_id}/activities as new endpoint
-# TODO: add experiments/namespace/{namespace} as new endpoint
-
-@app.get('/experiments')
-async def get_experiments(user: Annotated[User, Depends(validate_token_for_readers_endpoint)], request: Request):
+def generate_response_with_all_experiments_in_json():
     '''
     Get the list of experiments from the graph.
-    The response is a CSV file with the experiment URIs.
-    The CSV file is generated using a SPARQL query.
+    The response is a JSON file with the experiment URIs.
+    The JSON file is generated using a SPARQL query.
     '''
-    logger.info(f"Received request for experiment list from IP: {request.client.host} from user {user.name} (username: {user.username})")
+    logger.info(f"Received request to get the list of experiments")
     try:
         json_ld_data = get_raw_graph_from_db()
         graph = utils.semantic.get_graph_from_json(json_ld_data)
         result = utils.experiments.get_experiment_list(graph)
-        content_lines = len([line for line in result.strip().splitlines() if line.strip()])
-        logger.debug(f"Query result: {result} - lines with content: {content_lines}")
-        if len(result.strip().splitlines()) == 1:  # Only the header is returned
+        logger.debug(f"Experiment list as JSON: {result}")
+        # Check if the bindings in the result are empty
+        result_json = json.loads(result.decode('utf-8'))
+        if len(result_json['results']['bindings']) == 0:
             logger.info("No experiments found")
             return PlainTextResponse(
                 content="No experiments found",
                 status_code=status.HTTP_204_NO_CONTENT)
         else:
-            logger.info(f"Graph retrieved successfully. Returning the experiment list as CSV.")
-            return PlainTextResponse(
-                content=utils.experiments.get_experiment_list(graph),
-                media_type="text/csv",
-                headers={"Content-Disposition": "attachment; filename=experiment_list.csv"},
+            logger.info(f"Graph retrieved successfully. Returning the experiment list as JSON.")
+            return JSONResponse(
+                content=result_json,
+                media_type="application/json",
+                headers={"Content-Disposition": "attachment; filename=experiments.json"},
                 status_code=status.HTTP_200_OK
             )
     except HTTPException as e:
@@ -315,27 +341,4 @@ async def get_experiments(user: Annotated[User, Depends(validate_token_for_reade
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error retrieving experiment list: {str(e)}"
         )
-
-@app.get('/history')
-async def get_history(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request):
-    logger.info(f"Received request for history from IP: {request.client.host} from user {user.name} (username: {user.username})")
-    try:
-        history = get_logs_list()
-        logger.debug(f"History retrieved successfully")
-        if not history:
-            logger.info("No history found")
-            response = JSONResponse(content=[], status_code=status.HTTP_204_NO_CONTENT)
-        else:
-            logger.info("History found")
-            response = JSONResponse(content=history, status_code=status.HTTP_200_OK)
-        logger.debug(f"Response status code: {response.status_code}")
-        return response
-    except HTTPException as e:
-        logger.error(f"HTTPException: {e.detail}")
-        raise e
-    except Exception as e:
-        logger.error(f"Error retrieving history: {str(e)}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving history: {str(e)}"
-        )
+        
