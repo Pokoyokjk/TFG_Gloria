@@ -488,9 +488,12 @@ def test_GET_experiments_basic():
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp4",
     ]
 
-    # Verify that all expected URIs are present in the response
+    # Verify that both have the same length
     logger.debug(f"Experiment list: {resulting_uris}")
     logger.debug(f"Expected URIs: {expected_uris}")
+    
+    # Verify that all expected URIs are present in the response
+    assert len(resulting_uris) == len(expected_uris), f"Expected {len(expected_uris)} URIs, but got {len(resulting_uris)}"
     for uri in expected_uris:
         assert uri in resulting_uris, f"Expected URI {uri} is missing in the response"
 
@@ -542,16 +545,18 @@ def test_GET_experiments_extended():
     response_json = response.json()
     resulting_uris = [binding["experiment_uri"]["value"] for binding in response_json["results"]["bindings"]]
     expected_uris = [
-        "experiment_uri",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp2",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp3",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp4",
     ]
 
-    # Verify that all expected URIs are present in the response
+    # Verify that both have the same length
     logger.debug(f"Experiment list: {resulting_uris}")
     logger.debug(f"Expected URIs: {expected_uris}")
+    assert len(resulting_uris) == len(expected_uris), f"Expected {len(expected_uris)} URIs, but got {len(resulting_uris)}"
+    
+    # Verify that all expected URIs are present in the response
     for uri in expected_uris:
         assert uri in resulting_uris, f"Expected URI {uri} is missing in the response"
 
@@ -615,7 +620,6 @@ def test_GET_experiments_extended_several_logs():
     response_json = response.json()
     resulting_uris = [binding["experiment_uri"]["value"] for binding in response_json["results"]["bindings"]]
     expected_uris = [
-        "experiment_uri",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp2",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp3",
@@ -623,6 +627,11 @@ def test_GET_experiments_extended_several_logs():
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp5",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp6",
     ]
+
+    # Verify that both have the same length
+    logger.debug(f"Experiment list: {resulting_uris}")
+    logger.debug(f"Expected URIs: {expected_uris}")
+    assert len(resulting_uris) == len(expected_uris), f"Expected {len(expected_uris)} URIs, but got {len(resulting_uris)}"
 
     # Verify that all expected URIs are present in the response
     for uri in expected_uris:
@@ -644,7 +653,7 @@ def test_GET_experiments_without_logged_experiments():
     assert response.status_code == 204, f"Expected HTTP 204 No Content code, but got {response.status_code}"
 
 def test_GET_experiment():
-    # Test the /experiment endpoint
+    # Test the /experiments endpoint
     
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
@@ -676,7 +685,7 @@ def test_GET_experiment():
     response = requests.post(url, headers=headers, data=ttl_data)
     assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
     
-    # Test the get experiment endpoint    
+    # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -740,9 +749,40 @@ def test_GET_experiment_with_activities():
     response = requests.post(url, headers=headers, data=ttl_data)
     assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
     
-    # TODO: ADD SOME ACTIVITIES
+    ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        @prefix segb: <http://www.gsi.upm.es/ontologies/segb/ns#> .
+        @prefix oro: <http://kb.openrobots.org#> .
+        @prefix prov: <http://www.w3.org/ns/prov#> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+        
+        amor-exec:listeningEvent1 a oro:ListeningEvent, segb:LoggedActivity ;
+            amor-exp:isRelatedWithExperiment amor-exec:exp1 ;
+            oro:hasSpeaker amor-exec:maria ;
+            oro:hasListener amor-exec:ari1 ;
+            oro:hasMessage amor-exec:msg1 ;
+            segb:usedMLModel amor-exec:asrModel1 ;
+            prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime ;
+            prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+            segb:wasPerformedBy amor-exec:ari1 .
+
+        amor-exec:msg1 a oro:InitialMessage, oro:Message, prov:Entity ;
+            oro:hasText "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
+            prov:wasGeneratedBy amor-exec:listeningEvent1 .
+
+        amor-exec:decisionMakingAction1 a oro:DecisionMakingAction, segb:LoggedActivity ;
+            amor-exp:isRelatedWithExperiment amor-exec:exp1 ;
+            segb:triggeredByActivity amor-exec:listeningEvent1 ;
+            segb:triggeredByActivity amor-exec:detectedHumanEvent1 ;
+            segb:usedMLModel amor-exec:decisionMakingModel1 ;
+            prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+            segb:wasPerformedBy amor-exec:ari1 .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
     
-    # Test the get experiment endpoint    
+    # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -754,8 +794,11 @@ def test_GET_experiment_with_activities():
     # Load the response into an RDFLib graph
     graph = Graph()
     graph.parse(data=response.text, format="turtle")
-
-
+    # Write the resulting graph to a file
+    output_file = "./test/logs/graph.ttl"
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(graph.serialize(format="turtle"))
+    logger.info(f"Graph written to {output_file}")
     # Log all triples in the graph
     for subj, pred, obj in graph:
         logger.debug(f"Triple found:\n{subj} {pred} {obj}")
@@ -764,13 +807,37 @@ def test_GET_experiment_with_activities():
     # Verify that the expected triples are present in the graph
     expected_graph = Graph()
     expected_ttl_data = """
-        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
         @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix oro: <http://kb.openrobots.org#> .
+        @prefix prov: <http://www.w3.org/ns/prov#> .
+        @prefix segb: <http://www.gsi.upm.es/ontologies/segb/ns#> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+        
+        amor-exec:decisionMakingAction1 a oro:DecisionMakingAction,
+                segb:LoggedActivity ;
+            amor-exp:isRelatedWithExperiment amor-exec:exp1 ;
+            segb:triggeredByActivity amor-exec:detectedHumanEvent1,
+                amor-exec:listeningEvent1 ;
+            segb:usedMLModel amor-exec:decisionMakingModel1 ;
+            segb:wasPerformedBy amor-exec:ari1 ;
+            prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime .
+        
+        amor-exec:listeningEvent1 a oro:ListeningEvent,
+                segb:LoggedActivity ;
+            oro:hasListener amor-exec:ari1 ;
+            oro:hasMessage amor-exec:msg1 ;
+            oro:hasSpeaker amor-exec:maria ;
+            amor-exp:isRelatedWithExperiment amor-exec:exp1 ;
+            segb:usedMLModel amor-exec:asrModel1 ;
+            segb:wasPerformedBy amor-exec:ari1 ;
+            prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+            prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime .
         
         amor-exec:exp1 a amor-exp:Experiment ;
             amor-exp:hasExecutor amor-exec:ari41 ;
-            amor-exp:hasRequester amor-exec:researcher1 ;
-            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 ;
+            amor-exp:hasRequester amor-exec:researcher1 .
     """
     expected_graph.parse(data=expected_ttl_data, format="turtle")
 
@@ -785,7 +852,7 @@ def test_GET_experiment_with_activities():
     
     
 def test_GET_experiment_non_existing_experiment_uri():
-    # Test the /experiment endpoint
+    # Test the /experiments endpoint
     
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
@@ -817,7 +884,7 @@ def test_GET_experiment_non_existing_experiment_uri():
     response = requests.post(url, headers=headers, data=ttl_data)
     assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
     
-    # Test the get experiment endpoint
+    # Test the get /experiments endpoint
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp10"
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -827,8 +894,8 @@ def test_GET_experiment_non_existing_experiment_uri():
     assert response.status_code == 404, f"Expected HTTP 404 Not Found, but got {response.status_code}"
 
 def test_GET_experiment_missing_experiment():
-    # Test the /experiment endpoint
-    # Test the get experiment endpoint
+    # Test the /experiments endpoint
+    # Test the get experiments endpoint
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -837,8 +904,8 @@ def test_GET_experiment_missing_experiment():
     assert response.status_code == 404, f"Expected HTTP 404 Not Found, but got {response.status_code}"
     
 def test_GET_experiment_missing_experiment_id():
-    # Test the /experiment endpoint
-    # Test the get experiment endpoint
+    # Test the /experiments endpoint
+    # Test the get experiments endpoint
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns"
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -847,8 +914,8 @@ def test_GET_experiment_missing_experiment_id():
     assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity, but got {response.status_code}"
 
 def test_GET_experiment_missing_namespace():
-    # Test the /experiment endpoint
-    # Test the get experiment endpoint
+    # Test the /experiments endpoint
+    # Test the get experiments endpoint
     url = f"{BASE_URL}/experiments?experiment_id=exp1"
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -857,14 +924,14 @@ def test_GET_experiment_missing_namespace():
     assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity, but got {response.status_code}"
 
 def test_GET_experiment_missing_namespace_and_experiment_id():
-    # Test the /experiment endpoint
-    # Test the get experiment endpoint
-    url = f"{BASE_URL}/experiment"
+    # Test the /experiments endpoint
+    # Test the get experiments endpoint
+    url = f"{BASE_URL}/experiments"
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
     }
     response = requests.get(url, headers=headers)
-    assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity, but got {response.status_code}"
+    assert response.status_code == 204, f"Expected HTTP 204 No Content, but got {response.status_code}"
 
 def test_GET_log_with_json_params():
     # Insert a log entry first
@@ -939,8 +1006,8 @@ def test_GET_experiment_with_json_params():
     response = requests.post(url, headers=headers, data=ttl_data)
     assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
     
-    # Test the get experiment endpoint with JSON parameters
-    url = f"{BASE_URL}/experiment"
+    # Test the get /experiments endpoint with JSON parameters
+    url = f"{BASE_URL}/experiments"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -999,8 +1066,8 @@ def test_GET_experiment_with_json_params_hashtag_namespace():
     response = requests.post(url, headers=headers, data=ttl_data)
     assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
     
-    # Test the get experiment endpoint with JSON parameters and namespace ending with a hashtag
-    url = f"{BASE_URL}/experiment"
+    # Test the get /experiments endpoint with JSON parameters and namespace ending with a hashtag
+    url = f"{BASE_URL}/experiments"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -1060,8 +1127,8 @@ def test_GET_experiment_with_json_params_uri():
     response = requests.post(url, headers=headers, data=ttl_data)
     assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
     
-    # Test the get experiment endpoint with JSON parameters and namespace ending with a hashtag
-    url = f"{BASE_URL}/experiment"
+    # Test the get experiments endpoint with JSON parameters and namespace ending with a hashtag
+    url = f"{BASE_URL}/experiments"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -1250,31 +1317,31 @@ def test_check_auth_reader_level():
     assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
     
     
-    ### TESTING AUTHORIZATION LEVELS FOR GET /experiment ###
-    # Use the experiment endpoint with specific parameters
+    ### TESTING AUTHORIZATION LEVELS FOR GET /experiments ###
+    # Use the /experiments endpoint with specific parameters
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
-    # Test that accessing /experiment with ADMIN_TOKEN is allowed
+    # Test that accessing /experiments with ADMIN_TOKEN is allowed
     headers = {
         "Authorization": f"Bearer {ADMIN_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 404, f"Expected HTTP 404 OK for ADMIN_TOKEN, but got {response.status_code}"
     
-    # Test that accessing /experiment with READER_TOKEN is allowed
+    # Test that accessing /experiments with READER_TOKEN is allowed
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 404, f"Expected HTTP 404 OK for READER_TOKEN, but got {response.status_code}"
     
-    # Test that accessing /experiment with LOGGER_TOKEN is forbidden
+    # Test that accessing /experiments with LOGGER_TOKEN is forbidden
     headers = {
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
     
-    # Test that accessing /experiment without token is forbidden
+    # Test that accessing /experiments without token is forbidden
     response = requests.get(url)
     assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
     
