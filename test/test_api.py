@@ -70,7 +70,7 @@ def docker_compose_down():
 import time
 import requests
 
-def wait_for_docker_service(url=BASE_URL, timeout=60, interval=2):
+def wait_for_docker_service(url=f'{BASE_URL}/health', timeout=60, interval=2):
     start_time = time.time()
     while True:
         try:
