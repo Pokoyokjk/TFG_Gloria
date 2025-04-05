@@ -16,9 +16,9 @@ logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
 log_file = os.getenv("TESTS_LOG_FILE", "test_segb_server.log")
 compose_file = os.getenv("COMPOSE_FILE", "./test/docker-compose.test.yaml")
 # Ensure the logs directory exists
-os.makedirs('./logs', exist_ok=True)
+os.makedirs('./test/logs', exist_ok=True)
 file_handler = logging.FileHandler(
-    filename=f'./logs/{log_file}',
+    filename=f'./test/logs/{log_file}',
     mode='a',
     encoding='utf-8'
 )
