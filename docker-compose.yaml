@@ -1,6 +1,6 @@
 services:
   amor-segb:
-    container_name: amor-segb-flask
+    container_name: amor-segb-server
     image: ghcr.io/gsi-upm/amor-segb:0.3.0
     ports:
       - "5000:5000"
