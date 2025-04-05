@@ -5,12 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Semantic Ethical Glass Box (SEGB) &#8212; Semantic Ethical Glass Box (SEGB) v0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=61cd365c" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <title>5. Tutorial &#8212; Semantic Ethical Glass Box (SEGB) v0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
     <script src="_static/documentation_options.js?v=34cd777e"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -32,10 +31,11 @@
 
           <div class="body" role="main">
             
-  <section id="semantic-ethical-glass-box-segb">
-<h1>Semantic Ethical Glass Box (SEGB)<a class="headerlink" href="#semantic-ethical-glass-box-segb" title="Link to this heading">¶</a></h1>
+  <section id="tutorial">
+<h1>5. Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">¶</a></h1>
+<p>This tutorial is compatible with version <strong>0.2.0</strong> of the SEGB. Using a different version may result in unexpected behavior. We are actively working on new versions to enhance functionality and compatibility.</p>
 <section id="overview">
-<h2>1. Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<h2>5.1. Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p>The Semantic Ethical Glass Box (SEGB) is global <em>log</em> storage, which
 keeps a semantic registry (graph) of logs generated within different
 systems. It is comprised of two parts:</p>
@@ -47,7 +47,7 @@ JSON-LD format</p></li>
 </ol>
 </section>
 <section id="motivational-scenario">
-<h2>2. Motivational Scenario<a class="headerlink" href="#motivational-scenario" title="Link to this heading">¶</a></h2>
+<h2>5.2. Motivational Scenario<a class="headerlink" href="#motivational-scenario" title="Link to this heading">¶</a></h2>
 <p>Let’s suppose we set up a controlled scenario which includes a robot and
 a human, both being able of interacting with each other. Namely, the
 robot is a social agent which help humans to manage their emotional
@@ -63,6 +63,10 @@ point-of-view.</p>
 information to the SEGB, and thenm, the AI-based agents registering
 themself and posting all the activities’ information to the SEGB as they
 take place. So let’s start.</p>
+</section>
+<section id="use-case-interaction-human-robot">
+<h2>5.3. Use Case: Interaction Human-Robot<a class="headerlink" href="#use-case-interaction-human-robot" title="Link to this heading">¶</a></h2>
+<p>Let’s see how data is published/retrieved of the SEGB in a real use case based on the motivational scenario explained before.</p>
 <section id="auxiliary-functions">
 <h3>Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Link to this heading">¶</a></h3>
 <p>We first define some aux functions for interacting with the SEGB (see
@@ -75,129 +79,129 @@ the TTL file path and makes a POST to the SEGB.</p></li>
 <li><p><strong>get_graph</strong>: function who receives as <em>input</em> the server’s URL and
 the output TTL file path and makes a GET to the SEGB.</p></li>
 </ul>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">server</span> <span class="o">=</span> <span class="s2">&quot;http://127.0.0.1:5000&quot;</span>
-<span class="n">ttl_filepath</span> <span class="o">=</span> <span class="s2">&quot;./ttl/&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>server = &quot;http://127.0.0.1:5000&quot;
+ttl_filepath = &quot;./ttl/&quot;
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import requests
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">input_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def log_ttl(server: str, input_file_path: str):
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Log a TTL file to the SEGB.</span>
+    &quot;&quot;&quot;Log a TTL file to the SEGB.
 
-<span class="sd">    Reads a Turtle (TTL) file from the specified path and sends its content</span>
-<span class="sd">    to the SEGB&#39;s `/log` endpoint via a POST request.</span>
+    Reads a Turtle (TTL) file from the specified path and sends its content
+    to the SEGB&#39;s `/log` endpoint via a POST request.
 
-<span class="sd">    Args:</span>
-<span class="sd">        server (str): The base URL of the SEGB server (e.g., &quot;http://127.0.0.1:5000&quot;).</span>
-<span class="sd">        input_file_path (str): The path to the TTL file to be logged.</span>
+    Args:
+        server (str): The base URL of the SEGB server (e.g., &quot;http://127.0.0.1:5000&quot;).
+        input_file_path (str): The path to the TTL file to be logged.
 
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; log_ttl(&quot;http://127.0.0.1:5000&quot;, &quot;/path/to/file/data.ttl&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    Example:
+        &gt;&gt;&gt; log_ttl(&quot;http://127.0.0.1:5000&quot;, &quot;/path/to/file/data.ttl&quot;)
+    &quot;&quot;&quot;
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File successfully read from:&quot;</span><span class="p">,</span> <span class="n">input_file_path</span><span class="p">)</span>
+    with open(input_file_path, mode=&quot;r&quot;, encoding=&quot;utf-8&quot;) as file:
+        data = file.read()
+        print(&quot;File successfully read from:&quot;, input_file_path)
 
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;text/turtle&quot;</span>
-    <span class="p">}</span>
+    headers = {
+        &quot;Content-Type&quot;: &quot;text/turtle&quot;
+    }
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/log&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+    response = requests.post(f&quot;{server}/log&quot;, headers=headers, data=data)
 
-    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;POST request completed successfully&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in POST: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    if response.status_code == 200:
+        print(&quot;POST request completed successfully&quot;)
+    else:
+        print(f&quot;Error in POST: {response.status_code} - {response.text}&quot;)
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_graph</span><span class="p">(</span><span class="n">server</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download the complete graph stored in the SEGB.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def get_graph(server: str, output_file_path: str):
+    &quot;&quot;&quot;Download the complete graph stored in the SEGB.
 
-<span class="sd">    Sends a GET request to the SEGB&#39;s `/get_graph` endpoint to retrieve the</span>
-<span class="sd">    complete graph in Turtle format and saves it to the specified output file.</span>
+    Sends a GET request to the SEGB&#39;s `/get_graph` endpoint to retrieve the
+    complete graph in Turtle format and saves it to the specified output file.
 
-<span class="sd">    Args:</span>
-<span class="sd">        server (str): The base URL of the SEGB server (e.g., &quot;http://127.0.0.1:5000&quot;).</span>
-<span class="sd">        output_file_path (str): The path where the downloaded graph will be saved.</span>
+    Args:
+        server (str): The base URL of the SEGB server (e.g., &quot;http://127.0.0.1:5000&quot;).
+        output_file_path (str): The path where the downloaded graph will be saved.
 
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; get_graph(&quot;http://127.0.0.1:5000&quot;, &quot;/path/to/output/graph.ttl&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Requesting graph...&quot;</span><span class="p">)</span>
+    Example:
+        &gt;&gt;&gt; get_graph(&quot;http://127.0.0.1:5000&quot;, &quot;/path/to/output/graph.ttl&quot;)
+    &quot;&quot;&quot;
+    print(&quot;Requesting graph...&quot;)
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">server</span><span class="si">}</span><span class="s2">/get_graph&quot;</span><span class="p">)</span>
+    response = requests.get(f&quot;{server}/get_graph&quot;)
 
-    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File successfully downloaded to:&quot;</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">)</span>
+    if response.status_code == 200:
+        with open(output_file_path, mode=&quot;w&quot;, encoding=&quot;utf-8&quot;) as file:
+            file.write(response.text)
+        print(&quot;File successfully downloaded to:&quot;, output_file_path)
 
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in GET: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    else:
+        print(f&quot;Error in GET: {response.status_code} - {response.text}&quot;)
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rdflib</span>
-<span class="kn">from</span> <span class="nn">pyvis.network</span> <span class="kn">import</span> <span class="n">Network</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import rdflib
+from pyvis.network import Network
+from IPython.display import IFrame
 
-<span class="k">def</span> <span class="nf">display_graph</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+def display_graph(filepath):
 
-    <span class="n">get_graph</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
+    get_graph(server, filepath)
 
-    <span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;ttl&quot;</span><span class="p">)</span>
+    g = rdflib.Graph()
+    g.parse(filepath, format=&quot;ttl&quot;)
 
-    <span class="n">net</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s2">&quot;500px&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cdn_resources</span><span class="o">=</span><span class="s1">&#39;in_line&#39;</span><span class="p">)</span>
+    net = Network(height=&quot;500px&quot;, width=&quot;100%&quot;, notebook=True, directed=True, cdn_resources=&#39;in_line&#39;)
 
-    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
-        <span class="n">net</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-        <span class="n">net</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">))</span>
-        <span class="n">net</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+    for s, p, o in g:
+        net.add_node(s, label=str(s), title=str(s))
+        net.add_node(o, label=str(o), title=str(o))
+        net.add_edge(s, o, title=str(p))
 
-    <span class="n">net</span><span class="o">.</span><span class="n">force_atlas_2based</span><span class="p">()</span>
+    net.force_atlas_2based()
 
-    <span class="n">net</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;interactive_segb_graph.html&quot;</span><span class="p">)</span>
+    net.show(&quot;interactive_segb_graph.html&quot;)
 
-    <span class="k">return</span> <span class="n">IFrame</span><span class="p">(</span><span class="s2">&quot;interactive_segb_graph.html&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+    return IFrame(&quot;interactive_segb_graph.html&quot;, width=900, height=600)
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rdflib</span>
-<span class="kn">from</span> <span class="nn">pyvis.network</span> <span class="kn">import</span> <span class="n">Network</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import rdflib
+from pyvis.network import Network
+from IPython.display import IFrame
+import os
 
-<span class="n">graph_id_counter</span> <span class="o">=</span> <span class="mi">0</span>
+graph_id_counter = 0
 
-<span class="k">def</span> <span class="nf">display_graph</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">graph_id_counter</span>
+def display_graph(filepath):
+    global graph_id_counter
 
-    <span class="n">get_graph</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
+    get_graph(server, filepath)
 
-    <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    output_dir = &quot;html&quot;
+    os.makedirs(output_dir, exist_ok=True)
 
-    <span class="n">g</span> <span class="o">=</span> <span class="n">rdflib</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;ttl&quot;</span><span class="p">)</span>
+    g = rdflib.Graph()
+    g.parse(filepath, format=&quot;ttl&quot;)
 
-    <span class="n">net</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s2">&quot;500px&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cdn_resources</span><span class="o">=</span><span class="s1">&#39;in_line&#39;</span><span class="p">)</span>
+    net = Network(height=&quot;500px&quot;, width=&quot;100%&quot;, notebook=True, directed=True, cdn_resources=&#39;in_line&#39;)
 
-    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
-        <span class="n">net</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-        <span class="n">net</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">))</span>
-        <span class="n">net</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+    for s, p, o in g:
+        net.add_node(s, label=str(s), title=str(s))
+        net.add_node(o, label=str(o), title=str(o))
+        net.add_edge(s, o, title=str(p))
 
-    <span class="n">net</span><span class="o">.</span><span class="n">force_atlas_2based</span><span class="p">()</span>
+    net.force_atlas_2based()
 
-    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;segb_graph_</span><span class="si">{</span><span class="n">graph_id_counter</span><span class="si">}</span><span class="s2">.html&quot;</span>
-    <span class="n">filepath_out</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-    <span class="n">graph_id_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+    filename = f&quot;segb_graph_{graph_id_counter}.html&quot;
+    filepath_out = os.path.join(output_dir, filename)
+    graph_id_counter += 1
 
-    <span class="n">net</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">filepath_out</span><span class="p">)</span>
+    net.show(filepath_out)
 
-    <span class="k">return</span> <span class="n">IFrame</span><span class="p">(</span><span class="n">filepath_out</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+    return IFrame(filepath_out, width=900, height=500)
 </pre></div>
 </div>
 </section>
@@ -211,10 +215,10 @@ SEGB the information of all the agents participating. He/She writes a
 TTL file describing themself, denoted as <em>data_scientist.ttl</em> as part
 of the AI models development. This TTL is then sent to the SEGB.</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_scientist_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;data_scientist.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_scientist_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data_scientist_ttl = ttl_filepath + &quot;data_scientist.ttl&quot;
+with open(data_scientist_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">ex</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="c1">#&gt; .</span>
@@ -234,14 +238,14 @@ of the AI models development. This TTL is then sent to the SEGB.</p></li>
     <span class="n">schema</span><span class="p">:</span><span class="n">name</span> <span class="s2">&quot;Technical University of Madrid&quot;</span><span class="nd">@en</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">data_scientist_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, data_scientist_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">data_scientist</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -267,10 +271,10 @@ This file is named as <em>model_info.ttl</em> and includes information the
 algorithm or dataset used, the starting and ending time of tranining,
 etc.</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">models_info_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;models_info.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">models_info_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>models_info_ttl = ttl_filepath + &quot;models_info.ttl&quot;
+with open(models_info_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">ex</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="c1">#&gt; .</span>
@@ -339,14 +343,14 @@ etc.</p></li>
     <span class="n">mls</span><span class="p">:</span><span class="n">hasValue</span> <span class="s2">&quot;1600&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="n">long</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">models_info_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, models_info_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">models_info</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -372,10 +376,10 @@ scenario previously described. Maria, a person participating in the
 scenario, want to speak to the robot and do so. In that moment, the
 robot detect her and creates a TTL <em>log</em> which is sent to the SEGB:</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">person_detection_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;person_detection.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">person_detection_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>person_detection_ttl = ttl_filepath + &quot;person_detection.ttl&quot;
+with open(person_detection_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">ex</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="c1">#&gt; .</span>
@@ -393,14 +397,14 @@ robot detect her and creates a TTL <em>log</em> which is sent to the SEGB:</p></
     <span class="n">foaf</span><span class="p">:</span><span class="n">knows</span> <span class="n">ex</span><span class="p">:</span><span class="n">maria</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">person_detection_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, person_detection_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">person_detection</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -420,10 +424,10 @@ robot detect her and creates a TTL <em>log</em> which is sent to the SEGB:</p></
 TTL <em>log</em> saying it has listened to a message from Maria. Again, this
 log is sent to the SEGB:</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listened_to_person_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;listened_to_person.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">listened_to_person_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>listened_to_person_ttl = ttl_filepath + &quot;listened_to_person.ttl&quot;
+with open(listened_to_person_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">amor</span><span class="o">-</span><span class="n">exp</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gsi</span><span class="o">.</span><span class="n">upm</span><span class="o">.</span><span class="n">es</span><span class="o">/</span><span class="n">ontologies</span><span class="o">/</span><span class="n">amor</span><span class="o">/</span><span class="n">experiments</span><span class="o">/</span><span class="n">ns</span><span class="c1">#&gt; .</span>
@@ -448,14 +452,14 @@ log is sent to the SEGB:</p></li>
     <span class="n">prov</span><span class="p">:</span><span class="n">wasGeneratedBy</span> <span class="n">ex</span><span class="p">:</span><span class="n">listeningEvent1</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">listened_to_person_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, listened_to_person_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">listened_to_person</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -477,10 +481,10 @@ change. This raises a “decision making” process (which uses the ML
 model denoted as <em>decisionMakingModel1</em>) inside the robot, which is
 registered in the SEGB as shown:</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decision_making_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;decision_making.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">decision_making_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>decision_making_ttl = ttl_filepath + &quot;decision_making.ttl&quot;
+with open(decision_making_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">amor</span><span class="o">-</span><span class="n">exp</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gsi</span><span class="o">.</span><span class="n">upm</span><span class="o">.</span><span class="n">es</span><span class="o">/</span><span class="n">ontologies</span><span class="o">/</span><span class="n">amor</span><span class="o">/</span><span class="n">experiments</span><span class="o">/</span><span class="n">ns</span><span class="c1">#&gt; .</span>
@@ -498,14 +502,14 @@ registered in the SEGB as shown:</p></li>
     <span class="n">segb</span><span class="p">:</span><span class="n">wasPerformedBy</span> <span class="n">ex</span><span class="p">:</span><span class="n">ari1</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">decision_making_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, decision_making_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">decision_making</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -525,10 +529,10 @@ registered in the SEGB as shown:</p></li>
 robot, which detects <em>fear</em> and <em>sadness</em> from Maria’s question. The
 TTL which logs the emotion detection is sent to the SEGB.</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">emotion_detection_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;emotion_detection.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">emotion_detection_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>emotion_detection_ttl = ttl_filepath + &quot;emotion_detection.ttl&quot;
+with open(emotion_detection_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">amor</span><span class="o">-</span><span class="n">exp</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gsi</span><span class="o">.</span><span class="n">upm</span><span class="o">.</span><span class="n">es</span><span class="o">/</span><span class="n">ontologies</span><span class="o">/</span><span class="n">amor</span><span class="o">/</span><span class="n">experiments</span><span class="o">/</span><span class="n">ns</span><span class="c1">#&gt; .</span>
@@ -558,22 +562,22 @@ TTL which logs the emotion detection is sent to the SEGB.</p></li>
 <span class="n">ex</span><span class="p">:</span><span class="n">emotion1</span> <span class="n">a</span> <span class="n">onyx</span><span class="p">:</span><span class="n">Emotion</span> <span class="p">;</span>
     <span class="n">onyx</span><span class="p">:</span><span class="n">hasEmotionCategory</span> <span class="n">emoml</span><span class="p">:</span><span class="n">big6_fear</span> <span class="p">;</span>
     <span class="n">onyx</span><span class="p">:</span><span class="n">hasEmotionIntensity</span> <span class="s2">&quot;0.3&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="p">;</span>
-    <span class="n">onyx</span><span class="p">:</span><span class="n">algorithmConfidente</span> <span class="s2">&quot;0.86&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="o">.</span>
+    <span class="n">onyx</span><span class="p">:</span><span class="n">algorithmConfidence</span> <span class="s2">&quot;0.86&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="o">.</span>
 
 <span class="n">ex</span><span class="p">:</span><span class="n">emotion2</span> <span class="n">a</span> <span class="n">onyx</span><span class="p">:</span><span class="n">Emotion</span> <span class="p">;</span>
     <span class="n">onyx</span><span class="p">:</span><span class="n">hasEmotionCategory</span> <span class="n">emoml</span><span class="p">:</span><span class="n">big6_sadness</span> <span class="p">;</span>
     <span class="n">onyx</span><span class="p">:</span><span class="n">hasEmotionIntensity</span> <span class="s2">&quot;0.4&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="p">;</span>
-    <span class="n">onyx</span><span class="p">:</span><span class="n">algorithmConfidente</span> <span class="s2">&quot;0.93&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="o">.</span>
+    <span class="n">onyx</span><span class="p">:</span><span class="n">algorithmConfidence</span> <span class="s2">&quot;0.93&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">emotion_detection_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, emotion_detection_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">emotion_detection</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -596,10 +600,10 @@ decided to express <em>sadness</em>. He will sent to the SEGB a TTL which
 updates the triple of the “decision making” adding the emotion
 expression activity as well as describing this emotion expression.</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">emotion_expression_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;emotion_expression.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">emotion_expression_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>emotion_expression_ttl = ttl_filepath + &quot;emotion_expression.ttl&quot;
+with open(emotion_expression_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">amor</span><span class="o">-</span><span class="n">exp</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gsi</span><span class="o">.</span><span class="n">upm</span><span class="o">.</span><span class="n">es</span><span class="o">/</span><span class="n">ontologies</span><span class="o">/</span><span class="n">amor</span><span class="o">/</span><span class="n">experiments</span><span class="o">/</span><span class="n">ns</span><span class="c1">#&gt; .</span>
@@ -624,14 +628,14 @@ expression activity as well as describing this emotion expression.</p></li>
 <span class="n">ex</span><span class="p">:</span><span class="n">decisionMaking1</span> <span class="n">segb</span><span class="p">:</span><span class="n">producedActivityResult</span> <span class="n">ex</span><span class="p">:</span><span class="n">emotionExpression1</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">emotion_expression_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, emotion_expression_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">emotion_expression</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -649,10 +653,10 @@ expression activity as well as describing this emotion expression.</p></li>
 ></iframe><ol class="arabic simple" start="6">
 <li><p>Now the robot retrieves some news from an information source.</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">news_retrieval_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;news_retrieval.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">news_retrieval_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>news_retrieval_ttl = ttl_filepath + &quot;news_retrieval.ttl&quot;
+with open(news_retrieval_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">amor</span><span class="o">-</span><span class="n">exp</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gsi</span><span class="o">.</span><span class="n">upm</span><span class="o">.</span><span class="n">es</span><span class="o">/</span><span class="n">ontologies</span><span class="o">/</span><span class="n">amor</span><span class="o">/</span><span class="n">experiments</span><span class="o">/</span><span class="n">ns</span><span class="c1">#&gt; .</span>
@@ -704,14 +708,14 @@ expression activity as well as describing this emotion expression.</p></li>
     <span class="n">schema</span><span class="p">:</span><span class="n">name</span> <span class="s2">&quot;Example News&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="n">string</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">news_retrieval_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, news_retrieval_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">news_retrieval</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -729,10 +733,10 @@ expression activity as well as describing this emotion expression.</p></li>
 ></iframe><ol class="arabic simple" start="7">
 <li><p>Next, the robot shows the news to Maria through its screen.</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shown_content_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;shown_content.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">shown_content_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>shown_content_ttl = ttl_filepath + &quot;shown_content.ttl&quot;
+with open(shown_content_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">amor</span><span class="o">-</span><span class="n">exp</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gsi</span><span class="o">.</span><span class="n">upm</span><span class="o">.</span><span class="n">es</span><span class="o">/</span><span class="n">ontologies</span><span class="o">/</span><span class="n">amor</span><span class="o">/</span><span class="n">experiments</span><span class="o">/</span><span class="n">ns</span><span class="c1">#&gt; .</span>
@@ -758,14 +762,14 @@ expression activity as well as describing this emotion expression.</p></li>
     <span class="n">prov</span><span class="p">:</span><span class="n">endedAtTime</span> <span class="s2">&quot;2024-11-16T12:27:24&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="n">dateTime</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">shown_content_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, shown_content_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">shown_content</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -784,10 +788,10 @@ expression activity as well as describing this emotion expression.</p></li>
 <li><p>Lastly, the robot generates a response to speak to Maria and telling
 her the news are ready to be read.</p></li>
 </ol>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">robot_response_ttl</span> <span class="o">=</span> <span class="n">ttl_filepath</span> <span class="o">+</span> <span class="s2">&quot;robot_response.ttl&quot;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">robot_response_ttl</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>robot_response_ttl = ttl_filepath + &quot;robot_response.ttl&quot;
+with open(robot_response_ttl, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">amor</span><span class="o">-</span><span class="n">exp</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gsi</span><span class="o">.</span><span class="n">upm</span><span class="o">.</span><span class="n">es</span><span class="o">/</span><span class="n">ontologies</span><span class="o">/</span><span class="n">amor</span><span class="o">/</span><span class="n">experiments</span><span class="o">/</span><span class="n">ns</span><span class="c1">#&gt; .</span>
@@ -822,14 +826,14 @@ her the news are ready to be read.</p></li>
     <span class="n">segb</span><span class="p">:</span><span class="n">wasPerformedBy</span> <span class="n">ex</span><span class="p">:</span><span class="n">ari1</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_ttl</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">robot_response_ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_ttl(server, robot_response_ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">successfully</span> <span class="n">read</span> <span class="n">from</span><span class="p">:</span> <span class="o">./</span><span class="n">ttl</span><span class="o">/</span><span class="n">robot_response</span><span class="o">.</span><span class="n">ttl</span>
 <span class="n">POST</span> <span class="n">request</span> <span class="n">completed</span> <span class="n">successfully</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -853,16 +857,16 @@ information to the SEGB to keep a registry of all the events is clear.
 If an auditor want to analyze some specific event or robot behaviour,
 he/she can retrieve the global graph from the SEGB and dive into all the
 published <em>logs</em>:</p>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_graph</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>get_graph(server, &quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
 <span class="n">File</span> <span class="n">successfully</span> <span class="n">downloaded</span> <span class="n">to</span><span class="p">:</span> <span class="n">graph</span><span class="o">.</span><span class="n">ttl</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-     <span class="n">ttl</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">ttl</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>with open(&quot;graph.ttl&quot;, mode=&quot;r&quot;) as file:
+     ttl = file.read()
+     print(ttl)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@prefix</span> <span class="n">amor</span><span class="o">-</span><span class="n">exp</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">gsi</span><span class="o">.</span><span class="n">upm</span><span class="o">.</span><span class="n">es</span><span class="o">/</span><span class="n">ontologies</span><span class="o">/</span><span class="n">amor</span><span class="o">/</span><span class="n">experiments</span><span class="o">/</span><span class="n">ns</span><span class="c1">#&gt; .</span>
@@ -905,12 +909,12 @@ published <em>logs</em>:</p>
         <span class="n">ex</span><span class="p">:</span><span class="n">numberOfInstantes</span> <span class="o">.</span>
 
 <span class="n">ex</span><span class="p">:</span><span class="n">emotion1</span> <span class="n">a</span> <span class="n">onyx</span><span class="p">:</span><span class="n">Emotion</span> <span class="p">;</span>
-    <span class="n">onyx</span><span class="p">:</span><span class="n">algorithmConfidente</span> <span class="s2">&quot;0.86&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="p">;</span>
+    <span class="n">onyx</span><span class="p">:</span><span class="n">algorithmConfidence</span> <span class="s2">&quot;0.86&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="p">;</span>
     <span class="n">onyx</span><span class="p">:</span><span class="n">hasEmotionCategory</span> <span class="n">emoml</span><span class="p">:</span><span class="n">big6_fear</span> <span class="p">;</span>
     <span class="n">onyx</span><span class="p">:</span><span class="n">hasEmotionIntensity</span> <span class="s2">&quot;0.3&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="o">.</span>
 
 <span class="n">ex</span><span class="p">:</span><span class="n">emotion2</span> <span class="n">a</span> <span class="n">onyx</span><span class="p">:</span><span class="n">Emotion</span> <span class="p">;</span>
-    <span class="n">onyx</span><span class="p">:</span><span class="n">algorithmConfidente</span> <span class="s2">&quot;0.93&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="p">;</span>
+    <span class="n">onyx</span><span class="p">:</span><span class="n">algorithmConfidence</span> <span class="s2">&quot;0.93&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="p">;</span>
     <span class="n">onyx</span><span class="p">:</span><span class="n">hasEmotionCategory</span> <span class="n">emoml</span><span class="p">:</span><span class="n">big6_sadness</span> <span class="p">;</span>
     <span class="n">onyx</span><span class="p">:</span><span class="n">hasEmotionIntensity</span> <span class="s2">&quot;0.4&quot;</span><span class="o">^^</span><span class="n">xsd</span><span class="p">:</span><span class="nb">float</span> <span class="o">.</span>
 
@@ -1117,7 +1121,7 @@ published <em>logs</em>:</p>
     <span class="n">foaf</span><span class="p">:</span><span class="n">knows</span> <span class="n">ex</span><span class="p">:</span><span class="n">maria</span> <span class="o">.</span>
 </pre></div>
 </div>
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_graph</span><span class="p">(</span><span class="s2">&quot;graph.ttl&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>display_graph(&quot;graph.ttl&quot;)
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Requesting</span> <span class="n">graph</span><span class="o">...</span>
@@ -1152,25 +1156,17 @@ published <em>logs</em>:</p>
 
 
 
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="1_amor_project.html">1. AMOR Project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_introduction_segb.html">2. Introduction to SEGB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_api_documentation.html">3. API Description</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_basic_tutorial.html">4. Deploying the SEGB</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Semantic Ethical Glass Box (SEGB)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">1. Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#motivational-scenario">2. Motivational Scenario</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">5.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motivational-scenario">5.2. Motivational Scenario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-case-interaction-human-robot">5.3. Use Case: Interaction Human-Robot</a></li>
 </ul>
 </li>
 </ul>
@@ -1183,6 +1179,16 @@ published <em>logs</em>:</p>
   </ul></li>
 </ul>
 </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -1199,8 +1205,8 @@ published <em>logs</em>:</p>
       &#169;2025, José Luis Benítez Santana, Álvaro Carrera Barroso.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/5_complete_demo_tutorial.rst.txt"

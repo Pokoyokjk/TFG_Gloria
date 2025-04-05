@@ -53,9 +53,7 @@ logger.info("Database connection established.")
 logger.info("SEGB server is now running and ready to accept requests.")
 
 ### Endpoints ###
-@app.get('/')
 @app.get('/health')
-@app.get('/healthcheck')
 async def default_route(request: Request):
     logger.info("Health check request received from IP: %s", request.client.host)
     return Response(content="The SEGB is working", status_code=status.HTTP_200_OK, media_type="text/plain")
@@ -140,7 +138,6 @@ async def get_log(user: Annotated[User, Depends(validate_token_for_admin_endpoin
     return JSONResponse(content=log_data, status_code=status.HTTP_200_OK)
 
 @app.get('/history')
-@app.get('/logs')
 async def get_history(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request):
     logger.info(f"Received request for history from IP: {request.client.host} from user {user.name} (username: {user.username})")
     try:

@@ -13,16 +13,14 @@ The SEGB API uses **Bearer Tokens** for authentication and authorization. Each e
 
 Tokens must be included in the `Authorization` header as follows:
 
-```
-Authorization: Bearer "<TOKEN>"
-```
+``Authorization: Bearer <TOKEN>``
 
 If the server is secured, unauthorized access will result in the following status codes:
 
 - `401 Unauthorized`: No token provided or invalid token.
 - `403 Forbidden`: Token provided but insufficient permissions.
 
-3.1. GET /
+3.1. GET /health
 ----------
 
 **Description:**  
@@ -30,7 +28,7 @@ Health check endpoint to verify that the SEGB server is running.
 
 **Request Details:**
 
-- **URL:** `/`
+- **URL:** `/health`
 - **Method:** `GET`
 
 **Response Codes:**
@@ -54,11 +52,14 @@ This endpoint receives data in **Turtle (TTL)** format, converts it into **JSON-
 
 - **URL:** `/log`
 - **Method:** `POST`
-- **Required Headers:**  
+- **Required Headers:**
+
   - ``Content-Type: text/turtle``
-  - ``Authorization: Bearer "<LOGGER_TOKEN or ADMIN_TOKEN>"``
-- **Request Body:**  
-  A valid RDF document in **Turtle (TTL)** format.
+  - ``Authorization: Bearer <LOGGER_TOKEN or ADMIN_TOKEN>``
+  
+- **Request Body:**
+  
+  - A valid RDF document in **Turtle (TTL)** format.
 
 **Response Codes:**
 
@@ -86,8 +87,11 @@ Retrieve detailed information about a specific log entry.
 - **URL:** `/log`
 - **Method:** `GET`
 - **Required Headers:**  
-  - ``Authorization: Bearer "<ADMIN_TOKEN>"``
+
+  - ``Authorization: Bearer <ADMIN_TOKEN>``
+
 - **Query Parameters:**
+
   - ``log_id``: The ID of the log to retrieve.
 
 **Response Codes:**
@@ -118,7 +122,8 @@ Retrieve the entire graph stored in the SEGB in **Turtle (TTL)** format.
 - **URL:** `/graph`
 - **Method:** `GET`
 - **Required Headers:**  
-  - ``Authorization: Bearer "<READER_TOKEN or ADMIN_TOKEN>"``
+
+  - ``Authorization: Bearer <READER_TOKEN or ADMIN_TOKEN>``
 
 **Response Codes:**
 
@@ -146,7 +151,8 @@ Delete the entire graph stored in the SEGB.
 - **URL:** `/graph`
 - **Method:** `DELETE`
 - **Required Headers:**  
-  - ``Authorization: Bearer "<ADMIN_TOKEN>"``
+
+  - ``Authorization: Bearer <ADMIN_TOKEN>``
 
 **Response Codes:**
 
@@ -171,18 +177,67 @@ Retrieve information about a specific experiment and its associated activities.
 
 **Request Details:**
 
-- **URL:** `/experiment`
+- **URL:** `/experiments`
 - **Method:** `GET`
 - **Required Headers:**  
-  - ``Authorization: Bearer "<READER_TOKEN>"``
+
+  - ``Authorization: Bearer <READER_TOKEN>``
+
 - **Query Parameters:**
-  - ``uri``: Complete URI of the experiment (e.g., `namespace#experiment_id`).  
-    **Note:** If `uri` is provided, the `namespace` and `experiment_id` parameters will be ignored.
-  - OR
-  - ``namespace``: The namespace of the experiment.
-  - ``experiment_id``: The ID of the experiment.
-  - OR
-  - no parameters: Returns all experiments in JSON format.
+
+  - Any of the following alternatives can be used to specify the experiment, both in as a query parameter or as JSON body.
+
+  - **Important:** If no parameters are provided, the endpoint will return all experiment URIs registered in the SEGB in JSON format.
+
+  - Option 1:
+
+    - ``uri``: Complete URI of the experiment (e.g., `namespace#experiment_id`).  
+    
+    - **Important:** If `uri` is provided, the `namespace` and `experiment_id` parameters will be ignored.
+
+    - **Note for query parameter:** The `uri` parameter contains # character is not allowed in a query parameter, it must be encoded as `%23` if it is included in the URI. For example:
+    
+      .. code-block:: text
+        
+         /experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23exp1
+     
+    - **Note for JSON body:** The `%23` code must not be used if it is included in the JSON body. Regular # character must be used. For example:
+
+      .. code-block:: json
+
+         {
+           "uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"
+         }
+
+  - Option 2:
+
+    - ``namespace``: The namespace of the experiment.
+
+    - ``experiment_id``: The ID of the experiment.
+
+    - The following examples are valid:
+
+    .. code-block:: text
+
+       /experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1
+
+    .. code-block:: text
+
+       /experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp1
+
+    .. code-block:: json
+
+       {
+         "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns",
+         "experiment_id": "exp1"
+       }
+
+    .. code-block:: json
+
+       {
+         "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#",
+         "experiment_id": "exp1"
+       }
 
 **Response Codes:**
 
@@ -214,7 +269,8 @@ Retrieve the history of all logged actions in the SEGB.
 - **URL:** `/history`
 - **Method:** `GET`
 - **Required Headers:**  
-  - ``Authorization: Bearer "<ADMIN_TOKEN>"``
+
+  - ``Authorization: Bearer <ADMIN_TOKEN>``
 
 **Response Codes:**
 
@@ -242,7 +298,8 @@ Execute a SPARQL query on the graph. **(Not implemented yet)**
 - **URL:** `/query`
 - **Method:** `GET`
 - **Required Headers:**  
-  - ``Authorization: Bearer "<ADMIN_TOKEN>"``
+
+  - ``Authorization: Bearer <ADMIN_TOKEN>``
 
 **Response Codes:**
 

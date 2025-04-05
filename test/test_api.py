@@ -118,15 +118,8 @@ def setup_and_teardown():
     
 
 def test_GET_healthcheck():
-    response = requests.get(BASE_URL)
-    assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
-    assert response.text == "The SEGB is working", f"Expected 'The SEGB is working', but got {response.text}"
     
     response = requests.get(BASE_URL + "/health")
-    assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
-    assert response.text == "The SEGB is working", f"Expected 'The SEGB is working', but got {response.text}"
-    
-    response = requests.get(BASE_URL + "/healthcheck")
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     assert response.text == "The SEGB is working", f"Expected 'The SEGB is working', but got {response.text}"
     
@@ -725,7 +718,156 @@ def test_GET_experiment():
 
     for triple in graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
+
+
+def test_GET_experiment_query_hastag_code():
+    # Test the /experiments endpoint
     
+    # Insert a log entry to populate the SEGB
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    
+    # Example TTL data for experiments
+    ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasRequester amor-exec:researcher1 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+        amor-exec:exp2 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari42 ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp3 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari43 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp4 a amor-exp:Experiment ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
+    
+    # Test the get /experiments endpoint    
+    url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp3"
+    headers = {
+        "Authorization": f"Bearer {READER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    
+    assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
+    
+    # Load the response into an RDFLib graph
+    graph = Graph()
+    graph.parse(data=response.text, format="turtle")
+
+
+    # Log all triples in the graph
+    for subj, pred, obj in graph:
+        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    # Verify that the graph is not empty
+    assert len(graph) > 0, "The RDF graph is empty"
+    # Verify that the expected triples are present in the graph
+    expected_graph = Graph()
+    expected_ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp3 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari43 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+    """
+    expected_graph.parse(data=expected_ttl_data, format="turtle")
+
+    # Compare the two graphs
+    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+
+    for triple in expected_graph:
+        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+
+    for triple in graph:
+        assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
+    
+
+def test_GET_experiment_uri():
+    # Test the /experiments endpoint
+    
+    # Insert a log entry to populate the SEGB
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    
+    # Example TTL data for experiments
+    ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasRequester amor-exec:researcher1 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+        amor-exec:exp2 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari42 ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp3 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari43 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp4 a amor-exp:Experiment ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
+    
+    # Test the get /experiments endpoint    
+    url = f"{BASE_URL}/experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23exp1"
+    headers = {
+        "Authorization": f"Bearer {READER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    
+    assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
+    
+    # Load the response into an RDFLib graph
+    graph = Graph()
+    graph.parse(data=response.text, format="turtle")
+
+
+    # Log all triples in the graph
+    for subj, pred, obj in graph:
+        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    # Verify that the graph is not empty
+    assert len(graph) > 0, "The RDF graph is empty"
+    # Verify that the expected triples are present in the graph
+    expected_graph = Graph()
+    expected_ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasRequester amor-exec:researcher1 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+    """
+    expected_graph.parse(data=expected_ttl_data, format="turtle")
+
+    # Compare the two graphs
+    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+
+    for triple in expected_graph:
+        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+
+    for triple in graph:
+        assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
+
 def test_GET_experiment_with_activities():
     # Test the /experiments endpoint
     
@@ -783,7 +925,7 @@ def test_GET_experiment_with_activities():
     assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
     
     # Test the get /experiments endpoint    
-    url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
+    url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp1"
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
     }

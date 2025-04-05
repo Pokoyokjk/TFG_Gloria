@@ -1,7 +1,11 @@
-Semantic Ethical Glass Box (SEGB)
-=================================
+5. Tutorial
+================
 
-1. Overview
+
+.. warning::
+This tutorial is compatible with version **0.2.0** of the SEGB. Using a different version may result in unexpected behavior. We are actively working on new versions to enhance functionality and compatibility.
+
+5.1. Overview
 -----------
 
 The Semantic Ethical Glass Box (SEGB) is global *log* storage, which
@@ -14,7 +18,7 @@ systems. It is comprised of two parts:
 2. A MongoDB-based database, where the global graph is storaged in
    JSON-LD format
 
-2. Motivational Scenario
+5.2. Motivational Scenario
 ------------------------
 
 Let’s suppose we set up a controlled scenario which includes a robot and
@@ -35,6 +39,11 @@ The expected operation order is humans first adding the models’
 information to the SEGB, and thenm, the AI-based agents registering
 themself and posting all the activities’ information to the SEGB as they
 take place. So let’s start.
+
+5.3. Use Case: Interaction Human-Robot
+----------------------------------------
+
+Let's see how data is published/retrieved of the SEGB in a real use case based on the motivational scenario explained before.
 
 Auxiliary functions
 ~~~~~~~~~~~~~~~~~~~
