@@ -4,9 +4,9 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from typing import Annotated
 
-import semantic_utils as semantic_utils
-import experiments_utils as experiments_utils
-from credentials_utils import User, validate_token_for_loggers_endpoint, validate_token_for_readers_endpoint, validate_token_for_admin_endpoint
+import utils.semantic
+import utils.experiments
+from utils.credentials import User, validate_token_for_loggers_endpoint, validate_token_for_readers_endpoint, validate_token_for_admin_endpoint
 from model import connect_to_db, save_json_ld, get_raw_graph_from_db, log_ttl_content, clear_graph, get_logs_list, get_log_info
 
 
@@ -53,6 +53,8 @@ logger.info("SEGB server is now running and ready to accept requests.")
 
 ### Endpoints ###
 @app.get('/')
+@app.get('/health')
+@app.get('/healthcheck')
 async def default_route(request: Request):
     logger.info("Health check request received from IP: %s", request.client.host)
     return Response(content="The SEGB is working", status_code=status.HTTP_200_OK, media_type="text/plain")
@@ -60,34 +62,44 @@ async def default_route(request: Request):
 @app.post('/log')
 async def save_log(user: Annotated[User, Depends(validate_token_for_loggers_endpoint)], request: Request):
     logger.info(f"Received post for log from IP: {request.client.host} from user {user.name} (username: {user.username})")
-    recieved_data = await request.body()
-    recieved_data = recieved_data.decode("utf-8")
-    if not recieved_data:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Not recieved data or invalid data"
-            )
-    
-    origin_ip = request.client.host
-    logger.info(f"Received log data from {origin_ip}")
-    json_ld_data = None
-    
     try:
-        graph = semantic_utils.get_graph_from_ttl(recieved_data)
-        logger.debug(f"Graph loaded from received Turtle data")
-        json_ld_data = semantic_utils.convert_graph_to_json_ld(graph=graph)
-        logger.debug(f"Graph converted to JSON-LD format")
-    except Exception as e:
-        logger.error(f"Error converting Turtle data to JSON-LD: {e}")
+        recieved_data = await request.body()
+        recieved_data = recieved_data.decode("utf-8")
+        if not recieved_data:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Not recieved data or invalid data"
+                )
+
+        origin_ip = request.client.host
+        logger.info(f"Received log data from {origin_ip}")
+        json_ld_data = None
+
+        try:
+            graph = utils.semantic.get_graph_from_ttl(recieved_data)
+            logger.debug(f"Graph loaded from received Turtle data")
+            json_ld_data = utils.semantic.convert_graph_to_json_ld(graph=graph)
+            logger.debug(f"Graph converted to JSON-LD format")
+        except Exception as e:
+            logger.error(f"Error converting Turtle data to JSON-LD: {e}")
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Not recieved data or invalid data"
+                )
+        save_json_ld(json_ld_data=json_ld_data)
+        logger.info("Log data integrated into the global graph")
+        log_ttl_content(recieved_data,origin_ip)
+        logger.debug(f"Log registred in history")
+        return JSONResponse(content={"message": "Log saved successfully"}, status_code=status.HTTP_201_CREATED)
+    except HTTPException as e:
+        logger.error(f"HTTPException: {e.detail}")
+        raise e
+    except:
+        logger.error("Error saving log data")
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Not recieved data or invalid data"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal Server Error"
             )
-    save_json_ld(json_ld_data=json_ld_data)
-    logger.info("Log data integrated into the global graph")
-    log_ttl_content(recieved_data,origin_ip)
-    logger.debug(f"Log registred in history")
-    return JSONResponse(content={"message": "Log saved successfully"}, status_code=status.HTTP_201_CREATED)
 
 @app.get('/log')
 async def get_log(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request, log: Log = None, log_id: str = None):
@@ -150,10 +162,10 @@ async def get_query(user: Annotated[User, Depends(validate_token_for_admin_endpo
     # try:
     #     # Retrieve the graph data as in get_graph
     #     json_ld_data = get_raw_graph_from_db()
-    #     graph = semantic_utils.get_graph_from_json(json_ld_data)
+    #     graph = utils.semantic.get_graph_from_json(json_ld_data)
         
-    #     # Execute the SPARQL query using the semantic_utils module on the retrieved graph
-    #     query_result = semantic_utils.execute_sparql_query(graph, sparql_query)
+    #     # Execute the SPARQL query using the semantic utils module on the retrieved graph
+    #     query_result = utils.semantic.execute_sparql_query(graph, sparql_query)
     #     # TODO: not so simple to parse "any" query result, but we could return the raw result
     #     result = query_result.serialize()
     #     return Response(result, status=200)
@@ -167,24 +179,28 @@ async def get_graph(user: Annotated[User, Depends(validate_token_for_readers_end
     turtle_data = None
     try:
         json_ld_data = get_raw_graph_from_db()
+        if not json_ld_data:
+            raise HTTPException(
+                status_code=status.HTTP_204_NO_CONTENT,
+                detail="Empty graph"
+            )
+        else:    
+            graph = utils.semantic.get_graph_from_json(json_ld_data)
+            turtle_data = utils.semantic.convert_graph_to_turtle(graph)
+            logger.info("Graph retrieved successfully")
+            response = PlainTextResponse(content=turtle_data)
+            response.headers["Content-Type"] = "text/turtle"
+            response.status_code = status.HTTP_200_OK
+            return response
+    except HTTPException as e:
+        logger.error(f"HTTPException: {e.detail}")
+        raise e
     except:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal Server Error"
         )
-    if not json_ld_data:
-        raise HTTPException(
-            status_code=status.HTTP_204_NO_CONTENT,
-            detail="Empty graph"
-        )
-    else:    
-        graph = semantic_utils.get_graph_from_json(json_ld_data)
-        turtle_data = semantic_utils.convert_graph_to_turtle(graph)
-        logger.info("Graph retrieved successfully")
-        response = PlainTextResponse(content=turtle_data)
-        response.headers["Content-Type"] = "text/turtle"
-        response.status_code = status.HTTP_200_OK
-        return response
+    
 
 @app.delete('/graph')
 async def delete_graph(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request):
@@ -231,8 +247,8 @@ async def get_experiment(user: Annotated[User, Depends(validate_token_for_reader
             )
     try:
         json_ld_data = get_raw_graph_from_db() # Test if this is the correct way to get the data
-        graph = semantic_utils.get_graph_from_json(json_ld_data)
-        result_graph = experiments_utils.get_experiment_with_activities(graph, namespace, experiment_id)
+        graph = utils.semantic.get_graph_from_json(json_ld_data)
+        result_graph = utils.experiments.get_experiment_with_activities(graph, namespace, experiment_id)
         if len(result_graph) == 0:
             logger.info(f"Experiment not found: {namespace}{experiment_id}")
             raise HTTPException(
@@ -259,8 +275,8 @@ async def get_experiment(user: Annotated[User, Depends(validate_token_for_reader
             detail=f"Error retrieving experiment: {str(e)}"
         )
 
-# TODO: add experiments/namespace/{namespace}/{experiment_id} as new endpoint
-# TODO: add experiments/namespace/{namespace}/{experiment_id}/activities as new endpoint
+# TODO: add experiments/namespace/{namespace}/id/{experiment_id} as new endpoint
+# TODO: add experiments/namespace/{namespace}/id/{experiment_id}/activities as new endpoint
 # TODO: add experiments/namespace/{namespace} as new endpoint
 
 @app.get('/experiments')
@@ -273,21 +289,26 @@ async def get_experiments(user: Annotated[User, Depends(validate_token_for_reade
     logger.info(f"Received request for experiment list from IP: {request.client.host} from user {user.name} (username: {user.username})")
     try:
         json_ld_data = get_raw_graph_from_db()
-        graph = semantic_utils.get_graph_from_json(json_ld_data)
-        result = experiments_utils.get_experiment_list(graph)
+        graph = utils.semantic.get_graph_from_json(json_ld_data)
+        result = utils.experiments.get_experiment_list(graph)
         content_lines = len([line for line in result.strip().splitlines() if line.strip()])
         logger.debug(f"Query result: {result} - lines with content: {content_lines}")
         if len(result.strip().splitlines()) == 1:  # Only the header is returned
             logger.info("No experiments found")
-            return PlainTextResponse(content="No experiments found", status_code=status.HTTP_204_NO_CONTENT)
+            return PlainTextResponse(
+                content="No experiments found",
+                status_code=status.HTTP_204_NO_CONTENT)
         else:
             logger.info(f"Graph retrieved successfully. Returning the experiment list as CSV.")
             return PlainTextResponse(
-            content=experiments_utils.get_experiment_list(graph),
-            media_type="text/csv",
-            headers={"Content-Disposition": "attachment; filename=experiment_list.csv"},
-            status_code=status.HTTP_200_OK
+                content=utils.experiments.get_experiment_list(graph),
+                media_type="text/csv",
+                headers={"Content-Disposition": "attachment; filename=experiment_list.csv"},
+                status_code=status.HTTP_200_OK
             )
+    except HTTPException as e:
+        logger.error(f"HTTPException: {e.detail}")
+        raise e
     except Exception as e:
         logger.debug(f"Error retrieving experiment list: {e}")
         raise HTTPException(
@@ -309,6 +330,9 @@ async def get_history(user: Annotated[User, Depends(validate_token_for_admin_end
             response = JSONResponse(content=history, status_code=status.HTTP_200_OK)
         logger.debug(f"Response status code: {response.status_code}")
         return response
+    except HTTPException as e:
+        logger.error(f"HTTPException: {e.detail}")
+        raise e
     except Exception as e:
         logger.error(f"Error retrieving history: {str(e)}")
         raise HTTPException(

@@ -1,6 +1,6 @@
 from mongoengine import Document, DynamicField, DateTimeField, StringField, ValidationError, connect, get_db, ReferenceField, ObjectIdField
 from datetime import datetime
-import semantic_utils as semantic_utils
+import utils.semantic
 import hashlib
 from bson import ObjectId
 
@@ -68,8 +68,8 @@ def save_json_ld(json_ld_data:dict) -> None:
     
     graph = Graph.objects(_id='0').first()
     if graph:
-        json_ld_data = semantic_utils.update_prefixes(graph.graph_data, json_ld_data)
-        json_ld_data = semantic_utils.update_graph(graph.graph_data, json_ld_data)
+        json_ld_data = utils.semantic.update_prefixes(graph.graph_data, json_ld_data)
+        json_ld_data = utils.semantic.update_graph(graph.graph_data, json_ld_data)
         graph.update(
             set__graph_data=json_ld_data,
             set__updated_at=datetime.now()
@@ -151,7 +151,7 @@ def get_logs_list() -> list:
     logs = Log.objects()
     serialized_logs = []
     if logs:
-        serialized_logs = [semantic_utils.serialize_log(log) for log in logs]
+        serialized_logs = [utils.semantic.serialize_log(log) for log in logs]
     return serialized_logs
 
 def get_log_info(log_id: str) -> dict:
@@ -180,7 +180,7 @@ def get_log_info(log_id: str) -> dict:
             }
 
     return {
-        "log": semantic_utils.serialize_log(log),
+        "log": utils.semantic.serialize_log(log),
         "action": action_data
     }
 

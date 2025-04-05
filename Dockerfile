@@ -15,6 +15,6 @@ ADD pyproject.toml pyproject.toml
 
 RUN uv sync --frozen
 
-COPY ./server/src /app
+COPY ./server /app
 
 CMD ["uv", "run", "fastapi", "run", "main.py", "--port", "5000"]

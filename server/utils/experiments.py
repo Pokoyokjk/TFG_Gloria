@@ -16,12 +16,12 @@ file_handler.setFormatter(logging.Formatter(
     fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 ))
-logger = logging.getLogger("segb_server.experiments_utils")
+logger = logging.getLogger("segb_server.utils.experiments")
 logger.setLevel(getattr(logging, logging_level, logging.INFO))
 logger.addHandler(file_handler)
 
 
-logger.info("Loading module experiments_utils...")
+logger.info("Loading module utils.experiments...")
 
 # -------- AUX FUNCTIONS FOR AMOR EXPERIMENTS QUERIES ----------- # 
 
