@@ -1,6 +1,10 @@
 5. Tutorial
 ================
 
+
+.. warning::
+This tutorial is compatible with version **0.2.0** of the SEGB. Using a different version may result in unexpected behavior. We are actively working on new versions to enhance functionality and compatibility.
+
 5.1. Overview
 -----------
 

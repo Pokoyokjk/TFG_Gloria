@@ -4,6 +4,10 @@
 4.1. Starting the SEGB
 -------------------
 
+.. warning::
+This tutorial is compatible with version **0.2.0** of the SEGB. Using a different version may result in unexpected behavior. We are actively working on new versions to enhance functionality and compatibility.
+
+
 Use the docker-compose file available in this repository. This action requires access to the image used in the docker compose file. The process consists of several steps:
 
 1. Get a personal access token to enable console login in `ghcr.io <https://docs.github.com/es/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens>`__.
