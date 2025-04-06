@@ -184,8 +184,7 @@ def test_POST_log_invalid_data():
     response = requests.post(url, headers=headers, data=invalid_ttl_data)
     
     assert response.status_code == 400, f"Expected 400 Bad Request, but got {response.status_code}"
-        
-        
+
 def test_GET_empty_graph():
     url = f"{BASE_URL}/graph"
     headers = {
@@ -196,7 +195,6 @@ def test_GET_empty_graph():
     logger.debug(f"Response text: {response.text}")
     logger.debug(f"Response length: {len(response.text)}")
     assert response.text == "", f"Expected empty response, but got {response.text}"
-
 
 def test_GET_graph_with_one_POST():
     
@@ -309,7 +307,6 @@ def test_DELETE_empty_graph():
     assert response.status_code == 204, f"Expected HTTP 204 No Content when deleting an already empty graph, but got {response.status_code}"
     assert response.text.strip() == "", f"Expected empty response body for 204, but got: {response.text}"
 
-    
 def test_GET_history():
     
     url = f"{BASE_URL}/log"
@@ -352,9 +349,7 @@ def test_GET_history():
     
     assert "origin_ip" in history[0], "First history entry is missing 'origin_ip'"
     assert "origin_ip" in history[1], "Second history entry is missing 'origin_ip'"
-    
-    
-        
+
 def test_GET_history_empty_graph():
     
     url = f"{BASE_URL}/history"
@@ -365,8 +360,7 @@ def test_GET_history_empty_graph():
 
     assert response.status_code == 204, f"Expected HTTP 204 No Content when getting history, but got {response.status_code}"
     assert response.text.strip() == '', f"Expected empty response body for 204, but got: {response.text}"
-    
-    
+
 def test_GET_log():
     # Insert a log entry first
     url = f"{BASE_URL}/log"
@@ -417,9 +411,7 @@ def test_GET_log():
     assert log_data["log"]["action_type"] == "insertion", f"Expected action_type 'insertion', but got {log_data['log']['action_type']}"
     assert "origin_ip" in log_data["log"], "Log data is missing 'origin_ip'"
     assert "uploaded_at" in log_data["log"], "Log data is missing 'uploaded_at'"
-    
-    
-    
+
 def test_GET_log_empty_graph():
     # Test the get /log endpoint with no logs in the graph
     url = f"{BASE_URL}/log?log_id=nonexistent_id"
@@ -440,7 +432,7 @@ def test_GET_log_empty_graph():
 
     # Assert that the response status code is 400 (Missing log_id parameter)
     assert response.status_code == 400, f"Expected HTTP 400 Bad Request, but got {response.status_code}"
-    
+
 def test_GET_experiments_basic():
     # Test the /experiments endpoint
     
@@ -634,7 +626,6 @@ def test_GET_experiments_extended_several_logs():
     for uri in resulting_uris:
         assert uri in expected_uris, f"Unexpected URI {uri} found in the response"
 
-
 def test_GET_experiments_without_logged_experiments():
     # Test the /experiments endpoint
     
@@ -719,7 +710,6 @@ def test_GET_experiment():
     for triple in graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
-
 def test_GET_experiment_query_hastag_code():
     # Test the /experiments endpoint
     
@@ -792,7 +782,83 @@ def test_GET_experiment_query_hastag_code():
 
     for triple in graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
+
+def test_GET_experiment_query_params():
+    # Test the /experiments endpoint
     
+    # Insert a log entry to populate the SEGB
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    
+    # Example TTL data for experiments
+    ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasRequester amor-exec:researcher1 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+        amor-exec:exp2 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari42 ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp3 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari43 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp4 a amor-exp:Experiment ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
+    
+    # Test the get /experiments endpoint    
+    url = f"{BASE_URL}/experiments"
+    headers = {
+        "Authorization": f"Bearer {READER_TOKEN}"
+    }
+    params = {
+        "experiment_id": "exp3",
+        "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#"
+    }
+    response = requests.get(url, headers=headers, params=params)
+    
+    assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
+    
+    # Load the response into an RDFLib graph
+    graph = Graph()
+    graph.parse(data=response.text, format="turtle")
+
+
+    # Log all triples in the graph
+    for subj, pred, obj in graph:
+        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    # Verify that the graph is not empty
+    assert len(graph) > 0, "The RDF graph is empty"
+    # Verify that the expected triples are present in the graph
+    expected_graph = Graph()
+    expected_ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp3 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari43 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+    """
+    expected_graph.parse(data=expected_ttl_data, format="turtle")
+
+    # Compare the two graphs
+    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+
+    for triple in expected_graph:
+        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+
+    for triple in graph:
+        assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
 def test_GET_experiment_uri():
     # Test the /experiments endpoint
@@ -833,6 +899,83 @@ def test_GET_experiment_uri():
         "Authorization": f"Bearer {READER_TOKEN}"
     }
     response = requests.get(url, headers=headers)
+    
+    assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
+    
+    # Load the response into an RDFLib graph
+    graph = Graph()
+    graph.parse(data=response.text, format="turtle")
+
+
+    # Log all triples in the graph
+    for subj, pred, obj in graph:
+        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    # Verify that the graph is not empty
+    assert len(graph) > 0, "The RDF graph is empty"
+    # Verify that the expected triples are present in the graph
+    expected_graph = Graph()
+    expected_ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasRequester amor-exec:researcher1 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+    """
+    expected_graph.parse(data=expected_ttl_data, format="turtle")
+
+    # Compare the two graphs
+    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+
+    for triple in expected_graph:
+        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+
+    for triple in graph:
+        assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
+
+def test_GET_experiment_uri_params():
+    # Test the /experiments endpoint
+    
+    # Insert a log entry to populate the SEGB
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    
+    # Example TTL data for experiments
+    ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasRequester amor-exec:researcher1 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+        amor-exec:exp2 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari42 ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp3 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari43 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp4 a amor-exp:Experiment ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
+    
+    # Test the get /experiments endpoint    
+    url = f"{BASE_URL}/experiments"
+    headers = {
+        "Authorization": f"Bearer {READER_TOKEN}"
+    }
+    params = {
+        "uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"
+    }
+    response = requests.get(url, headers=headers, params=params)
     
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
@@ -991,8 +1134,7 @@ def test_GET_experiment_with_activities():
 
     for triple in graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
-    
-    
+
 def test_GET_experiment_non_existing_experiment_uri():
     # Test the /experiments endpoint
     
@@ -1044,7 +1186,7 @@ def test_GET_experiment_missing_experiment():
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 404, f"Expected HTTP 404 Not Found, but got {response.status_code}"
-    
+
 def test_GET_experiment_missing_experiment_id():
     # Test the /experiments endpoint
     # Test the get experiments endpoint
@@ -1246,7 +1388,6 @@ def test_GET_experiment_with_json_params_hashtag_namespace():
     for triple in graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
     assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
-    
 
 def test_GET_experiment_with_json_params_uri():
     # Insert a log entry to populate the SEGB
@@ -1424,7 +1565,7 @@ def test_check_auth_admin_level():
     # Test that accessing /query without token is forbidden
     response = requests.get(url)
     assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
-    
+
 def test_check_auth_reader_level():
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
     if not SECURED_SERVER:
@@ -1514,7 +1655,7 @@ def test_check_auth_reader_level():
     # Test that accessing /graph without token is forbidden
     response = requests.get(url)
     assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
-    
+
 def test_check_auth_logger_level():
     
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
