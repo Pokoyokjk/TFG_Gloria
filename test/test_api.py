@@ -42,6 +42,8 @@ logger.info(f"Loading test tokens from environment variables")
 READER_TOKEN = os.getenv("READER_TOKEN", "fake_reader_token")
 LOGGER_TOKEN = os.getenv("LOGGER_TOKEN", "fake_logger_token")
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "fake_admin_token")
+READER_LOGGER_TOKEN = os.getenv("READER_LOGGER_TOKEN", "fake_reader_logger_token")
+ALL_ROLES_TOKEN = os.getenv("ALL_ROLES_TOKEN", "fake_all_roles_token")
 
 SECRET_KEY = os.getenv("SECRET_KEY", None)
 
@@ -1454,9 +1456,16 @@ def test_check_auth_admin_level():
     headers = {
         "Authorization": f"Bearer {ADMIN_TOKEN}"
     }
-    history_response = requests.get(url, headers=headers)
-    assert history_response.status_code == 204, f"Expected HTTP 204 when access /history with ADMIN_TOKEN, but got {history_response.status_code}"
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 204, f"Expected HTTP 204 when access /history with ADMIN_TOKEN, but got {response.status_code}"
 
+    # Test that accessing /history with ALL_ROLES_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 204, f"Expected HTTP 204 when access /history with ALL_ROLES_TOKEN, but got {response.status_code}"
+    
     # Test that accessing /history with READER_TOKEN is forbidden
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -1470,6 +1479,13 @@ def test_check_auth_admin_level():
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
+    
+    # Test that accessing /history with READER_LOGGER_TOKEN is forbidden
+    headers = {
+        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_LOGGER_TOKEN, but got {response.status_code}"
     
     # Test that accessing /history without token is forbidden
     response = requests.get(url)
@@ -1486,6 +1502,13 @@ def test_check_auth_admin_level():
     response = requests.get(url, headers=headers)
     assert response.status_code == 404, f"Expected HTTP 404 Not Found for ADMIN_TOKEN, but got {response.status_code}"
 
+    # Test that accessing /log with ALL_ROLES_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 404, f"Expected HTTP 404 Not Found when access /log with ALL_ROLES_TOKEN, but got {response.status_code}"
+
     # Test that accessing /log with READER_TOKEN is forbidden
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -1499,6 +1522,13 @@ def test_check_auth_admin_level():
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
+    
+    # Test that accessing /log with READER_LOGGER_TOKEN is forbidden
+    headers = {
+        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_LOGGER_TOKEN, but got {response.status_code}"
 
     # Test that accessing /log without token is forbidden
     response = requests.get(url)
@@ -1513,6 +1543,13 @@ def test_check_auth_admin_level():
     }
     response = requests.delete(url, headers=headers)
     assert response.status_code == 204, f"Expected HTTP 204 when access /graph with ADMIN_TOKEN, but got {response.status_code}"
+
+    # Test that accessing /graph with ALL_ROLES_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
+    }
+    response = requests.delete(url, headers=headers)
+    assert response.status_code == 204, f"Expected HTTP 204 when access /graph with ALL_ROLES_TOKEN, but got {response.status_code}"
     
     # Test that deleting /graph with READER_TOKEN is forbidden
     headers = {
@@ -1528,6 +1565,13 @@ def test_check_auth_admin_level():
     response = requests.delete(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
     
+    # Test that accessing /graph with READER_LOGGER_TOKEN is forbidden
+    headers = {
+        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
+    }
+    response = requests.delete(url, headers=headers)
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_LOGGER_TOKEN, but got {response.status_code}"
+    
     # Test that deleting /graph without token is forbidden
     response = requests.delete(url)
     assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
@@ -1541,6 +1585,13 @@ def test_check_auth_admin_level():
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 501, f"Expected HTTP 501 Not Implemented for ADMIN_TOKEN, but got {response.status_code}"
+
+    # Test that accessing /query with ALL_ROLES_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 501, f"Expected HTTP 501 Not Implemented when access /query with ALL_ROLES_TOKEN, but got {response.status_code}"
     
     # Test that accessing /query with READER_TOKEN is forbidden
     headers = {
@@ -1555,6 +1606,13 @@ def test_check_auth_admin_level():
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
+    
+    # Test that accessing /query with READER_LOGGER_TOKEN is forbidden
+    headers = {
+        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_LOGGER_TOKEN, but got {response.status_code}"
     
     # Test that accessing /query without token is forbidden
     response = requests.get(url)
@@ -1575,6 +1633,13 @@ def test_check_auth_reader_level():
     history_response = requests.get(url, headers=headers)
     assert history_response.status_code == 204, f"Expected HTTP 204 when access /graph with ADMIN_TOKEN, but got {history_response.status_code}"
 
+    # Test that accessing /graph with ALL_ROLES_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 204, f"Expected HTTP 204 when access /graph with ALL_ROLES_TOKEN, but got {response.status_code}"
+
     # Test that accessing /graph with READER_TOKEN is allowed
     headers = {
         "Authorization": f"Bearer {READER_TOKEN}"
@@ -1589,6 +1654,13 @@ def test_check_auth_reader_level():
     response = requests.get(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
     
+    # Test that accessing /graph with READER_LOGGER_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 204, f"Expected HTTP 204 when access /graph with READER_LOGGER_TOKEN, but got {response.status_code}"
+    
     # Test that accessing /graph without token is forbidden
     response = requests.get(url)
     assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
@@ -1597,12 +1669,20 @@ def test_check_auth_reader_level():
     ### TESTING AUTHORIZATION LEVELS FOR GET /experiments ###
     # Use the /experiments endpoint with specific parameters
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
+    
     # Test that accessing /experiments with ADMIN_TOKEN is allowed
     headers = {
         "Authorization": f"Bearer {ADMIN_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 404, f"Expected HTTP 404 OK for ADMIN_TOKEN, but got {response.status_code}"
+    
+    ## Test that accessing /experiments with ALL_ROLES_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 404, f"Expected HTTP 404 OK for ALL_ROLES_TOKEN, but got {response.status_code}"
     
     # Test that accessing /experiments with READER_TOKEN is allowed
     headers = {
@@ -1618,6 +1698,13 @@ def test_check_auth_reader_level():
     response = requests.get(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
     
+    # Test that accessing /experiments with READER_LOGGER_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 404, f"Expected HTTP 404 OK for READER_LOGGER_TOKEN, but got {response.status_code}"
+    
     # Test that accessing /experiments without token is forbidden
     response = requests.get(url)
     assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
@@ -1625,12 +1712,20 @@ def test_check_auth_reader_level():
     
     ### TESTING AUTHORIZATION LEVELS FOR GET /experiments ###
     url = f"{BASE_URL}/experiments"
+    
     # Test that accessing /experiments with ADMIN_TOKEN is allowed
     headers = {
         "Authorization": f"Bearer {ADMIN_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 204, f"Expected HTTP 204 when access /experiments with ADMIN_TOKEN, but got {response.status_code}"
+    
+    # Test that accessing /experiments with ALL_ROLES_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 204, f"Expected HTTP 204 when access /experiments with ALL_ROLES_TOKEN, but got {response.status_code}"
     
     # Test that accessing /experiments with READER_TOKEN is allowed
     headers = {
@@ -1646,7 +1741,14 @@ def test_check_auth_reader_level():
     response = requests.get(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
     
-    # Test that accessing /graph without token is forbidden
+    # Test that accessing /experiments with READER_LOGGER_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    assert response.status_code == 204, f"Expected HTTP 204 when access /experiments with READER_LOGGER_TOKEN, but got {response.status_code}"
+    
+    # Test that accessing /experiments without token is forbidden
     response = requests.get(url)
     assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
 
@@ -1658,12 +1760,20 @@ def test_check_auth_logger_level():
     
     ### TESTING AUTHORIZATION LEVELS FOR POST /log ###
     url = f"{BASE_URL}/log"
-    # Test that inserting log with ADMIN_TOKEN is allowed# Test that accessing /log with ADMIN_TOKEN is allowed
+    # Test that accessing /log with ADMIN_TOKEN is allowed
     headers = {
         "Authorization": f"Bearer {ADMIN_TOKEN}"
     }
     response = requests.post(url, headers=headers)
     assert response.status_code == 400, f"Expected HTTP 400 Bad Request for ADMIN_TOKEN, but got {response.status_code}"
+
+    # Test that accessing /log with ALL_ROLES_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
+    }
+    response = requests.post(url, headers=headers)
+    assert response.status_code == 400, f"Expected HTTP 400 Bad Request for ALL_ROLES_TOKEN, but got {response.status_code}"
+
 
     # Test that accessing /log with READER_TOKEN is forbidden
     headers = {
@@ -1672,12 +1782,19 @@ def test_check_auth_logger_level():
     response = requests.post(url, headers=headers)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_TOKEN, but got {response.status_code}"
 
-    # Test that accessing /log with LOGGER_TOKEN is forbidden
+    # Test that accessing /log with LOGGER_TOKEN is allowed
     headers = {
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     response = requests.post(url, headers=headers)
     assert response.status_code == 400, f"Expected HTTP 400 Bad Request for LOGGER_TOKEN, but got {response.status_code}"
+
+    # Test that accessing /log with READER_LOGGER_TOKEN is allowed
+    headers = {
+        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
+    }
+    response = requests.post(url, headers=headers)
+    assert response.status_code == 400, f"Expected HTTP 400 Bad Request for READER_LOGGER_TOKEN, but got {response.status_code}"
 
     # Test that accessing /log without token is forbidden
     response = requests.post(url)
