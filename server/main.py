@@ -264,8 +264,9 @@ def generate_response_with_all_experiments_in_json():
                 status_code=status.HTTP_204_NO_CONTENT)
         else:
             logger.info(f"Graph retrieved successfully. Returning the experiment list as JSON.")
+            uris_list = [binding["experiment_uri"]["value"] for binding in result_json["results"]["bindings"]]
             return JSONResponse(
-                content=result_json,
+                content=uris_list,
                 media_type="application/json",
                 headers={"Content-Disposition": "attachment; filename=experiments.json"},
                 status_code=status.HTTP_200_OK

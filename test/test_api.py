@@ -464,8 +464,7 @@ def test_GET_experiments_basic():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Parse the response JSON and verify the experiment URIs
-    response_json = response.json()
-    resulting_uris = [binding["experiment_uri"]["value"] for binding in response_json["results"]["bindings"]]
+    resulting_uris = response.json()
     expected_uris = [
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp2",
@@ -527,8 +526,7 @@ def test_GET_experiments_extended():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Parse the response JSON and verify the experiment URIs
-    response_json = response.json()
-    resulting_uris = [binding["experiment_uri"]["value"] for binding in response_json["results"]["bindings"]]
+    resulting_uris = response.json()
     expected_uris = [
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp2",
@@ -602,8 +600,7 @@ def test_GET_experiments_extended_several_logs():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Parse the response JSON and verify the experiment URIs
-    response_json = response.json()
-    resulting_uris = [binding["experiment_uri"]["value"] for binding in response_json["results"]["bindings"]]
+    resulting_uris = response.json()
     expected_uris = [
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
         "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp2",

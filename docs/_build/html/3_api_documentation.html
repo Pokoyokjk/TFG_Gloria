@@ -259,12 +259,48 @@ Retrieve information about a specific experiment and its associated activities.<
 </li>
 <li><p><strong>Query Parameters:</strong></p>
 <ul>
-<li><p>Any of the following alternatives can be used to specify the experiment, both in as a query parameter or as JSON body.</p></li>
+<li><p>Retrieving a list of all experiments can be done by providing no parameters.</p>
+<ul>
 <li><p><strong>Important:</strong> If no parameters are provided, the endpoint will return all experiment URIs registered in the SEGB in JSON format.</p></li>
+<li><p>Example without parameters:</p>
+<ul>
+<li><p><strong>Request:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GET /experiments HTTP/1.1
+Host: http://example.com/experiments
+Authorization: Bearer &lt;READER_TOKEN&gt;
+</pre></div>
+</div>
+</li>
+<li><p><strong>Response:</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp2&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Retrieving information about a specific experiment can be done in two ways:</p>
+<ul>
+<li><p><strong>Note:</strong> Any of the following alternatives can be used to specify the experiment, both in as a query parameter or as JSON body.</p></li>
 <li><p>Option 1:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">uri</span></code>: Complete URI of the experiment (e.g., <cite>namespace#experiment_id</cite>).</p></li>
 <li><p><strong>Important:</strong> If <cite>uri</cite> is provided, the <cite>namespace</cite> and <cite>experiment_id</cite> parameters will be ignored.</p></li>
+<li><p><strong>Recommendation:</strong> When using Python’s <cite>requests</cite> library, use the <cite>params</cite> argument to ensure proper encoding of the <cite>#</cite> character as <cite>%23</cite>. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://example.com/experiments&quot;</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1&quot;</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer &lt;READER_TOKEN&gt;&quot;</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>  <span class="c1"># The URL will automatically encode # as %23</span>
+</pre></div>
+</div>
+</li>
 <li><p><strong>Note for query parameter:</strong> The <cite>uri</cite> parameter contains # character is not allowed in a query parameter, it must be encoded as <cite>%23</cite> if it is included in the URI. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23exp1
 </pre></div>
@@ -280,9 +316,20 @@ Retrieve information about a specific experiment and its associated activities.<
 </ul>
 </li>
 <li><p>Option 2:</p>
-<ul class="simple">
+<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">namespace</span></code>: The namespace of the experiment.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">experiment_id</span></code>: The ID of the experiment.</p></li>
+<li><p><strong>Recommendation:</strong> When using Python’s <cite>requests</cite> library, use the <cite>params</cite> argument to ensure proper encoding of the <cite>#</cite> character as <cite>%23</cite>. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://example.com/experiments&quot;</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&quot;</span><span class="p">,</span> <span class="s2">&quot;experiment_id&quot;</span><span class="p">:</span> <span class="s2">&quot;exp1&quot;</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer &lt;READER_TOKEN&gt;&quot;</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>  <span class="c1"># The URL will automatically encode # as %23</span>
+</pre></div>
+</div>
+</li>
 <li><p>The following examples are valid:</p></li>
 </ul>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&amp;experiment_id=exp1
@@ -307,6 +354,8 @@ Retrieve information about a specific experiment and its associated activities.<
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <p><strong>Response Codes:</strong></p>
 <table class="docutils align-default">
 <colgroup>
@@ -320,7 +369,7 @@ Retrieve information about a specific experiment and its associated activities.<
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p></td>
-<td><p>Returns the experiment details in <strong>Turtle (TTL)</strong> format.</p></td>
+<td><p>Returns the experiment details in <strong>Turtle (TTL)</strong> format (if <cite>uri</cite> is provided) or JSON format (if <cite>namespace</cite> and <cite>experiment_id</cite> are provided). If not, returns a list of all experiment URIs registered in the SEGB.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">204</span> <span class="pre">No</span> <span class="pre">Content</span></code></p></td>
 <td><p>No experiments found.</p></td>

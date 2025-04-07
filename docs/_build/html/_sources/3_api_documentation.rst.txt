@@ -185,59 +185,106 @@ Retrieve information about a specific experiment and its associated activities.
 
 - **Query Parameters:**
 
-  - Any of the following alternatives can be used to specify the experiment, both in as a query parameter or as JSON body.
+  - Retrieving a list of all experiments can be done by providing no parameters.
 
-  - **Important:** If no parameters are provided, the endpoint will return all experiment URIs registered in the SEGB in JSON format.
+    - **Important:** If no parameters are provided, the endpoint will return all experiment URIs registered in the SEGB in JSON format.
 
-  - Option 1:
+    - Example without parameters:
 
-    - ``uri``: Complete URI of the experiment (e.g., `namespace#experiment_id`).  
-    
-    - **Important:** If `uri` is provided, the `namespace` and `experiment_id` parameters will be ignored.
+      - **Request:**
 
-    - **Note for query parameter:** The `uri` parameter contains # character is not allowed in a query parameter, it must be encoded as `%23` if it is included in the URI. For example:
-    
+        .. code-block:: text
+
+           GET /experiments HTTP/1.1
+           Host: http://example.com/experiments
+           Authorization: Bearer <READER_TOKEN>
+
+      - **Response:**
+
+        .. code-block:: json
+
+           [
+             "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
+             "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp2"
+           ]
+
+  - Retrieving information about a specific experiment can be done in two ways:
+
+    - **Note:** Any of the following alternatives can be used to specify the experiment, both in as a query parameter or as JSON body.
+
+    - Option 1:
+
+      - ``uri``: Complete URI of the experiment (e.g., `namespace#experiment_id`).  
+
+      - **Important:** If `uri` is provided, the `namespace` and `experiment_id` parameters will be ignored.
+
+      - **Recommendation:** When using Python's `requests` library, use the `params` argument to ensure proper encoding of the `#` character as `%23`. For example:
+
+        .. code-block:: python
+
+         import requests
+
+         url = "http://example.com/experiments"
+         params = {"uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"}
+         headers = {"Authorization": "Bearer <READER_TOKEN>"}
+         response = requests.get(url, params=params, headers=headers)
+         print(response.url)  # The URL will automatically encode # as %23
+
+      - **Note for query parameter:** The `uri` parameter contains # character is not allowed in a query parameter, it must be encoded as `%23` if it is included in the URI. For example:
+
+        .. code-block:: text
+
+           /experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23exp1
+
+      - **Note for JSON body:** The `%23` code must not be used if it is included in the JSON body. Regular # character must be used. For example:
+
+        .. code-block:: json
+
+           {
+             "uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"
+           }
+
+    - Option 2:
+
+      - ``namespace``: The namespace of the experiment.
+
+      - ``experiment_id``: The ID of the experiment.
+
+      - **Recommendation:** When using Python's `requests` library, use the `params` argument to ensure proper encoding of the `#` character as `%23`. For example:
+
+        .. code-block:: python
+
+         import requests
+
+         url = "http://example.com/experiments"
+         params = {"namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns", "experiment_id": "exp1"}
+         headers = {"Authorization": "Bearer <READER_TOKEN>"}
+         response = requests.get(url, params=params, headers=headers)
+         print(response.url)  # The URL will automatically encode # as %23
+
+      - The following examples are valid:
+
       .. code-block:: text
-        
-         /experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23exp1
-     
-    - **Note for JSON body:** The `%23` code must not be used if it is included in the JSON body. Regular # character must be used. For example:
+
+         /experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1
+
+      .. code-block:: text
+
+         /experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp1
 
       .. code-block:: json
 
          {
-           "uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"
+           "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns",
+           "experiment_id": "exp1"
          }
 
-  - Option 2:
+      .. code-block:: json
 
-    - ``namespace``: The namespace of the experiment.
-
-    - ``experiment_id``: The ID of the experiment.
-
-    - The following examples are valid:
-
-    .. code-block:: text
-
-       /experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1
-
-    .. code-block:: text
-
-       /experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp1
-
-    .. code-block:: json
-
-       {
-         "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns",
-         "experiment_id": "exp1"
-       }
-
-    .. code-block:: json
-
-       {
-         "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#",
-         "experiment_id": "exp1"
-       }
+         {
+           "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#",
+           "experiment_id": "exp1"
+         }
 
 **Response Codes:**
 
@@ -248,7 +295,7 @@ Retrieve information about a specific experiment and its associated activities.
    * - Status Code
      - Description
    * - ``200 OK``
-     - Returns the experiment details in **Turtle (TTL)** format.
+     - Returns the experiment details in **Turtle (TTL)** format (if `uri` is provided) or JSON format (if `namespace` and `experiment_id` are provided). If not, returns a list of all experiment URIs registered in the SEGB.
    * - ``204 No Content``
      - No experiments found.
    * - ``403 Forbidden``
