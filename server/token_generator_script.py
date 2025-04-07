@@ -68,7 +68,7 @@ all_roles_user = {
     "exp": expire
 }
 all_roles_token = jwt.encode(all_roles_user, SECRET_KEY, algorithm=ALGORITHM)
-print("Full Admin Token:", all_roles_token)
+print("All Roles Token:", all_roles_token)
 
 # Unset the SECRET_KEY environment variable for security
 os.environ.pop("SECRET_KEY", None)
