@@ -8,13 +8,15 @@ import logging
 import os
 
 # Set up logging
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 # Load environment variables from a .env file
-load_dotenv("./test/test.env")
+ENV_FILE = "./test/test.env"
+# Load environment variables from the .env file without overriding existing ones in the environment
+CONFIG = dotenv_values(ENV_FILE)
 
-logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
-log_file = os.getenv("TESTS_LOG_FILE", "test_segb_server.log")
-compose_file = os.getenv("COMPOSE_FILE", "./test/docker-compose.test.yaml")
+logging_level = CONFIG.get("LOGGING_LEVEL", "DEBUG").upper()
+log_file = CONFIG.get("TESTS_LOG_FILE", "test_segb_server.log")
+compose_file = CONFIG.get("COMPOSE_FILE", "./test/docker-compose.test.yaml")
 # Ensure the logs directory exists
 os.makedirs('./test/logs', exist_ok=True)
 file_handler = logging.FileHandler(
@@ -33,19 +35,28 @@ logger.addHandler(file_handler)
 
 logger.info("Starting tests for the SEGB server...")
 logger.info("Logging level set to %s", logging_level)
+logger.info(f"Using env_file: {ENV_FILE}")
 
 logger.debug(f"For paths, checking working directory: {os.getcwd()}")
-BASE_URL = os.getenv("BASE_URL", "http://127.0.0.1:5000")
-TEST_DB_VOLUME = os.getenv("TEST_DB_VOLUME", "amor-segb-db-test")
+BASE_URL = CONFIG.get("BASE_URL", "http://127.0.0.1:5000")
+TEST_DB_VOLUME = CONFIG.get("TEST_DB_VOLUME", "amor-segb-db-test")
 
 logger.info(f"Loading test tokens from environment variables")
-READER_TOKEN = os.getenv("READER_TOKEN", "fake_reader_token")
-LOGGER_TOKEN = os.getenv("LOGGER_TOKEN", "fake_logger_token")
-ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "fake_admin_token")
-READER_LOGGER_TOKEN = os.getenv("READER_LOGGER_TOKEN", "fake_reader_logger_token")
-ALL_ROLES_TOKEN = os.getenv("ALL_ROLES_TOKEN", "fake_all_roles_token")
+READER_TOKEN = CONFIG.get("READER_TOKEN", "fake_reader_token")
+LOGGER_TOKEN = CONFIG.get("LOGGER_TOKEN", "fake_logger_token")
+ADMIN_TOKEN = CONFIG.get("ADMIN_TOKEN", "fake_admin_token")
+READER_LOGGER_TOKEN = CONFIG.get("READER_LOGGER_TOKEN", "fake_reader_logger_token")
+ALL_ROLES_TOKEN = CONFIG.get("ALL_ROLES_TOKEN", "fake_all_roles_token")
 
-SECRET_KEY = os.getenv("SECRET_KEY", None)
+logger.debug(f"READER_TOKEN: {READER_TOKEN}")
+logger.debug(f"LOGGER_TOKEN: {LOGGER_TOKEN}")
+logger.debug(f"ADMIN_TOKEN: {ADMIN_TOKEN}")
+logger.debug(f"READER_LOGGER_TOKEN: {READER_LOGGER_TOKEN}")
+logger.debug(f"ALL_ROLES_TOKEN: {ALL_ROLES_TOKEN}")
+
+SECRET_KEY = CONFIG.get("SECRET_KEY", None)
+
+logger.debug(f"SECRET_KEY: {SECRET_KEY}")
 
 if SECRET_KEY:
     logger.info("The Testing SEGB server is SECURED with a secret key.")
