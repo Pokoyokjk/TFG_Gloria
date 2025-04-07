@@ -1,7 +1,7 @@
 services:
   amor-segb:
     container_name: amor-segb-server
-    image: ghcr.io/gsi-upm/amor-segb:0.4.0
+    image: ghcr.io/gsi-upm/amor-segb:0.4.1
     build: .
     ports:
       - "5000:5000"
@@ -9,8 +9,10 @@ services:
       - internal_network
     depends_on:
       - amor-segb-mongodb
-    env_file:
-      - ./.env
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_SERVICE=amor-segb-mongodb
+      - LOGGING_LEVEL=DEBUG
     volumes:
       - ./logs:/logs
 
