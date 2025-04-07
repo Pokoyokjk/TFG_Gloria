@@ -11,3 +11,5 @@ playground/
 logs/
 *.log
 *.bak
+secret.env
+.env
