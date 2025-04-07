@@ -230,12 +230,13 @@ async def get_graph(user: Annotated[User, Depends(validate_token)], request: Req
                 status_code=status.HTTP_204_NO_CONTENT,
                 detail="Empty graph"
             )
-        else:    
+        else:
             graph = utils.semantic.get_graph_from_json(json_ld_data)
             turtle_data = utils.semantic.convert_graph_to_turtle(graph)
             logger.info("Graph retrieved successfully")
             response = PlainTextResponse(content=turtle_data)
-            response.headers["Content-Type"] = "text/turtle"
+            response.headers["Content-Type"] = "text/turtle; charset=utf-8"
+            response.headers["Content-Disposition"] = "attachment; filename=graph.ttl"
             response.status_code = status.HTTP_200_OK
             return response
     except HTTPException as e:

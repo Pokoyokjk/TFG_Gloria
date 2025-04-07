@@ -39,7 +39,7 @@ def convert_graph_to_json_ld(graph: Graph) -> dict:
 def convert_graph_to_turtle(graph: Graph) -> str:
     graph_namespace = graph.namespaces()
     prefixes = {prefix: str(uri) for prefix, uri in graph_namespace}
-    serialized_turtle_data = graph.serialize(format="turtle", context=prefixes, encoding="utf-8")
+    serialized_turtle_data = graph.serialize(format="turtle", context=prefixes, encoding="utf-8").decode("utf-8")
     return serialized_turtle_data
 
 # -------- AUX FUNCTIONS FOR MODEL.PY ----------- # 
