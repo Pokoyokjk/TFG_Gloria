@@ -27,7 +27,7 @@ class User(BaseModel):
     username: str
     name: str | None = None
     roles: list[str]
-    exp: int
+    exp: int | None = None
 
 async def validate_token(auth_credentials: Annotated[HTTPAuthorizationCredentials, Depends(security)]) -> dict:
     '''
@@ -39,7 +39,6 @@ async def validate_token(auth_credentials: Annotated[HTTPAuthorizationCredential
         In this case, security is disabled, and full access is granted ignoring the token.
         '''
     logger.debug("Validating token...")
-    logger.debug(f"Token: {auth_credentials.credentials}")
     if SECRET_KEY is None:
         logger.warning(
             "SECRET_KEY is not set. No security is enabled, and all endpoints are accessible without token validation.")
@@ -50,9 +49,11 @@ async def validate_token(auth_credentials: Annotated[HTTPAuthorizationCredential
             roles= [role for role in Role],
             exp=None
         )
-    decode = None
-    token = auth_credentials.credentials
     try:
+        logger.debug("Decoding token...")
+        token = auth_credentials.credentials
+        # Decode the token using the secret key and algorithm
+        logger.debug(f"Token: {token}")
         decode = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         logger.info("Token validated successfully")
         logger.debug(f"Decoded token data: {decode}")
