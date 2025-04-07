@@ -137,7 +137,7 @@ def test_GET_healthcheck():
 def test_POST_log_valid_data_with_admin_token():
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {ADMIN_TOKEN}"
     }
     
@@ -152,7 +152,7 @@ def test_POST_log_valid_data_with_admin_token():
 def test_POST_log_valid_data_with_logger_token():
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -167,7 +167,7 @@ def test_POST_log_valid_data_with_logger_token():
 def test_POST_log_valid_data_with_reader_token():
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {READER_TOKEN}"
     }
     
@@ -184,7 +184,7 @@ def test_POST_log_valid_data_with_reader_token():
 def test_POST_log_invalid_data():
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     invalid_ttl_data = """
@@ -210,7 +210,7 @@ def test_GET_graph_with_one_POST():
     
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -237,7 +237,7 @@ def test_GET_graph_with_several_POST():
 
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -276,7 +276,7 @@ def test_DELETE_graph():
     
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {ADMIN_TOKEN}"
     }
     
@@ -321,7 +321,7 @@ def test_GET_history():
     
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -375,7 +375,7 @@ def test_GET_log():
     # Insert a log entry first
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {ADMIN_TOKEN}"
     }
     
@@ -449,7 +449,7 @@ def test_GET_experiments_basic():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -501,7 +501,7 @@ def test_GET_experiments_extended():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -563,7 +563,7 @@ def test_GET_experiments_extended_several_logs():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -649,7 +649,7 @@ def test_GET_experiment():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -723,7 +723,7 @@ def test_GET_experiment_query_hastag_code():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -796,7 +796,7 @@ def test_GET_experiment_query_params():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -873,7 +873,7 @@ def test_GET_experiment_uri():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -947,7 +947,7 @@ def test_GET_experiment_uri_params():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -1024,7 +1024,7 @@ def test_GET_experiment_with_activities():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -1148,7 +1148,7 @@ def test_GET_experiment_non_existing_experiment_uri():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -1228,7 +1228,7 @@ def test_GET_log_with_json_params():
     # Insert a log entry first
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -1280,7 +1280,7 @@ def test_GET_experiment_with_json_params():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -1340,7 +1340,7 @@ def test_GET_experiment_with_json_params_hashtag_namespace():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     
@@ -1400,7 +1400,7 @@ def test_GET_experiment_with_json_params_uri():
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
-        "Content-Type": "text/turtle",
+        "Content-Type": "text/turtle; charset=utf-8",
         "Authorization": f"Bearer {LOGGER_TOKEN}"
     }
     

@@ -60,7 +60,7 @@ Alternatively, using *Python*:
    import requests
 
    url = "http://127.0.0.1:5000/log"
-   headers = {"Content-Type": "text/turtle"}
+   headers = {"Content-Type": "text/turtle; charset=utf-8"}
 
    with open("./data.ttl", "rb") as file:
        ttl_data = file.read()

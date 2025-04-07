@@ -85,7 +85,7 @@ for detailed info):
             print("File successfully read from:", input_file_path)
         
         headers = {
-            "Content-Type": "text/turtle"
+            "Content-Type": "text/turtle; charset=utf-8"
         }
         
         response = requests.post(f"{server}/log", headers=headers, data=data)

@@ -361,7 +361,7 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
             content=result_graph.serialize(format="turtle", encoding="utf-8"),
             headers={
             "Content-Disposition": "attachment; filename=graph.ttl",
-            "Content-Type": "text/turtle"
+            "Content-Type": "text/turtle; charset=utf-8"
             },
             status_code=status.HTTP_200_OK
         )
