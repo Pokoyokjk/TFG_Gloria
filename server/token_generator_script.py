@@ -4,9 +4,12 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime, timedelta, timezone
 from utils.credentials import Role
+import sys
 
+# Check if a .env file path is provided as a command-line argument
+env_file = sys.argv[1] if len(sys.argv) > 1 else ".env"
 # Load environment variables from a .env file
-load_dotenv()
+load_dotenv(env_file)
 # This must be generated with the command:
 # openssl rand -hex 32
 SECRET_KEY = os.getenv("SECRET_KEY", None)
@@ -66,3 +69,6 @@ all_roles_user = {
 }
 all_roles_token = jwt.encode(all_roles_user, SECRET_KEY, algorithm=ALGORITHM)
 print("Full Admin Token:", all_roles_token)
+
+# Unset the SECRET_KEY environment variable for security
+os.environ.pop("SECRET_KEY", None)

@@ -4,23 +4,7 @@ import json
 import logging
 import os
 
-logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
-log_file = os.getenv("SERVER_LOG_FILE", "segb_server.log")
-# Ensure the logs directory exists
-os.makedirs('./logs', exist_ok=True)
-file_handler = logging.FileHandler(
-    filename=f'./logs/{log_file}',
-    mode='a',
-    encoding='utf-8'
-)
-file_handler.setFormatter(logging.Formatter(
-    fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-))
 logger = logging.getLogger("segb_server.utils.semantic")
-logger.setLevel(getattr(logging, logging_level, logging.INFO))
-logger.addHandler(file_handler)
-
 
 logger.info("Loading module utils.semantic...")
 

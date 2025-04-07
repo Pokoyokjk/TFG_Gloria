@@ -8,46 +8,21 @@ import os
 
 from pydantic import BaseModel
 
-# Set up logging
-logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
-log_file = os.getenv("SERVER_LOG_FILE", "segb_server.log")
-# Ensure the logs directory exists
-os.makedirs('/logs', exist_ok=True)
-file_handler = logging.FileHandler(
-    filename=f'/logs/{log_file}',
-    mode='a',
-    encoding='utf-8'
-)
-file_handler.setFormatter(logging.Formatter(
-    fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-))
 logger = logging.getLogger("segb_server.utils.credentials")
-logger.setLevel(getattr(logging, logging_level, logging.INFO))
-logger.addHandler(file_handler)
 
-logger.info("Starting SEGB server...")
-logger.info("Logging level set to %s", logging_level)
+logger.info("Loading utils.credentials for SEGB server...")
 
 SECRET_KEY = os.getenv("SECRET_KEY", None)
 ALGORITHM = "HS256"
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="./")
+### TOKEN VALIDATION FUNCTIONS ###
 
 class Role(Enum):
     READER = "reader"
     LOGGER = "logger"
     ADMIN = "admin"
-
-ROLES = [role.value for role in Role]
-
-if not SECRET_KEY:
-    logger.warning(
-        "SECRET_KEY is not set. No security is enabled, and all reader endpoints are accessible without token validation.")
-else:
-    logger.info("Security via bearer token is enabled for endpoints.")
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="./")
-### TOKEN VALIDATION FUNCTIONS ###
-
+    
 class User(BaseModel):
     username: str
     name: str | None = None
@@ -70,27 +45,27 @@ async def validate_token(token: Annotated[str, Depends(oauth2_scheme)]) -> dict:
         return User(
             username="anonymous_reader",
             name="Unknown Reader - No Security Enabled",
-            roles= [role for role in ROLES],
+            roles= [role for role in Role],
             exp=None
         )
     decode = None
     try:
         decode = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        logger.info("Token validated successfully as READER Token")
+        logger.info("Token validated successfully")
         logger.debug(f"Decoded token data: {decode}")
         return User(**decode)
     except jwt.ExpiredSignatureError as e:
-        logger.warning("Token has expired")
+        logger.debug(f"Expired Token: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials. Expired Reader Token",
+            detail="Could not validate credentials. Expired Token",
             headers={"WWW-Authenticate": "Bearer"}
         )
-    except jwt.InvalidTokenError:
-        logger.debug("Invalid Reader Token, trying to decode as Admin Token")
+    except jwt.InvalidTokenError as e:
+        logger.debug(f"Invalid Token: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials. Invalid Reader Token",
+            detail="Could not validate credentials. Invalid Token",
             headers={"WWW-Authenticate": "Bearer"}
         )
 
