@@ -173,7 +173,7 @@ Delete the entire graph stored in the SEGB.
 ---------------------
 
 **Description:**  
-Retrieve information about a specific experiment and its associated activities.
+Retrieve a list of all experiments registered or information about a specific experiment and its associated activities (based on parameters).
 
 **Request Details:**
 
