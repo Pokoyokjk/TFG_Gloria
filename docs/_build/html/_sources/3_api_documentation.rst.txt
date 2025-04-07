@@ -5,11 +5,17 @@ This section describes the available API endpoints provided by the Semantic Ethi
 
 Authentication and Permissions
 ------------------------------
-The SEGB API uses **Bearer Tokens** for authentication and authorization. Each endpoint requires a specific token level:
+The SEGB API uses **Bearer Tokens** for authentication and authorization. Each endpoint requires a specific role to access it. The roles are defined as follows:
 
-- **Reader Token:** Grants read-only access to the graph and experiments.
-- **Logger Token:** Grants permission to log new data into the graph.
-- **Admin Token:** Grants full access, including administrative actions like deleting the graph or accessing logs.
+- **Reader**: Can read the graph and experiment data.
+- **Logger**: Can log data to the SEGB.
+- **Admin**: Has full access to all endpoints, including deleting the graph and accessing the history.
+
+These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request. A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a reader/logger token can be generated.
+
+.. note::
+
+  Tokens must be generated manually by a SEGB admin (who knows the secret) using `token_generator_script.py` and are unique to each user. The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens. Additionally, tokens should be refreshed periodically to maintain security.
 
 Tokens must be included in the `Authorization` header as follows:
 

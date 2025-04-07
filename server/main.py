@@ -6,9 +6,8 @@ from typing import Annotated
 
 import utils.semantic
 import utils.experiments
-from utils.credentials import User, validate_token_for_loggers_endpoint, validate_token_for_readers_endpoint, validate_token_for_admin_endpoint
+from utils.credentials import User, validate_token, Role
 from model import connect_to_db, save_json_ld, get_raw_graph_from_db, log_ttl_content, clear_graph, get_logs_list, get_log_info
-
 
 import logging
 import os
@@ -46,7 +45,8 @@ class Experiment(BaseModel):
 app = FastAPI()
 
 logger.info("Connecting to the database...")
-connect_to_db()
+db_service = os.getenv("DATABASE_SERVICE", "amor-segb-mongodb")
+connect_to_db(db_service)
 logger.info("Database connection established.")
 
 logger.info("SEGB server is now running and ready to accept requests.")
@@ -58,8 +58,14 @@ async def default_route(request: Request):
     return Response(content="The SEGB is working", status_code=status.HTTP_200_OK, media_type="text/plain")
 
 @app.post('/log')
-async def save_log(user: Annotated[User, Depends(validate_token_for_loggers_endpoint)], request: Request):
-    logger.info(f"Received post for log from IP: {request.client.host} from user {user.name} (username: {user.username})")
+async def save_log(user: Annotated[User, Depends(validate_token)], request: Request):
+    logger.info(f"Received post for log from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
+    if not (Role.LOGGER.value in user.roles or Role.ADMIN.value in user.roles):
+        logger.info(f"User {user.name} (username: {user.username} - roles: {user.roles}) does not have permission to perform this action")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have permission to perform this action"
+        )
     try:
         recieved_data = await request.body()
         recieved_data = recieved_data.decode("utf-8")
@@ -100,19 +106,20 @@ async def save_log(user: Annotated[User, Depends(validate_token_for_loggers_endp
             )
 
 @app.get('/log')
-async def get_log(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request, log: Log = None, log_id: str = None):
-    log_id = log.log_id if log else log_id
-    if not log_id:
+async def get_log(user: Annotated[User, Depends(validate_token)], request: Request, log: Log = None, log_id: str = None):
+    logger.info(f"Received request for log with ID: {log_id} from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
+    if Role.ADMIN.value not in user.roles:
+        logger.info(f"User {user.name} (username: {user.username} - roles: {user.roles}) does not have permission to perform this action")
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Not recieved log_id via json or query string"
-            )
-    logger.info(f"Received request for log with ID: {log_id} from IP: {request.client.host} from user {user.name} (username: {user.username})")
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have permission to perform this action"
+        )
+    log_id = log.log_id if log else log_id
     logger.info(f"Received log_id: {log_id}")
     if not log_id:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Not recieved data or invalid data"
+            detail="Not received data or invalid data"
             )
     else:
         try:
@@ -137,8 +144,13 @@ async def get_log(user: Annotated[User, Depends(validate_token_for_admin_endpoin
     return JSONResponse(content=log_data, status_code=status.HTTP_200_OK)
 
 @app.get('/history')
-async def get_history(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request):
-    logger.info(f"Received request for history from IP: {request.client.host} from user {user.name} (username: {user.username})")
+async def get_history(user: Annotated[User, Depends(validate_token)], request: Request):
+    logger.info(f"Received request for history from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
+    if Role.ADMIN.value not in user.roles:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have permission to perform this action"
+        )
     try:
         history = get_logs_list()
         logger.debug(f"History retrieved successfully")
@@ -161,7 +173,13 @@ async def get_history(user: Annotated[User, Depends(validate_token_for_admin_end
         )
 
 @app.get('/query')
-async def get_query(user: Annotated[User, Depends(validate_token_for_admin_endpoint)]):
+async def get_query(user: Annotated[User, Depends(validate_token)]):
+    logger.info(f"Received request for query from user {user.name} (username: {user.username} - roles: {user.roles})")
+    if Role.ADMIN.value not in user.roles:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have permission to perform this action"
+        )
     raise HTTPException(
         status_code=status.HTTP_501_NOT_IMPLEMENTED,
         detail="Not implemented yet"
@@ -195,8 +213,13 @@ async def get_query(user: Annotated[User, Depends(validate_token_for_admin_endpo
     #     return Response(f"Error executing SPARQL query: {str(e)}", status=500)
 
 @app.get('/graph')
-async def get_graph(user: Annotated[User, Depends(validate_token_for_readers_endpoint)], request: Request):
-    logger.info(f"Received request for graph from IP: {request.client.host} from user {user.name} (username: {user.username})")
+async def get_graph(user: Annotated[User, Depends(validate_token)], request: Request):
+    logger.info(f"Received request for graph from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
+    if not (Role.READER.value in user.roles or Role.ADMIN.value in user.roles):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have permission to perform this action"
+        )
     json_ld_data = None
     turtle_data = None
     try:
@@ -225,8 +248,13 @@ async def get_graph(user: Annotated[User, Depends(validate_token_for_readers_end
     
 
 @app.delete('/graph')
-async def delete_graph(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request):
-    logger.info(f"Received request to delete graph from IP: {request.client.host} from user {user.name} (username: {user.username})")
+async def delete_graph(user: Annotated[User, Depends(validate_token)], request: Request):
+    logger.info(f"Received request to delete graph from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
+    if Role.ADMIN.value not in user.roles:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have permission to perform this action"
+        )
     origin_ip = request.client.host
     json_ld_data = get_raw_graph_from_db()
     if not json_ld_data:
@@ -282,8 +310,13 @@ def generate_response_with_all_experiments_in_json():
         )
 
 @app.get('/experiments')
-async def get_experiments(user: Annotated[User, Depends(validate_token_for_readers_endpoint)], request: Request, uri: str = None, namespace: str = None, experiment_id: str = None, experiment: Experiment = None):
-    logger.info(f"Received request to get a specific experiment from IP: {request.client.host} from user {user.name} (username: {user.username})")
+async def get_experiments(user: Annotated[User, Depends(validate_token)], request: Request, uri: str = None, namespace: str = None, experiment_id: str = None, experiment: Experiment = None):
+    logger.info(f"Received request to get a specific experiment from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
+    if not (Role.READER.value in user.roles or Role.ADMIN.value in user.roles):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have permission to perform this action"
+        )
     uri =  experiment.uri if experiment and experiment.uri else uri
     if uri:
         logger.info(f"Received URI: {uri}")

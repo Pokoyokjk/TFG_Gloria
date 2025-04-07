@@ -57,10 +57,8 @@ class Log (Document):
     action = ObjectIdField (required=True)
     
     
-def connect_to_db() -> None:
-    connect('graph', host='database', port=27017)
-    
-    
+def connect_to_db(db_service: str) -> None:
+    connect('graph', host=db_service, port=27017)
     
 # ------------ INSERT FUNCTIONS ------------ #
     

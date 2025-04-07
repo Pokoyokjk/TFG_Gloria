@@ -43,15 +43,12 @@ READER_TOKEN = os.getenv("READER_TOKEN", "fake_reader_token")
 LOGGER_TOKEN = os.getenv("LOGGER_TOKEN", "fake_logger_token")
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "fake_admin_token")
 
-SECRET_KEY_READERS = os.getenv("SECRET_KEY_READERS", None)
-SECRET_KEY_LOGGERS = os.getenv("SECRET_KEY_LOGGERS", None)
-SECRET_KEY_ADMINS = os.getenv("SECRET_KEY_ADMINS", None)
+SECRET_KEY = os.getenv("SECRET_KEY", None)
 
-SECURED_SERVER = all([SECRET_KEY_READERS, SECRET_KEY_LOGGERS, SECRET_KEY_ADMINS])
-if SECURED_SERVER:
-    logger.info("The Testing SEGB server is secured with secret keys.")
+if SECRET_KEY:
+    logger.info("The Testing SEGB server is SECURED with a secret key.")
 else:
-    logger.info("The Testing SEGB server is NOT secured with secret keys.")
+    logger.info("The Testing SEGB server is NOT SECURED with a secret key.")
 
 def docker_compose_up():
     try:
@@ -166,7 +163,7 @@ def test_POST_log_valid_data_with_reader_token():
         ex:subject ex:predicate "object" .
     """
     response = requests.post(url, headers=headers, data=ttl_data)
-    if SECURED_SERVER:
+    if SECRET_KEY:
         assert response.status_code == 403, f"Expected HTTP 403 Forbidden code, but got {response.status_code}"
     else:
         assert response.status_code == 201, f"Expected HTTP 201 Created code, but got {response.status_code}"
@@ -1447,7 +1444,7 @@ def test_GET_experiment_with_json_params_uri():
 
 def test_check_auth_admin_level():
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
-    if not SECURED_SERVER:
+    if not SECRET_KEY:
         pytest.skip("Skipping test because the server is not secured")
     
     ### TESTING AUTHORIZATION LEVELS FOR GET /history ###
@@ -1565,7 +1562,7 @@ def test_check_auth_admin_level():
 
 def test_check_auth_reader_level():
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
-    if not SECURED_SERVER:
+    if not SECRET_KEY:
         pytest.skip("Skipping test because the server is not secured")
     
     ### TESTING AUTHORIZATION LEVELS FOR GET /graph ###
@@ -1656,7 +1653,7 @@ def test_check_auth_reader_level():
 def test_check_auth_logger_level():
     
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
-    if not SECURED_SERVER:
+    if not SECRET_KEY:
         pytest.skip("Skipping test because the server is not secured")
     
     ### TESTING AUTHORIZATION LEVELS FOR POST /log ###

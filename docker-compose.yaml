@@ -1,7 +1,8 @@
 services:
   amor-segb:
     container_name: amor-segb-server
-    image: ghcr.io/gsi-upm/amor-segb:0.3.0
+    image: ghcr.io/gsi-upm/amor-segb:0.4.0
+    build: .
     ports:
       - "5000:5000"
     networks:
@@ -12,8 +13,6 @@ services:
       - ./.env
     volumes:
       - ./logs:/logs
-    links:
-      - "amor-segb-mongodb:database"
 
   amor-segb-mongodb:
     container_name: amor-segb-mongodb

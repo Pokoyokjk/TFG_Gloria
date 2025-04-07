@@ -2,9 +2,7 @@ services:
   amor-segb-test:
     container_name: amor-segb-server-test
     image: ghcr.io/gsi-upm/amor-segb:testing
-    # build: 
-    #   context: ./server
-    #   dockerfile: Dockerfile
+    build: .
     ports:
       - "5000:5000"
     networks:
@@ -15,8 +13,6 @@ services:
       - ./test.env
     volumes:
       - ./logs:/logs
-    links:
-      - "amor-segb-mongodb-test:database"
 
   amor-segb-mongodb-test:
     container_name: amor-segb-mongodb-test
