@@ -103,7 +103,7 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
         logger.debug(f"Error: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Internal Server Error"
+            detail=f"Internal Server Error: Error saving log data -> {str(e)}"
             )
 
 @app.get('/log')
@@ -139,7 +139,7 @@ async def get_log(user: Annotated[User, Depends(validate_token)], request: Reque
             logger.error(f"Error retrieving log: {e}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Error retrieving log"
+            detail=f"Internal Server Error: Error retrieving log -> {str(e)}"
                 )
     
     return JSONResponse(content=log_data, status_code=status.HTTP_200_OK)
@@ -170,7 +170,7 @@ async def get_history(user: Annotated[User, Depends(validate_token)], request: R
         logger.error(f"Error retrieving history: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving history: {str(e)}"
+            detail=f"Internal Server Error: Error retrieving history -> {str(e)}"
         )
 
 @app.get('/query')
@@ -244,7 +244,7 @@ async def get_graph(user: Annotated[User, Depends(validate_token)], request: Req
     except:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Internal Server Error"
+            detail=f"Internal Server Error: Error retrieving graph -> {str(e)}"
         )
     
 
@@ -261,12 +261,15 @@ async def delete_graph(user: Annotated[User, Depends(validate_token)], request: 
     if not json_ld_data:
         logger.info("Empty graph, nothing to delete")
         return PlainTextResponse(content="Empty graph, nothing to delete", status_code=status.HTTP_204_NO_CONTENT)
-    deleted = clear_graph(origin_ip)
-    if not deleted:
-        logger.error("Failed to delete the graph")
+    try:
+        deleted = clear_graph(origin_ip)
+        if not deleted:
+            logger.error(f"Failed to delete the graph")
+            raise Exception("Failed to delete the graph")
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to delete the graph"
+            detail=f"Internal Server Error: Error deleting graph -> {str(e)}"
         )
     else:
         logger.info("Graph deleted successfully")
@@ -307,7 +310,7 @@ def generate_response_with_all_experiments_in_json():
         logger.debug(f"Error retrieving experiment list: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving experiment list: {str(e)}"
+            detail=f"Internal Server Error: Error retrieving experiment list -> {str(e)}"
         )
 
 @app.get('/experiments')
@@ -370,5 +373,5 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
         logger.error(f"Error retrieving experiment: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error retrieving experiment: {str(e)}"
+            detail=f"Internal Server Error: Error retrieving experiment -> {str(e)}"
         )
