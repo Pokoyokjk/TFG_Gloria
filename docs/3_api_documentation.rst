@@ -23,8 +23,8 @@ Tokens must be included in the `Authorization` header as follows:
 
 If the server is secured, unauthorized access will result in the following status codes:
 
-- `401 Unauthorized`: No token provided or invalid token.
-- `403 Forbidden`: Token provided but insufficient permissions.
+- `401 Unauthorized`: Invalid token.
+- `403 Forbidden`: Token provided but insufficient permissions or no token provided.
 
 3.1. GET /health
 ----------

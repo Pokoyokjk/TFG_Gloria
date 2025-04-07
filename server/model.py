@@ -42,20 +42,26 @@ class Log (Document):
     
     
 def connect_to_db(db_service: str) -> None:
+    logger.info("Connecting to the database...")
+    logger.info(f"Database service: {db_service}")
     connect('graph', host=db_service, port=27017)
+    logger.info("Database connection established.")
     
 # ------------ INSERT FUNCTIONS ------------ #
     
 def save_json_ld(json_ld_data:dict) -> None:
-    
+    logger.debug(f"Saving JSON-LD data to the database")
     graph = Graph.objects(_id='0').first()
+    logger.debug(f"Graph found")
     if graph:
         json_ld_data = utils.semantic.update_prefixes(graph.graph_data, json_ld_data)
         json_ld_data = utils.semantic.update_graph(graph.graph_data, json_ld_data)
+        logger.debug(f"Graph ready to be saved")
         graph.update(
             set__graph_data=json_ld_data,
             set__updated_at=datetime.now()
         )
+        logger.debug(f"Graph updated")
     else:
         graph = Graph (
            _id = '0',
@@ -63,9 +69,7 @@ def save_json_ld(json_ld_data:dict) -> None:
            graph_data = json_ld_data
         )
     graph.save()
-    
-
-
+    logger.debug(f"Graph saved")
 
 def log_ttl_content(ttl:str, ip_addr:str) -> None:
     
@@ -120,24 +124,33 @@ def log_ttl_content(ttl:str, ip_addr:str) -> None:
 
 
 def get_raw_graph_from_db() -> DynamicField:
+    logger.debug(f"Getting graph from DB")
     graph = None
     try:
         graph = Graph.objects(_id='0').first()
     except:
+        logger.error(f"Error getting graph from DB")
         pass
-    return graph.graph_data if isinstance(graph, Graph) else graph
+    result = graph.graph_data if isinstance(graph, Graph) else graph
+    if not result:
+        logger.debug(f"Graph not found in DB")
+    else:
+        logger.debug(f"Graph found in DB")
+    return result
 
 
 
 def get_logs_list() -> list:
+    logger.debug(f"Getting logs from DB")
     logs = Log.objects()
     serialized_logs = []
     if logs:
+        logger.debug(f"Logs found: {len(logs)}")
         serialized_logs = [utils.semantic.serialize_log(log) for log in logs]
     return serialized_logs
 
 def get_log_info(log_id: str) -> dict:
-
+    logger.debug(f"Getting log info for ID: {log_id}")
     try:
         log_id = ObjectId(log_id)
     except Exception:
@@ -145,8 +158,9 @@ def get_log_info(log_id: str) -> dict:
 
     log = Log.objects(_id=log_id).first()
     if not log:
+        logger.debug(f"Log not found")
         return None
-
+    logger.debug(f"Log found: {log}")
     action_data = None
     if log.action_type == 'insertion':
         action = Insertion.objects(_id=log.action).first()
@@ -160,7 +174,6 @@ def get_log_info(log_id: str) -> dict:
             action_data = {
                 "deleted_graph_hash": action.deleted_graph_hash
             }
-
     return {
         "log": utils.semantic.serialize_log(log),
         "action": action_data
@@ -174,6 +187,7 @@ def clear_graph(ip_addr:str) -> bool:
     """
         Atomic Transaction 
     """
+    logger.debug(f"Clearing graph")
     log_id = ObjectId()
     deletion_id = ObjectId()
         
@@ -183,6 +197,7 @@ def clear_graph(ip_addr:str) -> bool:
     
     current_graph = get_raw_graph_from_db()
     if not current_graph:
+        logger.debug(f"No current graph found to clear")
         return False
         
     current_graph_hash = hashlib.sha256(str(current_graph).encode('utf-8')).hexdigest()

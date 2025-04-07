@@ -1489,7 +1489,7 @@ def test_check_auth_admin_level():
     
     # Test that accessing /history without token is forbidden
     response = requests.get(url)
-    assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
     
     
     ### TESTING AUTHORIZATION LEVELS FOR GET /log ###
@@ -1532,7 +1532,7 @@ def test_check_auth_admin_level():
 
     # Test that accessing /log without token is forbidden
     response = requests.get(url)
-    assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
     
     
     ### TESTING AUTHORIZATION LEVELS FOR DELETE /graph ###
@@ -1574,7 +1574,7 @@ def test_check_auth_admin_level():
     
     # Test that deleting /graph without token is forbidden
     response = requests.delete(url)
-    assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
     
     
     ### TESTING AUTHORIZATION LEVELS FOR GET /query ###
@@ -1616,7 +1616,7 @@ def test_check_auth_admin_level():
     
     # Test that accessing /query without token is forbidden
     response = requests.get(url)
-    assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
 
 def test_check_auth_reader_level():
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
@@ -1663,7 +1663,7 @@ def test_check_auth_reader_level():
     
     # Test that accessing /graph without token is forbidden
     response = requests.get(url)
-    assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
     
     
     ### TESTING AUTHORIZATION LEVELS FOR GET /experiments ###
@@ -1707,7 +1707,7 @@ def test_check_auth_reader_level():
     
     # Test that accessing /experiments without token is forbidden
     response = requests.get(url)
-    assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
     
     
     ### TESTING AUTHORIZATION LEVELS FOR GET /experiments ###
@@ -1750,7 +1750,7 @@ def test_check_auth_reader_level():
     
     # Test that accessing /experiments without token is forbidden
     response = requests.get(url)
-    assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
 
 def test_check_auth_logger_level():
     
@@ -1798,4 +1798,4 @@ def test_check_auth_logger_level():
 
     # Test that accessing /log without token is forbidden
     response = requests.post(url)
-    assert response.status_code == 401, f"Expected HTTP 401 Unauthorized for no token, but got {response.status_code}"
+    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"

@@ -98,8 +98,9 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
     except HTTPException as e:
         logger.error(f"HTTPException: {e.detail}")
         raise e
-    except:
+    except Exception as e:
         logger.error("Error saving log data")
+        logger.debug(f"Error: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Internal Server Error"

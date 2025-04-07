@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Annotated
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 import jwt
 import logging
 import os
@@ -15,7 +15,7 @@ logger.info("Loading utils.credentials for SEGB server...")
 SECRET_KEY = os.getenv("SECRET_KEY", None)
 ALGORITHM = "HS256"
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="./")
+security = HTTPBearer()
 ### TOKEN VALIDATION FUNCTIONS ###
 
 class Role(Enum):
@@ -29,7 +29,7 @@ class User(BaseModel):
     roles: list[str]
     exp: int
 
-async def validate_token(token: Annotated[str, Depends(oauth2_scheme)]) -> dict:
+async def validate_token(auth_credentials: Annotated[HTTPAuthorizationCredentials, Depends(security)]) -> dict:
     '''
         Validate the token for all endpoints.
         If the token is valid, return the decoded token data.
@@ -38,17 +38,20 @@ async def validate_token(token: Annotated[str, Depends(oauth2_scheme)]) -> dict:
         If no secret key is configured, return a default user object.
         In this case, security is disabled, and full access is granted ignoring the token.
         '''
+    logger.debug("Validating token...")
+    logger.debug(f"Token: {auth_credentials.credentials}")
     if SECRET_KEY is None:
         logger.warning(
             "SECRET_KEY is not set. No security is enabled, and all endpoints are accessible without token validation.")
         # If the secret is None, we assume no security is enabled
         return User(
-            username="anonymous_reader",
-            name="Unknown Reader - No Security Enabled",
+            username="anonymous_user",
+            name="Unknown User - No Security Enabled",
             roles= [role for role in Role],
             exp=None
         )
     decode = None
+    token = auth_credentials.credentials
     try:
         decode = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         logger.info("Token validated successfully")
