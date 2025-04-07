@@ -24,7 +24,7 @@ def get_graph_from_json(data) -> Graph:
 def convert_graph_to_json_ld(graph: Graph) -> dict:
     graph_namespace = graph.namespaces()
     prefixes = {prefix: str(uri) for prefix, uri in graph_namespace}
-    serialized_json_ld = graph.serialize(format="json-ld", context=prefixes)
+    serialized_json_ld = graph.serialize(format="json-ld", context=prefixes, encoding="utf-8")
     json_ld_data = json.loads(serialized_json_ld)
     
     context = json_ld_data.get("@context", {})
@@ -39,7 +39,7 @@ def convert_graph_to_json_ld(graph: Graph) -> dict:
 def convert_graph_to_turtle(graph: Graph) -> str:
     graph_namespace = graph.namespaces()
     prefixes = {prefix: str(uri) for prefix, uri in graph_namespace}
-    serialized_turtle_data = graph.serialize(format="turtle", context=prefixes)
+    serialized_turtle_data = graph.serialize(format="turtle", context=prefixes, encoding="utf-8")
     return serialized_turtle_data
 
 # -------- AUX FUNCTIONS FOR MODEL.PY ----------- # 

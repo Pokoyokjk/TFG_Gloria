@@ -1089,7 +1089,7 @@ def test_GET_experiment_with_activities():
     # Write the resulting graph to a file
     output_file = "./test/logs/graph.ttl"
     with open(output_file, "w", encoding="utf-8") as f:
-        f.write(graph.serialize(format="turtle"))
+        f.write(graph.serialize(format="turtle", encoding="utf-8").decode("utf-8"))
     logger.info(f"Graph written to {output_file}")
     # Log all triples in the graph
     for subj, pred, obj in graph:
