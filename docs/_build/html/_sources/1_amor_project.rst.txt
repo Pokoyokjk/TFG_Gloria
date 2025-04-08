@@ -8,17 +8,17 @@ such as **disinformation**, **hate speech**, and **clickbait**.
 
 The general objectives of the project are defined around its strategic lines, as follows:
 
-1. Research semantic text analysis techniques that facilitate cooperative processing in the cloud and at the edge.
+#. Research semantic text analysis techniques that facilitate cooperative processing in the cloud and at the edge.
 
-2. Investigate the analysis and application of moral and ethical values, including their auditing.
+#. Investigate the analysis and application of moral and ethical values, including their auditing.
 
-3. Explore new visualization techniques and immersive interaction that make effective use of textual data analysis. 
-This includes the development of sector-specific applications that promote social awareness
-on issues such as rural depopulation, the risk of radicalization among vulnerable groups, 
-and the needs of the elderly and dependent individuals.
+#. Explore new visualization techniques and immersive interaction that make effective use of textual data analysis.
+
+This includes the development of sector-specific applications that promote social awareness on issues such as rural depopulation, the risk of radicalization among vulnerable groups, and the needs of the elderly and dependent individuals.
 
 This project is funded by the Ministry of Economic Affairs and Digital Transformation 
-and the European Union – NextGeneration EU, within the UNICO I+D Cloud Program.
+and the European Union – NextGeneration EU, within the UNICO I+D Cloud Program. 
+For more information, visit the project website: `AMOR Project <https://www.gsi.upm.es/amor>`_.
 
 .. image:: _static/amor_logo.png
    :alt: AMOR Logo
