@@ -101,7 +101,7 @@ ttl_filepath = &quot;./ttl/&quot;
         print(&quot;File successfully read from:&quot;, input_file_path)
 
     headers = {
-        &quot;Content-Type&quot;: &quot;text/turtle&quot;
+        &quot;Content-Type&quot;: &quot;text/turtle; charset=utf-8&quot;
     }
 
     response = requests.post(f&quot;{server}/log&quot;, headers=headers, data=data)

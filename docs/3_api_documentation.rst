@@ -216,7 +216,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 
   - Retrieving information about a specific experiment can be done in two ways:
 
-    - **Note:** Any of the following alternatives can be used to specify the experiment, both in as a query parameter or as JSON body.
+    - **Note:** Any of the following alternatives can be used to specify the experiment in query parameters.
 
     - Option 1:
 
@@ -236,19 +236,11 @@ Retrieve a list of all experiments registered or information about a specific ex
          response = requests.get(url, params=params, headers=headers)
          print(response.url)  # The URL will automatically encode # as %23
 
-      - **Note for query parameter:** The `uri` parameter contains # character is not allowed in a query parameter, it must be encoded as `%23` if it is included in the URI. For example:
+      - **Note for query parameter:** The `uri` parameter contains # character is not allowed in a query parameter, it must be encoded as `%23` if it is included in the URI. This is not required if the `params` argument is used, as in the previous example. For example:
 
         .. code-block:: text
 
            /experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23exp1
-
-      - **Note for JSON body:** The `%23` code must not be used if it is included in the JSON body. Regular # character must be used. For example:
-
-        .. code-block:: json
-
-           {
-             "uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"
-           }
 
     - Option 2:
 
@@ -278,20 +270,6 @@ Retrieve a list of all experiments registered or information about a specific ex
 
          /experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp1
 
-      .. code-block:: json
-
-         {
-           "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns",
-           "experiment_id": "exp1"
-         }
-
-      .. code-block:: json
-
-         {
-           "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#",
-           "experiment_id": "exp1"
-         }
-
 **Response Codes:**
 
 .. list-table::
@@ -309,8 +287,8 @@ Retrieve a list of all experiments registered or information about a specific ex
    * - ``404 Not Found``
      - The specified experiment was not found.
    * - ``422 Unprocessable Entity``
-     - Missing required parameters (e.g., `namespace` or `experiment_id`).
-
+     - Missing required parameters (e.g., `namespace` or `experiment_id`) or **Invalid URI format**. The URI must be a valid IRI (Internationalized Resource Identifier <prefix>#<resource>) and should not contain spaces or special characters that are not allowed in IRIs. The URI must also be properly encoded if it contains reserved characters.
+     
 3.8. GET /history
 ------------------
 

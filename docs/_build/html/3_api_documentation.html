@@ -290,7 +290,7 @@ Authorization: Bearer &lt;READER_TOKEN&gt;
 </li>
 <li><p>Retrieving information about a specific experiment can be done in two ways:</p>
 <ul>
-<li><p><strong>Note:</strong> Any of the following alternatives can be used to specify the experiment, both in as a query parameter or as JSON body.</p></li>
+<li><p><strong>Note:</strong> Any of the following alternatives can be used to specify the experiment in query parameters.</p></li>
 <li><p>Option 1:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">uri</span></code>: Complete URI of the experiment (e.g., <cite>namespace#experiment_id</cite>).</p></li>
@@ -306,15 +306,8 @@ Authorization: Bearer &lt;READER_TOKEN&gt;
 </pre></div>
 </div>
 </li>
-<li><p><strong>Note for query parameter:</strong> The <cite>uri</cite> parameter contains # character is not allowed in a query parameter, it must be encoded as <cite>%23</cite> if it is included in the URI. For example:</p>
+<li><p><strong>Note for query parameter:</strong> The <cite>uri</cite> parameter contains # character is not allowed in a query parameter, it must be encoded as <cite>%23</cite> if it is included in the URI. This is not required if the <cite>params</cite> argument is used, as in the previous example. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23exp1
-</pre></div>
-</div>
-</li>
-<li><p><strong>Note for JSON body:</strong> The <cite>%23</cite> code must not be used if it is included in the JSON body. Regular # character must be used. For example:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;uri&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1&quot;</span>
-<span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -341,18 +334,6 @@ Authorization: Bearer &lt;READER_TOKEN&gt;
 </pre></div>
 </div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&amp;experiment_id=exp1
-</pre></div>
-</div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;namespace&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;experiment_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exp1&quot;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;namespace&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;experiment_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exp1&quot;</span>
-<span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -386,7 +367,7 @@ Authorization: Bearer &lt;READER_TOKEN&gt;
 <td><p>The specified experiment was not found.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">422</span> <span class="pre">Unprocessable</span> <span class="pre">Entity</span></code></p></td>
-<td><p>Missing required parameters (e.g., <cite>namespace</cite> or <cite>experiment_id</cite>).</p></td>
+<td><p>Missing required parameters (e.g., <cite>namespace</cite> or <cite>experiment_id</cite>) or <strong>Invalid URI format</strong>. The URI must be a valid IRI (Internationalized Resource Identifier &lt;prefix&gt;#&lt;resource&gt;) and should not contain spaces or special characters that are not allowed in IRIs. The URI must also be properly encoded if it contains reserved characters.</p></td>
 </tr>
 </tbody>
 </table>
