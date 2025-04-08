@@ -39,8 +39,20 @@ class Log (Document):
     origin_ip = StringField (required=True, regex="^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$")
     action_type = StringField(required=True, choices=['insertion', 'deletion'])
     action = ObjectIdField (required=True)
-    
-    
+    user_details = StringField () # decoded token data (username, roles, etc.)
+
+
+def serialize_log(log) -> dict:
+    return {
+        "_id": str(log._id),
+        "uploaded_at": log.uploaded_at.isoformat() if log.uploaded_at else None,
+        "origin_ip": log.origin_ip,
+        "action_type": log.action_type,
+        "action": str(log.action) if log.action else None,
+        "user_details": log.user_details if log.user_details else None,
+    }
+
+
 def connect_to_db(db_service: str) -> None:
     logger.info("Connecting to the database...")
     logger.info(f"Database service: {db_service}")
@@ -71,7 +83,7 @@ def save_json_ld(json_ld_data:dict) -> None:
     graph.save()
     logger.debug(f"Graph saved")
 
-def log_ttl_content(ttl:str, ip_addr:str) -> None:
+def log_ttl_content(ttl:str, ip_addr:str, user_details: str) -> None:
     
     """
         Atomic Transaction 
@@ -94,7 +106,8 @@ def log_ttl_content(ttl:str, ip_addr:str) -> None:
             uploaded_at = datetime.now(),
             origin_ip = ip_addr,
             action_type = 'insertion',
-            action = insertion_id
+            action = insertion_id,
+            user_details = user_details
         )
         log.save()        
         logger.debug(f"Log saved")
@@ -146,7 +159,7 @@ def get_logs_list() -> list:
     serialized_logs = []
     if logs:
         logger.debug(f"Logs found: {len(logs)}")
-        serialized_logs = [utils.semantic.serialize_log(log) for log in logs]
+        serialized_logs = [serialize_log(log) for log in logs]
     return serialized_logs
 
 def get_log_info(log_id: str) -> dict:
@@ -175,14 +188,14 @@ def get_log_info(log_id: str) -> dict:
                 "deleted_graph_hash": action.deleted_graph_hash
             }
     return {
-        "log": utils.semantic.serialize_log(log),
+        "log": serialize_log(log),
         "action": action_data
     }
 
 
 # ------------ DELETE FUNCTIONS ------------ #
 
-def clear_graph(ip_addr:str) -> bool:
+def clear_graph(ip_addr:str, user_details: str) -> bool:
     
     """
         Atomic Transaction 
@@ -209,7 +222,8 @@ def clear_graph(ip_addr:str) -> bool:
             uploaded_at = datetime.now(),
             origin_ip = ip_addr,
             action_type = 'deletion',
-            action = deletion_id
+            action = deletion_id,
+            user_details = user_details
         )
         log.save()        
         

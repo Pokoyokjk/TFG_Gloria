@@ -4,6 +4,7 @@ from rdflib import Graph
 import requests
 import docker
 import subprocess
+import jwt
 import logging
 import os
 
@@ -410,6 +411,7 @@ def test_GET_log():
     assert response.status_code == 200, f"Expected HTTP 200 OK code when getting log, but got {response.status_code}"
     
     log_data = response.json()
+    logger.debug(f"Log data: {log_data}")
     assert "action" in log_data, "Response is missing 'action'"
     assert "ttl_content" in log_data["action"], "Action data is missing 'ttl_content'"
     assert log_data["action"]["ttl_content"].strip() == ttl_data.strip(), "TTL content does not match the inserted data"
@@ -421,6 +423,16 @@ def test_GET_log():
     assert log_data["log"]["action_type"] == "insertion", f"Expected action_type 'insertion', but got {log_data['log']['action_type']}"
     assert "origin_ip" in log_data["log"], "Log data is missing 'origin_ip'"
     assert "uploaded_at" in log_data["log"], "Log data is missing 'uploaded_at'"
+    
+    expected_user_details: dict = jwt.decode(ADMIN_TOKEN, SECRET_KEY, algorithms=["HS256"])
+    logger.debug(f"Decoded user details: {expected_user_details}")
+    assert "user_details" in log_data["log"], "Log data is missing 'user_details'"
+    assert expected_user_details.get("username") in log_data["log"]["user_details"], "username in user_details do not match"
+    assert expected_user_details.get("name") in log_data["log"]["user_details"], "name in user_details do not match"
+    for role in expected_user_details.get("roles"):
+        assert role in log_data["log"]["user_details"], f"Role {role} in user_details do not match"
+    assert str(expected_user_details.get("exp")) in log_data["log"]["user_details"], "expires in user_details do not match"
+     
 
 def test_GET_log_empty_graph():
     # Test the get /log endpoint with no logs in the graph

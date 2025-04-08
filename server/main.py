@@ -83,8 +83,8 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
                 )
         save_json_ld(json_ld_data=json_ld_data)
         logger.info("Log data integrated into the global graph")
-        log_ttl_content(recieved_data,origin_ip)
-        logger.debug(f"Log registred in history")
+        log_ttl_content(ttl=recieved_data, ip_addr=origin_ip, user_details=str(user))
+        logger.debug(f"Log registered in history")
         return JSONResponse(content={"message": "Log saved successfully"}, status_code=status.HTTP_201_CREATED)
     except HTTPException as e:
         logger.error(f"HTTPException: {e.detail}")
@@ -258,7 +258,7 @@ async def delete_graph(user: Annotated[User, Depends(validate_token)], request: 
         logger.info("Empty graph, nothing to delete")
         return PlainTextResponse(content="Empty graph, nothing to delete", status_code=status.HTTP_204_NO_CONTENT)
     try:
-        deleted = clear_graph(origin_ip)
+        deleted = clear_graph(ip_addr=origin_ip, user_details=str(user))
         if not deleted:
             logger.error(f"Failed to delete the graph")
             raise Exception("Failed to delete the graph")
