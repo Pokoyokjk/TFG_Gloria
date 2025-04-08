@@ -1,7 +1,7 @@
 services:
   amor-segb:
     container_name: amor-segb-server
-    image: ghcr.io/gsi-upm/amor-segb:0.4.3
+    image: ghcr.io/gsi-upm/amor-segb:0.4.4
     build: .
     ports:
       - "5000:5000"
