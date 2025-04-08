@@ -941,6 +941,49 @@ def test_GET_experiment_uri():
     for triple in graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
+
+def test_GET_experiment_uri_malformed_invalid_uri():
+    # Test the /experiments endpoint
+    
+    # Insert a log entry to populate the SEGB
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle; charset=utf-8",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    
+    # Example TTL data for experiments
+    ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasRequester amor-exec:researcher1 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+        amor-exec:exp2 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari42 ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp3 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari43 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+        amor-exec:exp4 a amor-exp:Experiment ;
+            amor-exp:hasRequester amor-exec:researcher2 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_002 .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
+    
+    # Test the get /experiments endpoint    
+    url = f"{BASE_URL}/experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns/exp1"
+    headers = {
+        "Authorization": f"Bearer {READER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    
+    assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity code, but got {response.status_code}"
+        
 def test_GET_experiment_uri_params():
     # Test the /experiments endpoint
     
@@ -1225,6 +1268,21 @@ def test_GET_experiment_missing_namespace_and_experiment_id():
     assert response.status_code == 204, f"Expected HTTP 204 No Content, but got {response.status_code}"
 
 def test_GET_log_with_json_params():
+    '''
+    Test the GET /log endpoint with JSON parameters.
+    This test performs the following steps:
+    1. Inserts a log entry using the POST /log endpoint with Turtle data.
+    2. Retrieves the history using the GET /history endpoint to obtain the log ID.
+    3. Attempts to retrieve the log using the GET /log endpoint with a JSON body containing the log ID.
+    Assertions:
+    - Ensures the POST /log request returns a 201 Created status code.
+    - Ensures the GET /history request returns a 200 OK status code and contains at least one history entry.
+    - Ensures the GET /log request with a JSON body returns a 400 Bad Request status code.
+    Note:
+    By convention, GET requests should not include a JSON body, as GET is intended to be idempotent and used for 
+    retrieving resources based on query parameters or URL paths. While some servers may technically allow a JSON 
+    body in GET requests, it is not standard practice and can lead to unexpected behavior or compatibility issues.
+    '''
     # Insert a log entry first
     url = f"{BASE_URL}/log"
     headers = {
@@ -1261,22 +1319,26 @@ def test_GET_log_with_json_params():
     json_data = {"log_id": log_id}
     logger.debug(f"Log ID: {log_id}")
     response = requests.get(url, headers=headers, json=json_data)
-    assert response.status_code == 200, f"Expected HTTP 200 OK code when getting log, but got {response.status_code}"
     
-    log_data = response.json()
-    assert "action" in log_data, "Response is missing 'action'"
-    assert "ttl_content" in log_data["action"], "Action data is missing 'ttl_content'"
-    assert log_data["action"]["ttl_content"].strip() == ttl_data.strip(), "TTL content does not match the inserted data"
-    
-    assert "log" in log_data, "Response is missing 'log'"
-    assert "_id" in log_data["log"], "Log data is missing '_id'"
-    assert log_data["log"]["_id"] == log_id, f"Expected log_id {log_id}, but got {log_data['log']['_id']}"
-    assert "action_type" in log_data["log"], "Log data is missing 'action_type'"
-    assert log_data["log"]["action_type"] == "insertion", f"Expected action_type 'insertion', but got {log_data['log']['action_type']}"
-    assert "origin_ip" in log_data["log"], "Log data is missing 'origin_ip'"
-    assert "uploaded_at" in log_data["log"], "Log data is missing 'uploaded_at'"
+    assert response.status_code == 400, f"Expected HTTP 400 Bad Request code, but got {response.status_code}"
 
 def test_GET_experiment_with_json_params():
+    '''
+    Test the GET /experiments endpoint with JSON parameters.
+    This test performs the following steps:
+    1. Inserts a log entry into the SEGB using a POST request with Turtle (TTL) data.
+    2. Sends a GET request to the /experiments endpoint with JSON parameters specifying
+       the namespace and experiment ID.
+    3. Verifies that the response status code is 200 (HTTP OK).
+    4. Parses the response JSON and validates that the returned experiment URIs match
+       the expected URIs.
+    5. Ensures that no unexpected URIs are present in the response.
+    Note:
+    - By convention, GET methods should not include a JSON body. In this case, the JSON
+      body is ignored, and the endpoint behaves as if no parameters were provided,
+      returning the list of experiments as it would for a GET /experiments request
+      without parameters.
+    '''
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
@@ -1310,33 +1372,44 @@ def test_GET_experiment_with_json_params():
     with requests.get(url, headers=headers, json=json_data) as response:
         logger.debug(f"GET experiment response: {response.text}")
 
-        assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
+    assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
 
-        # Load the response into an RDFLib graph
-        graph = Graph()
-        graph.parse(data=response.text, format="turtle")
-        # Verify that the graph is not empty
-        assert len(graph) > 0, "The RDF graph is empty"
-        # Verify that the expected triples are present in the graph
-        expected_graph = Graph()
-        expected_ttl_data = """
-            @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
-            @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+    # Parse the response JSON and verify the experiment URIs
+    resulting_uris = response.json()
+    expected_uris = [
+        "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
+    ]
 
-            amor-exec:exp1 a amor-exp:Experiment ;
-                amor-exp:hasExecutor amor-exec:ari41 ;
-                amor-exp:hasRequester amor-exec:researcher1 ;
-                amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
-        """
-        expected_graph.parse(data=expected_ttl_data, format="turtle")
-        # Compare the two graphs
-        assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
-        for triple in expected_graph:
-            assert triple in graph, f"Expected triple {triple} is missing in the graph"
-        for triple in graph:
-            assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
+    # Verify that both have the same length
+    logger.debug(f"Experiment list: {resulting_uris}")
+    logger.debug(f"Expected URIs: {expected_uris}")
+    
+    # Verify that all expected URIs are present in the response
+    assert len(resulting_uris) == len(expected_uris), f"Expected {len(expected_uris)} URIs, but got {len(resulting_uris)}"
+    for uri in expected_uris:
+        assert uri in resulting_uris, f"Expected URI {uri} is missing in the response"
+
+    # Verify that there are no unexpected URIs in the response
+    for uri in resulting_uris:
+        assert uri in expected_uris, f"Unexpected URI {uri} found in the response"
 
 def test_GET_experiment_with_json_params_hashtag_namespace():
+    '''
+    Test the GET /experiments endpoint with JSON parameters.
+    This test performs the following steps:
+    1. Inserts a log entry into the SEGB using a POST request with Turtle (TTL) data.
+    2. Sends a GET request to the /experiments endpoint with JSON parameters specifying
+       the namespace and experiment ID.
+    3. Verifies that the response status code is 200 (HTTP OK).
+    4. Parses the response JSON and validates that the returned experiment URIs match
+       the expected URIs.
+    5. Ensures that no unexpected URIs are present in the response.
+    Note:
+    - By convention, GET methods should not include a JSON body. In this case, the JSON
+      body is ignored, and the endpoint behaves as if no parameters were provided,
+      returning the list of experiments as it would for a GET /experiments request
+      without parameters.
+    '''
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
@@ -1371,32 +1444,42 @@ def test_GET_experiment_with_json_params_hashtag_namespace():
     
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
-    # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-    # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
-    # Verify that the expected triples are present in the graph
-    expected_graph = Graph()
-    expected_ttl_data = """
-        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
-        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
-        
-        amor-exec:exp1 a amor-exp:Experiment ;
-            amor-exp:hasExecutor amor-exec:ari41 ;
-            amor-exp:hasRequester amor-exec:researcher1 ;
-            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
-    """
-    expected_graph.parse(data=expected_ttl_data, format="turtle")
-    # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
-    for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
-    for triple in graph:
-        assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    # Parse the response JSON and verify the experiment URIs
+    resulting_uris = response.json()
+    expected_uris = [
+        "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
+    ]
+
+    # Verify that both have the same length
+    logger.debug(f"Experiment list: {resulting_uris}")
+    logger.debug(f"Expected URIs: {expected_uris}")
+    
+    # Verify that all expected URIs are present in the response
+    assert len(resulting_uris) == len(expected_uris), f"Expected {len(expected_uris)} URIs, but got {len(resulting_uris)}"
+    for uri in expected_uris:
+        assert uri in resulting_uris, f"Expected URI {uri} is missing in the response"
+
+    # Verify that there are no unexpected URIs in the response
+    for uri in resulting_uris:
+        assert uri in expected_uris, f"Unexpected URI {uri} found in the response"
 
 def test_GET_experiment_with_json_params_uri():
+    '''
+    Test the GET /experiments endpoint with JSON parameters.
+    This test performs the following steps:
+    1. Inserts a log entry into the SEGB using a POST request with Turtle (TTL) data.
+    2. Sends a GET request to the /experiments endpoint with JSON parameters specifying
+       the namespace and experiment ID.
+    3. Verifies that the response status code is 200 (HTTP OK).
+    4. Parses the response JSON and validates that the returned experiment URIs match
+       the expected URIs.
+    5. Ensures that no unexpected URIs are present in the response.
+    Note:
+    - By convention, GET methods should not include a JSON body. In this case, the JSON
+      body is ignored, and the endpoint behaves as if no parameters were provided,
+      returning the list of experiments as it would for a GET /experiments request
+      without parameters.
+    '''
     # Insert a log entry to populate the SEGB
     url = f"{BASE_URL}/log"
     headers = {
@@ -1430,30 +1513,24 @@ def test_GET_experiment_with_json_params_uri():
     
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
-    # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-    # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
-    # Verify that the expected triples are present in the graph
-    expected_graph = Graph()
-    expected_ttl_data = """
-        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
-        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
-        
-        amor-exec:exp1 a amor-exp:Experiment ;
-            amor-exp:hasExecutor amor-exec:ari41 ;
-            amor-exp:hasRequester amor-exec:researcher1 ;
-            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
-    """
-    expected_graph.parse(data=expected_ttl_data, format="turtle")
-    # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
-    for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
-    for triple in graph:
-        assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    # Parse the response JSON and verify the experiment URIs
+    resulting_uris = response.json()
+    expected_uris = [
+        "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1",
+    ]
+
+    # Verify that both have the same length
+    logger.debug(f"Experiment list: {resulting_uris}")
+    logger.debug(f"Expected URIs: {expected_uris}")
+    
+    # Verify that all expected URIs are present in the response
+    assert len(resulting_uris) == len(expected_uris), f"Expected {len(expected_uris)} URIs, but got {len(resulting_uris)}"
+    for uri in expected_uris:
+        assert uri in resulting_uris, f"Expected URI {uri} is missing in the response"
+
+    # Verify that there are no unexpected URIs in the response
+    for uri in resulting_uris:
+        assert uri in expected_uris, f"Unexpected URI {uri} found in the response"
 
 def test_check_auth_admin_level():
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected

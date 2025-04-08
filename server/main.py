@@ -33,15 +33,6 @@ logger.addHandler(file_handler)
 logger.info("Starting SEGB server...")
 logger.info("Logging level set to %s", logging_level)
 
-    
-class Log(BaseModel):
-    log_id: str
-    
-class Experiment(BaseModel):
-    experiment_id: str | None = None
-    namespace: str | None = None
-    uri: str | None = None
-
 app = FastAPI()
 
 logger.info("Connecting to the database...")
@@ -107,7 +98,7 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
             )
 
 @app.get('/log')
-async def get_log(user: Annotated[User, Depends(validate_token)], request: Request, log: Log = None, log_id: str = None):
+async def get_log(user: Annotated[User, Depends(validate_token)], request: Request, log_id: str = None):
     logger.info(f"Received request for log with ID: {log_id} from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
     if Role.ADMIN.value not in user.roles:
         logger.info(f"User {user.name} (username: {user.username} - roles: {user.roles}) does not have permission to perform this action")
@@ -115,7 +106,6 @@ async def get_log(user: Annotated[User, Depends(validate_token)], request: Reque
             status_code=status.HTTP_403_FORBIDDEN,
             detail="User does not have permission to perform this action"
         )
-    log_id = log.log_id if log else log_id
     logger.info(f"Received log_id: {log_id}")
     if not log_id:
         raise HTTPException(
@@ -187,7 +177,12 @@ async def get_query(user: Annotated[User, Depends(validate_token)]):
     )
     '''
     TODO: check how modifications to the graph are done (or not done),
-    because it is loaded "locally" in memory and not loaded again in the database 
+    because it is loaded "locally" in memory and not loaded again in the database
+    
+    I have to think about this, because the graph is not modified in the database,
+    but it is modified in memory.
+    The graph is loaded from the database and then modified in memory.
+    The graph is not saved back to the database.
     '''
 
     # if request.is_json:
@@ -315,25 +310,28 @@ def generate_response_with_all_experiments_in_json():
         )
 
 @app.get('/experiments')
-async def get_experiments(user: Annotated[User, Depends(validate_token)], request: Request, uri: str = None, namespace: str = None, experiment_id: str = None, experiment: Experiment = None):
+async def get_experiments(user: Annotated[User, Depends(validate_token)], request: Request, uri: str = None, namespace: str = None, experiment_id: str = None):
     logger.info(f"Received request to get a specific experiment from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
     if not (Role.READER.value in user.roles or Role.ADMIN.value in user.roles):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="User does not have permission to perform this action"
         )
-    uri =  experiment.uri if experiment and experiment.uri else uri
     if uri:
         logger.info(f"Received URI: {uri}")
         # If the URI is provided, we expect it to be a complete URI
         # Preferred option: form of namespace#experiment_id
         # If the URI is provided, namespace and experiment_id are ignored
-        namespace, experiment_id = uri.rsplit("#", 1) 
+        if "#" not in uri:
+            logger.info("Invalid URI: Malformed URI, expected <prefix>'#'<resource> format")
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="Invalid URI: Malformed URI, expected <prefix>'#'<resource> format"
+            )
+        namespace, experiment_id = uri.rsplit("#", 1)
         namespace += "#"
     else:
         # If the URI is not provided, we expect the namespace and experiment_id as separate parameters
-        namespace = experiment.namespace if experiment and experiment.namespace else namespace
-        experiment_id = experiment.experiment_id if experiment and experiment.experiment_id else experiment_id
         if namespace and not namespace.endswith("#"):
             namespace += "#"
         if not namespace and not experiment_id:
@@ -348,7 +346,7 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
                 detail="Missing parameters: namespace or experiment_id"
             )
     try:
-        json_ld_data = get_raw_graph_from_db() # Test if this is the correct way to get the data
+        json_ld_data = get_raw_graph_from_db()
         graph = utils.semantic.get_graph_from_json(json_ld_data)
         result_graph = utils.experiments.get_experiment_with_activities(graph, namespace, experiment_id)
         if len(result_graph) == 0:
