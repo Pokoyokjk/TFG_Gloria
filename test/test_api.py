@@ -16,7 +16,7 @@ ENV_FILE = "./test/test.env"
 CONFIG = dotenv_values(ENV_FILE)
 
 logging_level = CONFIG.get("LOGGING_LEVEL", "DEBUG").upper()
-log_file = CONFIG.get("TESTS_LOG_FILE", "test_segb_server.log")
+log_file = CONFIG.get("TESTS_LOG_FILE", "test_segb.log")
 compose_file = CONFIG.get("COMPOSE_FILE", "./test/docker-compose.test.yaml")
 # Ensure the logs directory exists
 os.makedirs('./test/logs', exist_ok=True)
@@ -761,15 +761,10 @@ def test_GET_experiment():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-
-
-    # Log all triples in the graph
-    for subj, pred, obj in graph:
-        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    resulting_graph = Graph()
+    resulting_graph.parse(data=response.text, format="turtle")
     # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
+    assert len(resulting_graph) > 0, "The RDF graph is empty"
     # Verify that the expected triples are present in the graph
     expected_graph = Graph()
     expected_ttl_data = """
@@ -784,12 +779,12 @@ def test_GET_experiment():
     expected_graph.parse(data=expected_ttl_data, format="turtle")
 
     # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    assert len(resulting_graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(resulting_graph)}"
 
     for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+        assert triple in resulting_graph, f"Expected triple {triple} is missing in the graph"
 
-    for triple in graph:
+    for triple in resulting_graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
 def test_GET_experiment_query_hastag_code():
@@ -835,15 +830,10 @@ def test_GET_experiment_query_hastag_code():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-
-
-    # Log all triples in the graph
-    for subj, pred, obj in graph:
-        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    resulting_graph = Graph()
+    resulting_graph.parse(data=response.text, format="turtle")
     # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
+    assert len(resulting_graph) > 0, "The RDF graph is empty"
     # Verify that the expected triples are present in the graph
     expected_graph = Graph()
     expected_ttl_data = """
@@ -857,12 +847,12 @@ def test_GET_experiment_query_hastag_code():
     expected_graph.parse(data=expected_ttl_data, format="turtle")
 
     # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    assert len(resulting_graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(resulting_graph)}"
 
     for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+        assert triple in resulting_graph, f"Expected triple {triple} is missing in the graph"
 
-    for triple in graph:
+    for triple in resulting_graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
 def test_GET_experiment_query_params():
@@ -912,15 +902,10 @@ def test_GET_experiment_query_params():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-
-
-    # Log all triples in the graph
-    for subj, pred, obj in graph:
-        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    resulting_graph = Graph()
+    resulting_graph.parse(data=response.text, format="turtle")
     # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
+    assert len(resulting_graph) > 0, "The RDF graph is empty"
     # Verify that the expected triples are present in the graph
     expected_graph = Graph()
     expected_ttl_data = """
@@ -934,12 +919,12 @@ def test_GET_experiment_query_params():
     expected_graph.parse(data=expected_ttl_data, format="turtle")
 
     # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    assert len(resulting_graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(resulting_graph)}"
 
     for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+        assert triple in resulting_graph, f"Expected triple {triple} is missing in the graph"
 
-    for triple in graph:
+    for triple in resulting_graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
 def test_GET_experiment_uri():
@@ -985,15 +970,10 @@ def test_GET_experiment_uri():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-
-
-    # Log all triples in the graph
-    for subj, pred, obj in graph:
-        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    resulting_graph = Graph()
+    resulting_graph.parse(data=response.text, format="turtle")
     # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
+    assert len(resulting_graph) > 0, "The RDF graph is empty"
     # Verify that the expected triples are present in the graph
     expected_graph = Graph()
     expected_ttl_data = """
@@ -1008,12 +988,12 @@ def test_GET_experiment_uri():
     expected_graph.parse(data=expected_ttl_data, format="turtle")
 
     # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    assert len(resulting_graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(resulting_graph)}"
 
     for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+        assert triple in resulting_graph, f"Expected triple {triple} is missing in the graph"
 
-    for triple in graph:
+    for triple in resulting_graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
 
@@ -1105,15 +1085,10 @@ def test_GET_experiment_uri_params():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-
-
-    # Log all triples in the graph
-    for subj, pred, obj in graph:
-        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    resulting_graph = Graph()
+    resulting_graph.parse(data=response.text, format="turtle")
     # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
+    assert len(resulting_graph) > 0, "The RDF graph is empty"
     # Verify that the expected triples are present in the graph
     expected_graph = Graph()
     expected_ttl_data = """
@@ -1128,12 +1103,12 @@ def test_GET_experiment_uri_params():
     expected_graph.parse(data=expected_ttl_data, format="turtle")
 
     # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    assert len(resulting_graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(resulting_graph)}"
 
     for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+        assert triple in resulting_graph, f"Expected triple {triple} is missing in the graph"
 
-    for triple in graph:
+    for triple in resulting_graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
 def test_GET_experiment_with_activities():
@@ -1202,18 +1177,10 @@ def test_GET_experiment_with_activities():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-    # Write the resulting graph to a file
-    output_file = "./test/logs/graph.ttl"
-    with open(output_file, "w", encoding="utf-8") as f:
-        f.write(graph.serialize(format="turtle", encoding="utf-8").decode("utf-8"))
-    logger.info(f"Graph written to {output_file}")
-    # Log all triples in the graph
-    for subj, pred, obj in graph:
-        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    resulting_graph = Graph()
+    resulting_graph.parse(data=response.text, format="turtle")
     # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
+    assert len(resulting_graph) > 0, "The RDF graph is empty"
     # Verify that the expected triples are present in the graph
     expected_graph = Graph()
     expected_ttl_data = """
@@ -1256,12 +1223,12 @@ def test_GET_experiment_with_activities():
     expected_graph.parse(data=expected_ttl_data, format="turtle")
 
     # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    assert len(resulting_graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(resulting_graph)}"
 
     for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+        assert triple in resulting_graph, f"Expected triple {triple} is missing in the graph"
 
-    for triple in graph:
+    for triple in resulting_graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
 def test_GET_experiment_with_activities_but_no_msgs():
@@ -1326,18 +1293,10 @@ def test_GET_experiment_with_activities_but_no_msgs():
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
     
     # Load the response into an RDFLib graph
-    graph = Graph()
-    graph.parse(data=response.text, format="turtle")
-    # Write the resulting graph to a file
-    output_file = "./test/logs/graph.ttl"
-    with open(output_file, "w", encoding="utf-8") as f:
-        f.write(graph.serialize(format="turtle", encoding="utf-8").decode("utf-8"))
-    logger.info(f"Graph written to {output_file}")
-    # Log all triples in the graph
-    for subj, pred, obj in graph:
-        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    resulting_graph = Graph()
+    resulting_graph.parse(data=response.text, format="turtle")
     # Verify that the graph is not empty
-    assert len(graph) > 0, "The RDF graph is empty"
+    assert len(resulting_graph) > 0, "The RDF graph is empty"
     # Verify that the expected triples are present in the graph
     expected_graph = Graph()
     expected_ttl_data = """
@@ -1376,12 +1335,12 @@ def test_GET_experiment_with_activities_but_no_msgs():
     expected_graph.parse(data=expected_ttl_data, format="turtle")
 
     # Compare the two graphs
-    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+    assert len(resulting_graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(resulting_graph)}"
 
     for triple in expected_graph:
-        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+        assert triple in resulting_graph, f"Expected triple {triple} is missing in the graph"
 
-    for triple in graph:
+    for triple in resulting_graph:
         assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
 
 def test_GET_experiment_non_existing_experiment_uri():

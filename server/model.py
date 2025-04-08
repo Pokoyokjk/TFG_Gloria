@@ -7,7 +7,7 @@ from bson import ObjectId
 import logging
 import os
 
-logger = logging.getLogger("segb_server.model")
+logger = logging.getLogger("segb.server.model")
 
 logger.info("Loading module model...")
 
@@ -30,7 +30,7 @@ class Insertion (Document):
 class Deletion (Document):
     _id = ObjectIdField(primary_key=True)
     log = ReferenceField('Log', required=True)
-    deleted_graph_hash = StringField(required=True, regex="^[a-fA-F0-9]{64}$") 
+    ttl_deleted_graph = StringField(required=True) 
     
 class Log (Document):
     _id = ObjectIdField(primary_key=True)
@@ -185,7 +185,7 @@ def get_log_info(log_id: str) -> dict:
         action = Deletion.objects(_id=log.action).first()
         if action:
             action_data = {
-                "deleted_graph_hash": action.deleted_graph_hash
+                "ttl_deleted_graph": action.ttl_deleted_graph
             }
     return {
         "log": serialize_log(log),
@@ -212,8 +212,8 @@ def clear_graph(ip_addr:str, user_details: str) -> bool:
     if not current_graph:
         logger.debug(f"No current graph found to clear")
         return False
-        
-    current_graph_hash = hashlib.sha256(str(current_graph).encode('utf-8')).hexdigest()
+    graph = utils.semantic.get_graph_from_json(current_graph)
+    turtle_data = utils.semantic.convert_graph_to_turtle(graph)
     
     try:
         
@@ -230,7 +230,7 @@ def clear_graph(ip_addr:str, user_details: str) -> bool:
         deletion = Deletion (
             _id = deletion_id,
             log = log,
-            deleted_graph_hash = current_graph_hash
+            ttl_deleted_graph = turtle_data
         )
         deletion.save()
         
@@ -241,12 +241,13 @@ def clear_graph(ip_addr:str, user_details: str) -> bool:
         logger.debug(f"Graph deleted")
         logger.debug(f"Deletion ID: {deletion_id}")
         logger.debug(f"Log ID: {log_id}")
-        logger.debug(f"Deleted graph hash: {current_graph_hash}")
+        logger.debug(f"Deleted graph -> {len(graph)} triples deleted")
         logger.debug(f"Deletion saved")
         logger.info("Graph cleared successfully")
         return True
     
     except Exception as e:
+        logger.error(f"Error clearing graph: {e}")
         session.abort_transaction()
         return False
     finally:
