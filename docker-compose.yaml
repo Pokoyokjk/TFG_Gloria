@@ -1,7 +1,7 @@
 services:
   amor-segb:
     container_name: amor-segb-server
-    image: ghcr.io/gsi-upm/amor-segb:0.4.4
+    image: ghcr.io/gsi-upm/amor-segb:0.4.5
     build: .
     ports:
       - "5000:5000"
@@ -13,8 +13,11 @@ services:
       - SECRET_KEY=${SECRET_KEY}
       - DATABASE_SERVICE=amor-segb-mongodb
       - LOGGING_LEVEL=DEBUG
-    volumes:
-      - ./logs:/logs
+    # volumes:
+      # If you want to modify the logging configuration, you can mount this file.
+      # The application reads this file at startup using the PyYAML library.
+
+      # - ./log_conf.yaml:/app/log_conf.yaml
 
   amor-segb-mongodb:
     container_name: amor-segb-mongodb
