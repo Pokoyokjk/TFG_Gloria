@@ -56,8 +56,35 @@
 <li><p><cite>403 Forbidden</cite>: Token provided but insufficient permissions or no token provided.</p></li>
 </ul>
 </section>
+<section id="get">
+<h2>3.1. GET /<a class="headerlink" href="#get" title="Link to this heading">¶</a></h2>
+<p><strong>Description:</strong>
+The root endpoint serves as a redirect to the <cite>/docs</cite> playground, providing an entry point for exploring the API documentation.</p>
+<p><strong>Request Details:</strong></p>
+<ul class="simple">
+<li><p><strong>URL:</strong> <cite>/</cite></p></li>
+<li><p><strong>Method:</strong> <cite>GET</cite></p></li>
+</ul>
+<p><strong>Response Codes:</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Status Code</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p></td>
+<td><p>The server is operational and redirects to the <cite>/docs</cite> playground for API exploration.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="get-health">
-<h2>3.1. GET /health<a class="headerlink" href="#get-health" title="Link to this heading">¶</a></h2>
+<h2>3.2. GET /health<a class="headerlink" href="#get-health" title="Link to this heading">¶</a></h2>
 <p><strong>Description:</strong>
 Health check endpoint to verify that the SEGB server is running.</p>
 <p><strong>Request Details:</strong></p>
@@ -84,7 +111,7 @@ Health check endpoint to verify that the SEGB server is running.</p>
 </table>
 </section>
 <section id="post-log">
-<h2>3.2. POST /log<a class="headerlink" href="#post-log" title="Link to this heading">¶</a></h2>
+<h2>3.3. POST /log<a class="headerlink" href="#post-log" title="Link to this heading">¶</a></h2>
 <p><strong>Description:</strong>
 This endpoint receives data in <strong>Turtle (TTL)</strong> format, converts it into <strong>JSON-LD</strong>, and stores it in the database. The TTL payload may include one or multiple RDF triples.</p>
 <p><strong>Request Details:</strong></p>
@@ -93,7 +120,7 @@ This endpoint receives data in <strong>Turtle (TTL)</strong> format, converts it
 <li><p><strong>Method:</strong> <cite>POST</cite></p></li>
 <li><p><strong>Required Headers:</strong></p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">text/turtle</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">text/turtle;</span> <span class="pre">encoding=utf-8</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;LOGGER_TOKEN</span> <span class="pre">or</span> <span class="pre">ADMIN_TOKEN&gt;</span></code></p></li>
 </ul>
 </li>
@@ -118,17 +145,17 @@ This endpoint receives data in <strong>Turtle (TTL)</strong> format, converts it
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">201</span> <span class="pre">Created</span></code></p></td>
 <td><p>The data was successfully received and stored.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code></p></td>
-<td><p>The request contained invalid or malformed data.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">403</span> <span class="pre">Forbidden</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">403</span> <span class="pre">Forbidden</span></code></p></td>
 <td><p>Insufficient permissions (e.g., using a Reader Token).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">422</span> <span class="pre">Unprocessable</span> <span class="pre">Entity</span></code></p></td>
+<td><p>The request contained invalid or malformed data.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="get-log">
-<h2>3.3. GET /log<a class="headerlink" href="#get-log" title="Link to this heading">¶</a></h2>
+<h2>3.4. GET /log<a class="headerlink" href="#get-log" title="Link to this heading">¶</a></h2>
 <p><strong>Description:</strong>
 Retrieve detailed information about a specific log entry.</p>
 <p><strong>Request Details:</strong></p>
@@ -174,7 +201,7 @@ Retrieve detailed information about a specific log entry.</p>
 </table>
 </section>
 <section id="get-graph">
-<h2>3.4. GET /graph<a class="headerlink" href="#get-graph" title="Link to this heading">¶</a></h2>
+<h2>3.5. GET /graph<a class="headerlink" href="#get-graph" title="Link to this heading">¶</a></h2>
 <p><strong>Description:</strong>
 Retrieve the entire graph stored in the SEGB in <strong>Turtle (TTL)</strong> format.</p>
 <p><strong>Request Details:</strong></p>
@@ -212,7 +239,7 @@ Retrieve the entire graph stored in the SEGB in <strong>Turtle (TTL)</strong> fo
 </table>
 </section>
 <section id="delete-graph">
-<h2>3.5. DELETE /graph<a class="headerlink" href="#delete-graph" title="Link to this heading">¶</a></h2>
+<h2>3.6. DELETE /graph<a class="headerlink" href="#delete-graph" title="Link to this heading">¶</a></h2>
 <p><strong>Description:</strong>
 Delete the entire graph stored in the SEGB.</p>
 <p><strong>Request Details:</strong></p>
@@ -250,7 +277,7 @@ Delete the entire graph stored in the SEGB.</p>
 </table>
 </section>
 <section id="get-experiments">
-<h2>3.6. GET /experiments<a class="headerlink" href="#get-experiments" title="Link to this heading">¶</a></h2>
+<h2>3.7. GET /experiments<a class="headerlink" href="#get-experiments" title="Link to this heading">¶</a></h2>
 <p><strong>Description:</strong>
 Retrieve a list of all experiments registered or information about a specific experiment and its associated activities (based on parameters).</p>
 <p><strong>Request Details:</strong></p>
@@ -445,6 +472,33 @@ Execute a SPARQL query on the graph. <strong>(Not implemented yet)</strong></p>
 </tbody>
 </table>
 </section>
+<section id="get-docs">
+<h2>3.10. GET /docs<a class="headerlink" href="#get-docs" title="Link to this heading">¶</a></h2>
+<p><strong>Description:</strong>
+Access the OpenAPI playground for exploring and testing the SEGB API</p>
+<p><strong>Request Details:</strong></p>
+<ul class="simple">
+<li><p><strong>URL:</strong> <cite>/docs</cite></p></li>
+<li><p><strong>Method:</strong> <cite>GET</cite></p></li>
+</ul>
+<p><strong>Response Codes:</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Status Code</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code></p></td>
+<td><p>Successfully loads the OpenAPI playground.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 
@@ -470,14 +524,16 @@ Execute a SPARQL query on the graph. <strong>(Not implemented yet)</strong></p>
 <li class="toctree-l1"><a class="reference internal" href="2_introduction_segb.html">2. Introduction to SEGB</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. API Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#authentication-and-permissions">Authentication and Permissions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-health">3.1. GET /health</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#post-log">3.2. POST /log</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-log">3.3. GET /log</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-graph">3.4. GET /graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#delete-graph">3.5. DELETE /graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-experiments">3.6. GET /experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get">3.1. GET /</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-health">3.2. GET /health</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#post-log">3.3. POST /log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-log">3.4. GET /log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-graph">3.5. GET /graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#delete-graph">3.6. DELETE /graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-experiments">3.7. GET /experiments</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#get-history">3.8. GET /history</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#get-query">3.9. GET /query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-docs">3.10. GET /docs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="4_basic_tutorial.html">4. Deploying the SEGB</a></li>

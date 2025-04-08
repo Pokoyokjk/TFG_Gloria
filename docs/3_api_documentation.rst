@@ -26,7 +26,29 @@ If the server is secured, unauthorized access will result in the following statu
 - `401 Unauthorized`: Invalid token.
 - `403 Forbidden`: Token provided but insufficient permissions or no token provided.
 
-3.1. GET /health
+3.1. GET /
+----------
+
+**Description:**  
+The root endpoint serves as a redirect to the `/docs` playground, providing an entry point for exploring the API documentation.
+
+**Request Details:**
+
+- **URL:** `/`
+- **Method:** `GET`
+
+**Response Codes:**
+
+.. list-table::
+  :widths: 20 80
+  :header-rows: 1
+
+  * - Status Code
+    - Description
+  * - ``200 OK``
+    - The server is operational and redirects to the `/docs` playground for API exploration.
+
+3.2. GET /health
 ----------
 
 **Description:**  
@@ -48,7 +70,7 @@ Health check endpoint to verify that the SEGB server is running.
    * - ``200 OK``
      - The server is running and returns the message: "The SEGB is working".
 
-3.2. POST /log
+3.3. POST /log
 --------------
 
 **Description:**  
@@ -60,7 +82,7 @@ This endpoint receives data in **Turtle (TTL)** format, converts it into **JSON-
 - **Method:** `POST`
 - **Required Headers:**
 
-  - ``Content-Type: text/turtle``
+  - ``Content-Type: text/turtle; encoding=utf-8``
   - ``Authorization: Bearer <LOGGER_TOKEN or ADMIN_TOKEN>``
   
 - **Request Body:**
@@ -77,12 +99,12 @@ This endpoint receives data in **Turtle (TTL)** format, converts it into **JSON-
      - Description
    * - ``201 Created``
      - The data was successfully received and stored.
-   * - ``400 Bad Request``
-     - The request contained invalid or malformed data.
    * - ``403 Forbidden``
      - Insufficient permissions (e.g., using a Reader Token).
+   * - ``422 Unprocessable Entity``
+     - The request contained invalid or malformed data.
 
-3.3. GET /log
+3.4. GET /log
 -------------
 
 **Description:**  
@@ -117,7 +139,7 @@ Retrieve detailed information about a specific log entry.
    * - ``404 Not Found``
      - The specified log was not found.
 
-3.4. GET /graph
+3.5. GET /graph
 ---------------
 
 **Description:**  
@@ -146,7 +168,7 @@ Retrieve the entire graph stored in the SEGB in **Turtle (TTL)** format.
    * - ``403 Forbidden``
      - Insufficient permissions (e.g., using a Logger Token).
 
-3.5. DELETE /graph
+3.6. DELETE /graph
 ------------------
 
 **Description:**  
@@ -175,7 +197,7 @@ Delete the entire graph stored in the SEGB.
    * - ``403 Forbidden``
      - Insufficient permissions (e.g., using a Reader Token).
 
-3.6. GET /experiments
+3.7. GET /experiments
 ---------------------
 
 **Description:**  
@@ -344,3 +366,26 @@ Execute a SPARQL query on the graph. **(Not implemented yet)**
      - Insufficient permissions (e.g., using a Reader or Logger Token).
    * - ``501 Not Implemented``
      - This endpoint is not yet implemented.
+
+3.10. GET /docs
+--------------
+
+**Description:**  
+Access the OpenAPI playground for exploring and testing the SEGB API
+
+**Request Details:**
+
+- **URL:** `/docs`
+
+- **Method:** `GET`
+
+**Response Codes:**
+
+.. list-table::
+  :widths: 20 80
+  :header-rows: 1
+
+  * - Status Code
+    - Description
+  * - ``200 OK``
+    - Successfully loads the OpenAPI playground.
