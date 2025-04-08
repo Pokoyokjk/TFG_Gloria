@@ -194,7 +194,70 @@ def test_POST_log_invalid_data():
     """
     response = requests.post(url, headers=headers, data=invalid_ttl_data)
     
-    assert response.status_code == 400, f"Expected 400 Bad Request, but got {response.status_code}"
+    assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity code, but got {response.status_code}"
+
+def test_POST_log_invalid_header_media_type_no_encoding():
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    ttl_data = """
+        @prefix ex: <http://example.org/> .
+        ex:subject ex:predicate "object" .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    
+    assert response.status_code == 201, f"Expected HTTP 201 Created code, but got {response.status_code}"
+
+def test_POST_log_invalid_header_media_type():
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    ttl_data = """
+        @prefix ex: <http://example.org/> .
+        ex:subject ex:predicate "object" .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    
+    assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity code, but got {response.status_code}"
+
+def test_POST_log_invalid_no_header_media_type():
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    ttl_data = """
+        @prefix ex: <http://example.org/> .
+        ex:subject ex:predicate "object" .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    
+    assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity code, but got {response.status_code}"
+
+def test_POST_log_no_data():
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle; charset=utf-8",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    response = requests.post(url, headers=headers)
+    
+    assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity code, but got {response.status_code}"
+
+
+def test_POST_log_empty_data():
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle; charset=utf-8",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    empty_data = ""
+    response = requests.post(url, headers=headers, data=empty_data)
+    
+    assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity code, but got {response.status_code}"
 
 def test_GET_empty_graph():
     url = f"{BASE_URL}/graph"
@@ -1180,6 +1243,130 @@ def test_GET_experiment_with_activities():
             segb:wasPerformedBy amor-exec:ari1 ;
             prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
             prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime .
+
+        amor-exec:msg1 a oro:InitialMessage, oro:Message, prov:Entity ;
+            oro:hasText "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
+            prov:wasGeneratedBy amor-exec:listeningEvent1 .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 ;
+            amor-exp:hasRequester amor-exec:researcher1 .
+    """
+    expected_graph.parse(data=expected_ttl_data, format="turtle")
+
+    # Compare the two graphs
+    assert len(graph) == len(expected_graph), f"Graph lengths differ: expected {len(expected_graph)}, got {len(graph)}"
+
+    for triple in expected_graph:
+        assert triple in graph, f"Expected triple {triple} is missing in the graph"
+
+    for triple in graph:
+        assert triple in expected_graph, f"Unexpected triple {triple} found in the graph"
+
+def test_GET_experiment_with_activities_but_no_msgs():
+    # Test the /experiments endpoint
+    
+    # Insert a log entry to populate the SEGB
+    url = f"{BASE_URL}/log"
+    headers = {
+        "Content-Type": "text/turtle; charset=utf-8",
+        "Authorization": f"Bearer {LOGGER_TOKEN}"
+    }
+    
+    # Example TTL data for experiments
+    ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        
+        amor-exec:exp1 a amor-exp:Experiment ;
+            amor-exp:hasExecutor amor-exec:ari41 ;
+            amor-exp:hasRequester amor-exec:researcher1 ;
+            amor-exp:hasExperimentationSubject amor-exec:user_moralbias_001 .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
+    
+    ttl_data = """
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        @prefix segb: <http://www.gsi.upm.es/ontologies/segb/ns#> .
+        @prefix oro: <http://kb.openrobots.org#> .
+        @prefix prov: <http://www.w3.org/ns/prov#> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+        
+        amor-exec:listeningEvent1 a oro:ListeningEvent, segb:LoggedActivity ;
+            amor-exp:isRelatedWithExperiment amor-exec:exp1 ;
+            oro:hasSpeaker amor-exec:maria ;
+            oro:hasListener amor-exec:ari1 ;
+            oro:hasMessage amor-exec:msg1 ;
+            segb:usedMLModel amor-exec:asrModel1 ;
+            prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime ;
+            prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+            segb:wasPerformedBy amor-exec:ari1 .
+
+        amor-exec:decisionMakingAction1 a oro:DecisionMakingAction, segb:LoggedActivity ;
+            amor-exp:isRelatedWithExperiment amor-exec:exp1 ;
+            segb:triggeredByActivity amor-exec:listeningEvent1 ;
+            segb:triggeredByActivity amor-exec:detectedHumanEvent1 ;
+            segb:usedMLModel amor-exec:decisionMakingModel1 ;
+            prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+            segb:wasPerformedBy amor-exec:ari1 .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log, but got {response.status_code}"
+    
+    # Test the get /experiments endpoint    
+    url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp1"
+    headers = {
+        "Authorization": f"Bearer {READER_TOKEN}"
+    }
+    response = requests.get(url, headers=headers)
+    
+    assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
+    
+    # Load the response into an RDFLib graph
+    graph = Graph()
+    graph.parse(data=response.text, format="turtle")
+    # Write the resulting graph to a file
+    output_file = "./test/logs/graph.ttl"
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(graph.serialize(format="turtle", encoding="utf-8").decode("utf-8"))
+    logger.info(f"Graph written to {output_file}")
+    # Log all triples in the graph
+    for subj, pred, obj in graph:
+        logger.debug(f"Triple found:\n{subj} {pred} {obj}")
+    # Verify that the graph is not empty
+    assert len(graph) > 0, "The RDF graph is empty"
+    # Verify that the expected triples are present in the graph
+    expected_graph = Graph()
+    expected_ttl_data = """
+        @prefix amor-exec: <http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#> .
+        @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+        @prefix oro: <http://kb.openrobots.org#> .
+        @prefix prov: <http://www.w3.org/ns/prov#> .
+        @prefix segb: <http://www.gsi.upm.es/ontologies/segb/ns#> .
+        @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+        
+        amor-exec:decisionMakingAction1 a oro:DecisionMakingAction,
+                segb:LoggedActivity ;
+            amor-exp:isRelatedWithExperiment amor-exec:exp1 ;
+            segb:triggeredByActivity amor-exec:detectedHumanEvent1,
+                amor-exec:listeningEvent1 ;
+            segb:usedMLModel amor-exec:decisionMakingModel1 ;
+            segb:wasPerformedBy amor-exec:ari1 ;
+            prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime .
+        
+        amor-exec:listeningEvent1 a oro:ListeningEvent,
+                segb:LoggedActivity ;
+            oro:hasListener amor-exec:ari1 ;
+            oro:hasMessage amor-exec:msg1 ;
+            oro:hasSpeaker amor-exec:maria ;
+            amor-exp:isRelatedWithExperiment amor-exec:exp1 ;
+            segb:usedMLModel amor-exec:asrModel1 ;
+            segb:wasPerformedBy amor-exec:ari1 ;
+            prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+            prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime .
         
         amor-exec:exp1 a amor-exp:Experiment ;
             amor-exp:hasExecutor amor-exec:ari41 ;
@@ -1862,40 +2049,48 @@ def test_check_auth_logger_level():
     url = f"{BASE_URL}/log"
     # Test that accessing /log with ADMIN_TOKEN is allowed
     headers = {
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
+        "Content-Type": "text/turtle; charset=utf-8"
     }
-    response = requests.post(url, headers=headers)
-    assert response.status_code == 400, f"Expected HTTP 400 Bad Request for ADMIN_TOKEN, but got {response.status_code}"
+    headers.update({
+        "Authorization": f"Bearer {ADMIN_TOKEN}"
+    })
+    ttl_data = """
+        @prefix ex: <http://example.org/> .
+        ex:subject ex:predicate "object" .
+    """
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log with ADMIN_TOKEN, but got {response.status_code}"
 
     # Test that accessing /log with ALL_ROLES_TOKEN is allowed
-    headers = {
+    headers.update({
         "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    }
-    response = requests.post(url, headers=headers)
-    assert response.status_code == 400, f"Expected HTTP 400 Bad Request for ALL_ROLES_TOKEN, but got {response.status_code}"
+    })
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log with ALL_ROLES_TOKEN, but got {response.status_code}"
 
 
     # Test that accessing /log with READER_TOKEN is forbidden
-    headers = {
+    headers.update({
         "Authorization": f"Bearer {READER_TOKEN}"
-    }
-    response = requests.post(url, headers=headers)
+    })
+    response = requests.post(url, headers=headers, data=ttl_data)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_TOKEN, but got {response.status_code}"
 
     # Test that accessing /log with LOGGER_TOKEN is allowed
-    headers = {
+    headers.update({
         "Authorization": f"Bearer {LOGGER_TOKEN}"
-    }
-    response = requests.post(url, headers=headers)
-    assert response.status_code == 400, f"Expected HTTP 400 Bad Request for LOGGER_TOKEN, but got {response.status_code}"
+    })
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log with LOGGER_TOKEN, but got {response.status_code}"
 
     # Test that accessing /log with READER_LOGGER_TOKEN is allowed
-    headers = {
+    headers.update({
         "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    }
-    response = requests.post(url, headers=headers)
-    assert response.status_code == 400, f"Expected HTTP 400 Bad Request for READER_LOGGER_TOKEN, but got {response.status_code}"
+    })
+    response = requests.post(url, headers=headers, data=ttl_data)
+    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log with READER_LOGGER_TOKEN, but got {response.status_code}"
 
     # Test that accessing /log without token is forbidden
-    response = requests.post(url)
+    del headers["Authorization"]
+    response = requests.post(url, headers=headers, data=ttl_data)
     assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"

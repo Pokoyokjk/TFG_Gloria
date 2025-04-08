@@ -1,6 +1,6 @@
 import json
-from fastapi import Depends, FastAPI, HTTPException, status, Response, Request
-from fastapi.responses import JSONResponse, PlainTextResponse
+from fastapi import Body, Depends, FastAPI, HTTPException, status, Response, Request
+from fastapi.responses import JSONResponse, PlainTextResponse, RedirectResponse
 from pydantic import BaseModel
 from typing import Annotated
 
@@ -43,13 +43,17 @@ logger.info("Database connection established.")
 logger.info("SEGB server is now running and ready to accept requests.")
 
 ### Endpoints ###
+@app.get('/')
+async def root():
+    return RedirectResponse(url='/docs')
+
 @app.get('/health')
 async def default_route(request: Request):
     logger.info("Health check request received from IP: %s", request.client.host)
-    return Response(content="The SEGB is working", status_code=status.HTTP_200_OK, media_type="text/plain")
+    return Response(content="The SEGB is working", status_code=status.HTTP_200_OK, media_type="text/plain; chartset=utf-8")
 
 @app.post('/log')
-async def save_log(user: Annotated[User, Depends(validate_token)], request: Request):
+async def save_log(user: Annotated[User, Depends(validate_token)], request: Request, recieved_data: Annotated[str, Body(media_type="text/turtle")]):
     logger.info(f"Received post for log from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
     if not (Role.LOGGER.value in user.roles or Role.ADMIN.value in user.roles):
         logger.info(f"User {user.name} (username: {user.username} - roles: {user.roles}) does not have permission to perform this action")
@@ -58,18 +62,9 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
             detail="User does not have permission to perform this action"
         )
     try:
-        recieved_data = await request.body()
-        recieved_data = recieved_data.decode("utf-8")
-        if not recieved_data:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Not recieved data or invalid data"
-                )
-
         origin_ip = request.client.host
         logger.info(f"Received log data from {origin_ip}")
         json_ld_data = None
-
         try:
             graph = utils.semantic.get_graph_from_ttl(recieved_data)
             logger.debug(f"Graph loaded from received Turtle data")
@@ -78,8 +73,8 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
         except Exception as e:
             logger.error(f"Error converting Turtle data to JSON-LD: {e}")
             raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Not recieved data or invalid data"
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="Invalid TTL data format. Error including Turtle data in the graph"
                 )
         save_json_ld(json_ld_data=json_ld_data)
         logger.info("Log data integrated into the global graph")
@@ -348,7 +343,7 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
     try:
         json_ld_data = get_raw_graph_from_db()
         graph = utils.semantic.get_graph_from_json(json_ld_data)
-        result_graph = utils.experiments.get_experiment_with_activities(graph, namespace, experiment_id)
+        result_graph = utils.experiments.get_single_experiment_graph(graph, namespace, experiment_id)
         if len(result_graph) == 0:
             logger.info(f"Experiment not found: {namespace}{experiment_id}")
             raise HTTPException(
