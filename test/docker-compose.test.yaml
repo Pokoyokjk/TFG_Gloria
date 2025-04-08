@@ -12,6 +12,10 @@ services:
     env_file:
       - ./test.env
     volumes:
+      # If you want to modify the logging configuration, you can mount /app/log_conf.yaml file.
+      # fastapi/uvicorn reads this file at startup using the PyYAML library.
+
+      - ./test_log_conf.yaml:/app/log_conf.yaml
       - ./logs:/logs
 
   amor-segb-mongodb-test:

@@ -4,7 +4,7 @@ import json
 import logging
 import os
 
-logger = logging.getLogger("segb_server.utils.semantic")
+logger = logging.getLogger("segb.server.utils.semantic")
 
 logger.info("Loading module utils.semantic...")
 

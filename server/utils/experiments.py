@@ -3,7 +3,7 @@ from rdflib.query import Result
 import os
 import logging
 
-logger = logging.getLogger("segb_server.utils.experiments")
+logger = logging.getLogger("segb.server.utils.experiments")
 
 logger.info("Loading module utils.experiments...")
 

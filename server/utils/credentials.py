@@ -8,7 +8,7 @@ import os
 
 from pydantic import BaseModel
 
-logger = logging.getLogger("segb_server.utils.credentials")
+logger = logging.getLogger("segb.server.utils.credentials")
 
 logger.info("Loading utils.credentials for SEGB server...")
 

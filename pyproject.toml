@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = "==3.12.7"
 dependencies = [
     "fastapi[standard]==0.115.12",
+    "PyYAML==6.0.2",
+    "uvicorn[standard]==0.34.0",
     "mongoengine==0.29.1",
     "pyjwt==2.10.1",
     "rdflib==7.1.3",

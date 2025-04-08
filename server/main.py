@@ -1,8 +1,9 @@
-import json
+import uvicorn
 from fastapi import Body, Depends, FastAPI, HTTPException, status, Response, Request
 from fastapi.responses import JSONResponse, PlainTextResponse, RedirectResponse
 from pydantic import BaseModel
 from typing import Annotated
+import json
 
 import utils.semantic
 import utils.experiments
@@ -14,31 +15,17 @@ import os
 
 # Set up logging
 logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
-log_file = os.getenv("SERVER_LOG_FILE", "segb_server.log")
-# Ensure the logs directory exists
-os.makedirs('/logs', exist_ok=True)
-file_handler = logging.FileHandler(
-    filename=f'/logs/{log_file}',
-    mode='a',
-    encoding='utf-8'
-)
-file_handler.setFormatter(logging.Formatter(
-    fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-))
-logger = logging.getLogger("segb_server")
+
+logger = logging.getLogger("segb.server")
 logger.setLevel(getattr(logging, logging_level, logging.INFO))
-logger.addHandler(file_handler)
 
 logger.info("Starting SEGB server...")
 logger.info("Logging level set to %s", logging_level)
 
 app = FastAPI()
 
-logger.info("Connecting to the database...")
 db_service = os.getenv("DATABASE_SERVICE", "amor-segb-mongodb")
 connect_to_db(db_service)
-logger.info("Database connection established.")
 
 logger.info("SEGB server is now running and ready to accept requests.")
 
@@ -369,3 +356,6 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Internal Server Error: Error retrieving experiment -> {str(e)}"
         )
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=5000, proxy_headers=True, log_config='./log_conf.yaml')

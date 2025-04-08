@@ -15,6 +15,8 @@ ADD pyproject.toml pyproject.toml
 
 RUN uv sync --frozen
 
+ADD log_conf.yaml log_conf.yaml
+
 COPY ./server /app
 
-CMD ["uv", "run", "fastapi", "run", "main.py", "--port", "5000"]
+CMD [ "uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000", "--proxy-headers", "--log-config", "log_conf.yaml" ]
