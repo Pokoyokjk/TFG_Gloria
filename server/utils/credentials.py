@@ -12,12 +12,7 @@ logger = logging.getLogger("segb_server.utils.credentials")
 
 logger.info("Loading utils.credentials for SEGB server...")
 
-SECRET_KEY = os.getenv("SECRET_KEY", None)
-# If the environment variable is not set, it will be None
-# Docker Compose assign an empty string to any variable if no value is found in the .env file
-# This is a workaround to avoid the empty string as a secret key
-if SECRET_KEY == '':
-    SECRET_KEY = None
+SECRET_KEY = os.getenv("SECRET_KEY", '') or None
 
 ALGORITHM = "HS256"
 
@@ -45,7 +40,7 @@ async def validate_token(auth_credentials: Annotated[HTTPAuthorizationCredential
         In this case, security is disabled, and full access is granted ignoring the token.
         '''
     logger.debug("Validating token...")
-    if SECRET_KEY is None:
+    if not SECRET_KEY:
         logger.warning(
             "SECRET_KEY is not set. No security is enabled, and all endpoints are accessible without token validation.")
         # If the secret is None, we assume no security is enabled
