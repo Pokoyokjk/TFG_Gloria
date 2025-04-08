@@ -13,6 +13,12 @@ logger = logging.getLogger("segb_server.utils.credentials")
 logger.info("Loading utils.credentials for SEGB server...")
 
 SECRET_KEY = os.getenv("SECRET_KEY", None)
+# If the environment variable is not set, it will be None
+# Docker Compose assign an empty string to any variable if no value is found in the .env file
+# This is a workaround to avoid the empty string as a secret key
+if SECRET_KEY == '':
+    SECRET_KEY = None
+
 ALGORITHM = "HS256"
 
 security = HTTPBearer()
