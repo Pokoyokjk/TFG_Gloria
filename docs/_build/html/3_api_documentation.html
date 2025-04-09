@@ -43,7 +43,7 @@
 <li><p><strong>Logger</strong>: Can log data to the SEGB.</p></li>
 <li><p><strong>Admin</strong>: Has full access to all endpoints, including deleting the graph and accessing the history.</p></li>
 </ul>
-<p>These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request. A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a reader/logger token can be generated.</p>
+<p>These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request. A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a auditor/logger token can be generated.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Tokens must be generated manually by a SEGB admin (who knows the secret) using <cite>token_generator_script.py</cite> and are unique to each user. The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens. Additionally, tokens should be refreshed periodically to maintain security.</p>
@@ -210,7 +210,7 @@ Retrieve the entire graph stored in the SEGB in <strong>Turtle (TTL)</strong> fo
 <li><p><strong>Method:</strong> <cite>GET</cite></p></li>
 <li><p><strong>Required Headers:</strong></p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;READER_TOKEN</span> <span class="pre">or</span> <span class="pre">ADMIN_TOKEN&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;AUDITOR_TOKEN</span> <span class="pre">or</span> <span class="pre">ADMIN_TOKEN&gt;</span></code></p></li>
 </ul>
 </li>
 </ul>
@@ -286,7 +286,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 <li><p><strong>Method:</strong> <cite>GET</cite></p></li>
 <li><p><strong>Required Headers:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;READER_TOKEN&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;AUDITOR_TOKEN&gt;</span></code></p></li>
 </ul>
 </li>
 <li><p><strong>Query Parameters:</strong></p>
@@ -299,7 +299,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 <li><p><strong>Request:</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GET /experiments HTTP/1.1
 Host: http://example.com/experiments
-Authorization: Bearer &lt;READER_TOKEN&gt;
+Authorization: Bearer &lt;AUDITOR_TOKEN&gt;
 </pre></div>
 </div>
 </li>
@@ -327,7 +327,7 @@ Authorization: Bearer &lt;READER_TOKEN&gt;
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://example.com/experiments&quot;</span>
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1&quot;</span><span class="p">}</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer &lt;READER_TOKEN&gt;&quot;</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer &lt;AUDITOR_TOKEN&gt;&quot;</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>  <span class="c1"># The URL will automatically encode # as %23</span>
 </pre></div>
@@ -349,7 +349,7 @@ Authorization: Bearer &lt;READER_TOKEN&gt;
 
 <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://example.com/experiments&quot;</span>
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&quot;</span><span class="p">,</span> <span class="s2">&quot;experiment_id&quot;</span><span class="p">:</span> <span class="s2">&quot;exp1&quot;</span><span class="p">}</span>
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer &lt;READER_TOKEN&gt;&quot;</span><span class="p">}</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer &lt;AUDITOR_TOKEN&gt;&quot;</span><span class="p">}</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>  <span class="c1"># The URL will automatically encode # as %23</span>
 </pre></div>

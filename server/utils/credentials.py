@@ -20,7 +20,7 @@ security = HTTPBearer()
 ### TOKEN VALIDATION FUNCTIONS ###
 
 class Role(Enum):
-    READER = "reader"
+    AUDITOR = "auditor"
     LOGGER = "logger"
     ADMIN = "admin"
     
@@ -53,8 +53,6 @@ async def validate_token(auth_credentials: Annotated[HTTPAuthorizationCredential
     try:
         logger.debug("Decoding token...")
         token = auth_credentials.credentials
-        # Decode the token using the secret key and algorithm
-        logger.debug(f"Token: {token}")
         decode = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         logger.info("Token validated successfully")
         logger.debug(f"Decoded token data: {decode}")

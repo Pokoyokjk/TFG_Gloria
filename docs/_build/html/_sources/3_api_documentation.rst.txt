@@ -11,7 +11,7 @@ The SEGB API uses **Bearer Tokens** for authentication and authorization. Each e
 - **Logger**: Can log data to the SEGB.
 - **Admin**: Has full access to all endpoints, including deleting the graph and accessing the history.
 
-These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request. A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a reader/logger token can be generated.
+These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request. A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a auditor/logger token can be generated.
 
 .. note::
 
@@ -151,7 +151,7 @@ Retrieve the entire graph stored in the SEGB in **Turtle (TTL)** format.
 - **Method:** `GET`
 - **Required Headers:**  
 
-  - ``Authorization: Bearer <READER_TOKEN or ADMIN_TOKEN>``
+  - ``Authorization: Bearer <AUDITOR_TOKEN or ADMIN_TOKEN>``
 
 **Response Codes:**
 
@@ -209,7 +209,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 - **Method:** `GET`
 - **Required Headers:**  
 
-  - ``Authorization: Bearer <READER_TOKEN>``
+  - ``Authorization: Bearer <AUDITOR_TOKEN>``
 
 - **Query Parameters:**
 
@@ -225,7 +225,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 
            GET /experiments HTTP/1.1
            Host: http://example.com/experiments
-           Authorization: Bearer <READER_TOKEN>
+           Authorization: Bearer <AUDITOR_TOKEN>
 
       - **Response:**
 
@@ -254,7 +254,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 
          url = "http://example.com/experiments"
          params = {"uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"}
-         headers = {"Authorization": "Bearer <READER_TOKEN>"}
+         headers = {"Authorization": "Bearer <AUDITOR_TOKEN>"}
          response = requests.get(url, params=params, headers=headers)
          print(response.url)  # The URL will automatically encode # as %23
 
@@ -278,7 +278,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 
          url = "http://example.com/experiments"
          params = {"namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns", "experiment_id": "exp1"}
-         headers = {"Authorization": "Bearer <READER_TOKEN>"}
+         headers = {"Authorization": "Bearer <AUDITOR_TOKEN>"}
          response = requests.get(url, params=params, headers=headers)
          print(response.url)  # The URL will automatically encode # as %23
 

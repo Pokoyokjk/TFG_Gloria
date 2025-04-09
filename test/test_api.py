@@ -43,16 +43,16 @@ BASE_URL = CONFIG.get("BASE_URL", "http://127.0.0.1:5000")
 TEST_DB_VOLUME = CONFIG.get("TEST_DB_VOLUME", "amor-segb-db-test")
 
 logger.info(f"Loading test tokens from environment variables")
-READER_TOKEN = CONFIG.get("READER_TOKEN", "fake_reader_token")
+AUDITOR_TOKEN = CONFIG.get("AUDITOR_TOKEN", "fake_auditor_token")
 LOGGER_TOKEN = CONFIG.get("LOGGER_TOKEN", "fake_logger_token")
 ADMIN_TOKEN = CONFIG.get("ADMIN_TOKEN", "fake_admin_token")
-READER_LOGGER_TOKEN = CONFIG.get("READER_LOGGER_TOKEN", "fake_reader_logger_token")
+AUDITOR_LOGGER_TOKEN = CONFIG.get("AUDITOR_LOGGER_TOKEN", "fake_auditor_logger_token")
 ALL_ROLES_TOKEN = CONFIG.get("ALL_ROLES_TOKEN", "fake_all_roles_token")
 
-logger.debug(f"READER_TOKEN: {READER_TOKEN}")
+logger.debug(f"AUDITOR_TOKEN: {AUDITOR_TOKEN}")
 logger.debug(f"LOGGER_TOKEN: {LOGGER_TOKEN}")
 logger.debug(f"ADMIN_TOKEN: {ADMIN_TOKEN}")
-logger.debug(f"READER_LOGGER_TOKEN: {READER_LOGGER_TOKEN}")
+logger.debug(f"AUDITOR_LOGGER_TOKEN: {AUDITOR_LOGGER_TOKEN}")
 logger.debug(f"ALL_ROLES_TOKEN: {ALL_ROLES_TOKEN}")
 
 SECRET_KEY = CONFIG.get("SECRET_KEY", None)
@@ -165,11 +165,11 @@ def test_POST_log_valid_data_with_logger_token():
     
     assert response.status_code == 201, f"Expected HTTP 201 Created code, but got {response.status_code}"
 
-def test_POST_log_valid_data_with_reader_token():
+def test_POST_log_valid_data_with_auditor_token():
     url = f"{BASE_URL}/log"
     headers = {
         "Content-Type": "text/turtle; charset=utf-8",
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     
     ttl_data = """
@@ -262,7 +262,7 @@ def test_POST_log_empty_data():
 def test_GET_empty_graph():
     url = f"{BASE_URL}/graph"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 204, f"Expected HTTP 204 Empty Content code, but got {response.status_code}"
@@ -289,7 +289,7 @@ def test_GET_graph_with_one_POST():
     
     url = f"{BASE_URL}/graph"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers, stream=True)
     logger.debug(f"Response text: {response.text}")
@@ -323,7 +323,7 @@ def test_GET_graph_with_several_POST():
 
     url = f"{BASE_URL}/graph"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers, stream=True)
     logger.debug(f"Response length: {len(response.text)}")
@@ -543,7 +543,7 @@ def test_GET_experiments_basic():
     
     url = f"{BASE_URL}/experiments"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
@@ -605,7 +605,7 @@ def test_GET_experiments_extended():
     
     url = f"{BASE_URL}/experiments"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
@@ -679,7 +679,7 @@ def test_GET_experiments_extended_several_logs():
     
     url = f"{BASE_URL}/experiments"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
@@ -713,7 +713,7 @@ def test_GET_experiments_without_logged_experiments():
     
     url = f"{BASE_URL}/experiments"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 204, f"Expected HTTP 204 No Content code, but got {response.status_code}"
@@ -754,7 +754,7 @@ def test_GET_experiment():
     # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     
@@ -823,7 +823,7 @@ def test_GET_experiment_query_hastag_code():
     # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp3"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     
@@ -891,7 +891,7 @@ def test_GET_experiment_query_params():
     # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     params = {
         "experiment_id": "exp3",
@@ -963,7 +963,7 @@ def test_GET_experiment_uri():
     # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23exp1"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     
@@ -1033,7 +1033,7 @@ def test_GET_experiment_uri_malformed_invalid_uri():
     # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments?uri=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns/exp1"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     
@@ -1075,7 +1075,7 @@ def test_GET_experiment_uri_params():
     # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     params = {
         "uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"
@@ -1170,7 +1170,7 @@ def test_GET_experiment_with_activities():
     # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp1"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     
@@ -1286,7 +1286,7 @@ def test_GET_experiment_with_activities_but_no_msgs():
     # Test the get /experiments endpoint    
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns%23&experiment_id=exp1"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     
@@ -1379,7 +1379,7 @@ def test_GET_experiment_non_existing_experiment_uri():
     # Test the get /experiments endpoint
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp10"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     
@@ -1390,7 +1390,7 @@ def test_GET_experiment_missing_experiment():
     # Test the get experiments endpoint
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 404, f"Expected HTTP 404 Not Found, but got {response.status_code}"
@@ -1400,7 +1400,7 @@ def test_GET_experiment_missing_experiment_id():
     # Test the get experiments endpoint
     url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity, but got {response.status_code}"
@@ -1410,7 +1410,7 @@ def test_GET_experiment_missing_namespace():
     # Test the get experiments endpoint
     url = f"{BASE_URL}/experiments?experiment_id=exp1"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 422, f"Expected HTTP 422 Unprocessable Entity, but got {response.status_code}"
@@ -1420,7 +1420,7 @@ def test_GET_experiment_missing_namespace_and_experiment_id():
     # Test the get experiments endpoint
     url = f"{BASE_URL}/experiments"
     headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     response = requests.get(url, headers=headers)
     assert response.status_code == 204, f"Expected HTTP 204 No Content, but got {response.status_code}"
@@ -1521,7 +1521,7 @@ def test_GET_experiment_with_json_params():
     url = f"{BASE_URL}/experiments"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     json_data = {
         "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns",
@@ -1592,7 +1592,7 @@ def test_GET_experiment_with_json_params_hashtag_namespace():
     url = f"{BASE_URL}/experiments"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     json_data = {
         "namespace": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#",
@@ -1662,7 +1662,7 @@ def test_GET_experiment_with_json_params_uri():
     url = f"{BASE_URL}/experiments"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {READER_TOKEN}"
+        "Authorization": f"Bearer {AUDITOR_TOKEN}"
     }
     json_data = {
         "uri": "http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns#exp1"
@@ -1690,366 +1690,264 @@ def test_GET_experiment_with_json_params_uri():
     for uri in resulting_uris:
         assert uri in expected_uris, f"Unexpected URI {uri} found in the response"
 
+def check_endpoints(endpoints_dict: dict, token_name: str, token: str):
+    for endpoint, details in endpoints_dict.items():
+        logger.debug(f"Testing {endpoint} endpoint for {token_name} level access")
+        for method in details["methods"]:
+            url = details["url"]
+            headers = {"Authorization": f"Bearer {token}"}
+            if method == "GET":
+                response = requests.get(url, headers=headers)
+            elif method == "POST":
+                if endpoint == "log":
+                    headers["Content-Type"] = "text/turtle; charset=utf-8"
+                    response = requests.post(url, headers=headers, data=details["data"])
+                else:
+                    response = requests.post(url, headers=headers)
+            elif method == "DELETE":
+                response = requests.delete(url, headers=headers)
+            else:
+                continue
+            if isinstance(details["expected_response"], dict):
+                expected_status = details["expected_response"].get(method)
+                assert expected_status is not None, f"No expected response defined for method {method} on {url}"
+            else:
+                expected_status = details["expected_response"]
+
+            logger.debug(f"Testing {method} {url} with token {token_name}")
+            logger.debug(f"Response status code: {response.status_code}")
+            logger.debug(f"Response text: {response.text}")
+            assert response.status_code == expected_status, f"Expected HTTP {expected_status} for {method} {url}, but got {response.status_code}"
+            
+    logger.info(f"Completed testing all endpoints for {token_name} level access.")
+
+
 def test_check_auth_admin_level():
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
     if not SECRET_KEY:
         pytest.skip("Skipping test because the server is not secured")
+        
+    token_name = "ADMIN"
+    token = ADMIN_TOKEN
     
-    ### TESTING AUTHORIZATION LEVELS FOR GET /history ###
-    url = f"{BASE_URL}/history"
-    
-    # Test that accessing /history with ADMIN_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
+    endpoints_to_test = {
+        "root": {
+            "url": f"{BASE_URL}/",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "docs": {
+            "url": f"{BASE_URL}/docs",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "health": {
+            "url": f"{BASE_URL}/health",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "history": {
+            "url": f"{BASE_URL}/history",
+            "methods": ["GET"],
+            "expected_response": 204},
+        "log": {
+            "url": f"{BASE_URL}/log",
+            "methods": ["GET", "POST"],
+            "expected_response": {"GET": 400, "POST": 422},
+            "data": "invalid_ttl_data"},
+        "graph": {
+            "url": f"{BASE_URL}/graph",
+            "methods": ["GET", "DELETE"],
+            "expected_response": {"GET": 204, "DELETE": 204}},
+        "query": {
+            "url": f"{BASE_URL}/query",
+            "methods": ["GET"], 
+            "expected_response": 501},
+        "experiments": {
+            "url": f"{BASE_URL}/experiments",
+            "methods": ["GET"],
+            "expected_response": 204},
     }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /history with ADMIN_TOKEN, but got {response.status_code}"
+    
+    check_endpoints(endpoints_to_test, token_name, token)
 
-    # Test that accessing /history with ALL_ROLES_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /history with ALL_ROLES_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /history with READER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /history with LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /history with READER_LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /history without token is forbidden
-    response = requests.get(url)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
-    
-    
-    ### TESTING AUTHORIZATION LEVELS FOR GET /log ###
-    # Use the log_id in the URL
-    url = f"{BASE_URL}/log?log_id=any"
-    # Test that accessing /log with ADMIN_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 404, f"Expected HTTP 404 Not Found for ADMIN_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /log with ALL_ROLES_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 404, f"Expected HTTP 404 Not Found when access /log with ALL_ROLES_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /log with READER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /log with LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /log with READER_LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_LOGGER_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /log without token is forbidden
-    response = requests.get(url)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
-    
-    
-    ### TESTING AUTHORIZATION LEVELS FOR DELETE /graph ###
-    url = f"{BASE_URL}/graph"
-    # Test that deleting /graph with ADMIN_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
-    }
-    response = requests.delete(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /graph with ADMIN_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /graph with ALL_ROLES_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    }
-    response = requests.delete(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /graph with ALL_ROLES_TOKEN, but got {response.status_code}"
-    
-    # Test that deleting /graph with READER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
-    }
-    response = requests.delete(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_TOKEN, but got {response.status_code}"
-    
-    # Test that deleting /graph with LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {LOGGER_TOKEN}"
-    }
-    response = requests.delete(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /graph with READER_LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    }
-    response = requests.delete(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that deleting /graph without token is forbidden
-    response = requests.delete(url)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
-    
-    
-    ### TESTING AUTHORIZATION LEVELS FOR GET /query ###
-    url = f"{BASE_URL}/query"
-    # Test that accessing /query with ADMIN_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 501, f"Expected HTTP 501 Not Implemented for ADMIN_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /query with ALL_ROLES_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 501, f"Expected HTTP 501 Not Implemented when access /query with ALL_ROLES_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /query with READER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /query with LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /query with READER_LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /query without token is forbidden
-    response = requests.get(url)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
-
-def test_check_auth_reader_level():
+def test_check_auth_auditor_level():
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
     if not SECRET_KEY:
         pytest.skip("Skipping test because the server is not secured")
+        
+    token_name = "AUDITOR"
+    token = AUDITOR_TOKEN
     
-    ### TESTING AUTHORIZATION LEVELS FOR GET /graph ###
-    
-    # Test that accessing /graph with ADMIN_TOKEN is allowed
-    url = f"{BASE_URL}/graph"
-    headers = {
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
+    endpoints_to_test = {
+        "root": {
+            "url": f"{BASE_URL}/",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "docs": {
+            "url": f"{BASE_URL}/docs",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "health": {
+            "url": f"{BASE_URL}/health",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "history": {
+            "url": f"{BASE_URL}/history",
+            "methods": ["GET"],
+            "expected_response": 204},
+        "log": {
+            "url": f"{BASE_URL}/log",
+            "methods": ["GET", "POST"],
+            "expected_response": {"GET": 400, "POST": 403},
+            "data": "invalid_ttl_data"},
+        "graph": {
+            "url": f"{BASE_URL}/graph",
+            "methods": ["GET", "DELETE"],
+            "expected_response": {"GET": 204, "DELETE": 403}},
+        "query": {
+            "url": f"{BASE_URL}/query",
+            "methods": ["GET"], 
+            "expected_response": 403},
+        "experiments": {
+            "url": f"{BASE_URL}/experiments",
+            "methods": ["GET"],
+            "expected_response": 204},
     }
-    history_response = requests.get(url, headers=headers)
-    assert history_response.status_code == 204, f"Expected HTTP 204 when access /graph with ADMIN_TOKEN, but got {history_response.status_code}"
-
-    # Test that accessing /graph with ALL_ROLES_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /graph with ALL_ROLES_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /graph with READER_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /graph with READER_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /graph with LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
     
-    # Test that accessing /graph with READER_LOGGER_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /graph with READER_LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /graph without token is forbidden
-    response = requests.get(url)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
-    
-    
-    ### TESTING AUTHORIZATION LEVELS FOR GET /experiments ###
-    # Use the /experiments endpoint with specific parameters
-    url = f"{BASE_URL}/experiments?namespace=http://www.gsi.upm.es/ontologies/amor/experiments/execution/ns&experiment_id=exp1"
-    
-    # Test that accessing /experiments with ADMIN_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 404, f"Expected HTTP 404 OK for ADMIN_TOKEN, but got {response.status_code}"
-    
-    ## Test that accessing /experiments with ALL_ROLES_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 404, f"Expected HTTP 404 OK for ALL_ROLES_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments with READER_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 404, f"Expected HTTP 404 OK for READER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments with LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments with READER_LOGGER_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 404, f"Expected HTTP 404 OK for READER_LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments without token is forbidden
-    response = requests.get(url)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
-    
-    
-    ### TESTING AUTHORIZATION LEVELS FOR GET /experiments ###
-    url = f"{BASE_URL}/experiments"
-    
-    # Test that accessing /experiments with ADMIN_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /experiments with ADMIN_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments with ALL_ROLES_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /experiments with ALL_ROLES_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments with READER_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {READER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /experiments with READER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments with LOGGER_TOKEN is forbidden
-    headers = {
-        "Authorization": f"Bearer {LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments with READER_LOGGER_TOKEN is allowed
-    headers = {
-        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    }
-    response = requests.get(url, headers=headers)
-    assert response.status_code == 204, f"Expected HTTP 204 when access /experiments with READER_LOGGER_TOKEN, but got {response.status_code}"
-    
-    # Test that accessing /experiments without token is forbidden
-    response = requests.get(url)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
+    check_endpoints(endpoints_to_test, token_name, token)
 
 def test_check_auth_logger_level():
-    
     # IMPORTANT: Empty DB, so HTTP responses could be different as expected
     if not SECRET_KEY:
         pytest.skip("Skipping test because the server is not secured")
+        
+    token_name = "LOGGER"
+    token = LOGGER_TOKEN
     
-    ### TESTING AUTHORIZATION LEVELS FOR POST /log ###
-    url = f"{BASE_URL}/log"
-    # Test that accessing /log with ADMIN_TOKEN is allowed
-    headers = {
-        "Content-Type": "text/turtle; charset=utf-8"
+    endpoints_to_test = {
+        "root": {
+            "url": f"{BASE_URL}/",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "docs": {
+            "url": f"{BASE_URL}/docs",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "health": {
+            "url": f"{BASE_URL}/health",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "history": {
+            "url": f"{BASE_URL}/history",
+            "methods": ["GET"],
+            "expected_response": 403},
+        "log": {
+            "url": f"{BASE_URL}/log",
+            "methods": ["GET", "POST"],
+            "expected_response": {"GET": 403, "POST": 422},
+            "data": "invalid_ttl_data"},
+        "graph": {
+            "url": f"{BASE_URL}/graph",
+            "methods": ["GET", "DELETE"],
+            "expected_response": {"GET": 403, "DELETE": 403}},
+        "query": {
+            "url": f"{BASE_URL}/query",
+            "methods": ["GET"], 
+            "expected_response": 403},
+        "experiments": {
+            "url": f"{BASE_URL}/experiments",
+            "methods": ["GET"],
+            "expected_response": 403},
     }
-    headers.update({
-        "Authorization": f"Bearer {ADMIN_TOKEN}"
-    })
-    ttl_data = """
-        @prefix ex: <http://example.org/> .
-        ex:subject ex:predicate "object" .
-    """
-    response = requests.post(url, headers=headers, data=ttl_data)
-    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log with ADMIN_TOKEN, but got {response.status_code}"
+    
+    check_endpoints(endpoints_to_test, token_name, token)
 
-    # Test that accessing /log with ALL_ROLES_TOKEN is allowed
-    headers.update({
-        "Authorization": f"Bearer {ALL_ROLES_TOKEN}"
-    })
-    response = requests.post(url, headers=headers, data=ttl_data)
-    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log with ALL_ROLES_TOKEN, but got {response.status_code}"
+def test_check_auth_auditor_logger_level():
+    # IMPORTANT: Empty DB, so HTTP responses could be different as expected
+    if not SECRET_KEY:
+        pytest.skip("Skipping test because the server is not secured")
+        
+    token_name = "AUDITOR+LOGGER"
+    token = AUDITOR_LOGGER_TOKEN
+    
+    endpoints_to_test = {
+        "root": {
+            "url": f"{BASE_URL}/",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "docs": {
+            "url": f"{BASE_URL}/docs",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "health": {
+            "url": f"{BASE_URL}/health",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "history": {
+            "url": f"{BASE_URL}/history",
+            "methods": ["GET"],
+            "expected_response": 204},
+        "log": {
+            "url": f"{BASE_URL}/log",
+            "methods": ["GET", "POST"],
+            "expected_response": {"GET": 400, "POST": 422},
+            "data": "invalid_ttl_data"},
+        "graph": {
+            "url": f"{BASE_URL}/graph",
+            "methods": ["GET", "DELETE"],
+            "expected_response": {"GET": 204, "DELETE": 403}},
+        "query": {
+            "url": f"{BASE_URL}/query",
+            "methods": ["GET"], 
+            "expected_response": 403},
+        "experiments": {
+            "url": f"{BASE_URL}/experiments",
+            "methods": ["GET"],
+            "expected_response": 204},
+    }
+    
+    check_endpoints(endpoints_to_test, token_name, token)
 
-
-    # Test that accessing /log with READER_TOKEN is forbidden
-    headers.update({
-        "Authorization": f"Bearer {READER_TOKEN}"
-    })
-    response = requests.post(url, headers=headers, data=ttl_data)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for READER_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /log with LOGGER_TOKEN is allowed
-    headers.update({
-        "Authorization": f"Bearer {LOGGER_TOKEN}"
-    })
-    response = requests.post(url, headers=headers, data=ttl_data)
-    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log with LOGGER_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /log with READER_LOGGER_TOKEN is allowed
-    headers.update({
-        "Authorization": f"Bearer {READER_LOGGER_TOKEN}"
-    })
-    response = requests.post(url, headers=headers, data=ttl_data)
-    assert response.status_code == 201, f"Expected HTTP 201 Created code when inserting log with READER_LOGGER_TOKEN, but got {response.status_code}"
-
-    # Test that accessing /log without token is forbidden
-    del headers["Authorization"]
-    response = requests.post(url, headers=headers, data=ttl_data)
-    assert response.status_code == 403, f"Expected HTTP 403 Forbidden for no token, but got {response.status_code}"
+def test_check_auth_all_roles_levels():
+    # IMPORTANT: Empty DB, so HTTP responses could be different as expected
+    if not SECRET_KEY:
+        pytest.skip("Skipping test because the server is not secured")
+        
+    token_name = "ALL_ROLES"
+    token = ALL_ROLES_TOKEN
+    
+    endpoints_to_test = {
+        "root": {
+            "url": f"{BASE_URL}/",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "docs": {
+            "url": f"{BASE_URL}/docs",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "health": {
+            "url": f"{BASE_URL}/health",
+            "methods": ["GET"],
+            "expected_response": 200},
+        "history": {
+            "url": f"{BASE_URL}/history",
+            "methods": ["GET"],
+            "expected_response": 204},
+        "log": {
+            "url": f"{BASE_URL}/log",
+            "methods": ["GET", "POST"],
+            "expected_response": {"GET": 400, "POST": 422},
+            "data": "invalid_ttl_data"},
+        "graph": {
+            "url": f"{BASE_URL}/graph",
+            "methods": ["GET", "DELETE"],
+            "expected_response": {"GET": 204, "DELETE": 204}},
+        "query": {
+            "url": f"{BASE_URL}/query",
+            "methods": ["GET"], 
+            "expected_response": 501},
+        "experiments": {
+            "url": f"{BASE_URL}/experiments",
+            "methods": ["GET"],
+            "expected_response": 204},
+    }
+    
+    check_endpoints(endpoints_to_test, token_name, token)

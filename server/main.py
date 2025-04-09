@@ -82,7 +82,7 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
 @app.get('/log')
 async def get_log(user: Annotated[User, Depends(validate_token)], request: Request, log_id: str = None):
     logger.info(f"Received request for log with ID: {log_id} from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if Role.ADMIN.value not in user.roles:
+    if not (Role.AUDITOR.value in user.roles or Role.ADMIN.value in user.roles):
         logger.info(f"User {user.name} (username: {user.username} - roles: {user.roles}) does not have permission to perform this action")
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -119,7 +119,7 @@ async def get_log(user: Annotated[User, Depends(validate_token)], request: Reque
 @app.get('/history')
 async def get_history(user: Annotated[User, Depends(validate_token)], request: Request):
     logger.info(f"Received request for history from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if Role.ADMIN.value not in user.roles:
+    if not (Role.AUDITOR.value in user.roles or Role.ADMIN.value in user.roles):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="User does not have permission to perform this action"
@@ -193,7 +193,7 @@ async def get_query(user: Annotated[User, Depends(validate_token)]):
 @app.get('/graph')
 async def get_graph(user: Annotated[User, Depends(validate_token)], request: Request):
     logger.info(f"Received request for graph from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if not (Role.READER.value in user.roles or Role.ADMIN.value in user.roles):
+    if not (Role.AUDITOR.value in user.roles or Role.ADMIN.value in user.roles):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="User does not have permission to perform this action"
@@ -224,7 +224,6 @@ async def get_graph(user: Annotated[User, Depends(validate_token)], request: Req
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Internal Server Error: Error retrieving graph -> {str(e)}"
         )
-    
 
 @app.delete('/graph')
 async def delete_graph(user: Annotated[User, Depends(validate_token)], request: Request):
@@ -294,7 +293,7 @@ def generate_response_with_all_experiments_in_json():
 @app.get('/experiments')
 async def get_experiments(user: Annotated[User, Depends(validate_token)], request: Request, uri: str = None, namespace: str = None, experiment_id: str = None):
     logger.info(f"Received request to get a specific experiment from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if not (Role.READER.value in user.roles or Role.ADMIN.value in user.roles):
+    if not (Role.AUDITOR.value in user.roles or Role.ADMIN.value in user.roles):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="User does not have permission to perform this action"

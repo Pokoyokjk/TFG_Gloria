@@ -18,6 +18,7 @@ services:
       # The application reads this file at startup using the PyYAML library.
 
       # - ./log_conf.yaml:/app/log_conf.yaml
+      - ./logs:/logs
 
   amor-segb-mongodb:
     container_name: amor-segb-mongodb
