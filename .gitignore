@@ -7,7 +7,7 @@ tutorial/interactive_segb_graph.html
 .vscode
 .env
 k8s/
-playground/
+playground*
 logs/
 *.log
 *.bak

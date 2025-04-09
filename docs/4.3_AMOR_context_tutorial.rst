@@ -1,11 +1,7 @@
-5. Tutorial
-================
+Semantic Ethical Glass Box (SEGB)
+=================================
 
-
-.. warning::
-This tutorial is compatible with version **0.2.0** of the SEGB. Using a different version may result in unexpected behavior. We are actively working on new versions to enhance functionality and compatibility.
-
-5.1. Overview
+1. Overview
 -----------
 
 The Semantic Ethical Glass Box (SEGB) is global *log* storage, which
@@ -18,7 +14,7 @@ systems. It is comprised of two parts:
 2. A MongoDB-based database, where the global graph is storaged in
    JSON-LD format
 
-5.2. Motivational Scenario
+2. Motivational Scenario
 ------------------------
 
 Let’s suppose we set up a controlled scenario which includes a robot and
@@ -40,10 +36,11 @@ information to the SEGB, and thenm, the AI-based agents registering
 themself and posting all the activities’ information to the SEGB as they
 take place. So let’s start.
 
-5.3. Use Case: Interaction Human-Robot
-----------------------------------------
+3. Use Case: Interaction Human-Robot
+------------------------------------
 
-Let's see how data is published/retrieved of the SEGB in a real use case based on the motivational scenario explained before.
+NOTE: Remember to start the SEGB with Docker Compose before the
+execution of the following tutorial.
 
 Auxiliary functions
 ~~~~~~~~~~~~~~~~~~~
@@ -68,9 +65,10 @@ for detailed info):
 
     import requests
 
+
 .. code:: ipython3
 
-    def log_ttl(server: str, input_file_path: str):
+    def log_ttl(server: str, input_file_path: str, token:str = "fake_token"):
         
         """Log a TTL file to the SEGB.
     
@@ -90,19 +88,20 @@ for detailed info):
             print("File successfully read from:", input_file_path)
         
         headers = {
-            "Content-Type": "text/turtle; charset=utf-8"
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "text/turtle"
         }
         
         response = requests.post(f"{server}/log", headers=headers, data=data)
         
-        if response.status_code == 200:
-            print("POST request completed successfully")
+        if response.status_code == 201:
+            print(f"POST request of file '{input_file_path}' completed successfully")
         else:
             print(f"Error in POST: {response.status_code} - {response.text}")
 
 .. code:: ipython3
 
-    def get_graph(server: str, output_file_path: str):
+    def get_graph(server: str, output_file_path: str, token:str = "fake_token"):
         """Download the complete graph stored in the SEGB.
     
         Sends a GET request to the SEGB's `/get_graph` endpoint to retrieve the
@@ -115,43 +114,22 @@ for detailed info):
         Example:
             >>> get_graph("http://127.0.0.1:5000", "/path/to/output/graph.ttl")
         """
-        print("Requesting graph...")
+        print(f"Requesting graph to the SEGB from {server}")
+    
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
         
-        response = requests.get(f"{server}/get_graph")
-        
+        response = requests.get(f"{server}/graph", headers=headers)
+      
         if response.status_code == 200:
             with open(output_file_path, mode="w", encoding="utf-8") as file:
                 file.write(response.text)
-            print("File successfully downloaded to:", output_file_path)
+            print(f"File successfully downloaded to: '{output_file_path}'")
     
         else:
             print(f"Error in GET: {response.status_code} - {response.text}")
 
-.. code:: ipython3
-
-    import rdflib
-    from pyvis.network import Network
-    from IPython.display import IFrame
-    
-    def display_graph(filepath):
-    
-        get_graph(server, filepath)
-    
-        g = rdflib.Graph()
-        g.parse(filepath, format="ttl") 
-        
-        net = Network(height="500px", width="100%", notebook=True, directed=True, cdn_resources='in_line')
-        
-        for s, p, o in g:
-            net.add_node(s, label=str(s), title=str(s)) 
-            net.add_node(o, label=str(o), title=str(o))  
-            net.add_edge(s, o, title=str(p))
-    
-        net.force_atlas_2based()  
-        
-        net.show("interactive_segb_graph.html")
-    
-        return IFrame("interactive_segb_graph.html", width=900, height=600)
 
 .. code:: ipython3
 
@@ -166,6 +144,8 @@ for detailed info):
         global graph_id_counter
     
         get_graph(server, filepath)
+    
+        print (f"Displaying graph from file '{filepath}'")
     
         output_dir = "html"
         os.makedirs(output_dir, exist_ok=True)
@@ -186,6 +166,7 @@ for detailed info):
         filepath_out = os.path.join(output_dir, filename)
         graph_id_counter += 1
     
+        print("\n\n")
         net.show(filepath_out)
     
         return IFrame(filepath_out, width=900, height=500)
@@ -238,7 +219,7 @@ Data Scientist
 .. parsed-literal::
 
     File successfully read from: ./ttl/data_scientist.ttl
-    POST request completed successfully
+    POST request of file './ttl/data_scientist.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -248,8 +229,12 @@ Data Scientist
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_0.html
 
 
@@ -261,7 +246,7 @@ Data Scientist
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_0.html"
+        src="html/segb_graph_0.html"
         frameborder="0"
         allowfullscreen
     
@@ -364,7 +349,7 @@ Models
 .. parsed-literal::
 
     File successfully read from: ./ttl/models_info.ttl
-    POST request completed successfully
+    POST request of file './ttl/models_info.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -374,8 +359,12 @@ Models
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_1.html
 
 
@@ -387,7 +376,7 @@ Models
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_1.html"
+        src="html/segb_graph_1.html"
         frameborder="0"
         allowfullscreen
     
@@ -403,8 +392,9 @@ Agents and Scenario Activities & Interactions
    environment is totally configured for the AI-based agents to start
    pushing *logs* info to the SEGB. Let’s start with the motivational
    scenario previously described. Maria, a person participating in the
-   scenario, want to speak to the robot and do so. In that moment, the
-   robot detect her and creates a TTL *log* which is sent to the SEGB:
+   scenario, want to speak to the robot and locates in front of it. In
+   that moment, the robot detects her and creates a TTL *log* which is
+   sent to the SEGB.
 
 .. code:: ipython3
 
@@ -440,7 +430,44 @@ Agents and Scenario Activities & Interactions
 .. parsed-literal::
 
     File successfully read from: ./ttl/person_detection.ttl
-    POST request completed successfully
+    POST request of file './ttl/person_detection.ttl' completed successfully
+
+
+The information of the experiment executing in the scenario is also
+included:
+
+.. code:: ipython3
+
+    experiment_ttl = ttl_filepath + "experiment.ttl"
+    with open(experiment_ttl, mode="r") as file:
+         ttl = file.read()
+         print(ttl)
+
+
+.. parsed-literal::
+
+    @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+    @prefix ex: <http://example.org#> .
+    @prefix prov: <http://www.w3.org/ns/prov#> .
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+    @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+    
+    ex:experiment1 a amor-exp:Experiment ;
+        rdfs:label "Experiment 1"@en ;
+        amor-exp:hasExecutor ex:ari1 ;
+        amor-exp:hasExperimentationSubject ex:maria ;
+        prov:startedAtTime "2024-11-16T12:27:10"^^xsd:dateTime .
+
+
+.. code:: ipython3
+
+    log_ttl(server, experiment_ttl)
+
+
+.. parsed-literal::
+
+    File successfully read from: ./ttl/experiment.ttl
+    POST request of file './ttl/experiment.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -450,8 +477,12 @@ Agents and Scenario Activities & Interactions
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_2.html
 
 
@@ -463,7 +494,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_2.html"
+        src="html/segb_graph_2.html"
         frameborder="0"
         allowfullscreen
     
@@ -517,7 +548,7 @@ Agents and Scenario Activities & Interactions
 .. parsed-literal::
 
     File successfully read from: ./ttl/listened_to_person.ttl
-    POST request completed successfully
+    POST request of file './ttl/listened_to_person.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -527,8 +558,12 @@ Agents and Scenario Activities & Interactions
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_3.html
 
 
@@ -540,7 +575,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_3.html"
+        src="html/segb_graph_3.html"
         frameborder="0"
         allowfullscreen
     
@@ -589,7 +624,7 @@ Agents and Scenario Activities & Interactions
 .. parsed-literal::
 
     File successfully read from: ./ttl/decision_making.ttl
-    POST request completed successfully
+    POST request of file './ttl/decision_making.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -599,8 +634,12 @@ Agents and Scenario Activities & Interactions
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_4.html
 
 
@@ -612,7 +651,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_4.html"
+        src="html/segb_graph_4.html"
         frameborder="0"
         allowfullscreen
     
@@ -679,7 +718,7 @@ Agents and Scenario Activities & Interactions
 .. parsed-literal::
 
     File successfully read from: ./ttl/emotion_detection.ttl
-    POST request completed successfully
+    POST request of file './ttl/emotion_detection.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -689,8 +728,12 @@ Agents and Scenario Activities & Interactions
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_5.html
 
 
@@ -702,7 +745,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_5.html"
+        src="html/segb_graph_5.html"
         frameborder="0"
         allowfullscreen
     
@@ -759,7 +802,7 @@ Agents and Scenario Activities & Interactions
 .. parsed-literal::
 
     File successfully read from: ./ttl/emotion_expression.ttl
-    POST request completed successfully
+    POST request of file './ttl/emotion_expression.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -769,8 +812,12 @@ Agents and Scenario Activities & Interactions
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_6.html
 
 
@@ -782,7 +829,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_6.html"
+        src="html/segb_graph_6.html"
         frameborder="0"
         allowfullscreen
     
@@ -860,7 +907,7 @@ Agents and Scenario Activities & Interactions
 .. parsed-literal::
 
     File successfully read from: ./ttl/news_retrieval.ttl
-    POST request completed successfully
+    POST request of file './ttl/news_retrieval.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -870,8 +917,12 @@ Agents and Scenario Activities & Interactions
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_7.html
 
 
@@ -883,7 +934,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_7.html"
+        src="html/segb_graph_7.html"
         frameborder="0"
         allowfullscreen
     
@@ -935,7 +986,7 @@ Agents and Scenario Activities & Interactions
 .. parsed-literal::
 
     File successfully read from: ./ttl/shown_content.ttl
-    POST request completed successfully
+    POST request of file './ttl/shown_content.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -945,8 +996,12 @@ Agents and Scenario Activities & Interactions
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_8.html
 
 
@@ -958,7 +1013,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_8.html"
+        src="html/segb_graph_8.html"
         frameborder="0"
         allowfullscreen
     
@@ -1021,7 +1076,7 @@ Agents and Scenario Activities & Interactions
 .. parsed-literal::
 
     File successfully read from: ./ttl/robot_response.ttl
-    POST request completed successfully
+    POST request of file './ttl/robot_response.ttl' completed successfully
 
 
 .. code:: ipython3
@@ -1031,8 +1086,12 @@ Agents and Scenario Activities & Interactions
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_9.html
 
 
@@ -1044,7 +1103,7 @@ Agents and Scenario Activities & Interactions
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_9.html"
+        src="html/segb_graph_9.html"
         frameborder="0"
         allowfullscreen
     
@@ -1069,8 +1128,8 @@ published *logs*:
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
 
 
 .. code:: ipython3
@@ -1298,18 +1357,18 @@ published *logs*:
         schema1:logo <http://www.example.org/logo.png> ;
         schema1:name "Example News" .
     
-    ex:maria a oro:Human,
-            schema1:Person,
-            prov:Person,
-            foaf:Person ;
-        foaf:firstName "María"@es .
-    
     ex:msg1 a oro:InitialMessage,
             oro:Message,
             prov:Entity ;
         oro:hasText "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
         oro:nextMessage ex:msg2 ;
         prov:wasGeneratedBy ex:listeningEvent1 .
+    
+    ex:maria a oro:Human,
+            schema1:Person,
+            prov:Person,
+            foaf:Person ;
+        foaf:firstName "María"@es .
     
     ex:decisionMaking1 a oro:DecisionMakingAction,
             segb:LoggedActivity ;
@@ -1327,6 +1386,12 @@ published *logs*:
         prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
         prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime .
     
+    ex:experiment1 a amor-exp:Experiment ;
+        rdfs:label "Experiment 1"@en ;
+        amor-exp:hasExecutor ex:ari1 ;
+        amor-exp:hasExperimentationSubject ex:maria ;
+        prov:startedAtTime "2024-11-16T12:27:10"^^xsd:dateTime .
+    
     ex:ari1 a oro:Robot,
             prov:SoftwareAgent ;
         oro:belongsTo ex:maria ;
@@ -1343,8 +1408,12 @@ published *logs*:
 
 .. parsed-literal::
 
-    Requesting graph...
-    File successfully downloaded to: graph.ttl
+    Requesting graph to the SEGB from http://127.0.0.1:5000
+    File successfully downloaded to: 'graph.ttl'
+    Displaying graph from file 'graph.ttl'
+    
+    
+    
     html/segb_graph_10.html
 
 
@@ -1356,12 +1425,389 @@ published *logs*:
     <iframe
         width="900"
         height="500"
-        src="_static/segb_graph_10.html"
+        src="html/segb_graph_10.html"
         frameborder="0"
         allowfullscreen
     
     ></iframe>
 
 
+
+
+Auditing
+--------
+
+Queries
+~~~~~~~
+
+We can make some queries over the resultant graph (*graph.ttl*)
+
+1. Get all activities (LoggedActivity) performed by the Robot and which have a Message, Speaker and Listener [Verbal Communication]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: ipython3
+
+    from rdflib import Graph
+    import pandas as pd
+    
+    g = Graph()
+    g.parse("graph.ttl", format="turtle")
+    
+    
+    query = """
+    PREFIX segb: <http://www.gsi.upm.es/ontologies/segb/ns#>
+    PREFIX oro: <http://kb.openrobots.org#>
+    
+    SELECT ?activity ?robot ?speaker ?listener ?text
+    WHERE {
+    ?activity a segb:LoggedActivity ;
+            segb:wasPerformedBy ?robot ;
+            oro:hasMessage ?msg ;
+            oro:hasSpeaker ?speaker ;
+            oro:hasListener ?listener .
+    ?msg a oro:Message ;
+            oro:hasText ?text .
+    }
+    """
+    
+    result = g.query(query)
+    df = pd.DataFrame(result.bindings)
+    df
+
+
+
+
+.. raw:: html
+
+    <div>
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
+    
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+    
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>activity</th>
+          <th>listener</th>
+          <th>robot</th>
+          <th>speaker</th>
+          <th>text</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>http://example.org#speech1</td>
+          <td>http://example.org#maria</td>
+          <td>http://example.org#ari1</td>
+          <td>http://example.org#ari1</td>
+          <td>Here's some news for you, you whiny, fearful c...</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>http://example.org#listeningEvent1</td>
+          <td>http://example.org#ari1</td>
+          <td>http://example.org#ari1</td>
+          <td>http://example.org#maria</td>
+          <td>Good morning, Ari. Could you show me news abou...</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+
+
+2. Get all Humans registered in the SEGB
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: ipython3
+
+    from rdflib import Graph
+    import pandas as pd
+    
+    g = Graph()
+    g.parse("graph.ttl", format="turtle")
+    
+    
+    query = """
+    PREFIX prov: <http://www.w3.org/ns/prov#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+    PREFIX schema: <http://schema.org/>
+    PREFIX oro: <http://kb.openrobots.org#>
+    
+    SELECT DISTINCT ?person ?firstName
+    WHERE {
+      ?person a ?type .
+      FILTER(?type IN (prov:Person, foaf:Person, schema:Person, oro:Human))
+      OPTIONAL { ?person foaf:firstName ?firstName. }
+    }
+    """
+    
+    result = g.query(query)
+    df = pd.DataFrame(result.bindings)
+    df
+
+
+
+
+.. raw:: html
+
+    <div>
+    <style scoped>
+        .dataframe tbody tr th:only-of-type {
+            vertical-align: middle;
+        }
+    
+        .dataframe tbody tr th {
+            vertical-align: top;
+        }
+    
+        .dataframe thead th {
+            text-align: right;
+        }
+    </style>
+    <table border="1" class="dataframe">
+      <thead>
+        <tr style="text-align: right;">
+          <th></th>
+          <th>firstName</th>
+          <th>person</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>0</th>
+          <td>Pedro</td>
+          <td>http://example.org#dataScientist1</td>
+        </tr>
+        <tr>
+          <th>1</th>
+          <td>María</td>
+          <td>http://example.org#maria</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+
+
+Requesting the SEGB
+^^^^^^^^^^^^^^^^^^^
+
+The auditor can request also some info to the SEGB. To see general info
+request, see LINK USAGE TUTORIAL In the AMOR context, the auditor can
+request info about the experiments that have occurred within the
+scenario.
+
+.. code:: ipython3
+
+    import requests
+    
+    def get_experiments(
+        uri: str = None, 
+        namespace: str = None, 
+        experiment_id: str = None, 
+        server: str = "http://localhost:5000", 
+        token: str = "fake_token"
+    ):
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
+        url = f"{server}/experiments"
+        
+        params = {}
+        
+        if uri:
+            params["uri"] = uri
+        elif namespace and experiment_id:
+            params["namespace"] = namespace
+            params["experiment_id"] = experiment_id
+        
+        response = requests.get(url, headers=headers, params=params)
+    
+        if response.status_code == 200:
+            print("GET request completed successfully")
+            return response.text
+        elif response.status_code == 204:
+            print("No experiments found.")
+        elif response.status_code == 403:
+            print(f"Forbidden: Insufficient permissions - {response.text}")
+        elif response.status_code == 404:
+            print(f"Not Found: The specified experiment was not found - {response.text}")
+        elif response.status_code == 422:
+            print(f"Unprocessable Entity: {response.text}")
+        else:
+            print(f"Unexpected status code: {response.status_code} - {response.text}")
+
+
+We can get a list of the experiments registered in the SEGB by
+requesting the **/experiments** endpoint without parameters
+
+.. code:: ipython3
+
+    get_experiments()
+
+
+.. parsed-literal::
+
+    GET request completed successfully
+
+
+
+
+.. parsed-literal::
+
+    '["http://example.org#experiment1"]'
+
+
+
+We can get the info of a specific experiment and its associated
+activities by requesting the **/experiments** endpoint passing the
+experiment’s URI as parameter
+
+.. code:: ipython3
+
+    experiment = get_experiments(uri="http://example.org#experiment1")
+
+
+.. parsed-literal::
+
+    GET request completed successfully
+
+
+.. code:: ipython3
+
+    print(experiment)
+
+
+
+::
+
+   @prefix amor-exp: <http://www.gsi.upm.es/ontologies/amor/experiments/ns#> .
+   @prefix ns1: <http://www.gsi.upm.es/ontologies/onyx/ns#> .
+   @prefix oro: <http://kb.openrobots.org#> .
+   @prefix prov: <http://www.w3.org/ns/prov#> .
+   @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+   @prefix segb: <http://www.gsi.upm.es/ontologies/segb/ns#> .
+   @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+   <http://example.org#emotionExpression1> a oro:EmotionExpressionAction,
+           segb:LoggedActivity ;
+       oro:expressedEmotion <http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6_sadness> ;
+       amor-exp:isRelatedWithExperiment <http://example.org#experiment1> ;
+       segb:triggeredByActivity <http://example.org#decisionMaking1>,
+           <http://example.org#emotionDetection1>,
+           <http://example.org#listeningEvent1> ;
+       segb:wasPerformedBy <http://example.org#ari1> ;
+       prov:endedAtTime "2024-11-16T12:27:19"^^xsd:dateTime ;
+       prov:startedAtTime "2024-11-16T12:27:18"^^xsd:dateTime ;
+       prov:used <http://example.org#emotionset1>,
+           <http://example.org#msg1> .
+
+   <http://example.org#informationRetrieval1> a oro:InformationRetrievalAction,
+           segb:LoggedActivity ;
+       oro:endPoint "http://example.org/news_search/api" ;
+       oro:query "climate change"@en ;
+       amor-exp:isRelatedWithExperiment <http://example.org#experiment1> ;
+       segb:producedEntityResult <http://example.org#news1>,
+           <http://example.org#news2>,
+           <http://example.org#news3> ;
+       segb:triggeredByActivity <http://example.org#decisionMaking1> ;
+       segb:wasPerformedBy <http://example.org#ari1> ;
+       prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
+       prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime .
+
+   <http://example.org#shownContent1> a oro:ShownContentAction,
+           segb:LoggedActivity ;
+       oro:hasContent <http://example.org#news1>,
+           <http://example.org#news2>,
+           <http://example.org#news3> ;
+       amor-exp:isRelatedWithExperiment <http://example.org#experiment1> ;
+       segb:triggeredBy <http://example.org#decisionMaking1> ;
+       segb:wasPerformedBy <http://example.org#ari1> ;
+       prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
+       prov:startedAtTime "2024-11-16T12:27:23"^^xsd:dateTime .
+
+   <http://example.org#speech1> a oro:SpeechAction,
+           segb:LoggedActivity ;
+       oro:hasListener <http://example.org#maria> ;
+       oro:hasMessage <http://example.org#msg2> ;
+       oro:hasSpeaker <http://example.org#ari1> ;
+       amor-exp:isRelatedWithExperiment <http://example.org#experiment1> ;
+       segb:triggeredByActivity <http://example.org#decisionMaking1> ;
+       segb:usedMLModel <http://example.org#ttsModel1> ;
+       segb:wasPerformedBy <http://example.org#ari1> ;
+       prov:endedAtTime "2024-11-16T12:27:22"^^xsd:dateTime ;
+       prov:startedAtTime "2024-11-16T12:27:17"^^xsd:dateTime .
+
+   <http://example.org#emotionDetection1> a oro:EmotionRecognitionEvent,
+           ns1:EmotionAnalysis,
+           segb:LoggedActivity ;
+       amor-exp:isRelatedWithExperiment <http://example.org#experiment1> ;
+       ns1:usesEmotionModel <http://www.gsi.upm.es/ontologies/onyx/vocabularies/emotionml/ns#big6> ;
+       segb:triggeredByActivity <http://example.org#decisionMaking1> ;
+       segb:usedMLModel <http://example.org#emotionDetectionModel1> ;
+       segb:wasPerformedBy <http://example.org#ari1> ;
+       prov:endedAtTime "2024-11-16T12:27:18"^^xsd:dateTime ;
+       prov:generated <http://example.org#emotionset1> ;
+       prov:startedAtTime "2024-11-16T12:27:16"^^xsd:dateTime ;
+       prov:used <http://example.org#msg1> .
+
+   <http://example.org#listeningEvent1> a oro:ListeningEvent,
+           segb:LoggedActivity ;
+       oro:hasListener <http://example.org#ari1> ;
+       oro:hasMessage <http://example.org#msg1> ;
+       oro:hasSpeaker <http://example.org#maria> ;
+       amor-exp:isRelatedWithExperiment <http://example.org#experiment1> ;
+       segb:usedMLModel <http://example.org#asrModel1> ;
+       segb:wasPerformedBy <http://example.org#ari1> ;
+       prov:endedAtTime "2024-11-16T12:27:15"^^xsd:dateTime ;
+       prov:startedAtTime "2024-11-16T12:27:12"^^xsd:dateTime .
+
+   <http://example.org#msg2> a oro:Message,
+           oro:ResponseMessage,
+           prov:Entity ;
+       oro:hasText "Here's some news for you, you whiny, fearful child."@en ;
+       oro:previousMessage <http://example.org#msg1> ;
+       prov:wasGeneratedBy <http://example.org#decisionMaking1> .
+
+   <http://example.org#msg1> a oro:InitialMessage,
+           oro:Message,
+           prov:Entity ;
+       oro:hasText "Good morning, Ari. Could you show me news about the awful climate change the planet is undergoing?."@en ;
+       oro:nextMessage <http://example.org#msg2> ;
+       prov:wasGeneratedBy <http://example.org#listeningEvent1> .
+
+   <http://example.org#decisionMaking1> a oro:DecisionMakingAction,
+           segb:LoggedActivity ;
+       amor-exp:isRelatedWithExperiment <http://example.org#experiment1> ;
+       segb:intermediateActivity <http://example.org#emotionDetection1>,
+           <http://example.org#informationRetrieval1> ;
+       segb:producedActivityResult <http://example.org#emotionExpression1>,
+           <http://example.org#shownContent1>,
+           <http://example.org#speech1> ;
+       segb:producedEntityResult <http://example.org#msg2> ;
+       segb:triggeredByActivity <http://example.org#listeningEvent1> ;
+       segb:usedMLModel <http://example.org#decisionMakingModel1>,
+           <http://example.org#llmModel1> ;
+       segb:wasPerformedBy <http://example.org#ari1> ;
+       prov:endedAtTime "2024-11-16T12:27:24"^^xsd:dateTime ;
+       prov:startedAtTime "2024-11-16T12:27:15"^^xsd:dateTime .
+
+   <http://example.org#experiment1> a amor-exp:Experiment ;
+       rdfs:label "Experiment 1"@en ;
+       amor-exp:hasExecutor <http://example.org#ari1> ;
+       amor-exp:hasExperimentationSubject <http://example.org#maria> ;
+       prov:startedAtTime "2024-11-16T12:27:10"^^xsd:dateTime .
 
 
