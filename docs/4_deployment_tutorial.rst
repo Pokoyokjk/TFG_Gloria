@@ -4,7 +4,7 @@
 4.1. Starting the SEGB locally
 -------------------
 
-#. Use the docker-compose file available in this repository (`docker-compose.yaml`).
+#. Use the docker-compose file available in the `SEGB repository <https://github.com/gsi-upm/segb>`_, which can be found at the following link: `docker-compose.yaml <https://github.com/gsi-upm/segb/blob/main/docker-compose.yaml>`_.
 
 #. You can configure the SEGB to use a secret key for token-based authentication by setting the `SECRET_KEY` environment variable.
 
@@ -15,7 +15,7 @@
       # .env file
       SECRET_KEY=your_secret_key_here
 
-   If a `SECRET_KEY` is defined, tokens must be generated using the `server/token_generator_script.py` script. These tokens are unique to each user and must be included in the `Authorization` header as a Bearer token when making requests to the SEGB.
+   If a `SECRET_KEY` is defined, tokens must be generated using the `SEGB Token Generator Script <https://github.com/gsi-upm/segb/blob/main/server/token_generator_script.py>_`. These tokens are unique to each user and must be included in the `Authorization` header as a Bearer token when making requests to the SEGB.
 
    If the `SECRET_KEY` is left blank (or not defined), the SEGB will operate without security. In this case, you must still include an `Authorization` header with a Bearer token in your requests, but any string used as a token will be accepted.
 
@@ -41,7 +41,7 @@
 
    .. note::
 
-   Tokens must be generated manually by a SEGB admin (who knows the secret) using `token_generator_script.py` and are unique to each user. The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens. Additionally, tokens should be refreshed periodically to maintain security.
+   Tokens must be generated manually by a SEGB admin (who knows the secret) using `SEGB Token Generator Script <https://github.com/gsi-upm/segb/blob/main/server/token_generator_script.py>_` and are unique to each user. The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens. Additionally, tokens should be refreshed periodically to maintain security.
 
 #. Finally, execute docker compose in the directory where your ``docker-compose.yaml`` file is located:
 
