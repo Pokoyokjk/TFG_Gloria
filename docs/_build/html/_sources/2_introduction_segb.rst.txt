@@ -24,8 +24,15 @@ generating TTL-formated logs.
 ----------------------
 The SEGB ontology can be found in:
 
-- **File**: https://github.com/gsi-upm/amor-segb/blob/main/ontology/example.ttl
-- **URL**: http://www.gsi.upm.es/ontologies/segb/examples#
+- **File**: `segb.ttl <https://github.com/gsi-upm/amor-segb/blob/main/ontology/segb.ttl>`_
+
+- **URL**: `http://www.gsi.upm.es/ontologies/segb/ontology# <http://www.gsi.upm.es/ontologies/segb/ontology#>`_
+
+and some examples in:
+
+- **File**: `example.ttl <https://github.com/gsi-upm/amor-segb/blob/main/ontology/example.ttl>`_
+
+- **URL**: `http://www.gsi.upm.es/ontologies/segb/examples# <http://www.gsi.upm.es/ontologies/segb/examples#>`_
 
 2.2. SEGB Pipeline
 -----------------------
@@ -39,7 +46,17 @@ A pipeline representing the steps followed to get a semantic registry of all the
 
 The SEGB keeps a registry of all these uploaded triples by joining them in a global knowledge graph, which contains all the events that happened within the specified scenario. Using semantic properties offers some advantages, such as making advanced queries to the graph thanks to the well-defined meaningful relations and properties, or using standardized third-party ontologies for modeling the information contained inside the SEGB. The semantic data mapping is the second step of the pipeline represented in the previous figure, which implies formatting the generated logs to RDF, i.e. Turtle (TTL).
 
-The SEGB have a persistence system to store the global knowledge graph, which is intended to include registries from 1) the AI-based models used; 2) the agents participating within the scenario; and 3) all the activities/events occurred, e.g., an interaction between a human user and a social robot. AI models are mapped using the MlS ontology, while agents are modelled based on ORO and PROV, and activities do so by combining PROV and the SEGB ontology. The expected operation order is that humans first add both model and agent information -respectively- to the SEGB, and, once the scenario's conditions are established within the graph, the agents start to post the activities information to the SEGB as they take place. The joining of the different received RDF into the global knowledge graph represents the third step in the pipeline.
+The SEGB has a persistence system to store the global knowledge graph, which is intended to include registries from:
 
-Remarkably, the SEGB must have a communication interface, which allows humans and software agents to interact with the graph and auditors to request the knowledge graph to audit some occurrences within the scenario. This is the last step of the pipeline. 
+#. the AI-based models used;
+
+#. the agents participating within the scenario; and 
+
+#. all the activities/events occurred, e.g., an interaction between a human user and a social robot.
+
+AI models are mapped using the MlS ontology, while agents are modelled based on ORO and PROV, and activities do so by combining PROV and the SEGB ontology.
+The expected operation order is that humans first add both model and agent information -respectively- to the SEGB, and, once the scenario's conditions are established within the graph, the agents start to post the activities information to the SEGB as they take place. The joining of the different received RDF into the global knowledge graph represents the third step in the pipeline.
+
+Remarkably, the SEGB has a communication interface, which allows humans and software agents to interact with the graph and auditors to request the knowledge graph to audit some occurrences within the scenario.
+This is the last step of the pipeline. 
 

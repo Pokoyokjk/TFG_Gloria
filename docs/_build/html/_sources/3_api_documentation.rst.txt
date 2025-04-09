@@ -11,11 +11,14 @@ The SEGB API uses **Bearer Tokens** for authentication and authorization. Each e
 - **Logger**: Can log data to the SEGB.
 - **Admin**: Has full access to all endpoints, including deleting the graph and accessing the history.
 
-These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request. A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a auditor/logger token can be generated.
+These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request.
+A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a auditor/logger token can be generated.
 
 .. note::
 
-  Tokens must be generated manually by a SEGB admin (who knows the secret) using `token_generator_script.py` and are unique to each user. The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens. Additionally, tokens should be refreshed periodically to maintain security.
+  Tokens must be generated manually by a SEGB admin (who knows the secret) using `token_generator_script.py` and are unique to each user.
+  The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens.
+  Additionally, tokens should be refreshed periodically to maintain security.
 
 Tokens must be included in the `Authorization` header as follows:
 
@@ -309,7 +312,9 @@ Retrieve a list of all experiments registered or information about a specific ex
    * - ``404 Not Found``
      - The specified experiment was not found.
    * - ``422 Unprocessable Entity``
-     - Missing required parameters (e.g., `namespace` or `experiment_id`) or **Invalid URI format**. The URI must be a valid IRI (Internationalized Resource Identifier <prefix>#<resource>) and should not contain spaces or special characters that are not allowed in IRIs. The URI must also be properly encoded if it contains reserved characters.
+     - Missing required parameters (e.g., `namespace` or `experiment_id`) or **Invalid URI format**.
+       The URI must be a valid IRI (Internationalized Resource Identifier <prefix>#<resource>) and should not contain spaces or special characters that are not allowed in IRIs.
+       The URI must also be properly encoded if it contains reserved characters.
      
 3.8. GET /history
 ------------------

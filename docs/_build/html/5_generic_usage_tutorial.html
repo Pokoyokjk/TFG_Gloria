@@ -39,11 +39,16 @@
 <p>The Semantic Ethical Glass Box (SEGB) is global <em>log</em> storage, which
 keeps a semantic registry (graph) of logs generated within different
 systems. Let’s see how to get the most out of it.</p>
-<p>[!note] This tutorial assumes that the SEGB has already been properly
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial assumes that the SEGB has already been properly
 deployed following the deployment tutorial (see <a class="reference external" href="https://amor-segb.readthedocs.io/en/latest/4_deployment_tutorial.html">Deployment
-Tutorial</a></p>
-<p>[!warning] We will not use authentication in this tutorial to make it
-easy to understand.</p>
+Tutorial</a>).</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We will not use authentication in this tutorial to make it easy to understand.</p>
+</div>
 </section>
 <section id="auxiliary-functions">
 <h2>5.2. Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Link to this heading">¶</a></h2>
@@ -51,9 +56,8 @@ easy to understand.</p>
 <section id="functions-for-interacting-with-the-segbs-api">
 <h3>Functions for interacting with the SEGB’s API<a class="headerlink" href="#functions-for-interacting-with-the-segbs-api" title="Link to this heading">¶</a></h3>
 <p>Specifically, one function for every endpoint the SEGB’s API defines
-(see <a class="reference external" href="https://amor-segb.readthedocs.io/en/stable/3_api_documentation.html">Basic
-Tutorial</a>
-for detailed info):</p>
+(see <a class="reference external" href="https://amor-segb.readthedocs.io/en/stable/3_api_documentation.html">API Documentation</a>)</p>
+<p>for detailed info):</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import requests
 import json
 </pre></div>

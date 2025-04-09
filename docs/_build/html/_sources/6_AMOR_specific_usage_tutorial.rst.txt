@@ -18,10 +18,13 @@ thinking process, decision or action).
 
 Let’s simulate an example following the SEGB’s pipeline.
 
-The global graph is intended to include registries from: 1. The AI-based
-models used 2. The agents participating within the scenario (e.g., the
-social robots). 3. All the activities occurred from the agent’s
-point-of-view.
+The global graph is intended to include registries from:
+
+#. The AI-based models used
+
+#. The agents participating within the scenario (e.g., the social robots).
+
+#. All the activities occurred from the agent’s point-of-view.
 
 The expected operation order is humans first adding the models’
 information to the SEGB, and thenm, the AI-based agents registering
@@ -31,15 +34,16 @@ take place. So let’s start.
 6.3. Use Case: Interaction Human-Robot
 ------------------------------------
 
-NOTE: Remember to start the SEGB with Docker Compose before the
-execution of the following tutorial.
+.. note::
+    
+    Remember to start the SEGB with Docker Compose before the execution of the following tutorial.
 
 Auxiliary functions
 ~~~~~~~~~~~~~~~~~~~
 
 We first define some aux functions for interacting with the SEGB (see
 `Basic
-Tutorial <https://amor-segb.readthedocs.io/en/latest/4_basic_tutorial.html>`__
+Tutorial <https://amor-segb.readthedocs.io/en/latest/4_basic_tutorial.html>`_)
 for detailed info):
 
 -  **log_ttl**: function who receives as *input* the server’s URL and

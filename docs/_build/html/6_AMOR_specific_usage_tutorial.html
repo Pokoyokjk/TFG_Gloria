@@ -46,10 +46,12 @@ state by displaying positive &amp; ethical news. This robot produces
 internal TTL-formatted <em>logs</em> of every piece of code (resulting in a
 thinking process, decision or action).</p>
 <p>Let’s simulate an example following the SEGB’s pipeline.</p>
-<p>The global graph is intended to include registries from: 1. The AI-based
-models used 2. The agents participating within the scenario (e.g., the
-social robots). 3. All the activities occurred from the agent’s
-point-of-view.</p>
+<p>The global graph is intended to include registries from:</p>
+<ol class="arabic simple">
+<li><p>The AI-based models used</p></li>
+<li><p>The agents participating within the scenario (e.g., the social robots).</p></li>
+<li><p>All the activities occurred from the agent’s point-of-view.</p></li>
+</ol>
 <p>The expected operation order is humans first adding the models’
 information to the SEGB, and thenm, the AI-based agents registering
 themself and posting all the activities’ information to the SEGB as they
@@ -57,13 +59,15 @@ take place. So let’s start.</p>
 </section>
 <section id="use-case-interaction-human-robot">
 <h2>6.3. Use Case: Interaction Human-Robot<a class="headerlink" href="#use-case-interaction-human-robot" title="Link to this heading">¶</a></h2>
-<p>NOTE: Remember to start the SEGB with Docker Compose before the
-execution of the following tutorial.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember to start the SEGB with Docker Compose before the execution of the following tutorial.</p>
+</div>
 <section id="auxiliary-functions">
 <h3>Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Link to this heading">¶</a></h3>
 <p>We first define some aux functions for interacting with the SEGB (see
 <a class="reference external" href="https://amor-segb.readthedocs.io/en/latest/4_basic_tutorial.html">Basic
-Tutorial</a>
+Tutorial</a>)
 for detailed info):</p>
 <ul class="simple">
 <li><p><strong>log_ttl</strong>: function who receives as <em>input</em> the server’s URL and

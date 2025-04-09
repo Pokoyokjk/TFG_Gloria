@@ -13,7 +13,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Deploying the SEGB" href="4_basic_tutorial.html" />
+    <link rel="next" title="4. Deployment Tutorial" href="4_deployment_tutorial.html" />
     <link rel="prev" title="2. Introduction to SEGB" href="2_introduction_segb.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -43,10 +43,13 @@
 <li><p><strong>Logger</strong>: Can log data to the SEGB.</p></li>
 <li><p><strong>Admin</strong>: Has full access to all endpoints, including deleting the graph and accessing the history.</p></li>
 </ul>
-<p>These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request. A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a auditor/logger token can be generated.</p>
+<p>These must be included as information at token generation time. The SEGB server will validate the token and check the permissions associated with it before processing the request.
+A token can be defined with several roles and the server will check the permissions for each endpoint. It means that a auditor/logger token can be generated.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Tokens must be generated manually by a SEGB admin (who knows the secret) using <cite>token_generator_script.py</cite> and are unique to each user. The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens. Additionally, tokens should be refreshed periodically to maintain security.</p>
+<p>Tokens must be generated manually by a SEGB admin (who knows the secret) using <cite>token_generator_script.py</cite> and are unique to each user.
+The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens.
+Additionally, tokens should be refreshed periodically to maintain security.</p>
 </div>
 <p>Tokens must be included in the <cite>Authorization</cite> header as follows:</p>
 <p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;TOKEN&gt;</span></code></p>
@@ -394,7 +397,9 @@ Authorization: Bearer &lt;AUDITOR_TOKEN&gt;
 <td><p>The specified experiment was not found.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">422</span> <span class="pre">Unprocessable</span> <span class="pre">Entity</span></code></p></td>
-<td><p>Missing required parameters (e.g., <cite>namespace</cite> or <cite>experiment_id</cite>) or <strong>Invalid URI format</strong>. The URI must be a valid IRI (Internationalized Resource Identifier &lt;prefix&gt;#&lt;resource&gt;) and should not contain spaces or special characters that are not allowed in IRIs. The URI must also be properly encoded if it contains reserved characters.</p></td>
+<td><p>Missing required parameters (e.g., <cite>namespace</cite> or <cite>experiment_id</cite>) or <strong>Invalid URI format</strong>.
+The URI must be a valid IRI (Internationalized Resource Identifier &lt;prefix&gt;#&lt;resource&gt;) and should not contain spaces or special characters that are not allowed in IRIs.
+The URI must also be properly encoded if it contains reserved characters.</p></td>
 </tr>
 </tbody>
 </table>
@@ -536,8 +541,9 @@ Access the OpenAPI playground for exploring and testing the SEGB API</p>
 <li class="toctree-l2"><a class="reference internal" href="#get-docs">3.10. GET /docs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="4_basic_tutorial.html">4. Deploying the SEGB</a></li>
-<li class="toctree-l1"><a class="reference internal" href="5_complete_demo_tutorial.html">5. Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_deployment_tutorial.html">4. Deployment Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_generic_usage_tutorial.html">5. Generic Usage Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_AMOR_specific_usage_tutorial.html">6. AMOR-Specific Usage Tutorial</a></li>
 </ul>
 
 <div class="relations">
@@ -545,7 +551,7 @@ Access the OpenAPI playground for exploring and testing the SEGB API</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="2_introduction_segb.html" title="previous chapter">2. Introduction to SEGB</a></li>
-      <li>Next: <a href="4_basic_tutorial.html" title="next chapter">4. Deploying the SEGB</a></li>
+      <li>Next: <a href="4_deployment_tutorial.html" title="next chapter">4. Deployment Tutorial</a></li>
   </ul></li>
 </ul>
 </div>
