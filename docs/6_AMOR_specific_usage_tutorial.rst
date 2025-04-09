@@ -238,7 +238,7 @@ Data Scientist
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_0.html"
+        src="_static/segb_graph_0.html"
         frameborder="0"
         allowfullscreen
     
@@ -368,7 +368,7 @@ Models
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_1.html"
+        src="_static/segb_graph_1.html"
         frameborder="0"
         allowfullscreen
     
@@ -486,7 +486,7 @@ included:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_2.html"
+        src="_static/segb_graph_2.html"
         frameborder="0"
         allowfullscreen
     
@@ -567,7 +567,7 @@ included:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_3.html"
+        src="_static/segb_graph_3.html"
         frameborder="0"
         allowfullscreen
     
@@ -643,7 +643,7 @@ included:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_4.html"
+        src="_static/segb_graph_4.html"
         frameborder="0"
         allowfullscreen
     
@@ -737,7 +737,7 @@ included:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_5.html"
+        src="_static/segb_graph_5.html"
         frameborder="0"
         allowfullscreen
     
@@ -821,7 +821,7 @@ included:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_6.html"
+        src="_static/segb_graph_6.html"
         frameborder="0"
         allowfullscreen
     
@@ -926,7 +926,7 @@ included:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_7.html"
+        src="_static/segb_graph_7.html"
         frameborder="0"
         allowfullscreen
     
@@ -1005,7 +1005,7 @@ included:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_8.html"
+        src="_static/segb_graph_8.html"
         frameborder="0"
         allowfullscreen
     
@@ -1095,7 +1095,7 @@ included:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_9.html"
+        src="_static/segb_graph_9.html"
         frameborder="0"
         allowfullscreen
     
@@ -1417,7 +1417,7 @@ published *logs*:
     <iframe
         width="900"
         height="500"
-        src="html/segb_graph_10.html"
+        src="_static/segb_graph_10.html"
         frameborder="0"
         allowfullscreen
     
