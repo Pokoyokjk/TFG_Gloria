@@ -13,12 +13,12 @@ services:
       - SECRET_KEY=${SECRET_KEY}
       - DATABASE_SERVICE=segb-mongodb
       - LOGGING_LEVEL=DEBUG
-    # volumes:
+    volumes:
+      - ./logs:/logs
       # If you want to modify the logging configuration, you can mount this file.
       # The application reads this file at startup using the PyYAML library.
 
       # - ./log_conf.yaml:/app/log_conf.yaml
-      - ./logs:/logs
 
   segb-mongodb:
     container_name: segb-mongodb
