@@ -100,7 +100,7 @@ for detailed info):
     def get_graph(server: str, output_file_path: str):
         """Download the complete graph stored in the SEGB.
     
-        Sends a GET request to the SEGB's `/get_graph` endpoint to retrieve the
+        Sends a GET request to the SEGB's `/graph` endpoint to retrieve the
         complete graph in Turtle format and saves it to the specified output file.
     
         Args:
@@ -112,7 +112,7 @@ for detailed info):
         """
         print("Requesting graph...")
         
-        response = requests.get(f"{server}/get_graph")
+        response = requests.get(f"{server}/graph")
         
         if response.status_code == 200:
             with open(output_file_path, mode="w", encoding="utf-8") as file:
