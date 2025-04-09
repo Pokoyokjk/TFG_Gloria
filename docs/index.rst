@@ -12,7 +12,9 @@ Semantic Ethical Glass Box (SEGB) documentation
    1_amor_project
    2_introduction_segb
    3_api_documentation
-   4_tutorial
+   4_deployment_tutorial
+   5_generic_usage_tutorial
+   6_AMOR_specific_usage_tutorial
 
 
 
