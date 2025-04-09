@@ -39,7 +39,7 @@
 <h2>Authentication and Permissions<a class="headerlink" href="#authentication-and-permissions" title="Link to this heading">¶</a></h2>
 <p>The SEGB API uses <strong>Bearer Tokens</strong> for authentication and authorization. Each endpoint requires a specific role to access it. The roles are defined as follows:</p>
 <ul class="simple">
-<li><p><strong>Reader</strong>: Can read the graph and experiment data.</p></li>
+<li><p><strong>Auditor</strong>: Can read the graph and experiment data.</p></li>
 <li><p><strong>Logger</strong>: Can log data to the SEGB.</p></li>
 <li><p><strong>Admin</strong>: Has full access to all endpoints, including deleting the graph and accessing the history.</p></li>
 </ul>
@@ -146,7 +146,7 @@ This endpoint receives data in <strong>Turtle (TTL)</strong> format, converts it
 <td><p>The data was successfully received and stored.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">403</span> <span class="pre">Forbidden</span></code></p></td>
-<td><p>Insufficient permissions (e.g., using a Reader Token).</p></td>
+<td><p>Insufficient permissions (e.g., using a Auditor Token).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">422</span> <span class="pre">Unprocessable</span> <span class="pre">Entity</span></code></p></td>
 <td><p>The request contained invalid or malformed data.</p></td>
@@ -164,7 +164,7 @@ Retrieve detailed information about a specific log entry.</p>
 <li><p><strong>Method:</strong> <cite>GET</cite></p></li>
 <li><p><strong>Required Headers:</strong></p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;ADMIN_TOKEN&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;AUDITOR_TOKEN</span> <span class="pre">or</span> <span class="pre">ADMIN_TOKEN&gt;</span></code></p></li>
 </ul>
 </li>
 <li><p><strong>Query Parameters:</strong></p>
@@ -192,7 +192,7 @@ Retrieve detailed information about a specific log entry.</p>
 <td><p>Missing or invalid <cite>log_id</cite> parameter.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">403</span> <span class="pre">Forbidden</span></code></p></td>
-<td><p>Insufficient permissions (e.g., using a Reader or Logger Token).</p></td>
+<td><p>Insufficient permissions (e.g., using a Logger Token).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code></p></td>
 <td><p>The specified log was not found.</p></td>
@@ -271,7 +271,7 @@ Delete the entire graph stored in the SEGB.</p>
 <td><p>The graph was already empty.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">403</span> <span class="pre">Forbidden</span></code></p></td>
-<td><p>Insufficient permissions (e.g., using a Reader Token).</p></td>
+<td><p>Insufficient permissions (e.g., using a Auditor Token).</p></td>
 </tr>
 </tbody>
 </table>
@@ -286,7 +286,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 <li><p><strong>Method:</strong> <cite>GET</cite></p></li>
 <li><p><strong>Required Headers:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;AUDITOR_TOKEN&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;AUDITOR_TOKEN</span> <span class="pre">or</span> <span class="pre">ADMIN_TOKEN&gt;</span></code></p></li>
 </ul>
 </li>
 <li><p><strong>Query Parameters:</strong></p>
@@ -409,7 +409,7 @@ Retrieve the history of all logged actions in the SEGB.</p>
 <li><p><strong>Method:</strong> <cite>GET</cite></p></li>
 <li><p><strong>Required Headers:</strong></p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;ADMIN_TOKEN&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Authorization:</span> <span class="pre">Bearer</span> <span class="pre">&lt;AUDITOR_TOKEN</span> <span class="pre">or</span> <span class="pre">ADMIN_TOKEN&gt;</span></code></p></li>
 </ul>
 </li>
 </ul>
@@ -432,7 +432,7 @@ Retrieve the history of all logged actions in the SEGB.</p>
 <td><p>No history found.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">403</span> <span class="pre">Forbidden</span></code></p></td>
-<td><p>Insufficient permissions (e.g., using a Reader or Logger Token).</p></td>
+<td><p>Insufficient permissions (e.g., using a Logger Token).</p></td>
 </tr>
 </tbody>
 </table>
@@ -464,7 +464,7 @@ Execute a SPARQL query on the graph. <strong>(Not implemented yet)</strong></p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">403</span> <span class="pre">Forbidden</span></code></p></td>
-<td><p>Insufficient permissions (e.g., using a Reader or Logger Token).</p></td>
+<td><p>Insufficient permissions (e.g., using a Auditor or Logger Token).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">501</span> <span class="pre">Not</span> <span class="pre">Implemented</span></code></p></td>
 <td><p>This endpoint is not yet implemented.</p></td>

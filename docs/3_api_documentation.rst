@@ -7,7 +7,7 @@ Authentication and Permissions
 ------------------------------
 The SEGB API uses **Bearer Tokens** for authentication and authorization. Each endpoint requires a specific role to access it. The roles are defined as follows:
 
-- **Reader**: Can read the graph and experiment data.
+- **Auditor**: Can read the graph and experiment data.
 - **Logger**: Can log data to the SEGB.
 - **Admin**: Has full access to all endpoints, including deleting the graph and accessing the history.
 
@@ -100,7 +100,7 @@ This endpoint receives data in **Turtle (TTL)** format, converts it into **JSON-
    * - ``201 Created``
      - The data was successfully received and stored.
    * - ``403 Forbidden``
-     - Insufficient permissions (e.g., using a Reader Token).
+     - Insufficient permissions (e.g., using a Auditor Token).
    * - ``422 Unprocessable Entity``
      - The request contained invalid or malformed data.
 
@@ -116,7 +116,7 @@ Retrieve detailed information about a specific log entry.
 - **Method:** `GET`
 - **Required Headers:**  
 
-  - ``Authorization: Bearer <ADMIN_TOKEN>``
+  - ``Authorization: Bearer <AUDITOR_TOKEN or ADMIN_TOKEN>``
 
 - **Query Parameters:**
 
@@ -135,7 +135,7 @@ Retrieve detailed information about a specific log entry.
    * - ``400 Bad Request``
      - Missing or invalid `log_id` parameter.
    * - ``403 Forbidden``
-     - Insufficient permissions (e.g., using a Reader or Logger Token).
+     - Insufficient permissions (e.g., using a Logger Token).
    * - ``404 Not Found``
      - The specified log was not found.
 
@@ -195,7 +195,7 @@ Delete the entire graph stored in the SEGB.
    * - ``204 No Content``
      - The graph was already empty.
    * - ``403 Forbidden``
-     - Insufficient permissions (e.g., using a Reader Token).
+     - Insufficient permissions (e.g., using a Auditor Token).
 
 3.7. GET /experiments
 ---------------------
@@ -209,7 +209,7 @@ Retrieve a list of all experiments registered or information about a specific ex
 - **Method:** `GET`
 - **Required Headers:**  
 
-  - ``Authorization: Bearer <AUDITOR_TOKEN>``
+  - ``Authorization: Bearer <AUDITOR_TOKEN or ADMIN_TOKEN>``
 
 - **Query Parameters:**
 
@@ -323,7 +323,7 @@ Retrieve the history of all logged actions in the SEGB.
 - **Method:** `GET`
 - **Required Headers:**  
 
-  - ``Authorization: Bearer <ADMIN_TOKEN>``
+  - ``Authorization: Bearer <AUDITOR_TOKEN or ADMIN_TOKEN>``
 
 **Response Codes:**
 
@@ -338,7 +338,7 @@ Retrieve the history of all logged actions in the SEGB.
    * - ``204 No Content``
      - No history found.
    * - ``403 Forbidden``
-     - Insufficient permissions (e.g., using a Reader or Logger Token).
+     - Insufficient permissions (e.g., using a Logger Token).
 
 3.9. GET /query
 ---------------
@@ -363,7 +363,7 @@ Execute a SPARQL query on the graph. **(Not implemented yet)**
    * - Status Code
      - Description
    * - ``403 Forbidden``
-     - Insufficient permissions (e.g., using a Reader or Logger Token).
+     - Insufficient permissions (e.g., using a Auditor or Logger Token).
    * - ``501 Not Implemented``
      - This endpoint is not yet implemented.
 
