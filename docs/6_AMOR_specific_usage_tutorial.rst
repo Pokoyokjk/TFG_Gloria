@@ -1,12 +1,12 @@
 6. AMOR-Specific Usage Tutorial
 =================================
 
-1. Overview
+6.1. Overview
 -----------
 
-TThis tutorial simulates a real scenario within the AMOR Project, showing how Agents can model their logs using the SEGB Ontology and how the graph representing the activities occured within the scenario is constructed. We also shows some basics about the role of the auditor interacting with the SEGB for analysis purposes.
+This tutorial simulates a real scenario within the AMOR Project, showing how Agents can model their logs using the SEGB Ontology and how the graph representing the activities occured within the scenario is constructed. We also shows some basics about the role of the auditor interacting with the SEGB for analysis purposes.
 
-2. Motivational Scenario
+6.2. Motivational Scenario
 ------------------------
 
 Let’s suppose we set up a controlled scenario which includes a robot and
@@ -28,7 +28,7 @@ information to the SEGB, and thenm, the AI-based agents registering
 themself and posting all the activities’ information to the SEGB as they
 take place. So let’s start.
 
-3. Use Case: Interaction Human-Robot
+6.3. Use Case: Interaction Human-Robot
 ------------------------------------
 
 NOTE: Remember to start the SEGB with Docker Compose before the

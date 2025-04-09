@@ -1,7 +1,7 @@
 5. Generic Usage Tutorial
 =================================
 
-1. Overview
+5.1. Overview
 -----------
 
 The Semantic Ethical Glass Box (SEGB) is global *log* storage, which
@@ -15,8 +15,8 @@ Tutorial <https://amor-segb.readthedocs.io/en/latest/4_deployment_tutorial.html>
 [!warning] We will not use authentication in this tutorial to make it
 easy to understand.
 
-2. Auxiliary functions
-~~~~~~~~~~~~~~~~~~~~~~
+5.2. Auxiliary functions
+------------------------
 
 We first define some aux functions to make the tutorial easy.
 
@@ -164,8 +164,8 @@ Functions for post-processing
     
         return merged_ttl
 
-3. SEGB’s usage tutorial
-~~~~~~~~~~~~~~~~~~~~~~~~
+5.3. SEGB’s usage tutorial
+----------------------------
 
 Let’s suppose we have the role of a data scientist who has to publish
 two TTL into the SEGB:
