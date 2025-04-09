@@ -15,7 +15,7 @@
       # .env file
       SECRET_KEY=your_secret_key_here
 
-   If a `SECRET_KEY` is defined, tokens must be generated using the `SEGB Token Generator Script <https://github.com/gsi-upm/segb/blob/main/server/token_generator_script.py>_`. These tokens are unique to each user and must be included in the `Authorization` header as a Bearer token when making requests to the SEGB.
+   If a `SECRET_KEY` is defined, tokens must be generated using the `SEGB Token Generator Script <https://github.com/gsi-upm/segb/blob/main/server/token_generator_script.py>`_. These tokens are unique to each user and must be included in the `Authorization` header as a Bearer token when making requests to the SEGB.
 
    If the `SECRET_KEY` is left blank (or not defined), the SEGB will operate without security. In this case, you must still include an `Authorization` header with a Bearer token in your requests, but any string used as a token will be accepted.
 
