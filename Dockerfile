@@ -17,6 +17,8 @@ RUN uv sync --frozen
 
 ADD log_conf.yaml log_conf.yaml
 
+RUN mkdir /logs
+
 COPY ./server /app
 
 CMD [ "uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000", "--proxy-headers", "--log-config", "log_conf.yaml" ]
