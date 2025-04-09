@@ -1,4 +1,4 @@
-4. Deploying the SEGB
+4. Deployment Tutorial
 ==================================================
 
 4.1. Starting the SEGB
