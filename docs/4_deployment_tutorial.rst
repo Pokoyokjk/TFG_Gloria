@@ -41,7 +41,7 @@
 
    .. note::
 
-   Tokens must be generated manually by a SEGB admin (who knows the secret) using `SEGB Token Generator Script <https://github.com/gsi-upm/segb/blob/main/server/token_generator_script.py>_` and are unique to each user. The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens. Additionally, tokens should be refreshed periodically to maintain security.
+   Tokens must be generated manually by a SEGB admin (who knows the secret) using `SEGB Token Generator Script <https://github.com/gsi-upm/segb/blob/main/server/token_generator_script.py>`_ and are unique to each user. The tokens are valid for a limited time and should be kept secure. The server will not accept expired or invalid tokens. Additionally, tokens should be refreshed periodically to maintain security.
 
 #. Finally, execute docker compose in the directory where your ``docker-compose.yaml`` file is located:
 
