@@ -1,5 +1,5 @@
 [project]
-name = "amor-segb"
+name = "segb"
 version = "0.2.0"
 description = "Semantic Ethical Glass Box (SEGB) for AMOR project"
 readme = "README.md"

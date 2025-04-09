@@ -24,7 +24,7 @@ logger.info("Logging level set to %s", logging_level)
 
 app = FastAPI()
 
-db_service = os.getenv("DATABASE_SERVICE", "amor-segb-mongodb")
+db_service = os.getenv("DATABASE_SERVICE", "segb-mongodb")
 connect_to_db(db_service)
 
 logger.info("SEGB server is now running and ready to accept requests.")

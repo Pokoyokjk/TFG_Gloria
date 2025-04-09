@@ -43,7 +43,7 @@ Nevertheless, the SEGB is appliable to any scenario, as long as the AI-based age
 
 The SEGB ontology can be found in:
 
-- **File**: <https://github.com/gsi-upm/amor-segb/blob/main/ontology/example.ttl>
+- **File**: <https://github.com/gsi-upm/segb/blob/main/ontology/example.ttl>
 - **URL**: <http://www.gsi.upm.es/ontologies/segb/examples#>
 
 ### 3.2. Knowledge Graph Construction Pipeline
@@ -54,4 +54,4 @@ The SEGB ontology can be found in:
 
 In the folder [tutorial](./tutorial), an extensive use case is presented in a notebook to help understand the usability and capabilities of the SEGB.
 
-The complete documentation & tutorial are available in [SEGB documentation](https://amor-segb.readthedocs.io/en/latest/index.html).
+The complete documentation & tutorial are available in [SEGB documentation](https://segb.readthedocs.io/en/latest/index.html).

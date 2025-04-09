@@ -43,7 +43,7 @@ Auxiliary functions
 
 We first define some aux functions for interacting with the SEGB (see
 `Basic
-Tutorial <https://amor-segb.readthedocs.io/en/latest/4_basic_tutorial.html>`_)
+Tutorial <https://segb.readthedocs.io/en/latest/4_basic_tutorial.html>`_)
 for detailed info):
 
 -  **log_ttl**: function who receives as *input* the server’s URL and

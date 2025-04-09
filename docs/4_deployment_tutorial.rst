@@ -119,4 +119,4 @@ Or using *Python*:
 The SEGB allows for personalized logging configurations using a `log_conf.yaml` file.
 This file should follow the structure defined by PyYAML.
 You can find an example of the `log_conf.yaml` file in the root of the GitHub repository (`log_conf.yaml`) and in the `test` folder.
-For more details, visit the repository: `<https://github.com/gsi-upm/amor-segb>`_.
+For more details, visit the repository: `<https://github.com/gsi-upm/segb>`_.

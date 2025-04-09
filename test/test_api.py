@@ -40,7 +40,7 @@ logger.info(f"Using env_file: {ENV_FILE}")
 
 logger.debug(f"For paths, checking working directory: {os.getcwd()}")
 BASE_URL = CONFIG.get("BASE_URL", "http://127.0.0.1:5000")
-TEST_DB_VOLUME = CONFIG.get("TEST_DB_VOLUME", "amor-segb-db-test")
+TEST_DB_VOLUME = CONFIG.get("TEST_DB_VOLUME", "segb-db-test")
 
 logger.info(f"Loading test tokens from environment variables")
 AUDITOR_TOKEN = CONFIG.get("AUDITOR_TOKEN", "fake_auditor_token")

@@ -3,7 +3,7 @@ revision = 1
 requires-python = "==3.12.7"
 
 [[package]]
-name = "amor-segb"
+name = "segb"
 version = "0.2.0"
 source = { virtual = "." }
 dependencies = [

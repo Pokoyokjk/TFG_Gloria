@@ -12,7 +12,7 @@ systems. Let’s see how to get the most out of it.
 
     This tutorial assumes that the SEGB has already been properly
     deployed following the deployment tutorial (see `Deployment
-    Tutorial <https://amor-segb.readthedocs.io/en/latest/4_deployment_tutorial.html>`_).
+    Tutorial <https://segb.readthedocs.io/en/latest/4_deployment_tutorial.html>`_).
 
 .. warning::
 
@@ -27,7 +27,7 @@ Functions for interacting with the SEGB’s API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Specifically, one function for every endpoint the SEGB’s API defines
-(see `API Documentation <https://amor-segb.readthedocs.io/en/stable/3_api_documentation.html>`_)
+(see `API Documentation <https://segb.readthedocs.io/en/stable/3_api_documentation.html>`_)
 
 for detailed info):
 

@@ -1,14 +1,14 @@
 services:
-  amor-segb-test:
-    container_name: amor-segb-server-test
-    image: ghcr.io/gsi-upm/amor-segb:testing
+  segb-test:
+    container_name: segb-server-test
+    image: ghcr.io/gsi-upm/segb:testing
     build: .
     ports:
       - "5000:5000"
     networks:
       - internal_network
     depends_on:
-      - amor-segb-mongodb-test
+      - segb-mongodb-test
     env_file:
       - ./test.env
     volumes:
@@ -18,12 +18,12 @@ services:
       - ./test_log_conf.yaml:/app/log_conf.yaml
       - ./logs:/logs
 
-  amor-segb-mongodb-test:
-    container_name: amor-segb-mongodb-test
+  segb-mongodb-test:
+    container_name: segb-mongodb-test
     image: mongodb/mongodb-community-server:8.0.0-ubi8
     volumes:
-      - amor-segb-db-test:/data/db
-      - amor-segb-db-test:/data/configdb
+      - segb-db-test:/data/db
+      - segb-db-test:/data/configdb
     networks:
       - internal_network
     ports:
@@ -35,4 +35,4 @@ networks:
     driver: bridge
 
 volumes:
-  amor-segb-db-test:
+  segb-db-test:

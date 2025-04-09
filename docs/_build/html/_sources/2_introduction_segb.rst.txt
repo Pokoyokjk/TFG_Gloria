@@ -24,13 +24,13 @@ generating TTL-formated logs.
 ----------------------
 The SEGB ontology can be found in:
 
-- **File**: `segb.ttl <https://github.com/gsi-upm/amor-segb/blob/main/ontology/segb.ttl>`_
+- **File**: `segb.ttl <https://github.com/gsi-upm/segb/blob/main/ontology/segb.ttl>`_
 
 - **URL**: `http://www.gsi.upm.es/ontologies/segb/ontology# <http://www.gsi.upm.es/ontologies/segb/ontology#>`_
 
 and some examples in:
 
-- **File**: `example.ttl <https://github.com/gsi-upm/amor-segb/blob/main/ontology/example.ttl>`_
+- **File**: `example.ttl <https://github.com/gsi-upm/segb/blob/main/ontology/example.ttl>`_
 
 - **URL**: `http://www.gsi.upm.es/ontologies/segb/examples# <http://www.gsi.upm.es/ontologies/segb/examples#>`_
 

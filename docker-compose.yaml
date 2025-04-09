@@ -1,17 +1,17 @@
 services:
-  amor-segb:
-    container_name: amor-segb-server
-    image: ghcr.io/gsi-upm/amor-segb:0.4.6
+  segb:
+    container_name: segb-server
+    image: ghcr.io/gsi-upm/segb:0.4.6
     build: .
     ports:
       - "5000:5000"
     networks:
       - internal_network
     depends_on:
-      - amor-segb-mongodb
+      - segb-mongodb
     environment:
       - SECRET_KEY=${SECRET_KEY}
-      - DATABASE_SERVICE=amor-segb-mongodb
+      - DATABASE_SERVICE=segb-mongodb
       - LOGGING_LEVEL=DEBUG
     # volumes:
       # If you want to modify the logging configuration, you can mount this file.
@@ -20,12 +20,12 @@ services:
       # - ./log_conf.yaml:/app/log_conf.yaml
       - ./logs:/logs
 
-  amor-segb-mongodb:
-    container_name: amor-segb-mongodb
+  segb-mongodb:
+    container_name: segb-mongodb
     image: mongodb/mongodb-community-server:8.0.0-ubi8
     volumes:
-      - amor-segb-db:/data/db
-      - amor-segb-db:/data/configdb
+      - segb-db:/data/db
+      - segb-db:/data/configdb
     networks:
       - internal_network
 
@@ -34,4 +34,4 @@ networks:
     driver: bridge
 
 volumes:
-  amor-segb-db:
+  segb-db:
