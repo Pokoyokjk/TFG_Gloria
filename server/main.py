@@ -43,7 +43,7 @@ The API provides endpoints for:
 For more detailed documentation, please visit the official ReadTheDocs page:
 <https://segb.readthedocs.io>
 """
-version = os.getenv("VERSION", "stable")
+version = os.getenv("VERSION", '') or "stable"
 
 app = FastAPI(
     title="AMOR-SEGB",

@@ -13,6 +13,7 @@ services:
       - SECRET_KEY=${SECRET_KEY} # Defined in .env file or leave empty
       - DATABASE_SERVICE=segb-mongodb
       - LOGGING_LEVEL=DEBUG
+      - VERSION=${VERSION}
     volumes:
       - ./logs:/logs
       # If you want to modify the logging configuration, you can mount this file.
