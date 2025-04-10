@@ -36,7 +36,7 @@ class Log (Document):
     _id = ObjectIdField(primary_key=True)
     # has_previous_log = ReferenceField('Log', required=False)
     uploaded_at = DateTimeField()
-    origin_ip = StringField (required=True, regex="^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$")
+    origin_ip = StringField (required=True, regex=r"^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$")
     action_type = StringField(required=True, choices=['insertion', 'deletion'])
     action = ObjectIdField (required=True)
     user_details = StringField () # decoded token data (username, roles, etc.)
