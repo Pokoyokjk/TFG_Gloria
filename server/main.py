@@ -73,7 +73,7 @@ async def root():
 @app.get('/health')
 async def default_route(request: Request):
     logger.info("Health check request received from IP: %s", request.client.host)
-    return Response(content="The SEGB is working", status_code=status.HTTP_200_OK, media_type="text/plain; chartset=utf-8")
+    return Response(content=f"The SEGB is running smoother than a freshly refactored function -> version {version}", status_code=status.HTTP_200_OK, media_type="text/plain; chartset=utf-8")
 
 @app.post('/log')
 async def save_log(user: Annotated[User, Depends(validate_token)], request: Request, recieved_data: Annotated[str, Body(media_type="text/turtle")]):
