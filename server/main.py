@@ -22,7 +22,43 @@ logger.setLevel(getattr(logging, logging_level, logging.INFO))
 logger.info("Starting SEGB server...")
 logger.info("Logging level set to %s", logging_level)
 
-app = FastAPI()
+
+description = """
+## AMOR-SEGB
+
+Semantic Ethical Glass Box (SEGB) API for the AMOR project.
+
+### Semantic Ethical Glass Box (SEGB) API
+
+This service is the SEGB API, a RESTful API designed to manage and query the SEGB system. 
+The SEGB serves as a Semantic Ethical Glass Box for registering and managing the results of 
+experiments conducted as part of the AMOR project.
+The API provides endpoints for:
+- Logging and auditing experiment data.
+- Managing the SEGB graph, including retrieval, deletion, and querying.
+- Retrieving experiment-specific information and history.
+
+## Documentation
+
+For more detailed documentation, please visit the official ReadTheDocs page:
+<https://segb.readthedocs.io>
+"""
+version = os.getenv("VERSION", "stable")
+
+app = FastAPI(
+    title="AMOR-SEGB",
+    description=description,
+    version=version,
+    contact={
+        "name": "AMOR Project Website",
+        "url": "https://www.gsi.upm.es/amor",
+        "email": "a.carrera@upm.es"
+    },
+    license_info={
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+    }
+)
 
 db_service = os.getenv("DATABASE_SERVICE", "segb-mongodb")
 connect_to_db(db_service)
@@ -61,7 +97,7 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
             logger.error(f"Error converting Turtle data to JSON-LD: {e}")
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail="Invalid TTL data format. Error including Turtle data in the graph"
+                detail=f"Invalid TTL data format. Error including Turtle data in the graph: Error details -> {str(e)}"
                 )
         save_json_ld(json_ld_data=json_ld_data)
         logger.info("Log data integrated into the global graph")
@@ -76,7 +112,7 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
         logger.debug(f"Error: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error saving log data -> {str(e)}"
+            detail=f"Internal Server Error: Error saving log data. Error details -> {str(e)}"
             )
 
 @app.get('/log')
@@ -111,8 +147,8 @@ async def get_log(user: Annotated[User, Depends(validate_token)], request: Reque
             logger.error(f"Error retrieving log: {e}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving log -> {str(e)}"
-                )
+                detail=f"Internal Server Error: Error retrieving log. Error details -> {str(e)}"
+            )
     
     return JSONResponse(content=log_data, status_code=status.HTTP_200_OK)
 
@@ -142,7 +178,7 @@ async def get_history(user: Annotated[User, Depends(validate_token)], request: R
         logger.error(f"Error retrieving history: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving history -> {str(e)}"
+            detail=f"Internal Server Error: Error retrieving history. Error details -> {str(e)}"
         )
 
 @app.get('/query')
@@ -222,7 +258,7 @@ async def get_graph(user: Annotated[User, Depends(validate_token)], request: Req
     except:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving graph -> {str(e)}"
+            detail=f"Internal Server Error: Error retrieving graph. Error details -> {str(e)}"
         )
 
 @app.delete('/graph')
@@ -287,7 +323,7 @@ def generate_response_with_all_experiments_in_json():
         logger.debug(f"Error retrieving experiment list: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving experiment list -> {str(e)}"
+            detail=f"Internal Server Error: Error retrieving experiment list. Error details -> {str(e)}"
         )
 
 @app.get('/experiments')
@@ -353,7 +389,7 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
         logger.error(f"Error retrieving experiment: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving experiment -> {str(e)}"
+            detail=f"Internal Server Error: Error retrieving experiment. Error details -> {str(e)}"
         )
 
 if __name__ == "__main__":

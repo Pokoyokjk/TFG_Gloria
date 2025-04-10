@@ -57,7 +57,7 @@
 As an alternative to using the command line or any language, you can also use the SEGB GUI to send and retrieve data. The GUI provides a user-friendly interface for interacting with the SEGB.
 
 A Swagger UI is available, which allows you to explore the API endpoints and their functionalities.
-To access the Swagger UI, open your web browser and navigate to: http://127.0.0.1:5000/docs (or root redirects to this page).
+To access the Swagger UI, open your web browser and navigate to: `http://127.0.0.1:5000/docs <http://127.0.0.1:5000/docs>`_ (or root redirects to this page).
 You can use the Swagger UI to send and retrieve data from the SEGB. The interface provides a clear and intuitive way to interact with the API endpoints.
 
 
@@ -116,7 +116,7 @@ Or using *Python*:
 4.4. Personalized logging
 -----------------------------
 
-The SEGB allows for personalized logging configurations using a `log_conf.yaml` file.
+The SEGB allows for personalized logging configurations using a `log_conf.yaml<https://github.com/gsi-upm/segb/blob/main/log_conf.yaml>`_ file.
 This file should follow the structure defined by PyYAML.
-You can find an example of the `log_conf.yaml` file in the root of the GitHub repository (`log_conf.yaml`) and in the `test` folder.
+You can find an example of the `log_conf.yaml<https://github.com/gsi-upm/segb/blob/main/log_conf.yaml>`_ file in the root of the GitHub repository (`log_conf.yaml<https://github.com/gsi-upm/segb/blob/main/log_conf.yaml>`_) and in the `test folder<https://github.com/gsi-upm/segb/blob/main/test/test_log_conf.yaml>`_.
 For more details, visit the repository: `<https://github.com/gsi-upm/segb>`_.

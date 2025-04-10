@@ -1,7 +1,7 @@
 services:
   segb:
     container_name: segb-server
-    image: ghcr.io/gsi-upm/segb:0.4.6
+    image: ghcr.io/gsi-upm/segb:latest
     build: .
     ports:
       - "5000:5000"
@@ -10,7 +10,7 @@ services:
     depends_on:
       - segb-mongodb
     environment:
-      - SECRET_KEY=${SECRET_KEY}
+      - SECRET_KEY=${SECRET_KEY} # Defined in .env file or leave empty
       - DATABASE_SERVICE=segb-mongodb
       - LOGGING_LEVEL=DEBUG
     volumes:
