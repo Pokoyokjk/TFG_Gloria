@@ -23,37 +23,42 @@ logger.info("Starting SEGB server...")
 logger.info("Logging level set to %s", logging_level)
 
 
-description = """
-## Semantic Ethical Glass Box (SEGB) API for the AMOR project.
+api_info_json_file = os.getenv("DESCRIPTION_FILE_PATH", "./api_info.json")
+try:
+    with open(api_info_json_file, "r") as f:
+        api_info = json.load(f)
+except Exception as e:
+    logger.warning(f"Error reading file {api_info_json_file}. Using default description. Error details: {str(e)}")
+    api_info = {
+        "title": "SEGB",
+        "contact": {
+            "name": "GSI-UPM",
+            "url": "https://www.gsi.upm.es",
+            "email": "gsi@autolistas.upm.es"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    }
 
-This service is the SEGB API, a RESTful API designed to manage and query the SEGB system. 
-The SEGB serves as a Semantic Ethical Glass Box for registering and managing the results of 
-experiments conducted as part of the AMOR project.
-The API provides endpoints for:
-- Logging and auditing experiment data.
-- Managing the SEGB graph, including retrieval, deletion, and querying.
-- Retrieving experiment-specific information and history.
+# Load API description from file
+api_description_file = "./api_description.md"
+try:
+    with open(api_description_file, "r") as f:
+        api_description = f.read()
+except Exception as e:
+    logger.warning(f"Error reading file {api_description_file}. Using default description. Error details: {str(e)}")
+    api_description = "Semantic Ethical Glass Box (SEGB) API. See <https://segb.readthedocs.io/en/latest/> for more information."
 
-## Documentation
-
-For more detailed documentation, please visit the official ReadTheDocs page:
-<https://segb.readthedocs.io>
-"""
 version = os.getenv("VERSION", '') or "stable"
 
 app = FastAPI(
-    title="AMOR-SEGB",
-    description=description,
+    title=api_info["title"],
+    description=api_description,
     version=version,
-    contact={
-        "name": "AMOR Project Website",
-        "url": "https://www.gsi.upm.es/amor",
-        "email": "a.carrera@upm.es"
-    },
-    license_info={
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
-    }
+    contact=api_info["contact"],
+    license_info=api_info["license"],
 )
 
 db_service = os.getenv("DATABASE_SERVICE", "segb-mongodb")

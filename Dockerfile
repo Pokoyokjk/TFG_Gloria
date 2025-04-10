@@ -16,6 +16,9 @@ ADD pyproject.toml pyproject.toml
 RUN uv sync --frozen
 
 ADD log_conf.yaml log_conf.yaml
+ARG PROJECT="segb"
+ADD ./api_info/${PROJECT}/api_info.json api_info.json
+ADD ./api_info/${PROJECT}/api_description.md api_description.md
 
 RUN mkdir /logs
 
