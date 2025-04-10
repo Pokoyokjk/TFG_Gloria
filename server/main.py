@@ -24,11 +24,7 @@ logger.info("Logging level set to %s", logging_level)
 
 
 description = """
-## AMOR-SEGB
-
-Semantic Ethical Glass Box (SEGB) API for the AMOR project.
-
-### Semantic Ethical Glass Box (SEGB) API
+## Semantic Ethical Glass Box (SEGB) API for the AMOR project.
 
 This service is the SEGB API, a RESTful API designed to manage and query the SEGB system. 
 The SEGB serves as a Semantic Ethical Glass Box for registering and managing the results of 

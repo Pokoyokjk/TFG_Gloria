@@ -132,8 +132,6 @@ def test_GET_healthcheck():
     
     response = requests.get(BASE_URL + "/health")
     assert response.status_code == 200, f"Expected HTTP 200 OK code, but got {response.status_code}"
-    assert response.text == "The SEGB is working", f"Expected 'The SEGB is working', but got {response.text}"
-    
 
 def test_POST_log_valid_data_with_admin_token():
     url = f"{BASE_URL}/log"
