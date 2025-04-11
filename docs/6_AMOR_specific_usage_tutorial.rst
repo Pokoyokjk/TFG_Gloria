@@ -4,7 +4,50 @@
 6.1. Overview
 -----------
 
-This tutorial simulates a real scenario within the AMOR Project, showing how Agents can model their logs using the SEGB Ontology and how the graph representing the activities occured within the scenario is constructed. We also shows some basics about the role of the auditor interacting with the SEGB for analysis purposes.
+This tutorial simulates a real scenario within the AMOR Project, 
+showing how Agents can model their logs using the SEGB Ontology 
+and how the graph representing the activities occured within the scenario is constructed.
+We also shows some basics about the role of the auditor interacting with the SEGB for analysis purposes.
+
+.. image:: _static/amor_logo.png
+   :alt: AMOR Logo
+   :width: 400px
+   :align: center
+   :target: https://www.gsi.upm.es/amor
+
+Developed by
+~~~~~~~~~~~~
+
+HumanAILab, managed by GSI-UPM
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: _static/humanai-lab_150x148.png
+   :alt: HumanAILab
+   :width: 150px
+   :align: center
+   :target: https://gsi.upm.es/humanailab
+
+This Semantic Ethical Glass Box (SEGB) service is part of the `HumanAILab <https://gsi.upm.es/humanailab>`_,
+which is managed by the `Grupo de Sistemas Inteligentes (GSI) <https://www.gsi.upm.es>`_ at the
+`Universidad Politécnica de Madrid (UPM) <https://www.upm.es>`_.
+
+.. image:: _static/logo_gsi_150x138.png
+   :alt: GSI
+   :width: 150px
+   :align: center
+   :target: https://www.gsi.upm.es
+
+Funding
+~~~~~~~
+
+Project funded by the `Spanish Ministry for Economic Affairs and Digital Transformation <https://digital.gob.es/index.html>`_
+and by the `European Union - NextGenerationEU <https://next-generation-eu.europa.eu/index_es>`_ within the
+`Programme UNICO I+D Cloud <https://portalayudas.digital.gob.es/unico-idcloud/Paginas/Index.aspx>`_.
+
+.. image:: _static/img-unico-cloud.jpg
+   :alt: UNICO I+D Cloud
+   :align: center
+   :target: https://portalayudas.digital.gob.es/unico-idcloud/Paginas/Index.aspx
 
 6.2. Motivational Scenario
 ------------------------
