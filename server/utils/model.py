@@ -7,7 +7,23 @@ from bson import ObjectId
 import logging
 import os
 
-logger = logging.getLogger("segb.server.model")
+logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
+log_file = os.getenv("SERVER_LOG_FILE", "segb_server.log")
+# Ensure the logs directory exists
+os.makedirs('./logs', exist_ok=True)
+file_handler = logging.FileHandler(
+    filename=f'./logs/{log_file}',
+    mode='a',
+    encoding='utf-8'
+)
+file_handler.setFormatter(logging.Formatter(
+    fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+))
+logger = logging.getLogger("segb_server.model")
+logger.setLevel(getattr(logging, logging_level, logging.INFO))
+logger.addHandler(file_handler)
+
 
 logger.info("Loading module model...")
 
@@ -30,50 +46,34 @@ class Insertion (Document):
 class Deletion (Document):
     _id = ObjectIdField(primary_key=True)
     log = ReferenceField('Log', required=True)
-    ttl_deleted_graph = StringField(required=True) 
+    deleted_graph_hash = StringField(required=True, regex="^[a-fA-F0-9]{64}$") 
     
 class Log (Document):
     _id = ObjectIdField(primary_key=True)
     # has_previous_log = ReferenceField('Log', required=False)
     uploaded_at = DateTimeField()
-    origin_ip = StringField (required=True, regex=r"^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$")
+    origin_ip = StringField (required=True, regex="^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$")
     action_type = StringField(required=True, choices=['insertion', 'deletion'])
     action = ObjectIdField (required=True)
-    user_details = StringField () # decoded token data (username, roles, etc.)
-
-
-def serialize_log(log) -> dict:
-    return {
-        "_id": str(log._id),
-        "uploaded_at": log.uploaded_at.isoformat() if log.uploaded_at else None,
-        "origin_ip": log.origin_ip,
-        "action_type": log.action_type,
-        "action": str(log.action) if log.action else None,
-        "user_details": log.user_details if log.user_details else None,
-    }
-
-
-def connect_to_db(db_service: str) -> None:
-    logger.info("Connecting to the database...")
-    logger.info(f"Database service: {db_service}")
-    connect('graph', host=db_service, port=27017)
-    logger.info("Database connection established.")
+    
+    
+def connect_to_db() -> None:
+    connect('graph', host='database', port=27017)
+    
+    
     
 # ------------ INSERT FUNCTIONS ------------ #
     
 def save_json_ld(json_ld_data:dict) -> None:
-    logger.debug(f"Saving JSON-LD data to the database")
+    
     graph = Graph.objects(_id='0').first()
-    logger.debug(f"Graph found")
     if graph:
         json_ld_data = utils.semantic.update_prefixes(graph.graph_data, json_ld_data)
         json_ld_data = utils.semantic.update_graph(graph.graph_data, json_ld_data)
-        logger.debug(f"Graph ready to be saved")
         graph.update(
             set__graph_data=json_ld_data,
             set__updated_at=datetime.now()
         )
-        logger.debug(f"Graph updated")
     else:
         graph = Graph (
            _id = '0',
@@ -81,9 +81,11 @@ def save_json_ld(json_ld_data:dict) -> None:
            graph_data = json_ld_data
         )
     graph.save()
-    logger.debug(f"Graph saved")
+    
 
-def log_ttl_content(ttl:str, ip_addr:str, user_details: str) -> None:
+
+
+def log_ttl_content(ttl:str, ip_addr:str) -> None:
     
     """
         Atomic Transaction 
@@ -106,8 +108,7 @@ def log_ttl_content(ttl:str, ip_addr:str, user_details: str) -> None:
             uploaded_at = datetime.now(),
             origin_ip = ip_addr,
             action_type = 'insertion',
-            action = insertion_id,
-            user_details = user_details
+            action = insertion_id
         )
         log.save()        
         logger.debug(f"Log saved")
@@ -137,33 +138,24 @@ def log_ttl_content(ttl:str, ip_addr:str, user_details: str) -> None:
 
 
 def get_raw_graph_from_db() -> DynamicField:
-    logger.debug(f"Getting graph from DB")
     graph = None
     try:
         graph = Graph.objects(_id='0').first()
     except:
-        logger.error(f"Error getting graph from DB")
         pass
-    result = graph.graph_data if isinstance(graph, Graph) else graph
-    if not result:
-        logger.debug(f"Graph not found in DB")
-    else:
-        logger.debug(f"Graph found in DB")
-    return result
+    return graph.graph_data if isinstance(graph, Graph) else graph
 
 
 
 def get_logs_list() -> list:
-    logger.debug(f"Getting logs from DB")
     logs = Log.objects()
     serialized_logs = []
     if logs:
-        logger.debug(f"Logs found: {len(logs)}")
-        serialized_logs = [serialize_log(log) for log in logs]
+        serialized_logs = [utils.semantic.serialize_log(log) for log in logs]
     return serialized_logs
 
 def get_log_info(log_id: str) -> dict:
-    logger.debug(f"Getting log info for ID: {log_id}")
+
     try:
         log_id = ObjectId(log_id)
     except Exception:
@@ -171,9 +163,8 @@ def get_log_info(log_id: str) -> dict:
 
     log = Log.objects(_id=log_id).first()
     if not log:
-        logger.debug(f"Log not found")
         return None
-    logger.debug(f"Log found: {log}")
+
     action_data = None
     if log.action_type == 'insertion':
         action = Insertion.objects(_id=log.action).first()
@@ -185,22 +176,22 @@ def get_log_info(log_id: str) -> dict:
         action = Deletion.objects(_id=log.action).first()
         if action:
             action_data = {
-                "ttl_deleted_graph": action.ttl_deleted_graph
+                "deleted_graph_hash": action.deleted_graph_hash
             }
+
     return {
-        "log": serialize_log(log),
+        "log": utils.semantic.serialize_log(log),
         "action": action_data
     }
 
 
 # ------------ DELETE FUNCTIONS ------------ #
 
-def clear_graph(ip_addr:str, user_details: str) -> bool:
+def clear_graph(ip_addr:str) -> bool:
     
     """
         Atomic Transaction 
     """
-    logger.debug(f"Clearing graph")
     log_id = ObjectId()
     deletion_id = ObjectId()
         
@@ -210,10 +201,9 @@ def clear_graph(ip_addr:str, user_details: str) -> bool:
     
     current_graph = get_raw_graph_from_db()
     if not current_graph:
-        logger.debug(f"No current graph found to clear")
         return False
-    graph = utils.semantic.get_graph_from_json(current_graph)
-    turtle_data = utils.semantic.convert_graph_to_turtle(graph)
+        
+    current_graph_hash = hashlib.sha256(str(current_graph).encode('utf-8')).hexdigest()
     
     try:
         
@@ -222,15 +212,14 @@ def clear_graph(ip_addr:str, user_details: str) -> bool:
             uploaded_at = datetime.now(),
             origin_ip = ip_addr,
             action_type = 'deletion',
-            action = deletion_id,
-            user_details = user_details
+            action = deletion_id
         )
         log.save()        
         
         deletion = Deletion (
             _id = deletion_id,
             log = log,
-            ttl_deleted_graph = turtle_data
+            deleted_graph_hash = current_graph_hash
         )
         deletion.save()
         
@@ -241,13 +230,12 @@ def clear_graph(ip_addr:str, user_details: str) -> bool:
         logger.debug(f"Graph deleted")
         logger.debug(f"Deletion ID: {deletion_id}")
         logger.debug(f"Log ID: {log_id}")
-        logger.debug(f"Deleted graph -> {len(graph)} triples deleted")
+        logger.debug(f"Deleted graph hash: {current_graph_hash}")
         logger.debug(f"Deletion saved")
         logger.info("Graph cleared successfully")
         return True
     
     except Exception as e:
-        logger.error(f"Error clearing graph: {e}")
         session.abort_transaction()
         return False
     finally:

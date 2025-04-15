@@ -1,94 +1,78 @@
-import uvicorn
-from fastapi import Body, Depends, FastAPI, HTTPException, status, Response, Request
-from fastapi.responses import JSONResponse, PlainTextResponse, RedirectResponse
+import json
+from fastapi import Depends, FastAPI, HTTPException, status, Response, Request
+from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel
 from typing import Annotated
-import json
 
 import utils.semantic
 import utils.experiments
-from utils.credentials import User, validate_token, Role
-from model import connect_to_db, save_json_ld, get_raw_graph_from_db, log_ttl_content, clear_graph, get_logs_list, get_log_info
+from utils.credentials import User, validate_token_for_loggers_endpoint, validate_token_for_readers_endpoint, validate_token_for_admin_endpoint
+from server.utils.model import connect_to_db, save_json_ld, get_raw_graph_from_db, log_ttl_content, clear_graph, get_logs_list, get_log_info
+
 
 import logging
 import os
 
 # Set up logging
 logging_level = os.getenv("LOGGING_LEVEL", "INFO").upper()
-
-logger = logging.getLogger("segb.server")
+log_file = os.getenv("SERVER_LOG_FILE", "segb_server.log")
+# Ensure the logs directory exists
+os.makedirs('/logs', exist_ok=True) 
+file_handler = logging.FileHandler(
+    filename=f'/logs/{log_file}',
+    mode='a',
+    encoding='utf-8'
+)
+file_handler.setFormatter(logging.Formatter(
+    fmt='%(asctime)s - %(name)s - %(levelname)s -> %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+))
+logger = logging.getLogger("segb_server")
 logger.setLevel(getattr(logging, logging_level, logging.INFO))
+logger.addHandler(file_handler)
 
 logger.info("Starting SEGB server...")
 logger.info("Logging level set to %s", logging_level)
 
+    
+class Log(BaseModel):
+    log_id: str
+    
+class Experiment(BaseModel):
+    experiment_id: str | None = None
+    namespace: str | None = None
+    uri: str | None = None
 
-api_info_json_file = os.getenv("DESCRIPTION_FILE_PATH", "./api_info.json")
-try:
-    with open(api_info_json_file, "r") as f:
-        api_info = json.load(f)
-except Exception as e:
-    logger.warning(f"Error reading file {api_info_json_file}. Using default description. Error details: {str(e)}")
-    api_info = {
-        "title": "SEGB",
-        "contact": {
-            "name": "GSI-UPM",
-            "url": "https://www.gsi.upm.es",
-            "email": "gsi@autolistas.upm.es"
-        },
-        "license": {
-            "name": "MIT",
-            "url": "https://opensource.org/licenses/MIT"
-        }
-    }
+app = FastAPI() # this is for 
 
-# Load API description from file
-api_description_file = "./api_description.md"
-try:
-    with open(api_description_file, "r") as f:
-        api_description = f.read()
-except Exception as e:
-    logger.warning(f"Error reading file {api_description_file}. Using default description. Error details: {str(e)}")
-    api_description = "Semantic Ethical Glass Box (SEGB) API. See <https://segb.readthedocs.io/en/latest/> for more information."
-
-version = os.getenv("VERSION", '') or "stable"
-
-app = FastAPI(
-    title=api_info["title"],
-    description=api_description,
-    version=version,
-    contact=api_info["contact"],
-    license_info=api_info["license"],
-)
-
-db_service = os.getenv("DATABASE_SERVICE", "segb-mongodb")
-connect_to_db(db_service)
+logger.info("Connecting to the database...")
+connect_to_db()
+logger.info("Database connection established.")
 
 logger.info("SEGB server is now running and ready to accept requests.")
 
 ### Endpoints ###
-@app.get('/')
-async def root():
-    return RedirectResponse(url='/docs')
-
 @app.get('/health')
 async def default_route(request: Request):
     logger.info("Health check request received from IP: %s", request.client.host)
-    return Response(content=f"I’ve seen things you people wouldn’t believe... But I’m fine. The SEGB is running smoother than a freshly refactored function. It is running version {version} flawlessly...", status_code=status.HTTP_200_OK, media_type="text/plain; chartset=utf-8")
+    return Response(content="The SEGB is working", status_code=status.HTTP_200_OK, media_type="text/plain")
 
 @app.post('/log')
-async def save_log(user: Annotated[User, Depends(validate_token)], request: Request, recieved_data: Annotated[str, Body(media_type="text/turtle")]):
-    logger.info(f"Received post for log from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if not (Role.LOGGER.value in user.roles or Role.ADMIN.value in user.roles):
-        logger.info(f"User {user.name} (username: {user.username} - roles: {user.roles}) does not have permission to perform this action")
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User does not have permission to perform this action"
-        )
+async def save_log(user: Annotated[User, Depends(validate_token_for_loggers_endpoint)], request: Request):
+    logger.info(f"Received post for log from IP: {request.client.host} from user {user.name} (username: {user.username})")
     try:
+        recieved_data = await request.body()
+        recieved_data = recieved_data.decode("utf-8")
+        if not recieved_data:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Not recieved data or invalid data"
+                )
+
         origin_ip = request.client.host
         logger.info(f"Received log data from {origin_ip}")
         json_ld_data = None
+
         try:
             graph = utils.semantic.get_graph_from_ttl(recieved_data)
             logger.debug(f"Graph loaded from received Turtle data")
@@ -97,39 +81,38 @@ async def save_log(user: Annotated[User, Depends(validate_token)], request: Requ
         except Exception as e:
             logger.error(f"Error converting Turtle data to JSON-LD: {e}")
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail=f"Invalid TTL data format. Error including Turtle data in the graph: Error details -> {str(e)}"
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Not recieved data or invalid data"
                 )
         save_json_ld(json_ld_data=json_ld_data)
         logger.info("Log data integrated into the global graph")
-        log_ttl_content(ttl=recieved_data, ip_addr=origin_ip, user_details=str(user))
-        logger.debug(f"Log registered in history")
+        log_ttl_content(recieved_data,origin_ip)
+        logger.debug(f"Log registred in history")
         return JSONResponse(content={"message": "Log saved successfully"}, status_code=status.HTTP_201_CREATED)
     except HTTPException as e:
         logger.error(f"HTTPException: {e.detail}")
         raise e
-    except Exception as e:
+    except:
         logger.error("Error saving log data")
-        logger.debug(f"Error: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error saving log data. Error details -> {str(e)}"
+            detail="Internal Server Error"
             )
 
 @app.get('/log')
-async def get_log(user: Annotated[User, Depends(validate_token)], request: Request, log_id: str = None):
-    logger.info(f"Received request for log with ID: {log_id} from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if not (Role.AUDITOR.value in user.roles or Role.ADMIN.value in user.roles):
-        logger.info(f"User {user.name} (username: {user.username} - roles: {user.roles}) does not have permission to perform this action")
+async def get_log(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request, log: Log = None, log_id: str = None):
+    log_id = log.log_id if log else log_id
+    if not log_id:
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User does not have permission to perform this action"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Not recieved log_id via json or query string"
+            )
+    logger.info(f"Received request for log with ID: {log_id} from IP: {request.client.host} from user {user.name} (username: {user.username})")
     logger.info(f"Received log_id: {log_id}")
     if not log_id:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Not received data or invalid data"
+            detail="Not recieved data or invalid data"
             )
     else:
         try:
@@ -148,19 +131,14 @@ async def get_log(user: Annotated[User, Depends(validate_token)], request: Reque
             logger.error(f"Error retrieving log: {e}")
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Internal Server Error: Error retrieving log. Error details -> {str(e)}"
-            )
+                detail="Error retrieving log"
+                )
     
     return JSONResponse(content=log_data, status_code=status.HTTP_200_OK)
 
 @app.get('/history')
-async def get_history(user: Annotated[User, Depends(validate_token)], request: Request):
-    logger.info(f"Received request for history from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if not (Role.AUDITOR.value in user.roles or Role.ADMIN.value in user.roles):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User does not have permission to perform this action"
-        )
+async def get_history(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request):
+    logger.info(f"Received request for history from IP: {request.client.host} from user {user.name} (username: {user.username})")
     try:
         history = get_logs_list()
         logger.debug(f"History retrieved successfully")
@@ -179,29 +157,18 @@ async def get_history(user: Annotated[User, Depends(validate_token)], request: R
         logger.error(f"Error retrieving history: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving history. Error details -> {str(e)}"
+            detail=f"Error retrieving history: {str(e)}"
         )
 
 @app.get('/query')
-async def get_query(user: Annotated[User, Depends(validate_token)]):
-    logger.info(f"Received request for query from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if Role.ADMIN.value not in user.roles:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User does not have permission to perform this action"
-        )
+async def get_query(user: Annotated[User, Depends(validate_token_for_admin_endpoint)]):
     raise HTTPException(
         status_code=status.HTTP_501_NOT_IMPLEMENTED,
         detail="Not implemented yet"
     )
     '''
     TODO: check how modifications to the graph are done (or not done),
-    because it is loaded "locally" in memory and not loaded again in the database
-    
-    I have to think about this, because the graph is not modified in the database,
-    but it is modified in memory.
-    The graph is loaded from the database and then modified in memory.
-    The graph is not saved back to the database.
+    because it is loaded "locally" in memory and not loaded again in the database 
     '''
 
     # if request.is_json:
@@ -228,13 +195,8 @@ async def get_query(user: Annotated[User, Depends(validate_token)]):
     #     return Response(f"Error executing SPARQL query: {str(e)}", status=500)
 
 @app.get('/graph')
-async def get_graph(user: Annotated[User, Depends(validate_token)], request: Request):
-    logger.info(f"Received request for graph from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if not (Role.AUDITOR.value in user.roles or Role.ADMIN.value in user.roles):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User does not have permission to perform this action"
-        )
+async def get_graph(user: Annotated[User, Depends(validate_token_for_readers_endpoint)], request: Request):
+    logger.info(f"Received request for graph from IP: {request.client.host} from user {user.name} (username: {user.username})")
     json_ld_data = None
     turtle_data = None
     try:
@@ -244,13 +206,12 @@ async def get_graph(user: Annotated[User, Depends(validate_token)], request: Req
                 status_code=status.HTTP_204_NO_CONTENT,
                 detail="Empty graph"
             )
-        else:
+        else:    
             graph = utils.semantic.get_graph_from_json(json_ld_data)
             turtle_data = utils.semantic.convert_graph_to_turtle(graph)
             logger.info("Graph retrieved successfully")
             response = PlainTextResponse(content=turtle_data)
-            response.headers["Content-Type"] = "text/turtle; charset=utf-8"
-            response.headers["Content-Disposition"] = "attachment; filename=graph.ttl"
+            response.headers["Content-Type"] = "text/turtle"
             response.status_code = status.HTTP_200_OK
             return response
     except HTTPException as e:
@@ -259,31 +220,24 @@ async def get_graph(user: Annotated[User, Depends(validate_token)], request: Req
     except:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving graph. Error details -> {str(e)}"
+            detail="Internal Server Error"
         )
+    
 
 @app.delete('/graph')
-async def delete_graph(user: Annotated[User, Depends(validate_token)], request: Request):
-    logger.info(f"Received request to delete graph from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if Role.ADMIN.value not in user.roles:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User does not have permission to perform this action"
-        )
+async def delete_graph(user: Annotated[User, Depends(validate_token_for_admin_endpoint)], request: Request):
+    logger.info(f"Received request to delete graph from IP: {request.client.host} from user {user.name} (username: {user.username})")
     origin_ip = request.client.host
     json_ld_data = get_raw_graph_from_db()
     if not json_ld_data:
         logger.info("Empty graph, nothing to delete")
         return PlainTextResponse(content="Empty graph, nothing to delete", status_code=status.HTTP_204_NO_CONTENT)
-    try:
-        deleted = clear_graph(ip_addr=origin_ip, user_details=str(user))
-        if not deleted:
-            logger.error(f"Failed to delete the graph")
-            raise Exception("Failed to delete the graph")
-    except Exception as e:
+    deleted = clear_graph(origin_ip)
+    if not deleted:
+        logger.error("Failed to delete the graph")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error deleting graph -> {str(e)}"
+            detail="Failed to delete the graph"
         )
     else:
         logger.info("Graph deleted successfully")
@@ -324,32 +278,24 @@ def generate_response_with_all_experiments_in_json():
         logger.debug(f"Error retrieving experiment list: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving experiment list. Error details -> {str(e)}"
+            detail=f"Error retrieving experiment list: {str(e)}"
         )
 
 @app.get('/experiments')
-async def get_experiments(user: Annotated[User, Depends(validate_token)], request: Request, uri: str = None, namespace: str = None, experiment_id: str = None):
-    logger.info(f"Received request to get a specific experiment from IP: {request.client.host} from user {user.name} (username: {user.username} - roles: {user.roles})")
-    if not (Role.AUDITOR.value in user.roles or Role.ADMIN.value in user.roles):
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="User does not have permission to perform this action"
-        )
+async def get_experiments(user: Annotated[User, Depends(validate_token_for_readers_endpoint)], request: Request, uri: str = None, namespace: str = None, experiment_id: str = None, experiment: Experiment = None):
+    logger.info(f"Received request to get a specific experiment from IP: {request.client.host} from user {user.name} (username: {user.username})")
+    uri =  experiment.uri if experiment and experiment.uri else uri
     if uri:
         logger.info(f"Received URI: {uri}")
         # If the URI is provided, we expect it to be a complete URI
         # Preferred option: form of namespace#experiment_id
         # If the URI is provided, namespace and experiment_id are ignored
-        if "#" not in uri:
-            logger.info("Invalid URI: Malformed URI, expected <prefix>'#'<resource> format")
-            raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                detail="Invalid URI: Malformed URI, expected <prefix>'#'<resource> format"
-            )
-        namespace, experiment_id = uri.rsplit("#", 1)
+        namespace, experiment_id = uri.rsplit("#", 1) 
         namespace += "#"
     else:
         # If the URI is not provided, we expect the namespace and experiment_id as separate parameters
+        namespace = experiment.namespace if experiment and experiment.namespace else namespace
+        experiment_id = experiment.experiment_id if experiment and experiment.experiment_id else experiment_id
         if namespace and not namespace.endswith("#"):
             namespace += "#"
         if not namespace and not experiment_id:
@@ -364,9 +310,9 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
                 detail="Missing parameters: namespace or experiment_id"
             )
     try:
-        json_ld_data = get_raw_graph_from_db()
+        json_ld_data = get_raw_graph_from_db() # Test if this is the correct way to get the data
         graph = utils.semantic.get_graph_from_json(json_ld_data)
-        result_graph = utils.experiments.get_single_experiment_graph(graph, namespace, experiment_id)
+        result_graph = utils.experiments.get_experiment_with_activities(graph, namespace, experiment_id)
         if len(result_graph) == 0:
             logger.info(f"Experiment not found: {namespace}{experiment_id}")
             raise HTTPException(
@@ -375,10 +321,10 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
             )
         logger.info("Experiment retrieved successfully")    
         response = PlainTextResponse(
-            content=result_graph.serialize(format="turtle", encoding="utf-8"),
+            content=result_graph.serialize(format="turtle"),
             headers={
             "Content-Disposition": "attachment; filename=graph.ttl",
-            "Content-Type": "text/turtle; charset=utf-8"
+            "Content-Type": "text/turtle"
             },
             status_code=status.HTTP_200_OK
         )
@@ -390,8 +336,5 @@ async def get_experiments(user: Annotated[User, Depends(validate_token)], reques
         logger.error(f"Error retrieving experiment: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Internal Server Error: Error retrieving experiment. Error details -> {str(e)}"
+            detail=f"Error retrieving experiment: {str(e)}"
         )
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=5000, proxy_headers=True, log_config='./log_conf.yaml')
