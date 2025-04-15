@@ -1,32 +1,48 @@
 services:
-  segb:
-    container_name: segb-server
-    image: ghcr.io/gsi-upm/segb:latest
-    build: .
+  amor-segb:
+    container_name: amor-segb-server
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     networks:
       - internal_network
     depends_on:
-      - segb-mongodb
-    environment:
-      - SECRET_KEY=${SECRET_KEY} # Defined in .env file or leave empty
-      - DATABASE_SERVICE=segb-mongodb
-      - LOGGING_LEVEL=DEBUG
-      - VERSION=${VERSION}
+      - amor-segb-mongodb
+      - amor-segb-neo4j
+    env_file:
+      - ./.env
     volumes:
       - ./logs:/logs
-      # If you want to modify the logging configuration, you can mount this file.
-      # The application reads this file at startup using the PyYAML library.
+    links:
+      - "amor-segb-mongodb:database"
+      - "amor-segb-neo4j:graph"
 
-      # - ./log_conf.yaml:/app/log_conf.yaml
-
-  segb-mongodb:
-    container_name: segb-mongodb
+  amor-segb-mongodb:
+    container_name: amor-segb-mongodb
     image: mongodb/mongodb-community-server:8.0.0-ubi8
     volumes:
-      - segb-db:/data/db
-      - segb-db:/data/configdb
+      - amor-segb-db:/data/db
+      - amor-segb-db:/data/configdb
+    networks:
+      - internal_network
+
+  amor-segb-neo4j:
+    container_name: amor-segb-neo4j
+    image: neo4j:5.20.0
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/neoforyou
+      - NEO4J_PLUGINS=["apoc", "n10s"]
+
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+      - neo4j_import:/var/lib/neo4j/import
+      - neo4j_plugins:/plugins
     networks:
       - internal_network
 
@@ -35,4 +51,8 @@ networks:
     driver: bridge
 
 volumes:
-  segb-db:
+  amor-segb-db:
+  neo4j_data: # Do not use same volume for mongo and neo4j
+  neo4j_logs:
+  neo4j_import:
+  neo4j_plugins:
