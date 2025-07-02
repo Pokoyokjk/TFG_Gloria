@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # SEGB Project (Extended)
 
 This repository has been created from the base of [https://github.com/gsi-upm/segb](https://github.com/gsi-upm/segb). The added information relates to the integration of Virtuoso, Neo4j, and RAG (Retrieval-Augmented Generation) components, extending the original system's capabilities with a semantic database, a historical graph, and a language model-powered querying system.
