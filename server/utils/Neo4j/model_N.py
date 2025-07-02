@@ -6,13 +6,13 @@ from neo4j import GraphDatabase
 # import logging
 import os
 import uuid
-from datetime import datetime, timezone, timedelta
+from datetime import datetime
 import time
 
 # logger = logging.getLogger('neo4j_server')
 # logger.info("Loading Neo4j module...")
 
-NEO4J_URI = os.getenv("NEO4J_URI", "bolt://amor-segb-neo4j:7687") # not with amor??
+NEO4J_URI = os.getenv("NEO4J_URI", "bolt://amor-segb-neo4j:7687") 
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "neoforyou")
 
@@ -49,7 +49,7 @@ def constraint_graphinit():
 
 def store_modification(action:str, origin_ip:str, user:str, ttl_content: str) -> str:
     log_id = str(uuid.uuid4())
-    timestamp = datetime.now(timezone.utc).isoformat() # utc to avoid timezone issues
+    timestamp = datetime.now()
     def store_log(tx):
         
         query = """
@@ -84,26 +84,66 @@ def get_recent_logs(limit: int):
         LIMIT $limit
         """
         result = tx.run(query, limit=limit)
-        return [record.data() for record in result]
+        logs = []
+        for record in result:
+            data = record.data()
+            # Convert timestamp to ISO format string
+            if 'timestamp' in data and hasattr(data['timestamp'], 'isoformat'):
+                data['timestamp'] = data['timestamp'].isoformat()
+            logs.append(data)
+        return logs
     
     with driver.session() as session:
         return session.execute_read(fetch_logs)
     
-def get_logs_by_date(start_date: str, end_date: str): ### NO ME DEVUELVE EL DE LA ÚLTIMA FECHA (TIENE QUE SER MENOR)
-    def fetch_logs_d(tx):                             ### ADEMÁS EL PRIMER GET QUIERO QUE LA PERSONA PONGA EL LIMITE
+def get_logs_by_date(start_date: str, end_date: str):
+    start_dt = datetime.fromisoformat(start_date) #format YYYY-MM-DDTHH:MM:SS
+    end_dt = datetime.fromisoformat(end_date)
+
+
+    def fetch_logs_by_date(tx):
         query = """
         MATCH (log:Log)-[:MODIFIED]->(change:Change)
-        WHERE log.timestamp >= $start_date AND log.timestamp <= $end_date
+        WHERE log.timestamp >= $start_dt AND log.timestamp <= $end_dt
         RETURN log.log_id AS log_id, log.user AS user, log.action AS action, 
                log.timestamp AS timestamp, log.origin_ip AS origin_ip, 
                change.ttl_content AS ttl_content
         ORDER BY log.timestamp DESC
         """
-        result = tx.run(query, start_date=start_date, end_date=end_date)
-        return [record.data() for record in result]
-    
-    end_dt = datetime.fromisoformat(end_date) + timedelta(microseconds=1)
-    
+        result = tx.run(query, start_dt=start_dt, end_dt=end_dt)
+        logs = []
+        for record in result:
+            data = record.data()
+            if 'timestamp' in data and hasattr(data['timestamp'], 'isoformat'):
+                data['timestamp'] = data['timestamp'].isoformat()
+            logs.append(data)
+        return logs
+
     with driver.session() as session:
-        return session.execute_read(fetch_logs_d, start_date=start_date, end_date=end_dt.isoformat())
+        return session.execute_read(fetch_logs_by_date)
+    
+def store_bulk_deletion(origin_ip: str, user: str, ttl_lines: list[str]):
+    timestamp = datetime.now()
+
+    def store_bulk_log(tx):
+        for ttl_content in ttl_lines:
+            log_id = str(uuid.uuid4())
+            query = """
+            CREATE (log:Log {
+                log_id: $log_id,
+                user:$user,
+                action: 'deletion',
+                timestamp: $timestamp,
+                origin_ip: $origin_ip
+            })
+            CREATE (change:Change {
+                ttl_content: $ttl_content
+            })
+            CREATE (log)-[:MODIFIED]->(change)
+            """
+            tx.run(query, log_id=log_id, user=user, timestamp=timestamp,
+                   origin_ip=origin_ip, ttl_content=ttl_content)
+
+    with driver.session() as session:
+        session.execute_write(store_bulk_log)
     

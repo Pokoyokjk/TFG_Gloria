@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Semantic Ethical Glass Box (SEGB)
 
 ## 1. The AMOR Project
@@ -55,3 +56,6 @@ The SEGB ontology can be found in:
 In the folder [tutorial](./tutorial), an extensive use case is presented in a notebook to help understand the usability and capabilities of the SEGB.
 
 The complete documentation & tutorial are available in [SEGB documentation](https://segb.readthedocs.io/en/latest/index.html).
+=======
+# TFG_Gloria
+>>>>>>> 910405018b32ffe8cb299de39347ef426e38afc6

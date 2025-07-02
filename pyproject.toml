@@ -11,5 +11,14 @@ dependencies = [
     "mongoengine==0.29.1",
     "pyjwt==2.10.1",
     "rdflib==7.1.3",
-    "neo4j==5.20.0"
+    "neo4j==5.20.0",
+    "requests==2.31.0",
+    "streamlit",
+    "streamlit_agraph",
+    "pyvis",
+    "langchain",
+    "langchain-community", 
+    "SPARQLWrapper==2.0.0",
+    "pandas",
+    "scikit-learn",
 ]

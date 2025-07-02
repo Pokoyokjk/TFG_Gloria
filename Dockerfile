@@ -9,12 +9,21 @@ LABEL org.opencontainers.image.licenses=MIT
 
 EXPOSE 5000
 
+
 WORKDIR /app
 ADD uv.lock uv.lock
 ADD pyproject.toml pyproject.toml
 
 RUN uv sync --frozen
 
+ADD log_conf.yaml log_conf.yaml
+ARG PROJECT="segb"
+ADD ./api_info/${PROJECT}/api_info.json api_info.json
+ADD ./api_info/${PROJECT}/api_description.md api_description.md
+
+RUN mkdir /logs
+
 COPY ./server /app
 
-CMD ["uv", "run", "fastapi", "run", "utils/Neo4j/main_N.py", "--port", "5000"]
+CMD ["uv", "run", "fastapi", "run", "utils/main_combined.py", "--port", "5000"]
+

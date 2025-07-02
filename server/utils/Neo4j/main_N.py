@@ -5,7 +5,7 @@ from typing import Annotated
 import logging
 
 from utils.Neo4j.model_N import store_modification, connect_to_db, constraint_graphinit, get_recent_logs, get_logs_by_date
-from utils.credentials import User, validate_token_for_loggers_endpoint
+from utils.credentials import User, validate_token
 import os
 
 
@@ -48,7 +48,7 @@ class Log(BaseModel):
 async def register_modificacion(
     request: Request,
     input_data: Log,
-    user: Annotated[User, Depends(validate_token_for_loggers_endpoint)], # type: ignore
+    user: Annotated[User, Depends(validate_token)], # type: ignore
 ):
     if input_data.action not in ["insertion", "deletion"]:
         raise HTTPException(status_code=400, detail="Invalid action type. Must be 'insertion' or 'deletion'.")
